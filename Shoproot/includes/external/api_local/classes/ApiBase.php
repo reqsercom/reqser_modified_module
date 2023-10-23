@@ -32,7 +32,7 @@ class ApiBase {
    * @return NULL
    */
   public function __construct($subp = '') {
-    $this->api_version = '0.9';
+    $this->api_version = '1.0';
     $this->debug_curl == false;
 
     $this->browser_mode = false;
