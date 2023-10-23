@@ -1,0 +1,128 @@
+/*BOC overwrite modified styles (for system module reqser)*/
+.modulbox form ul {
+margin:6px 0;
+padding:0 0 0 20px;
+}
+.modulbox .contentTable {
+border:0 none;
+}
+.modulbox .infoBoxHeading {
+background:#393939;
+color:#ededed;
+border:1px solid #6f6f6f;
+}
+.modulbox .infoBoxContent hr {
+  height:6px;
+  margin-bottom:14px;
+  background:#29808a;
+}
+.infoBoxHeading a {
+font-size:12px;
+font-weight:bold;
+}
+.modulbox .infoBoxContent {
+background:#4f4f4f;
+color:#ededed;
+padding:10px !important;
+}
+.infoBoxContent a {
+  font-size:12px;
+  color:#6ee2fd;
+  font-weight:inherit;
+}
+.infoBoxContent a:hover {
+  font-size:12px;
+  font-weight:inherit;
+}
+.infoBoxContent a.button, .infoBoxContent input.button, .infoBoxContent button.button {
+color:#ddd;
+padding:0 10px;
+font-size:12px;
+line-height:28px;
+background-color:#29808a;
+border-color:#1e6168;
+}
+.infoBoxContent a.button:hover, .infoBoxContent input.button:hover, .infoBoxContent button.button:hover {
+background-color:#1e6168;
+}
+.cfg_select_option, input[type="text"], input[type="password"], .SumoSelect {
+margin-top:6px;
+}
+.SumoSelect > .CaptionCont > span, .SumoSelect > .optWrapper > .options > li {
+color:#626262;
+}
+.SumoSelect > .optWrapper > .options > li:hover {
+color:#4e4e4e;
+}
+.cfg_select_option input[type="radio"]:checked + label, .cfg_select_option input[type="radio"]:checked + label.cfg_sov_true {
+background:#5c831e;
+}
+.cfg_select_option input[type="radio"]:checked + label.cfg_sov_false {
+background:#ab3838;
+}
+.textareaModule {height:40px;}
+/*EOC overwrite modified styles*/
+
+/*additional styles*/
+/*BOC display tooltip differently */
+.tooltip {
+  padding:0;
+}
+.tooltip:hover em {
+  bottom:auto;
+  top:0;
+  left:100%;
+  padding:2px 5px;
+  background:#fff;
+  color:#444;
+  border:1px solid #444;
+  border-radius:5px;
+}
+/*EOC display tooltip differently */
+
+.infoBoxContent label {
+  cursor:pointer;
+  text-decoration 
+}
+
+.infoBoxContent button.button {
+  display:inline-block;
+  font-weight:bold;
+  border-style:solid;
+  border-width:1px;
+  vertical-align:middle;
+  -webkit-border-radius:4px;
+  -moz-border-radius:4px;
+  border-radius:4px;
+  margin:4px 4px 0px 0px;
+  cursor:pointer;
+}
+.infoBoxContent button#gen-tok {
+  line-height:20px;
+}
+
+.infoBoxContent input:disabled {cursor:not-allowed;}
+.infoBoxContent .alrt {
+  color:#ff8c8c;
+}
+
+#dcbt-fixed-sve {
+position:fixed;
+top:50%;
+left:-4pX; /*-48px;*/
+margin:0;
+padding:4px; /*0 8px;*/
+background: #29808a;
+border:1px solid #1e6168;
+font-size:15px;
+line-height:15px; /*26px;*/
+letter-spacing:0.1em;
+/*transform:rotate(-90deg);*/
+text-orientation: upright;
+writing-mode: tb-rl;
+border-radius:0 6px 6px 0;
+}
+#dcbt-fixed-sve:hover {
+left:0; /*-42px;*/
+background:#1e6168;
+}
