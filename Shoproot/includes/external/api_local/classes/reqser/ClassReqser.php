@@ -337,13 +337,9 @@ class ClassReqser extends api_local\ApiBase {
     $return_array = array();
     $received_data = file_get_contents('php://input');
     if($received_data != '') {
-      if($this->ala !== true)
-        return array('error' => 'Add Language not allowed!', 'add_language_not_allowed' => true);
-
+      if($this->ala !== true) return array('error' => 'Add Language not allowed!', 'add_language_not_allowed' => true);
       $dec_rec_data = json_decode($received_data, true);
-      if($this->fwl == (int)$this->shop_languages[strtolower($dec_rec_data['language_code'])]['languages_id'])
-         return array('error' => 'adding language '.$dec_rec_data['language_code'].' not allowed, it is "from which language to tanslate"!');
-
+      if($this->fwl == (int)$this->shop_languages[strtolower($dec_rec_data['language_code'])]['languages_id']) return array('error' => 'adding language '.$dec_rec_data['language_code'].' not allowed, it is "from which language to tanslate"!');
       if(!array_key_exists($dec_rec_data['code'], $this->shop_languages)) { //Prüfen ob es language_code schon gibt
         $ins_qu_str = "INSERT INTO languages (name, code, image, directory, sort_order, language_charset, status, status_admin) 
                             VALUES ('".xtc_db_input($dec_rec_data['name'])."', 
@@ -360,7 +356,6 @@ class ClassReqser extends api_local\ApiBase {
         } else {
           return array('error' => 'new language '.$dec_rec_data['code'].' could not be created in DB table languages');
         }
-        
         //JorisK Sprache zu Translate Array hinzufügen
         $iwl_arr = explode(',', $this->iwl);
         $iwl_arr[] = $new_lang_id;
@@ -375,6 +370,20 @@ class ClassReqser extends api_local\ApiBase {
         if ($dec_rec_data['set_active'] == 'true'){
           if(xtc_db_query('UPDATE languages SET status = 1, status_admin = 1 WHERE code = "'.$dec_rec_data['code'].'"'))
             $return_array = array('success' => 'status of language '.$dec_rec_data['code'].' activated');
+        }
+        //Get the Language ID and add to the $iwl_array
+        $iwl_arr = explode(',', $this->iwl);
+        $check_langs_arr = $this->getShopLanguages();
+        foreach($check_langs_arr as $check_lang){
+          if ($dec_rec_data['code'] == $check_lang['code']){
+            $iwl_arr[] = $check_lang['languages_id'];
+          }
+        }
+        sort($iwl_arr);
+        if(xtc_db_query("UPDATE configuration SET configuration_value = '".implode(',', $iwl_arr)."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'")) {
+          $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
+        } else {
+          return array('error' => 'new language '.$dec_rec_data['code'].' could not be added to "Into which languages shall be translated" in DB table configuration');
         }
       }
     } else {
