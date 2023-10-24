@@ -340,6 +340,15 @@ class ClassReqser extends api_local\ApiBase {
       if($this->ala !== true) return array('error' => 'Add Language not allowed!', 'add_language_not_allowed' => true);
       $dec_rec_data = json_decode($received_data, true);
       if($this->fwl == (int)$this->shop_languages[strtolower($dec_rec_data['language_code'])]['languages_id']) return array('error' => 'adding language '.$dec_rec_data['language_code'].' not allowed, it is "from which language to tanslate"!');
+      if ($dec_rec_data['language_charset'] == ''){
+        $language_array = $this->shop_languages;
+        foreach ($language_array as $language){
+          if ($language['languages_id'] == $this->fwl){
+            $dec_rec_data['language_charset'] = $language['language_charset'];
+            break;
+          } 
+        }
+      }
       if(!array_key_exists($dec_rec_data['code'], $this->shop_languages)) { //Prüfen ob es language_code schon gibt
         $ins_qu_str = "INSERT INTO languages (name, code, image, directory, sort_order, language_charset, status, status_admin) 
                             VALUES ('".xtc_db_input($dec_rec_data['name'])."', 
