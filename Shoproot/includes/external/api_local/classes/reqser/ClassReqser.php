@@ -343,7 +343,7 @@ class ClassReqser extends api_local\ApiBase {
       if(!array_key_exists($dec_rec_data['code'], $this->shop_languages)) { //Prüfen ob es language_code schon gibt
         $ins_qu_str = "INSERT INTO languages (name, code, image, directory, sort_order, language_charset, status, status_admin) 
                             VALUES ('".xtc_db_input($dec_rec_data['name'])."', 
-                                    '".xtc_input_validation($dec_rec_data['code'], 'lang')."', 
+                                    '".xtc_db_input($dec_rec_data['code'])."',
                                     '".xtc_db_input($dec_rec_data['image'])."', 
                                     '".xtc_db_input($dec_rec_data['directory'])."', 
                                     ".(int)$dec_rec_data['sort_order'].", 
