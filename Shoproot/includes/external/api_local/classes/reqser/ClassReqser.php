@@ -247,7 +247,7 @@ class ClassReqser extends api_local\ApiBase {
           }
         }
 
-        if ($fwl_array && $iwl_array){
+        if ($fwl_array){
           //Get Files from muttersprache
           //Check if Folder exists 
           if ($fwl_array['directory'] != ''){
@@ -264,7 +264,7 @@ class ClassReqser extends api_local\ApiBase {
               } 
             }
           }
-          if ($this->iwl != ''){
+          if ($iwl_array){
             foreach($iwl_array as $iwl){
               if ($iwl['directory'] != ''){
                 if (!isset($return_array['iwl'][$iwl['directory']])) {
@@ -279,17 +279,6 @@ class ClassReqser extends api_local\ApiBase {
                       $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles(substr($basePath, 0, -1)));
                   } 
                 }       
-                /*if (file_exists($pathToCheck)){
-                  $return_array['iwl'][$iwl['directory']] = $this->scanAllFiles($pathToCheck);
-                } else {
-                  //Create folder 
-                  if (!mkdir($pathToCheck, 0777, true)) {
-                    $return_array = array('error' => 'Error creating Folder '.$pathToCheck.'!');
-             
-                  } else {
-                    $return_array['iwl'][$iwl['directory']] = '';
-                  } 
-                }*/
               }
             }
           }
