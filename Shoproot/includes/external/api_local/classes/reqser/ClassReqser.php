@@ -233,18 +233,16 @@ class ClassReqser extends api_local\ApiBase {
    * @return array with row information
    */
   protected function callFilesGet_all_language_files() {
-    if($this->lf === false)
-      return array('error' => 'Get_all_language_files not allowed!');
-
+    if($this->lf === false) return array('error' => 'Get_all_language_files not allowed!');
     $return_array = array();
     $iwl_arr = explode(',', $this->iwl);
-    if ($this->fwl != '' && $this->iwl != ''){
+    if ($this->fwl != ''){
       $language_array = $this->shop_languages;
       if ($language_array && sizeof($language_array) > 0){
         foreach ($language_array as $language){
           if ($language['languages_id'] == $this->fwl){
             $fwl_array = $language;
-          } elseif (in_array($language['languages_id'], $iwl_arr)){
+          } elseif (sizeof($iwl_arr) > 0 && in_array($language['languages_id'], $iwl_arr)){
             $iwl_array[] = $language;
           }
         }
@@ -266,35 +264,35 @@ class ClassReqser extends api_local\ApiBase {
               } 
             }
           }
-
-          foreach($iwl_array as $iwl){
-            if ($iwl['directory'] != ''){
-              if (!isset($return_array['iwl'][$iwl['directory']])) {
-                $return_array['iwl'][$iwl['directory']] = [];
-              } 
-              foreach ($this->path as $key => $basePath) {
-                $pathToCheck = $basePath . $iwl['directory'];
-                if (file_exists($pathToCheck)) {
-                    // Append the result to the array
-                    $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles($pathToCheck));
-                } elseif (file_exists(substr($basePath, 0, -1)) && in_array($key, $this->path_file_name)) {
-                    $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles(substr($basePath, 0, -1)));
+          if ($this->iwl != ''){
+            foreach($iwl_array as $iwl){
+              if ($iwl['directory'] != ''){
+                if (!isset($return_array['iwl'][$iwl['directory']])) {
+                  $return_array['iwl'][$iwl['directory']] = [];
                 } 
-              }       
-              /*if (file_exists($pathToCheck)){
-                $return_array['iwl'][$iwl['directory']] = $this->scanAllFiles($pathToCheck);
-              } else {
-                //Create folder 
-                if (!mkdir($pathToCheck, 0777, true)) {
-                  $return_array = array('error' => 'Error creating Folder '.$pathToCheck.'!');
-           
+                foreach ($this->path as $key => $basePath) {
+                  $pathToCheck = $basePath . $iwl['directory'];
+                  if (file_exists($pathToCheck)) {
+                      // Append the result to the array
+                      $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles($pathToCheck));
+                  } elseif (file_exists(substr($basePath, 0, -1)) && in_array($key, $this->path_file_name)) {
+                      $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles(substr($basePath, 0, -1)));
+                  } 
+                }       
+                /*if (file_exists($pathToCheck)){
+                  $return_array['iwl'][$iwl['directory']] = $this->scanAllFiles($pathToCheck);
                 } else {
-                  $return_array['iwl'][$iwl['directory']] = '';
-                } 
-              }*/
+                  //Create folder 
+                  if (!mkdir($pathToCheck, 0777, true)) {
+                    $return_array = array('error' => 'Error creating Folder '.$pathToCheck.'!');
+             
+                  } else {
+                    $return_array['iwl'][$iwl['directory']] = '';
+                  } 
+                }*/
+              }
             }
           }
-        
         }
       }
     }
