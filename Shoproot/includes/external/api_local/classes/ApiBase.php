@@ -21,7 +21,7 @@ if(!function_exists('xtc_create_password') || !function_exists('xtc_RandomString
   require_once(DIR_FS_INC.'xtc_create_password.inc.php');
 
 class ApiBase {
-  private $api_version;
+  private $api_base_version, $shop_version;
   protected $debug_curl, $dev_mode, $log_path, $allowed_methods;
   public $browser_mode, $api_main_path, $api_sub_path;
   
@@ -32,8 +32,11 @@ class ApiBase {
    * @return NULL
    */
   public function __construct($subp = '') {
-    $this->api_version = '1.0';
+    $this->api_base_version = '1.1';
     $this->debug_curl == false;
+
+    require_once(DIR_ADMIN.'includes/version.php');
+    $this->shop_version = PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION.(defined('PROJECT_REVISION') && PROJECT_REVISION != '' ? ' rev'.PROJECT_REVISION : '');
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -50,12 +53,21 @@ class ApiBase {
   }
 
   /**  
-   * protected method getApiVersion
-   *callTemp_tokenFetch
+   * protected method getShopVersion
+   *
+   * @return shop version
+   */
+  protected function getShopVersion() {
+    return $this->shop_version;
+  }
+
+  /**  
+   * protected method getApiBaseVersion
+   * 
    * @return API version
    */
-  protected function getApiVersion() {
-    return $this->api_version;
+  protected function getApiBaseVersion() {
+    return $this->api_base_version;
   }
 
   /**  
@@ -139,17 +151,19 @@ class ApiBase {
    * @param $select, only request for one
    * @return array with 'languages_id', 'name', 'code', 'language_charset' of shop languages
    */
-  protected function getShopLanguages($select = '') {
-    //$allowed_fields = array('languages_id', 'name', 'code', 'language_charset');
-    //$langs_qu_str = "SELECT * FROM languages";
+  protected function getShopLanguages($key = '', $select = '') {
+    if($key == '') $key = 'code';
+    $allwd_keys = array('code', 'languages_id', 'directory');
     $langs_qu_str = "SELECT languages_id, code, language_charset, directory, status, status_admin FROM languages";
     $langs_qu = xtc_db_query($langs_qu_str);
     $langs_array = array();
     while($langs_arr = xtc_db_fetch_array($langs_qu)) {
-      if ($select != ''){
-        $langs_array[$langs_arr['code']] = $langs_arr[$select];
+      if($select != '' && array_key_exists($langs_arr[$select])) {
+        if(in_array($key, $allwd_keys))
+          $langs_array[$langs_arr[$key]] = $langs_arr[$select];
       } else {
-        $langs_array[$langs_arr['code']] = $langs_arr;
+        if(in_array($key, $allwd_keys))
+          $langs_array[$langs_arr[$key]] = $langs_arr;
       }
       
     }
@@ -411,7 +425,7 @@ class ApiBase {
       }
 
       $hve_err_str = isset($err_str) ? $err_str : '';
-      $hve_resp_err = array_key_exists('error', $api_call_response) ? $api_call_response['error'] : '';
+      $hve_resp_err = isset($api_call_response) && array_key_exists('error', $api_call_response) ? $api_call_response['error'] : '';
       $exec_time = number_format(($time_end - $time_start), 4);
       $log_str = date('Y-m-d H:i:s').' | '.$rem_add.' | exec_time '.$exec_time.': '."\n"
                 .'called: '.(isset($method_name) ? $method_name.'()' : '').(isset($params_str) ? ' with params: '.$params_str : '')."\n"
