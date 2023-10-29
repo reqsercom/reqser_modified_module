@@ -24,7 +24,7 @@ defined('ENCODE_DEFINED_CHARSETS') || define('ENCODE_DEFINED_CHARSETS','ASCII,UT
 
 class ClassReqser extends api_local\ApiBase {
   public $browser_mode, $protoc;
-  protected $dev_mode, $allowed_methods, $log_path, $shop_languages;
+  protected $api_reqser_version, $dev_mode, $allowed_methods, $log_path, $shop_languages, $path, $path_file_name;
   private $write_control_mode, $at, $mt, $mtad, $lt, $aara, $fwl, $iwl, $lf, $ala;
 
   /**  
@@ -36,9 +36,12 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
+    $this->api_reqser_version = '1.1';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
+
+    
 
     $this->protoc = defined('MODULE_SYSTEM_REQSER_PROTOCOL_ACC') && MODULE_SYSTEM_REQSER_PROTOCOL_ACC == 'true' ? true : false;
     $this->log_path = DIR_FS_API.$subp.'/logs/';
@@ -53,6 +56,7 @@ class ClassReqser extends api_local\ApiBase {
 
     $this->fwl = defined('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG') && MODULE_SYSTEM_REQSER_FROM_WHICH_LANG != '' ? preg_replace('#[^0-9]#', '', MODULE_SYSTEM_REQSER_FROM_WHICH_LANG) : '';
     $this->iwl = defined('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS') && MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS != '' ? preg_replace('#[^0-9\,]#i', '', MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS) : '';
+    $this->fwl_and_iwl_arr = array('fwl' => $this->fwl, 'iwl' => explode(',', $this->iwl)); //new var for all allowed langs, noRiddle, 10-2023
     $this->lf = defined('MODULE_SYSTEM_REQSER_LANGUAGE_FILES') && MODULE_SYSTEM_REQSER_LANGUAGE_FILES == 'true';
     $this->ala = defined('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED') && MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED == 'true';
 
@@ -81,10 +85,12 @@ class ClassReqser extends api_local\ApiBase {
                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/api_calls/info',
                                                                                         'desc' => 'get information about possible shop API calls',
                                                                                         'returns' => 'an array with the possible shop API calls',
-                                                                                        'module_version' => $this->getApiVersion(),
+                                                                                        'api_base_version' => $this->getApiBaseVersion(),
+                                                                                        'api_reqser_version' => $this->getApiReqserVersion(),
+                                                                                        'shop_version' => $this->getShopVersion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
-                                                                                        'language_add_allowed' => ($this->ala === true ? '1' : '0'),
+                                                                                        'language_add_allowed' => ($this->ala === true ? '1' : '0')
                                                                                        )
                                                                        )
                                                        ),
@@ -94,7 +100,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                           'desc' => 'get token for shop API calls (valid 1 month)',
                                                                                           'returns' => 'an array with the token and its expiry'
                                                                                          )
-                                                                     ),
+                                                                         ),
                                                          'renew' => array('method' => 'get',
                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/renew',
                                                                                           'desc' => 'renew token (e.g. because expired) for shop API calls (valid 1 month)',
@@ -109,7 +115,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                        ),
                                                         'add_language' => array('method' => 'post',
                                                                                 'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/languages/add_language',
-                                                                                                'params' => 'an array to add or update to table language',
+                                                                                                'params' => 'an array to add or update to table languages',
                                                                                                 'desc' => 'write new foreign language to shop DB',
                                                                                                 'return' => 'a success or on failure an error message'
                                                                                                )
@@ -122,19 +128,19 @@ class ClassReqser extends api_local\ApiBase {
                                                                                ),
                                                      'count_tbl_records' => array('method' => 'get',
                                                                                   'params' => array('table', 'lang', 'language_field', 'use_language_code'),
-                                                                                  'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/count_tbl_records?table=X&lang=Y',
+                                                                                  'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/count_tbl_records?table=X&lang=Y&language_field=Z',
                                                                                                   'params' => array('table=TABLE_NAME' => 'for the specified table',
                                                                                                                     'lang=ISO_CODE' => 'for the specified language (e.g. de, for German, en for English, fr for french, etc.)',
                                                                                                                     'language_field=LANGUAGE_FIELD' => 'row name of language field',
                                                                                                                     'use_language_code=BOOLEAN' => 'use language code instead of language id',
-                                                                                                                 ),
+                                                                                                                   ),
                                                                                                   'desc' => 'count table records',
                                                                                                   'returns' => 'an array with the number of records'
                                                                                                  )
                                                                                  ),
                                                      'get_transfields' => array('method' => 'get',
                                                                                 'params' => array('table', 'unique_field', 'lang', 'language_field', 'use_language_code', 'select_fields', 'from', 'chunks'),
-                                                                                'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_transfields?table=X&lang=Y&from=A&chunks=C',
+                                                                                'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_transfields?table=X&unique_field=Y&lang=Z&from=A&chunks=C',
                                                                                                 'params' => array('table=TABLE_NAME' => 'for the specified table',
                                                                                                                   'lang=ISO_CODE' => 'for the specified language (e.g. de, for German, en for English, fr for french, etc.)',
                                                                                                                   'language_field' => 'row name of language field',
@@ -153,42 +159,51 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                   'desc' => 'write translations to fields in shop DB, should happen in chunks',
                                                                                                   'return' => 'a success or on failure an error message'
                                                                                                  )
-                                                                              ),
+                                                                                 ),
                                                      'get_table_row_information' => array('method' => 'get',
                                                                                           'params' => array('table'),
                                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_table_row_information?table=X',
                                                                                                           'params' => array('table=TABLE_NAME' => 'for the specified table'),
                                                                                                           'desc' => 'get row names and type',
                                                                                                           'returns' => 'an array with the row information, needed to add more than predefined rows for translation'
-                                                                                                          )
-                                                                             ),
+                                                                                                         )
+                                                                                         ),
                                                   ),
-                                      'files' => array('get_all_language_files' => array('method' => 'get',
-                                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
-                                                                                                  'desc' => 'get all language files',
-                                                                                                  'returns' => 'returns all files',
-                                                                                                  )
-                                                                                ),
-                                                        'get_file' => array('method' => 'get',
-                                                                            'params' => array('file'),
-                                                                            'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_file?file=X',
-                                                                                            'params' => array('file=FILE_NAME' => 'for the specified table'),
-                                                                                            'desc' => 'get a base64 encoded file',
-                                                                                            'returns' => 'Returns the File as base64 encoded string'
-                                                                                            )
-                                                                                          ),
-                                                         'send_file' => array('method' => 'post',
-                                                                              'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/send_file',
-                                                                                              'params' => 'an array of data',
-                                                                                              'desc' => 'recieve a base64 encoded file',
-                                                                                              'returns' => 'bool or error'
-                                                                                              )
-                                                                                            ),
+                                   'files' => array('get_all_language_files' => array('method' => 'get',
+                                                                                      'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
+                                                                                                      'desc' => 'get all language files',
+                                                                                                      'returns' => 'returns all files',
+                                                                                                     )
+                                                                                     ),
+                                                    'get_file' => array('method' => 'get',
+                                                                        'params' => array('file'),
+                                                                        'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_file?file=X',
+                                                                                        'params' => array('file=FILE_NAME' => 'for the specified file path beginning from root without beginning slash'),
+                                                                                        'desc' => 'get a base64 encoded file',
+                                                                                        'returns' => 'Returns the File as base64 encoded string'
+                                                                                       )
+                                                                       ),
+                                                    'send_file' => array('method' => 'post',
+                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/send_file',
+                                                                                         'params' => 'an array of data',
+                                                                                         'desc' => 'recieve a base64 encoded file',
+                                                                                         'returns' => 'bool or error'
+                                                                                        )
+                                                                        ),
 
-                                                      ),
+                                                  ),
                                   );
   }
 
+  /**  
+   * public method getApiReqserVersion
+   *
+   * @return version of present reqser api (which is an extension of BaseApi with its own version)
+   */
+  public function getApiReqserVersion() {
+    return $this->api_reqser_version;
+  }
+  
   /**  
    * public method getAllowedMethods
    *
@@ -230,55 +245,68 @@ class ClassReqser extends api_local\ApiBase {
       /**  
    * private method callFilesGet_all_language_files
    *
-   * @return array with row information
+   * @return array with language files to be translated
    */
   protected function callFilesGet_all_language_files() {
-    if($this->lf === false) return array('error' => 'Get_all_language_files not allowed!');
+    if($this->lf === false)
+      return array('error' => 'Get_all_language_files not allowed!');
+
     $return_array = array();
+    $fwl_array = array(); //initialize param, noRiddle, 10-2023
+    $iwl_array = array();//initialize param, noRiddle, 10-2023
+
     $iwl_arr = explode(',', $this->iwl);
-    if ($this->fwl != ''){
-      $language_array = $this->shop_languages;
-      if ($language_array && sizeof($language_array) > 0){
-        foreach ($language_array as $language){
-          if ($language['languages_id'] == $this->fwl){
-            $fwl_array = $language;
-          } elseif (sizeof($iwl_arr) > 0 && in_array($language['languages_id'], $iwl_arr)){
-            $iwl_array[] = $language;
+    if($this->fwl != '') {
+      //BOC use new param for getShopLanguages(), noRiddle, 10-2023
+      //$language_array = $this->shop_languages;
+      $language_array = $this->getShopLanguages('languages_id');
+      if(is_array($language_array) && sizeof($language_array) > 0) {
+        if(array_key_exists($this->fwl, $language_array)) {
+          $fwl_array = $language_array[$this->fwl];
+        }
+        if(sizeof($iwl_arr) > 0) {
+          foreach($iwl_arr as $iwl_id) {
+            if(array_key_exists($this->iwl, $language_array)) {
+              $iwl_array[] = $language_array[$iwl_id];
+            }
           }
         }
+        //EOC use new param for getShopLanguages(), noRiddle, 10-2023
 
-        if ($fwl_array){
+        if(count($fwl_array) > 0) {
           //Get Files from muttersprache
           //Check if Folder exists 
-          if ($fwl_array['directory'] != ''){
-            if (!isset($return_array['fwl'][$fwl_array['directory']])) {
-              $return_array['fwl'][$fwl_array['directory']] = [];
+          if($fwl_array['directory'] != '') {
+            if(!isset($return_array['fwl'][$fwl_array['directory']])) {
+              $return_array['fwl'][$fwl_array['directory']] = array();
             }
-            foreach ($this->path as $key => $basePath) {
+            foreach($this->path as $key => $basePath) {
               $pathToCheck = $basePath . $fwl_array['directory'];
-              if (file_exists($pathToCheck)) {
-                  // Append the result to the array
-                  $return_array['fwl'][$fwl_array['directory']] = array_merge($return_array['fwl'][$fwl_array['directory']], $this->scanAllFiles($pathToCheck));
-              } elseif (file_exists(substr($basePath, 0, -1)) && in_array($key, $this->path_file_name)) {
-                  $return_array['fwl'][$fwl_array['directory']] = array_merge($return_array['fwl'][$fwl_array['directory']], $this->scanAllFiles(substr($basePath, 0, -1)));
+              $basePathNoSlash = substr($basePath, 0, -1);
+              if(file_exists($pathToCheck)) {
+                // Append the result to the array
+                $return_array['fwl'][$fwl_array['directory']] = array_merge($return_array['fwl'][$fwl_array['directory']], $this->scanAllFiles($pathToCheck));
+              } elseif(file_exists($basePathNoSlash) && in_array($key, $this->path_file_name)) {
+                $return_array['fwl'][$fwl_array['directory']] = array_merge($return_array['fwl'][$fwl_array['directory']], $this->scanAllFiles($basePathNoSlash));
               } 
             }
           }
-          if ($iwl_array){
-            foreach($iwl_array as $iwl){
-              if ($iwl['directory'] != ''){
-                if (!isset($return_array['iwl'][$iwl['directory']])) {
-                  $return_array['iwl'][$iwl['directory']] = [];
+          if(count($iwl_array) > 0) {
+            foreach($iwl_array as $iwl) {
+              if($iwl['directory'] != '') {
+                if(!isset($return_array['iwl'][$iwl['directory']])) {
+                  $return_array['iwl'][$iwl['directory']] = array();
                 } 
-                foreach ($this->path as $key => $basePath) {
+                foreach($this->path as $key => $basePath) {
                   $pathToCheck = $basePath . $iwl['directory'];
-                  if (file_exists($pathToCheck)) {
-                      // Append the result to the array
-                      $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles($pathToCheck));
-                  } elseif (file_exists(substr($basePath, 0, -1)) && in_array($key, $this->path_file_name)) {
-                      $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles(substr($basePath, 0, -1)));
+                  $basePathNoSlash = substr($basePath, 0, -1);
+                  if(file_exists($pathToCheck)) {
+                    // Append the result to the array
+                    $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles($pathToCheck));
+                  } elseif(file_exists($basePathNoSlash) && in_array($key, $this->path_file_name)) {
+                    $return_array['iwl'][$iwl['directory']] = array_merge($return_array['iwl'][$iwl['directory']], $this->scanAllFiles($basePathNoSlash));
                   } 
-                }       
+                }
               }
             }
           }
@@ -288,58 +316,54 @@ class ClassReqser extends api_local\ApiBase {
     return $return_array;
   }
 
-      /**  
+  /**  
    * private method scanAllFiles
    *
-   * @return array with row information
+   * @return array with relative file paths
    */
   private function scanAllFiles($dir) {
     $files = array();
     $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir), \RecursiveIteratorIterator::SELF_FIRST);
 
-    foreach ($iterator as $fileinfo) {
-        if ($fileinfo->isFile()) {
-            $relativePath = substr($fileinfo->getPathname(), strlen(DIR_FS_CATALOG));
-            $files[] = $relativePath;
-        }
+    foreach($iterator as $fileinfo) {
+      if($fileinfo->isFile()) {
+        $relativePath = substr($fileinfo->getPathname(), strlen(DIR_FS_CATALOG));
+        $files[] = $relativePath;
+      }
     }
 
     return $files;
-}
+  }
 
-    /**  
+  /**  
    * private method callLanguagesAdd_language
    *
-   * @param $name = name
-   * @param $code = code
-   * @param $image = image
-   * @param $directory = directory
-   * @param $sort_order = sort_order
-   * @param $language_charset = language_charset
-   * @param $status = status
-   * @param $status_admin = status_admin
-   * @return array with row information
+   * @return array with success or error message
    */
-  protected function callLanguagesAdd_language() {
+  protected function callLanguagesAdd_language() { //made code more concise, noRiddle, 10-2023
     $return_array = array();
+    $check_langs_arr = $this->getShopLanguages();
+    $iwl_arr = explode(',', $this->iwl);
+
     $received_data = file_get_contents('php://input');
     if($received_data != '') {
       if($this->ala !== true) return array('error' => 'Add Language not allowed!', 'add_language_not_allowed' => true);
       $dec_rec_data = json_decode($received_data, true);
-      if($this->fwl == (int)$this->shop_languages[strtolower($dec_rec_data['language_code'])]['languages_id']) return array('error' => 'adding language '.$dec_rec_data['language_code'].' not allowed, it is "from which language to tanslate"!');
-      if ($dec_rec_data['language_charset'] == ''){
-        $language_array = $this->shop_languages;
-        foreach ($language_array as $language){
-          if ($language['languages_id'] == $this->fwl){
-            $dec_rec_data['language_charset'] = $language['language_charset'];
-            break;
-          } 
+      if($this->fwl == (int)$this->shop_languages[strtolower($dec_rec_data['language_code'])]['languages_id'])
+        return array('error' => 'adding language '.$dec_rec_data['language_code'].' not allowed, it is "from which language to tanslate"!');
+
+      if($dec_rec_data['language_charset'] == '') {
+        $language_array = $this->getShopLanguages('languages_id');
+        if(array_key_exists($this->fwl, $language_array)) {
+          $dec_rec_data['language_charset'] = $language_array[$this->fwl]['language_charset'];
+        } else {
+          return array('error' => '"ffrom which language to tanslate" is not in array of shop languages! Language_charset could not be determined');
         }
       }
-      if(!array_key_exists($dec_rec_data['code'], $this->shop_languages)) { //Prüfen ob es language_code schon gibt
+      if(!array_key_exists($dec_rec_data['code'], $check_langs_arr)) { //Prüfen ob es language_code schon gibt
         $ins_qu_str = "INSERT INTO languages (name, code, image, directory, sort_order, language_charset, status, status_admin) 
                             VALUES ('".xtc_db_input($dec_rec_data['name'])."', 
-                                    '".xtc_db_input($dec_rec_data['code'])."',
+                                    '".nr_input_validation($dec_rec_data['code'], 'lang')."', 
                                     '".xtc_db_input($dec_rec_data['image'])."', 
                                     '".xtc_db_input($dec_rec_data['directory'])."', 
                                     ".(int)$dec_rec_data['sort_order'].", 
@@ -353,28 +377,21 @@ class ClassReqser extends api_local\ApiBase {
           return array('error' => 'new language '.$dec_rec_data['code'].' could not be created in DB table languages');
         }
         //JorisK Sprache zu Translate Array hinzufügen
-        $iwl_arr = explode(',', $this->iwl);
-        $iwl_arr[] = $new_lang_id;
-        sort($iwl_arr);
-        if(xtc_db_query("UPDATE configuration SET configuration_value = '".implode(',', $iwl_arr)."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'")) {
-          $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
-        } else {
-          return array('error' => 'new language '.$dec_rec_data['code'].' could not be added to "Into which languages shall be translated" in DB table configuration');
+        if(isset($new_lang_id)) { //added condition, noRiddle, 10-2023
+          $iwl_arr[] = $new_lang_id;
         }
       } else {
         //JorisK Sprache existiert bereits somit alles i.o.
         if ($dec_rec_data['set_active'] == 'true'){
           if(xtc_db_query('UPDATE languages SET status = 1, status_admin = 1 WHERE code = "'.$dec_rec_data['code'].'"'))
             $return_array = array('success' => 'status of language '.$dec_rec_data['code'].' activated');
+        } else {
+          return array('error' => 'status of language '.$dec_rec_data['code'].' could not be activated');
         }
         //Get the Language ID and add to the $iwl_array
-        $iwl_arr = explode(',', $this->iwl);
-        $check_langs_arr = $this->getShopLanguages();
-        foreach($check_langs_arr as $check_lang){
-          if ($dec_rec_data['code'] == $check_lang['code']){
-            $iwl_arr[] = $check_lang['languages_id'];
-          }
-        }
+        $iwl_arr[] = $check_langs_arr[$dec_rec_data['code']]['languages_id'];
+      }
+      if(count($iwl_arr) > 0) {
         sort($iwl_arr);
         if(xtc_db_query("UPDATE configuration SET configuration_value = '".implode(',', $iwl_arr)."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'")) {
           $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
@@ -388,74 +405,61 @@ class ClassReqser extends api_local\ApiBase {
     return $return_array;
   }
 
-    /**  
+  /**  
    * private method callFilesSend_file
-   *
-   * @param $type = type
-   * @param $lang_directory = directory
-   * @param $file_name = file name including path in the language directory
-   * @param $file_content = base64
-   * @param $reqser_file_id = for troubleshoot
-   * @return array with row information
+   * 
+   * @return array with success or error message
    */
-  protected function callFilesSend_file() {
+  protected function callFilesSend_file() { //made code more concise, noRiddle, 10-2023
     $received_data = file_get_contents('php://input');
-    if ($received_data != '') {
+    if($received_data != '') {
       $dec_rec_data = json_decode($received_data, true);
       if($this->lf === false)
         return array('error' => 'Send File not allowed!');
 
       $dec_rec_data = $this->purifyResp($dec_rec_data); //sanitize, noRiddle, 08-2023
-      //Prüfen ob language_directory in zu übersetzenden Sprachen drin 
       $langs_arr = $this->getShopLanguages('directory');
-      if (!in_array($dec_rec_data['lang_directory'], $langs_arr)){
+
+      //Prüfen ob language_directory in zu übersetzenden Sprachen drin
+      if(!array_key_exists($dec_rec_data['lang_directory'], $langs_arr)) {
         return array('error' => 'Language Directory not allowed! '.$dec_rec_data['type'].' '.$dec_rec_data['lang_directory'].' '.json_encode($langs_arr));
       } 
 
       //Prüfen ob die Sprache auch in den zu übersetzenden Sprachen vorhanden ist 
       $iwl_erlaubt = false;
       $iwl_arr = explode(',', $this->iwl);
-      $check_langs_arr = $this->getShopLanguages();
-      foreach($check_langs_arr as $check_lang){
-        if ($dec_rec_data['lang_directory'] == $check_lang['directory'] && in_array($check_lang['languages_id'], $iwl_arr)){
-          $iwl_erlaubt = true;
-        }
+      if(in_array($langs_arr[$dec_rec_data['lang_directory']]['languages_id'], $iwl_arr)) {
+        $iwl_erlaubt = true;
       }
-      
 
       $directory = DIR_FS_CATALOG.$dec_rec_data['file_name'];
       //Prüfen ob directory erlaubt 
       $directory_erlaubt = false;
       foreach($this->path as $key => $path){
-        if ($path == substr($directory, 0, strlen($path))){
+        if($path == substr($directory, 0, strlen($path))) {
           $directory_erlaubt = true;
+          break; //stop loop, noRiddle, 10-2023
         }
       }
+      //Prüfen ob es in den erlaubten Sprachordner schreibt 
       $sprache_erlaubt = false;
-      //Prüfen ob es mit Ausnahme des Template Pfades in den erlaubten Sprachordner schreibt 
-      if (in_array($key, $this->path_file_name)){
-        foreach($langs_arr  as $language){
-          if (substr_count($directory, '/lang/'.$language.'/') > 0){
-            $sprache_erlaubt = true;
-          }
-        }
-      } else {
-        //Prüfen ob Directory Name im File selbst vorkommt, bsp .section File 
-        foreach($langs_arr  as $language){
-          if (substr_count($directory, basename($dec_rec_data['file_name'])) > 0){
-            $sprache_erlaubt = true;
-          }
+      $path_components = explode('/', $dec_rec_data['file_name']);
+      foreach($langs_arr as $dir => $lang_vals_arr) {
+        if(in_array($dir, $path_components) || strpos(basename($dec_rec_data['file_name']), $dir) !== false) {
+          $sprache_erlaubt = true;
+          break;
         }
       }
-      if ($directory_erlaubt === true && $sprache_erlaubt === true && $iwl_erlaubt === true){
+
+      if($directory_erlaubt === true && $sprache_erlaubt === true && $iwl_erlaubt === true) {
         $filename = $dec_rec_data['file_name'];
         $directory = dirname($filename);
    
         $fullPath = $filename;
         // Check if directory exists
-        if (!file_exists($directory)) {
-            // If not, create the directory
-            mkdir($directory, 0777, true);  // 0777 is the default mode. 'true' is for recursive directory creation.
+        if(!file_exists($directory)) {
+          // If not, create the directory
+          mkdir($directory, 0777, true);  // 0777 is the default mode. 'true' is for recursive directory creation.
         }
         // Save the file
         file_put_contents($fullPath, base64_decode($dec_rec_data['file_content']));
@@ -469,46 +473,66 @@ class ClassReqser extends api_local\ApiBase {
     return $return_array;
   }
 
-    /**  
+  /**  
    * private method callFilesGet_file
    *
    * @param $file = which file
-   * @return array with row information
+   * @return array with success or error message
    */
   protected function callFilesGet_file($file = '') {
     if($this->lf === false)
       return array('error' => 'Get_file not allowed!');
 
-    if ($file != ''){
+    if($file != '') {
+      //BOC allowed language ?, noRiddle, 10-2023
+      $path_components = explode('/', $file_name);
+      $lang_allwd = false;
+      $shop_langs_arr = $this->getShopLanguages('directory');
+      foreach($shop_langs_arr as $dir => $lang_vals_arr) {
+        if(in_array($dir, $path_components) || strpos($file, $dir) !== false) {
+          $lng_id = $lang_vals_arr['languages_id'];
+          break;
+        }
+      }
+      if(isset($lng_id) && (in_array($lng_id, $this->fwl_and_iwl_arr) || in_array($lng_id, $this->fwl_and_iwl_arr['iwl']))) {
+        $lang_allwd = true;
+      }
+      //EOC allowed language ?, noRiddle, 10-2023
+      
       //JorisK Prüfen ob der Path erlaubt ist 
       $path_erlaubt = false;
-      foreach($this->path as $path){
-        if ($path == substr(DIR_FS_CATALOG.$file, 0, strlen($path))){
+      foreach($this->path as $path) {
+        if($path == substr(DIR_FS_CATALOG.$file, 0, strlen($path))) { //verify whether lang allowed, noRiddle, 10-2023
           $path_erlaubt = true;
+          break; //stop loop, noRiddle, 10-2023
         }
       }
-      if ($path_erlaubt === true){
-        if (file_exists(DIR_FS_CATALOG.$file)){
-          $file_content = file_get_contents(DIR_FS_CATALOG.$file);
-          $return_array = array('file' => $file, 'content' => base64_encode($file_content));
+
+      if($lang_allwd === true) {
+        if($path_erlaubt === true) {
+          if(file_exists(DIR_FS_CATALOG.$file)) {
+            $file_content = file_get_contents(DIR_FS_CATALOG.$file);
+            $return_array = array('file' => $file, 'content' => base64_encode($file_content));
+          } else {
+            $return_array = array('error' => 'File '.$file.' does not exist!', 'file_doesnt_exists' => true);
+          }
         } else {
-          $return_array = array('error' => 'File '.$file.' does not exist!', 'file_doesnt_exists' => true);
+          $return_array = array('error' => 'Path not allowed! '.$file.' dirname '.$file.' allowed Path '.json_encode($this->path));
         }
       } else {
-        $return_array = array('error' => 'Path not allowed! '.$file.' Dirname '.$file.' Allowed Path '.json_encode($this->path));
+        $return_array = array('error' => 'Language directory is not allowed, neither in "from which language" nor in "into which languages"');
       }
     } else {
-      $return_array = array('error' => 'No File provided!');
+      $return_array = array('error' => 'No file provided!');
     }
     return $return_array;
   }
 
-
-
-    /**  
+  /**  
    * private method callTablesGetTableRowInformation
    *
-   * @return array with row information
+   * @param $table DB table
+   * @return array with table information
    */
   protected function callTablesGet_table_row_information($table = '') {
     $allowed_tables = $this->allowedTables();
@@ -545,11 +569,15 @@ class ClassReqser extends api_local\ApiBase {
     return $allowed_tables;
   }
 
+  /**  
+   * private method callLanguagesData
+   *
+   * @return array of language from and languages into to translate
+   */
   protected function callLanguagesData() {
-    
     $langs_arr = $this->getShopLanguages();
     $iwl_arr = explode(',', $this->iwl);
-    
+
     foreach($langs_arr as $code => $data) {
       if($data['languages_id'] != $this->fwl && !in_array($data['languages_id'], $iwl_arr)) {
         unset($langs_arr[$code]);
@@ -561,14 +589,22 @@ class ClassReqser extends api_local\ApiBase {
           } else {
             $langs_arr[$code]['en_choice'] = 'en-us';
           }
-          
         }
       }
     }
-    
+
     return $langs_arr;
   }
 
+  /**  
+   * private method callTablesCount_tbl_records
+   *
+   * @param $table 
+   * @param $lang 
+   * @param $language_field
+   * @param $use_language_code
+   * @return array of number of table records or errors
+   */
   protected function callTablesCount_tbl_records($table = '', $lang = '', $language_field = '', $use_language_code = 0) {
     
     if($table != '' && $lang != '' && $language_field != '') {
@@ -589,7 +625,7 @@ class ClassReqser extends api_local\ApiBase {
           //return array('error' => 'test', 'text' => 'Language_FIeld '.$language_field);
           $language_field = preg_replace('#[^a-z0-9\_]#', '', $language_field);
           if ($use_language_code == 1){
-            $lang_id = strtolower($lang);
+            $lang_id = strtolower(nr_input_validation($lang, 'lang'));
           }
           $qu_str = "SELECT COUNT(*) AS records FROM ".$table." WHERE ".$language_field." = '".$lang_id."'";
           if($qu = xtc_db_query($qu_str)) {
@@ -941,6 +977,11 @@ class ClassReqser extends api_local\ApiBase {
                  'expiry' => $time);
   }
 
+  /**  
+   * protected method haveTableRecord
+   *
+   * @return WHAT IS THIS FOR ?, noRiddle
+   */
   protected function haveTableRecord($tbl, $id_field, $id, $lng_field, $lng, $orig_lng) {
     $verify_qu1 = xtc_db_query("SELECT ".$id_field." FROM ".$tbl." WHERE ".$id_field." = ".(int)$id." AND ".$lng_field." = ".(int)$lng);
     if(xtc_db_num_rows($verify_qu1) == 0) {
@@ -957,8 +998,7 @@ class ClassReqser extends api_local\ApiBase {
   /**  
    * private method allowedTables
    *
-   * @param table name
-   * @return array of to be translated fields and the field name of the unique language
+   * @return array of allowed db tables to be translated
    */
   private function allowedTables() {
     $allowed_tables = explode(',', $this->at);
