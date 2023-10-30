@@ -485,7 +485,7 @@ class ClassReqser extends api_local\ApiBase {
 
     if($file != '') {
       //BOC allowed language ?, noRiddle, 10-2023
-      $path_components = explode('/', $file_name);
+      $path_components = explode('/', $file);
       $lang_allwd = false;
       $shop_langs_arr = $this->getShopLanguages('directory');
       foreach($shop_langs_arr as $dir => $lang_vals_arr) {
