@@ -148,8 +148,10 @@ class ApiBase {
 
   /**  
    * protected method getShopLanguages
-   * @param $select, only request for one
-   * @return array with 'languages_id', 'name', 'code', 'language_charset' of shop languages
+   *
+   * @param $key to define key of returned array
+   * @param $select to request only one field
+   * @return array with important fields of shop languages
    */
   protected function getShopLanguages($key = '', $select = '') {
     if($key == '') $key = 'code';
