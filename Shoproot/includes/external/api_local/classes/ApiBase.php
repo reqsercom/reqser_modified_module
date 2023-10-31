@@ -32,7 +32,7 @@ class ApiBase {
    * @return NULL
    */
   public function __construct($subp = '') {
-    $this->api_base_version = '1.1';
+    $this->api_base_version = '1.2';
     $this->debug_curl == false;
 
     require_once(DIR_ADMIN.'includes/version.php');
@@ -115,11 +115,14 @@ class ApiBase {
    * @return array of headers of a request
    */
   protected function getHeaders() {
-    //or use this ? https://stackoverflow.com/questions/40582161/how-to-properly-use-bearer-tokens#answer-40582472
     $headers = getallheaders();
-
-    return $headers;
-  }
+    return array_combine(
+        array_map(function($key) {
+            return ucfirst(strtolower($key));
+        }, array_keys($headers)),
+        $headers
+    );
+}
 
   /**  
    * protected method getUrlParts
