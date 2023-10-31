@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '1.1';
+    $this->api_reqser_version = '1.2';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -86,7 +86,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'desc' => 'get information about possible shop API calls',
                                                                                         'returns' => 'an array with the possible shop API calls',
                                                                                         'api_base_version' => $this->getApiBaseVersion(),
-                                                                                        'api_reqser_version' => $this->getApiReqserVersion(),
+                                                                                        'module_version' => $this->getApiReqserVersion(),
                                                                                         'shop_version' => $this->getShopVersion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
