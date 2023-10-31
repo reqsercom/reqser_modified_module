@@ -115,6 +115,7 @@ class ApiBase {
    * @return array of headers of a request
    */
   protected function getHeaders() {
+    //JorisK update for HTTP/2 where the authorization comes in lower case
     $headers = getallheaders();
     return array_combine(
         array_map(function($key) {
