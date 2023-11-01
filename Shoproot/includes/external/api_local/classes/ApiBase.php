@@ -35,6 +35,7 @@ class ApiBase {
     $this->api_base_version = '1.3';
     $this->debug_curl == false;
 
+    //JorisK Only if file_exists
     if (file_exists(DIR_ADMIN.'includes/version.php')){
       require_once(DIR_ADMIN.'includes/version.php');
       $this->shop_version = PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION.(defined('PROJECT_REVISION') && PROJECT_REVISION != '' ? ' rev'.PROJECT_REVISION : '');
