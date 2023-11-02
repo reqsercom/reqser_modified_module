@@ -32,11 +32,17 @@ class ApiBase {
    * @return NULL
    */
   public function __construct($subp = '') {
-    $this->api_base_version = '1.2';
+    $this->api_base_version = '1.3';
     $this->debug_curl == false;
 
-    require_once(DIR_ADMIN.'includes/version.php');
-    $this->shop_version = PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION.(defined('PROJECT_REVISION') && PROJECT_REVISION != '' ? ' rev'.PROJECT_REVISION : '');
+    //JorisK Only if file_exists
+    if (file_exists(DIR_ADMIN.'includes/version.php')){
+      require_once(DIR_ADMIN.'includes/version.php');
+      $this->shop_version = PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION.(defined('PROJECT_REVISION') && PROJECT_REVISION != '' ? ' rev'.PROJECT_REVISION : '');
+    } else {
+      $this->shop_version = '';
+    }
+
 
     $this->browser_mode = false;
     $this->dev_mode = true;
