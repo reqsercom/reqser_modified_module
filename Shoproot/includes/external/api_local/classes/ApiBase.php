@@ -22,7 +22,7 @@ if(!function_exists('xtc_create_password') || !function_exists('xtc_RandomString
 
 class ApiBase {
   private $api_base_version, $shop_version;
-  protected $debug_curl, $dev_mode, $log_path, $allowed_methods;
+  protected $debug_curl, $dev_mode, $api_db_conn, $log_path, $allowed_methods;
   public $browser_mode, $api_main_path, $api_sub_path;
   
   /**  
@@ -32,6 +32,8 @@ class ApiBase {
    * @return NULL
    */
   public function __construct($subp = '') {
+    global $api_db_conn;
+
     $this->api_base_version = '1.3';
     $this->debug_curl == false;
 
@@ -43,9 +45,10 @@ class ApiBase {
       $this->shop_version = '';
     }
 
-
     $this->browser_mode = false;
     $this->dev_mode = true;
+
+    $this->api_db_conn = $api_db_conn;
 
     $this->log_path = '';
 
@@ -121,15 +124,15 @@ class ApiBase {
    * @return array of headers of a request
    */
   protected function getHeaders() {
-    //JorisK update for HTTP/2 where the authorization comes in lower case
+    //JorisK update for HTTP/2 where the authorization comes in lower case //meaning in HHTP/1.1 the header Authorization, noRiddle, 10-2023
     $headers = getallheaders();
     return array_combine(
-        array_map(function($key) {
-            return ucfirst(strtolower($key));
-        }, array_keys($headers)),
-        $headers
+      array_map(function($key) {
+        return ucfirst(strtolower($key));
+      }, array_keys($headers)),
+      $headers
     );
-}
+  }
 
   /**  
    * protected method getUrlParts
@@ -138,6 +141,10 @@ class ApiBase {
    * @return array of requested URL path parts
    */
   protected function getUrlParts($url) {
+    if(isset($_SERVER['HTTPS']) && empty($_SERVER['HTTPS']) || !isset($_SERVER['HTTPS'])) {
+      return array('error' => 'call via ssl necessary');
+    }
+
     $path_str = parse_url($url, PHP_URL_PATH);
     $url_arr = explode( '/', ltrim($path_str, '/'));
 
@@ -167,9 +174,10 @@ class ApiBase {
     if($key == '') $key = 'code';
     $allwd_keys = array('code', 'languages_id', 'directory');
     $langs_qu_str = "SELECT languages_id, code, language_charset, directory, status, status_admin FROM languages";
-    $langs_qu = xtc_db_query($langs_qu_str);
+    $langs_qu = $this->api_db_conn->apiDbQuery($langs_qu_str); //xtc_db_query($langs_qu_str);
     $langs_array = array();
-    while($langs_arr = xtc_db_fetch_array($langs_qu)) {
+    //while($langs_arr = xtc_db_fetch_array($langs_qu)) {
+    while($langs_arr = $this->api_db_conn->apiDbFetchArray($langs_qu)) {
       if($select != '' && array_key_exists($langs_arr[$select])) {
         if(in_array($key, $allwd_keys))
           $langs_array[$langs_arr[$key]] = $langs_arr[$select];
@@ -191,10 +199,14 @@ class ApiBase {
    */
   protected function mapLanguageIdToIso($id) {
     $id = (int)$id;
-    $code_qu_str = "SELECT code FROM languages WHERE languages_id = ".$id;
-    $code_qu = xtc_db_query($code_qu_str);
-    if(xtc_db_num_rows($code_qu) > 0) {
-      $code_arr = xtc_db_fetch_array($code_qu);
+    /*$code_qu_str = "SELECT code FROM languages WHERE languages_id = ".$id;
+    $code_qu = xtc_db_query($code_qu_str);*/
+    $code_qu_str = "SELECT code FROM languages WHERE languages_id = ?";
+    $code_qu = $this->api_db_conn->apiDbQuery($code_qu_str, (int)$id);
+    //if(xtc_db_num_rows($code_qu) > 0) {
+    if($this->api_db_conn->apiDbNumRows($code_qu) > 0) {
+      //$code_arr = xtc_db_fetch_array($code_qu);
+      $code_arr = $this->api_db_conn->apiDbFetchArray($code_qu);
       return $code_arr['code'];
     }
     return 'lang code not exists';
@@ -314,6 +326,10 @@ class ApiBase {
    */
   public function receiveRequest(string $requ_url): array {
     $url_parts = $this->getUrlParts($requ_url);
+    if(isset($url_parts['error']) ) {
+      return array('error' => $url_parts['error']);
+    }
+    
     if(strpos($requ_url, '?') !== false && $_SERVER['QUERY_STRING'] != '') {
       $query_parts = $this->getQueryStringParts($_SERVER['QUERY_STRING']);
     }
@@ -337,6 +353,10 @@ class ApiBase {
    * @return
    */
   public function callRestMethod($uri_arr, $api_key, $api_token, $api_valid_until, $rem_add = '') {
+    if(isset($uri_arr['error'])) {
+      return json_encode(array('error' => $uri_arr['error']));
+    }
+
     if($rem_add !== '') {
       $time_start = microtime(true);
     }
