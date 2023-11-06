@@ -38,8 +38,8 @@ class ApiBase {
     $this->debug_curl == false;
 
     //JorisK Only if file_exists
-    if(file_exists(DIR_ADMIN.'includes/version.php')) {
-      require_once(DIR_ADMIN.'includes/version.php');
+    if(file_exists(DIR_FS_ADMIN.'includes/version.php')) {
+      require_once(DIR_FS_ADMIN.'includes/version.php');
       $this->shop_version = PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION.(defined('PROJECT_REVISION') && PROJECT_REVISION != '' ? ' rev'.PROJECT_REVISION : '');
     } else {
       $this->shop_version = '';
