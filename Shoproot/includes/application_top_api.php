@@ -88,15 +88,21 @@ require(DIR_WS_INCLUDES . 'database_tables.php');
 define('STORE_DB_TRANSACTIONS', 'false');
 
 // Database
+/*
 require_once (DIR_FS_INC.'db_functions_'.DB_MYSQL_TYPE.'.inc.php');
 require_once (DIR_FS_INC.'db_functions.inc.php');
 
 // make a connection to the database... now
 xtc_db_connect() or die('Unable to connect to database server!');
+*/
+require_once(DIR_FS_EXTERNAL.'api_local/classes/db/DbFuncs.php');
+$api_db_conn = new api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
 
 // set the application parameters
-$configuration_query = xtc_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
-while ($configuration = xtc_db_fetch_array($configuration_query)) {
+//$configuration_query = xtc_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
+$configuration_query = $api_db_conn->apiDbQuery("SELECT configuration_key AS cfgKey, configuration_value as cfgValue FROM ".TABLE_CONFIGURATION);
+//while ($configuration = xtc_db_fetch_array($configuration_query)) {
+  while ($configuration = $api_db_conn->apiDbFetchArray($configuration_query)) {
   defined($configuration['cfgKey']) OR  define($configuration['cfgKey'], stripslashes($configuration['cfgValue'])); //Web28 - 2012-08-09 - fix slashes
 }
 
