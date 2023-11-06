@@ -21,14 +21,14 @@ define('PAGE_PARSE_START_TIME', microtime());
 error_reporting(0);
 
 // Set the local configuration parameters - mainly for developers - if exists else the mainconfigure
-if (file_exists(dirname(__FILE__).'/local/configure.php')) {
+if(file_exists(dirname(__FILE__).'/local/configure.php')) {
   include_once(dirname(__FILE__).'/local/configure.php');
 } else {
   include_once(dirname(__FILE__).'/configure.php');
 }
 
 // minimum requirement
-if (version_compare(PHP_VERSION, '7.0', '<')) {
+if(version_compare(PHP_VERSION, '7.0', '<')) {
   return array('error' => 'APi Version too low min PHP 7.0 Shop has '.PHP_VERSION);
 }
 
@@ -37,7 +37,7 @@ defined('DEFAULT_TIMEZONE') OR define('DEFAULT_TIMEZONE', 'Europe/Berlin');
 date_default_timezone_set(DEFAULT_TIMEZONE);
 
 // new error handling
-if (is_file(DIR_WS_INCLUDES.'error_reporting.php')) {
+if(is_file(DIR_WS_INCLUDES.'error_reporting.php')) {
   require_once (DIR_WS_INCLUDES.'error_reporting.php');
 }
 
@@ -68,7 +68,7 @@ define('PROJECT_VERSION', 'modified eCommerce Shopsoftware');
 define('TAX_DECIMAL_PLACES', 0);
 
 // set the type of request (secure or not)
-if (file_exists(DIR_WS_INCLUDES.'request_type.php')) {
+if(file_exists(DIR_WS_INCLUDES.'request_type.php')) {
   include (DIR_WS_INCLUDES.'request_type.php');
 } else {
   $request_type = 'NONSSL';
