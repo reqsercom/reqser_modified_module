@@ -72,7 +72,7 @@ class ClassReqser extends api_local\ApiBase {
     );
 
     //JorisK werden nicht in allen Templates verwendet
-    if(file_exists(DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/')){
+    if(file_exists(DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/')) {
       $this->path['template_buttons'] = DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/';
     } 
 
@@ -393,7 +393,7 @@ class ClassReqser extends api_local\ApiBase {
         }
       } else {
         //JorisK Sprache existiert bereits somit alles i.o.
-        if ($dec_rec_data['set_active'] == 'true') {
+        if($dec_rec_data['set_active'] == 'true') {
           $upd_qu_str = "UPDATE languages SET status = 1, status_admin = 1 WHERE code = ?";
           //if(xtc_db_query('UPDATE languages SET status = 1, status_admin = 1 WHERE code = "'.$dec_rec_data['code'].'"'))
           if($upd_qu = $this->api_db_conn->apiDbQuery($upd_qu_str, nr_input_validation($dec_rec_data['code'], 'lang'))) {
@@ -606,8 +606,8 @@ class ClassReqser extends api_local\ApiBase {
         unset($langs_arr[$code]);
       } else {
         $langs_arr[$code]['purpose'] = ($data['languages_id'] == $this->fwl ? 'from' : 'to');
-        if ($code == 'en'){
-          if(MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH == 'true'){
+        if($code == 'en') {
+          if(MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH == 'true') {
             $langs_arr[$code]['en_choice'] = 'en-gb';
           } else {
             $langs_arr[$code]['en_choice'] = 'en-us';
@@ -646,7 +646,7 @@ class ClassReqser extends api_local\ApiBase {
           }
           //return array('error' => 'test', 'text' => 'Language_FIeld '.$language_field);
           $language_field = preg_replace('#[^a-z0-9\_]#', '', $language_field);
-          if ($use_language_code == 1) {
+          if($use_language_code == 1) {
             $lang_id = strtolower(nr_input_validation($lang, 'lang'));
           }
           //$qu_str = "SELECT COUNT(*) AS records FROM ".$table." WHERE ".$language_field." = '".$lang_id."'";
@@ -660,7 +660,7 @@ class ClassReqser extends api_local\ApiBase {
             $out_arr = array('error' => 'Query '.$qu_str.' could not be executed, please consult log files of shop');
           }
         } else {
-          if (!in_array($table, $allowed_tables)){
+          if(!in_array($table, $allowed_tables)) {
             $out_arr = array('error' => 'table '.$table.' in Modified Modul not allowed, allowed Tables '.implode(", ", $allowed_tables));
           } else {
             $out_arr = array('error' => 'language '.$lang.' in shop not allowed, allowed languages '.implode(", ", $iwl_arr));
@@ -694,7 +694,7 @@ class ClassReqser extends api_local\ApiBase {
             $lang_id = (int)$this->shop_languages[strtolower($lang)]['languages_id'];
             if(in_array($lang_id, $iwl_arr) || $lang_id == $this->fwl) {
               //JorisK Spezialfall da die Tabelle plugin_language_snippets_data nicht die ID sondern den Language Code hat
-              if ($use_language_code == 1) {
+              if($use_language_code == 1) {
                 $lang_id = strtolower($lang);
               }
               if(in_array($table, $allowed_tables) && isset($lang_id)) {
@@ -728,7 +728,7 @@ class ClassReqser extends api_local\ApiBase {
                   //JorisK Absicherung für MYSQL Injection sofern Tabelle vordefiniert
                   if((isset($fields['unique_key']) && $uk != $fields['unique_key']) && $this->aara === false) {
                     $out_arr = array('error' => 'Unique Field '.$uk.' not allowed');
-                  } elseif ($uk != '') {
+                  } elseif($uk != '') {
                     $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
            
                     //JorisK Fehler falls eine ältere Shopversion verwendet wird die ggf diese Spalten gar nicht hat!
@@ -993,7 +993,7 @@ class ClassReqser extends api_local\ApiBase {
     if(strtolower($charset) == 'utf-8' || $force_utf8 === true) {
       $supported_charsets = explode(',', strtoupper(ENCODE_DEFINED_CHARSETS));  
       $cur_encoding = !empty($encoding) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
-      if ($cur_encoding == 'UTF-8' && mb_check_encoding($string, 'UTF-8')) {
+      if($cur_encoding == 'UTF-8' && mb_check_encoding($string, 'UTF-8')) {
         return $string;
       } else {
         return mb_convert_encoding($string, 'UTF-8', $cur_encoding);
