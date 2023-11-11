@@ -256,7 +256,8 @@ class DbFuncs {
    * @return array of results with field names as keys
    */
   public function apiDbFetchArray(object $stmt, $close = false) {
-    if(!is_iterable($stmt)) {
+    //if(!is_iterable($stmt)) {
+    if(!$this->custom_is_iterable($stmt)) {
       $params = array();
       $row = array();
       $meta = $stmt->result_metadata();
@@ -293,7 +294,8 @@ class DbFuncs {
    */
   public function apiDbFetchArrayLoop(object $stmt, $lkey = null, $close = false, $callback = null) {
     //echo '<pre style="padding:10px 0 0;">'.(is_iterable($stmt) ? 'is iterable' : 'is NOT iterable').'</pre>';
-    if(!is_iterable($stmt)) { //we have params to be bound
+    //if(!is_iterable($stmt)) { //we have params to be bound
+    if(!$this->custom_is_iterable($stmt)) {
       $params = array();
       $row = array();
       $meta = $stmt->result_metadata();
@@ -350,7 +352,8 @@ class DbFuncs {
    * @return array of results with field names as keys
    */
   public function apiDbFetchRow(object $stmt, $close = false) {
-    if(!is_iterable($stmt)) {
+    //if(!is_iterable($stmt)) {
+    if(!$this->custom_is_iterable($stmt)) {
       $params = array();
       $row = array();
       $meta = $stmt->result_metadata();
@@ -384,7 +387,8 @@ class DbFuncs {
    * @return number of rows of query result
    */
   public function apiDbNumRows(object $stmt, $close = false) {
-    if(!is_iterable($stmt)) {
+    //if(!is_iterable($stmt)) {
+    if(!$this->custom_is_iterable($stmt)) {
       $num_rows = $stmt->num_rows;
       if($close === true) {
         $stmt->close();
@@ -514,6 +518,20 @@ class DbFuncs {
     }
     return $ret;
 	}
+
+  /**
+   * protected method custom_is_iterable
+   *
+   * @param $var
+   * @return whether $var is iterable (boolean)
+   */
+  function custom_is_iterable($var) {
+    if(function_exists('is_iterable')) {
+      return is_iterable($var);
+    } else {
+      return is_array($var) || $var instanceof \Traversable;
+    }
+  }
 
   /**
    * protected method apiDbSlowQuLog
