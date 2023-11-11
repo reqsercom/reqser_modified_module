@@ -255,7 +255,7 @@ class DbFuncs {
    * @param $stmt prepared statement object or query result object
    * @return array of results with field names as keys
    */
-  public function apiDbFetchArray(object $stmt, $close = false) {
+  public function apiDbFetchArray($stmt, $close = false) {
     //if(!is_iterable($stmt)) {
     if(!$this->custom_is_iterable($stmt)) {
       $params = array();
@@ -292,7 +292,7 @@ class DbFuncs {
    * @param optional callback func
    * @return array of results (with $lkey as key) with sub-array with field names as keys
    */
-  public function apiDbFetchArrayLoop(object $stmt, $lkey = null, $close = false, $callback = null) {
+  public function apiDbFetchArrayLoop($stmt, $lkey = null, $close = false, $callback = null) {
     //echo '<pre style="padding:10px 0 0;">'.(is_iterable($stmt) ? 'is iterable' : 'is NOT iterable').'</pre>';
     //if(!is_iterable($stmt)) { //we have params to be bound
     if(!$this->custom_is_iterable($stmt)) {
@@ -351,7 +351,7 @@ class DbFuncs {
    * @param $stmt prepared statement object or query result object
    * @return array of results with field names as keys
    */
-  public function apiDbFetchRow(object $stmt, $close = false) {
+  public function apiDbFetchRow($stmt, $close = false) {
     //if(!is_iterable($stmt)) {
     if(!$this->custom_is_iterable($stmt)) {
       $params = array();
@@ -386,7 +386,7 @@ class DbFuncs {
    * @param $stmt prepared statement object
    * @return number of rows of query result
    */
-  public function apiDbNumRows(object $stmt, $close = false) {
+  public function apiDbNumRows($stmt, $close = false) {
     //if(!is_iterable($stmt)) {
     if(!$this->custom_is_iterable($stmt)) {
       $num_rows = $stmt->num_rows;
@@ -407,7 +407,7 @@ class DbFuncs {
    * @param $offset
    * @return if prepared statement nothing else boolean
    */
-  public function apiDbDataSeek(object $stmt, $offset = 0) {
+  public function apiDbDataSeek($stmt, $offset = 0) {
     return $stmt->data_seek($offset);
 	}
 
@@ -417,7 +417,7 @@ class DbFuncs {
    * @param $stmt prepared statement object
    * @return affected rows of query result
    */
-  public function apiDbAffectedRows(object $stmt, $close = false) {
+  public function apiDbAffectedRows($stmt, $close = false) {
 		if($close === true) {
       $stmt->close();
     }
