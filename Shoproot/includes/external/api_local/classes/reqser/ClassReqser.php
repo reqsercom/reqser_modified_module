@@ -652,7 +652,7 @@ class ClassReqser extends api_local\ApiBase {
           //$qu_str = "SELECT COUNT(*) AS records FROM ".$table." WHERE ".$language_field." = '".$lang_id."'";
           $qu_str = "SELECT COUNT(*) AS records FROM ".$table." WHERE ".$language_field." = ?";
           //if($qu = xtc_db_query($qu_str)) {
-          if($qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$lang_id)) {
+          if($qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id)) {
             //$qu_arr = xtc_db_fetch_array($qu);
             $qu_arr = $this->api_db_conn->apiDbFetchArray($qu, true);
             $out_arr = array('table' => $table, 'lang' => $lang, 'records' => $qu_arr['records'], 'sql_request' => $qu_str);
@@ -739,13 +739,13 @@ class ClassReqser extends api_local\ApiBase {
                                         ".$limit."
                                        ");*/
                     $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? ORDER BY ".$uk." ASC".$limit;
-                    $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$lang_id);
+                    $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
                     //if(xtc_db_num_rows($qu) > 0) {
                     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+                      $chrst = $this->getShopCharset();
                       //while($qu_arr = xtc_db_fetch_array($qu)) {
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
                         foreach($qu_arr as $key => $value) {
-                          $chrst = $this->getShopCharset();
                           $value = $this->encode_utf8($chrst, $value); //why do we need this ??, noRiddle, 30-10-2023
                           $out_arr[$qu_arr[$uk]][$key] = $value;      
                         }
