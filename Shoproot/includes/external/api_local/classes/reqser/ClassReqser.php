@@ -742,11 +742,10 @@ class ClassReqser extends api_local\ApiBase {
                     $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
                     //if(xtc_db_num_rows($qu) > 0) {
                     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-                      $chrst = $this->getShopCharset();
                       //while($qu_arr = xtc_db_fetch_array($qu)) {
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
                         foreach($qu_arr as $key => $value) {
-                          $value = $this->encode_utf8($chrst, $value); //why do we need this ??, noRiddle, 30-10-2023
+                          $value = $this->encode_utf8('utf-8', $value); //JorisK must be set to utf-8 12.11.2023
                           $out_arr[$qu_arr[$uk]][$key] = $value;      
                         }
                       }
