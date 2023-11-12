@@ -34,7 +34,7 @@ class ApiBase {
   public function __construct($subp = '') {
     global $api_db_conn;
 
-    $this->api_base_version = '1.5';
+    $this->api_base_version = '1.3';
     $this->debug_curl == false;
 
     //JorisK Only if file_exists
