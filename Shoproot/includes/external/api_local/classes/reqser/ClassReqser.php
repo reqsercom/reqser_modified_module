@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '1.5';
+    $this->api_reqser_version = '1.6';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -742,10 +742,10 @@ class ClassReqser extends api_local\ApiBase {
                     $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
                     //if(xtc_db_num_rows($qu) > 0) {
                     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-                      //while($qu_arr = xtc_db_fetch_array($qu)) {
+                      $chrst = $this->getShopCharset();
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
                         foreach($qu_arr as $key => $value) {
-                          $value = $this->encode_utf8('utf-8', $value); //JorisK must be set to utf-8 12.11.2023
+                          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 12.11.2023
                           $out_arr[$qu_arr[$uk]][$key] = $value;      
                         }
                       }
@@ -991,7 +991,7 @@ class ClassReqser extends api_local\ApiBase {
   protected function encode_utf8($charset, $string, $encoding = '', $force_utf8 = false) {
     if(strtolower($charset) == 'utf-8' || $force_utf8 === true) {
       $supported_charsets = explode(',', strtoupper(ENCODE_DEFINED_CHARSETS));  
-      $cur_encoding = !empty($encoding) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
+      $cur_encoding = (!empty($encoding) && $encoding !== false) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
       if($cur_encoding == 'UTF-8' && mb_check_encoding($string, 'UTF-8')) {
         return $string;
       } else {
