@@ -850,7 +850,7 @@ class ClassReqser extends api_local\ApiBase {
                       //Aus Muttersprache kopieren und nur language_id abändern, damit anschliessend update möglich ist.
                       //JorisK Achtung bei Auto Increment funktioniert das nicht, z.B. content_manager hat die content_id als Auto Increment
                       $auto_increment = '';
-                      $check_for_auto_increment_qu_str = "SHOW COLUMNS FROM ? WHERE Extra = 'auto_increment'";
+                      $check_for_auto_increment_qu_str = "SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'";
                       //$check_for_auto_increment_query = xtc_db_query("SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'");
                       $check_for_auto_increment_query = $this->api_db_conn->apiDbQuery($check_for_auto_increment_qu_str, $table);
                       //if(xtc_db_num_rows($check_for_auto_increment_query) > 0) {
