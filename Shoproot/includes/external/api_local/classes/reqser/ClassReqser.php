@@ -883,7 +883,7 @@ class ClassReqser extends api_local\ApiBase {
                         //$get_muttersprach_entry_query = xtc_db_query($query);
                         $get_muttersprach_entry_query = $this->api_db_conn->apiDbQuery($get_muttersprach_entry_qu_str, array((int)$unique_key, $fwl_language));
                         //if(xtc_db_num_rows($get_muttersprach_entry_query) > 0) {
-                        if($this->api_db_conn->apiDbNumRows($get_muttersprach_entry_query, true) > 0) {
+                        if($this->api_db_conn->apiDbNumRows($get_muttersprach_entry_query) > 0) {
                           //$get_muttersprach_entry = xtc_db_fetch_array($get_muttersprach_entry_query);
                           $get_muttersprach_entry = $this->api_db_conn->apiDbFetchArray($get_muttersprach_entry_query, true);
                           $insert_array = array();
@@ -900,7 +900,7 @@ class ClassReqser extends api_local\ApiBase {
                             }, $insert_array);
                             $sql = "INSERT INTO ".$table." (".implode(', ', $fields).") VALUES (".implode(', ', $values).")";*/
                             //if(xtc_db_query($sql)) {
-                            if($insert_qu = $this->api_db_conn->apiDbArrayToTable($sql)) {
+                            if($insert_qu = $this->api_db_conn->apiDbArrayToTable($table, $insert_array)) {
                               $this->api_db_conn->apiDbStmtClose($insert_qu);
                               $out_arr[$unique_key]['success_duplicate'] = 'successfully duplicated '.$sql;
                             } else {
