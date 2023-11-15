@@ -413,7 +413,7 @@ class ClassReqser extends api_local\ApiBase {
           if (isset($return_array['success'])){
             $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
           } else {
-            $return_array['success'] .= 'Language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
+            $return_array['success'] = 'Language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
           }
           
         } else {
