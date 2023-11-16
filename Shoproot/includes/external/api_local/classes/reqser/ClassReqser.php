@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '1.6';
+    $this->api_reqser_version = '1.7';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -355,7 +355,7 @@ class ClassReqser extends api_local\ApiBase {
         if(array_key_exists($this->fwl, $language_array)) {
           $dec_rec_data['language_charset'] = $language_array[$this->fwl]['language_charset'];
         } else {
-          return array('error' => '"ffrom which language to tanslate" is not in array of shop languages! Language_charset could not be determined');
+          return array('error' => '"from which language to tanslate" is not in array of shop languages! Language_charset could not be determined');
         }
       }
       if(!array_key_exists($dec_rec_data['code'], $check_langs_arr)) { //Prüfen ob es language_code schon gibt
@@ -400,8 +400,6 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($upd_qu);
             $return_array = array('success' => 'status of language '.$dec_rec_data['code'].' activated');
           }
-        } else {
-          return array('error' => 'status of language '.$dec_rec_data['code'].' could not be activated');
         }
         //Get the Language ID and add to the $iwl_array
         $iwl_arr[] = $check_langs_arr[$dec_rec_data['code']]['languages_id'];
@@ -412,7 +410,12 @@ class ClassReqser extends api_local\ApiBase {
         //if(xtc_db_query("UPDATE configuration SET configuration_value = '".implode(',', $iwl_arr)."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'")) {
         if($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, implode(',', $iwl_arr), 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS')) {
           $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
-          $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
+          if (isset($return_array['success'])){
+            $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
+          } else {
+            $return_array['success'] = 'Language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
+          }
+          
         } else {
           return array('error' => 'new language '.$dec_rec_data['code'].' could not be added to "Into which languages shall be translated" in DB table configuration');
         }
