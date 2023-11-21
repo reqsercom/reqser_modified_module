@@ -36,43 +36,26 @@ class reqser {
 
     $this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
 
-    //JorisK auf Updates prüfen sofern API Key gesetzt ist
+    //BOC check for new version, Joris, noRiddle, 11-2023
+    static $update_request = false;
     $local_api_key = constant($this->mn_const.'REQSER_API_KEY');
-    if ($local_api_key != '' && function_exists('curl_init') && $this->check() !== false){
-      $url = 'https://reqser.com/api/token?key='.$local_api_key;  //Gewünschter API Key einsetzen
-      $login = curl_init();
-      curl_setopt($login, CURLOPT_URL, $url);
-      curl_setopt($login, CURLOPT_POST, 1);
-      curl_setopt($login, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($login, CURLOPT_TIMEOUT, 5);
-      curl_setopt($login, CURLOPT_SSL_VERIFYPEER, 1);
-      $result_login = curl_exec($login);
-      $result_login = json_decode($result_login, true);
-      curl_close($login);
-      if ($result_login && $result_login["access_token"] != ''){
-          $fields['cms'] = 'modified';
-          $fields['cms_version'] = PROJECT_MINOR_VERSION;
-          $fields['php_version'] = phpversion();
-          $fields['module_version'] = $this->module_version;
-          $request = curl_init();
-          $url = 'https://reqser.com/api/module_request';
-          curl_setopt($request, CURLOPT_URL, $url);
-          $authorization = "Authorization: Bearer ".$result_login["access_token"];
-          curl_setopt($request, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , $authorization ));
-          curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
-          curl_setopt($request, CURLOPT_TIMEOUT, 5);
-          curl_setopt($request, CURLOPT_POSTFIELDS, json_encode($fields));
-          curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 0);
-          curl_setopt($request, CURLOPT_POST, 1);
-          $result_request = curl_exec($request);
-          curl_close($request);
-          $result_request = json_decode($result_request, true);
-          if ($result_request["warning_message"]){
-            $this->title .= '<br><span style="color:red;">'.$result_request["warning_message"].'</span>';
-          }
-      } 
-      
+    if($local_api_key != '' && $this->check() !== false) { // && $update_request !== true JorisK 21.11.2023 funtkioniert nicht weil er dann beim 2ten Aufruf den Titel nicht mehr ergänzt!
+      require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
+      $api_base = new api_local\ApiBase();
+      $url_credential = 'https://reqser.com/api/token';
+      $vals_credential = array('key' => $local_api_key);
+      $token_verify = $api_base->doRequest($url_credential, 'post', 'normal', 'json', $vals_credential, array('token' => $local_api_key), NULL, 'y', 5);
+      if(!isset($token_verify['warning_message'])){
+        $url_requ = 'https://reqser.com/api/module_request';
+        $post_fields = array('cms' => 'modified','cms_version' => PROJECT_MINOR_VERSION, 'php_version' => phpversion(), 'module_version' => $this->module_version);
+        $result_request = $api_base->doRequest($url_requ, 'post', 'json', 'json', $post_fields, array('token' => $token_verify['access_token']), NULL, 'y', 5);
+        if(isset($result_request['warning_message']) && $result_request['warning_message'] != ''){
+          $this->title .= '<br><span style="color:red;">'.$result_request["warning_message"].'</span>';
+      }
     }
+    $update_request = true;
+  }
+    //EOC check for new version, Joris, noRiddle, 11-2023
 
     if(isset($_GET['module']) && $_GET['module'] == $this->code && isset($_GET['action']) && $_GET['action'] == 'save') {
       if($_POST['configuration'][$this->mn_const.'STATUS'] == 'true') {
