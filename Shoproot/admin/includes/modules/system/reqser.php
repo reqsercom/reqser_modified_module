@@ -37,10 +37,9 @@ class reqser {
     $this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
 
     //JorisK auf Updates prüfen sofern API Key gesetzt ist
-    $api_key_query = xtc_db_query("SELECT configuration_value FROM ".TABLE_CONFIGURATION." WHERE configuration_key = '".$this->mn_const."REQSER_API_KEY'");
-    $api_key = xtc_db_fetch_array($api_key_query);
-    if ($api_key['configuration_value'] != '' && function_exists('curl_init')){
-      $url = 'https://reqser.com/api/token?key='.$api_key['configuration_value'];  //Gewünschter API Key einsetzen
+    $local_api_key = constant($this->mn_const.'REQSER_API_KEY');
+    if ($local_api_key != '' && function_exists('curl_init') && $this->check() !== false){
+      $url = 'https://reqser.com/api/token?key='.$local_api_key;  //Gewünschter API Key einsetzen
       $login = curl_init();
       curl_setopt($login, CURLOPT_URL, $url);
       curl_setopt($login, CURLOPT_POST, 1);
@@ -68,10 +67,9 @@ class reqser {
           $result_request = curl_exec($request);
           curl_close($request);
           $result_request = json_decode($result_request, true);
-          if ($result_login["warning_message"]){
-            $messageStack->add_session($result_login["warning_message"], 'warning');
+          if ($result_request["warning_message"]){
+            $this->title .= '<br><span style="color:red;">'.$result_request["warning_message"].'</span>';
           }
-          
       } 
       
     }
