@@ -37,9 +37,8 @@ class reqser {
     $this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
 
     //BOC check for new version, Joris, noRiddle, 11-2023
-    static $update_request = false;
     $local_api_key = constant($this->mn_const.'REQSER_API_KEY');
-    if($local_api_key != '' && $this->check() !== false) { // && $update_request !== true JorisK 21.11.2023 funtkioniert nicht weil er dann beim 2ten Aufruf den Titel nicht mehr ergänzt!
+    if($local_api_key != '' && $this->check() !== false) { 
       require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
       $api_base = new api_local\ApiBase();
       $url_credential = 'https://reqser.com/api/token';
@@ -51,10 +50,9 @@ class reqser {
         $result_request = $api_base->doRequest($url_requ, 'post', 'json', 'json', $post_fields, array('token' => $token_verify['access_token']), NULL, 'y', 5);
         if(isset($result_request['warning_message']) && $result_request['warning_message'] != ''){
           $this->title .= '<br><span style="color:red;">'.$result_request["warning_message"].'</span>';
+        }
       }
     }
-    $update_request = true;
-  }
     //EOC check for new version, Joris, noRiddle, 11-2023
 
     if(isset($_GET['module']) && $_GET['module'] == $this->code && isset($_GET['action']) && $_GET['action'] == 'save') {
