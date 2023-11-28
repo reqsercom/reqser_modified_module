@@ -39,7 +39,7 @@ class reqser {
     //BOC check for new version, Joris, noRiddle, 11-2023
     static $reqser_update_request = false;
     static $reqser_error_message = '';
-    $local_api_key = constant($this->mn_const.'REQSER_API_KEY');
+    $local_api_key = defined($this->mn_const.'REQSER_API_KEY') ? constant($this->mn_const.'REQSER_API_KEY') : '';
     if($local_api_key != '' && $this->check() !== false && $reqser_update_request !== true) {
       require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
       $api_base = new api_local\ApiBase();
