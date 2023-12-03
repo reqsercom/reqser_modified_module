@@ -855,7 +855,7 @@ class ClassReqser extends api_local\ApiBase {
                       $auto_increment = '';
                       $check_for_auto_increment_qu_str = "SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'";
                       //$check_for_auto_increment_query = xtc_db_query("SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'");
-                      $check_for_auto_increment_query = $this->api_db_conn->apiDbQuery($check_for_auto_increment_qu_str, $table);
+                      $check_for_auto_increment_query = $this->api_db_conn->apiDbQuery($check_for_auto_increment_qu_str);
                       //if(xtc_db_num_rows($check_for_auto_increment_query) > 0) {
                       if($this->api_db_conn->apiDbNumRows($check_for_auto_increment_query) > 0) {
                         //$check_for_auto_increment = xtc_db_fetch_array($check_for_auto_increment_query);
@@ -863,7 +863,7 @@ class ClassReqser extends api_local\ApiBase {
                         $auto_increment = $check_for_auto_increment['Field'];
                       }
                       //Prüfen ob Eintrag wirklich nicht existiert 
-                      $check_entry_exist_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ".(int)$unique_key." AND ".$dec_rec_data['language_field']." = '".$lang_id."'";
+                      $check_entry_exist_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
                       //$check_entry_exist_query = xtc_db_query("SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = '".$unique_key."' AND ".$dec_rec_data['language_field']." = ".$lang_id);
                       $check_entry_exist_query = $this->api_db_conn->apiDbQuery($check_entry_exist_qu_str, array((int)$unique_key, $lang_id));
                       //if(xtc_db_num_rows($check_entry_exist_query) == 0) {
