@@ -863,7 +863,7 @@ class ClassReqser extends api_local\ApiBase {
                         $auto_increment = $check_for_auto_increment['Field'];
                       }
                       //Prüfen ob Eintrag wirklich nicht existiert 
-                      $check_entry_exist_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
+                      $check_entry_exist_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ".(int)$unique_key." AND ".$dec_rec_data['language_field']." = '".$lang_id."'";
                       //$check_entry_exist_query = xtc_db_query("SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = '".$unique_key."' AND ".$dec_rec_data['language_field']." = ".$lang_id);
                       $check_entry_exist_query = $this->api_db_conn->apiDbQuery($check_entry_exist_qu_str, array((int)$unique_key, $lang_id));
                       //if(xtc_db_num_rows($check_entry_exist_query) == 0) {
