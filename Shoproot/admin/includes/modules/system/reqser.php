@@ -46,7 +46,7 @@ class reqser {
       $url_credential = 'https://reqser.com/api/token';
       $vals_credential = array('key' => $local_api_key);
       $token_verify = $api_base->doRequest($url_credential, 'post', 'normal', 'json', $vals_credential, array('token' => $local_api_key), NULL, 'y', 5);
-      if(!isset($token_verify['warning_message'])){
+      if(isset($token_verify['access_token']) && !isset($token_verify['warning_message'])) {
         $url_requ = 'https://reqser.com/api/module_request';
         $post_fields = array('cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'php_version' => phpversion(), 'module_version' => $this->module_version);
         $result_request = $api_base->doRequest($url_requ, 'post', 'json', 'json', $post_fields, array('token' => $token_verify['access_token']), NULL, 'y', 5);
