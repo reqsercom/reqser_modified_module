@@ -855,7 +855,7 @@ class ClassReqser extends api_local\ApiBase {
                       $auto_increment = '';
                       $check_for_auto_increment_qu_str = "SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'";
                       //$check_for_auto_increment_query = xtc_db_query("SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'");
-                      $check_for_auto_increment_query = $this->api_db_conn->apiDbQuery($check_for_auto_increment_qu_str, $table);
+                      $check_for_auto_increment_query = $this->api_db_conn->apiDbQuery($check_for_auto_increment_qu_str);
                       //if(xtc_db_num_rows($check_for_auto_increment_query) > 0) {
                       if($this->api_db_conn->apiDbNumRows($check_for_auto_increment_query) > 0) {
                         //$check_for_auto_increment = xtc_db_fetch_array($check_for_auto_increment_query);
