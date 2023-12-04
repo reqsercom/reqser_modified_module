@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '1.7';
+    $this->api_reqser_version = '1.8';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
