@@ -18,7 +18,7 @@
 defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
 class reqser {
-  private $module_version, $mn_const, $langs_arr_str, $shop_version_lt_2060;
+  private $module_version, $mn_const, $langs_arr_str;
   public $code, $title, $description, $enabled, $sort_order;
 
   function __construct() {
@@ -33,8 +33,6 @@ class reqser {
     $this->enabled = $this->get_const('STATUS') == 'true' ? true : false;
 
     $this->langs_arr_str = get_langs_from_translate();
-
-    $this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
 
     if(isset($_GET['module']) && $_GET['module'] == $this->code && isset($_GET['action']) && $_GET['action'] == 'save') {
       if($_POST['configuration'][$this->mn_const.'STATUS'] == 'true') {
