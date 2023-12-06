@@ -18,7 +18,7 @@
 defined( '_VALID_XTC' ) or die( 'Direct Access to this location is not allowed.' );
 
 class reqser {
-  private $module_version, $mn_const, $langs_arr_str, $shop_version_lt_2060;
+  private $module_version, $mn_const, $langs_arr_str;
   public $code, $title, $description, $enabled, $sort_order;
 
   function __construct() {
@@ -33,33 +33,6 @@ class reqser {
     $this->enabled = $this->get_const('STATUS') == 'true' ? true : false;
 
     $this->langs_arr_str = get_langs_from_translate();
-
-    $this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
-
-    //BOC check for new version, Joris, noRiddle, 11-2023
-    static $reqser_update_request = false;
-    static $reqser_error_message = '';
-    $local_api_key = defined($this->mn_const.'REQSER_API_KEY') ? constant($this->mn_const.'REQSER_API_KEY') : '';
-    if($local_api_key != '' && $this->check() !== false && $reqser_update_request !== true) {
-      require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
-      $api_base = new api_local\ApiBase();
-      $url_credential = 'https://reqser.com/api/token';
-      $vals_credential = array('key' => $local_api_key);
-      $token_verify = $api_base->doRequest($url_credential, 'post', 'normal', 'json', $vals_credential, array('token' => $local_api_key), NULL, 'y', 5);
-      if(isset($token_verify['access_token']) && !isset($token_verify['warning_message'])) {
-        $url_requ = 'https://reqser.com/api/module_request';
-        $post_fields = array('cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'php_version' => phpversion(), 'module_version' => $this->module_version);
-        $result_request = $api_base->doRequest($url_requ, 'post', 'json', 'json', $post_fields, array('token' => $token_verify['access_token']), NULL, 'y', 5);
-        if(isset($result_request['warning_message']) && $result_request['warning_message'] != ''){
-          $this->title .= '<br><span style="color:red;">'.$result_request["warning_message"].'</span>';
-          $reqser_error_message = $result_request["warning_message"];
-        }
-      }
-      $reqser_update_request = true;
-    } elseif ($reqser_update_request === true && $reqser_error_message != '') {
-      $this->title .= '<br><span style="color:red;">'.$reqser_error_message.'</span>';
-    }
-    //EOC check for new version, Joris, noRiddle, 11-2023
 
     if(isset($_GET['module']) && $_GET['module'] == $this->code && isset($_GET['action']) && $_GET['action'] == 'save') {
       if($_POST['configuration'][$this->mn_const.'STATUS'] == 'true') {
