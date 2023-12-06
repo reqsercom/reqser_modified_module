@@ -15,7 +15,7 @@
 
 ***********************************************************/
 
-define('MODULE_SYSTEM_REQSER_TITLE', 'Deepl &Uuml;bersetzungen via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatische Deepl &Uuml;bersetzungen via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
 System-Modul f&uuml;r die Aktivierung und Konfiguration von &Uuml;bersetzungen via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a><br /><span style="color:#c00;">!!! Wenn Sie irgend etwas an Ihrer Datenbankstruktur &auml;ndern m&ouml;chten (kann z.B. auch durch Wawis geschehen), soda&szlig; sich z.B. IDs in zu &uuml;bersetzenden Tabellen &auml;ndern k&ouml;nnen, dieses Modul vorher unbedingt deaktivieren !!!</span>');
