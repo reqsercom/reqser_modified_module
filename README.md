@@ -15,7 +15,7 @@ Registrieren dich bei Reqser.com [hier](https://www.reqser.com/register) und ers
 
 ### 2. Modified Modul
 
-Lade alle Dateien aus dem Shoproot in dein Modified Shop und installiere das Modul unter "Systemmodule".
+Lade alle Dateien aus dem Shoproot (Achtung Admin Ordner muss ggf. umbenennt werden gemäss Ihrem Shop Admin Ordner) in dein Modified Shop und installiere das Modul unter "Systemmodule".
 Trage den API Key ein, definiere deine Muttersprache von welcher übersetzt werden soll und definiere die Sprachen in welche du die Übersetzung möchtest.
 
 ### 3. Verbindungs Test
