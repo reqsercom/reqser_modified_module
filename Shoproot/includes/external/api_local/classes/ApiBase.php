@@ -372,8 +372,10 @@ class ApiBase {
         if($headers !== false && !empty($headers)) {
           if($api_call == 'temp_token' && ($action == 'fetch' || $action == 'renew')) {
             if(isset($headers['Authorization'])) {
-              if(base64_decode($headers['Authorization']) != $api_key) {
-                $err = array('error' => ($this->dev_mode === true ? 'wrong API key' : 'restricted area, not authorized')); //array('auth' => base64_decode($headers['Authorization']));
+              if ($api_key == ''){
+                $err = array('error' => 'no API Key Set'); //array('auth' => base64_decode($headers['Authorization']));
+              } elseif(base64_decode($headers['Authorization']) != $api_key) {
+                $err = array('error' => ($this->dev_mode === true ? 'wrong API Key' : 'restricted area, not authorized')); //array('auth' => base64_decode($headers['Authorization']));
               }
             } else {
               $err = array('error' => ($this->dev_mode === true ? 'authorization header missing' : 'restricted area, not authorized')); //array('auth' => base64_decode($headers['Authorization']));

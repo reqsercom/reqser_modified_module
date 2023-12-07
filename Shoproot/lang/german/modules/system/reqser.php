@@ -18,7 +18,7 @@
 define('MODULE_SYSTEM_REQSER_TITLE', 'Automatische Deepl &Uuml;bersetzungen via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
-System-Modul f&uuml;r die Aktivierung und Konfiguration von &Uuml;bersetzungen via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a><br /><span style="color:#c00;">!!! Wenn Sie irgend etwas an Ihrer Datenbankstruktur &auml;ndern m&ouml;chten (kann z.B. auch durch Wawis geschehen), soda&szlig; sich z.B. IDs in zu &uuml;bersetzenden Tabellen &auml;ndern k&ouml;nnen, dieses Modul vorher unbedingt deaktivieren !!!</span>');
+System-Modul f&uuml;r die Aktivierung und Konfiguration von &Uuml;bersetzungen via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', 'Modul aktivieren ?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
@@ -42,7 +42,7 @@ define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Tabellen ausschließen');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Hier-komma-separiert Tabellen eintragen, die von &Uuml;bersetzungen ausgeschlossen werden sollen.<br />(Nur n&ouml;tig wenn oben alle Standard-Tabellen markiert sind und es sollen welche davon ausgeschlossen werden.)');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'Von welcher Sprache &uuml;bersetzen?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Von welcher Sprache aus soll &uuml;bersetzt werden?');
-define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'In welche Sprachen &uuml;bersetzen ? '.draw_tooltip('Wenn Sie hier eine Sprache markieren die zum modified-Standard geh&ouml;rt (z.B. Englisch):<br />In dem Fall k&ouml;nnen die zugeh&ouml;rigen Sprachdateien nach &Uuml;bersetzung durch Reqser von den von modified gelieferten Dateien abweichen.<br />
+define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'In welche Sprachen &uuml;bersetzen? '.draw_tooltip('Wenn Sie hier eine Sprache markieren die zum modified-Standard geh&ouml;rt (z.B. Englisch):<br />In dem Fall k&ouml;nnen die zugeh&ouml;rigen Sprachdateien nach &Uuml;bersetzung durch Reqser von den von modified gelieferten Dateien abweichen.<br />
 Wenn Sie lediglich Dateien f&uuml;r Erweiterungen &uuml;bersetzen lassen m&ouml;chten stellen Sie "Sprachdateien automatisch &uuml;bertragen ?" auf "Nein"<br />Auf Reqser.com kann ebenfalls eingestellt werden ob schon vorhandene Fremdsprachen Texte &uuml;bernommen werden sollen, oder ob die komplette Sprache neu &uuml;bersetzt wird.
 und markieren die zu übersetzenden Dateien manuell auf reqser.com.'));
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', 'In welche Sprachen soll &uuml;bersetzt werden ?<br />F&uuml;r neue Sprachen, siehe bitte einen Eintrag h&ouml;her.');
@@ -63,8 +63,8 @@ define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Im Browser testen ohne Header 
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Der hier im Modul hinterlegte "Reqser API-Key" stimmt nicht mit dem bei <i>reqser.com</i> hinterlegten &uuml;berein.<br />Bitte bei <i>reqser.com</i> einloggen und den API-Key pr&uuml;fen, bzw. ggfls. neu holen und hier speichern.');
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API Key erfolgreich hinterlegt');
 
-define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Es wurde kein API Key eingetragen! Bitte bei <i>reqser.com</i> einloggen und den API-Key holen und hier speichern.');
+define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Es wurde kein API Key eingetragen! Bitte bei <i>reqser.com</i> einloggen und den API-Key für diese Website holen und hier im Modul speichern.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Keine Sprache in welche &uuml;bersetzt werden soll ausgew&auml;hlt !');
-define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"In welche Sprachen &uuml;bersetzen ?" darf nicht eine Sprache enthalten die in "Von welcher Sprache &uuml;bersetzen ?" ausgew&auml;hlt wurde.');
+define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"In welche Sprachen &uuml;bersetzen?" darf nicht eine Sprache enthalten die in "Von welcher Sprache &uuml;bersetzen?" ausgew&auml;hlt wurde.');
