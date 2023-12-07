@@ -14,7 +14,7 @@
 
 ********************************************************************/
 
-if(!isset($_SESSION['msreq_upd_requested'])) {
+/*if(!isset($_SESSION['msreq_upd_requested'])) {
   if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset($_POST['msreq_api_key']) && $_POST['msreq_api_key'] != '')) {
     $reqser_error_message = '';
     $msreq_local_api_key = $_POST['msreq_api_key'];
@@ -42,4 +42,4 @@ if(!isset($_SESSION['msreq_upd_requested'])) {
       }
     }
   }
-}
+}*/
