@@ -40,7 +40,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Weitere DB-Tabellen (die o
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Hier weitere DB-Tabellen komma-separiert eingeben die &uuml;bersetzt werden sollen.<br />(F&uuml;r Erweiterungen mit neuen "Nicht modified Standard"-Tabellen)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Tabellen ausschließen');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Hier-komma-separiert Tabellen eintragen, die von &Uuml;bersetzungen ausgeschlossen werden sollen.<br />(Nur n&ouml;tig wenn oben alle Standard-Tabellen markiert sind und es sollen welche davon ausgeschlossen werden.)');
-define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', '<hr />Von welcher Sprache &uuml;bersetzen?');
+define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'Von welcher Sprache &uuml;bersetzen?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Von welcher Sprache aus soll &uuml;bersetzt werden?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'In welche Sprachen &uuml;bersetzen ? '.draw_tooltip('Wenn Sie hier eine Sprache markieren die zum modified-Standard geh&ouml;rt (z.B. Englisch):<br />In dem Fall k&ouml;nnen die zugeh&ouml;rigen Sprachdateien nach &Uuml;bersetzung durch Reqser von den von modified gelieferten Dateien abweichen.<br />
 Wenn Sie lediglich Dateien f&uuml;r Erweiterungen &uuml;bersetzen lassen m&ouml;chten stellen Sie "Sprachdateien automatisch &uuml;bertragen ?" auf "Nein"<br />Auf Reqser.com kann ebenfalls eingestellt werden ob schon vorhandene Fremdsprachen Texte &uuml;bernommen werden sollen, oder ob die komplette Sprache neu &uuml;bersetzt wird.
@@ -51,8 +51,8 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'M&ouml;chten Sie liebe
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', 'Soll auf <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> eine neue Sprache hinzugef&uuml;gt werden d&uuml;rfen ?'); 
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Mit dieser Einstellung auf "Ja" k&ouml;nnen neue Sprachen auf <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> hinzugef&uuml;gt werden.<br />Mit "Nein" muss die Sprache im Shopsystem bereits vorhanden sein und im vorliegenden Modul muss die Sprache aktiviert werden.<br />Sprache im Shop anlegen: <a href="'.DIR_WS_ADMIN.FILENAME_LANGUAGES.'">&raquo Sprache im Shop anlegen ?</a> &nbsp;&nbsp;<span class="alrt">!! Die neue Sprache ist erst nach 24-48h im Shop vorhanden. !!</span><br />Anschliessend hier als zu &uuml;bersetzende Sprache markieren'); 
 
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '<hr />Sprachdateien auf dem Server &uuml;bersetzen?'.draw_tooltip('Ohne das Filesystem m&uuml;ssen die Sprachdateien in jeder Fremdsprache selbst&auml;ndig im Ordner lang/ und an allen anderen Orten eingepflegt werden.'));
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Alle Dateien auf dem Server werden abgefragt und &uuml;bersetzt.');
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Sprachdateien auf dem Server &uuml;bersetzen?'.draw_tooltip('Alle Dateien auf dem Server werden abgefragt und &uuml;bersetzt'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Ohne Sprachdateien funktioniert keine Fremdsprache im Shop und es gibt eine "weisse" Seite!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Sprachdateien automatisch &uuml;bertragen?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Sollen die &uuml;bersetzten Sprachdateien automatisch in Ihren Shop &uuml;bertragen oder jede Sprachdatei manuell in Reqser ausgew&auml;hlt werden ?<br />Ja = Sprachdateien automatisch / Nein = manuell &uuml;bertragen');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr />API-Zugriffe protokollieren?');
@@ -63,7 +63,7 @@ define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Im Browser testen ohne Header 
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Der hier im Modul hinterlegte "Reqser API-Key" stimmt nicht mit dem bei <i>reqser.com</i> hinterlegten &uuml;berein.<br />Bitte bei <i>reqser.com</i> einloggen und den API-Key pr&uuml;fen, bzw. ggfls. neu holen und hier speichern.');
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API Key erfolgreich hinterlegt');
 
-define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Der abgefragte "Reqser API-Key" ist leer und kann deshalb nicht mit dem hier im Modul hinterlegten verglichen werden.<br />Bitte <i>reqser.com</i> kontaktieren.');
+define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Es wurde kein API Key eingetragen! Bitte bei <i>reqser.com</i> einloggen und den API-Key holen und hier speichern.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Keine Sprache in welche &uuml;bersetzt werden soll ausgew&auml;hlt !');
