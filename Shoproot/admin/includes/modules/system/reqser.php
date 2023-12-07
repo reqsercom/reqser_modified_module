@@ -70,7 +70,9 @@ class reqser {
         }
 
         //chosen languages okay ?
-        if(!isset($_POST['configuration'][$this->mn_const.'INTO_WHICH_LANGS'])) {
+        if ($_POST['configuration'][$this->mn_const.'REQSER_API_KEY'] == ''){
+          $messageStack->add_session(MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR, 'warning');
+        } elseif(!isset($_POST['configuration'][$this->mn_const.'INTO_WHICH_LANGS'])) {
           $messageStack->add_session(MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR, 'warning');
         } else {
           $post_fwl = $_POST['configuration'][$this->mn_const.'FROM_WHICH_LANG'];
@@ -135,8 +137,8 @@ class reqser {
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'INTO_ENGLISH_BRITISH'."', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ADD_LANGUAGE_ALLOWED'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES'."', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES_SETTING'."', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES_SETTING'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'PROTOCOL_ACC'."', 'false', '6', '12', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     //xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'BROWSER_TEST'."', 'false', '6', '13', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //we better don't let users have power over this, we'll do this in ClassReqser
@@ -149,21 +151,21 @@ class reqser {
   function keys() {
     return array($this->mn_const.'STATUS',
                  $this->mn_const.'REQSER_API_KEY',
-                 $this->mn_const.'VERIFY_KEY_ON_SAVE',
-                 $this->mn_const.'TEMP_SHOP_TOKEN',
-                 $this->mn_const.'TST_VALID_UNTIL',
+                 $this->mn_const.'FROM_WHICH_LANG',
+                 $this->mn_const.'INTO_WHICH_LANGS',
+                 $this->mn_const.'INTO_ENGLISH_BRITISH',
+                 $this->mn_const.'LANGUAGE_FILES',
+                 $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'ALLOW_ALL_ROW_ACCESS',
                  $this->mn_const.'TABLES_TO_TRANSL',
                  $this->mn_const.'MORE_TABLES',
                  $this->mn_const.'MORE_TABLES_ADD',
                  //$this->mn_const.'LESS_TABLES',
-                 $this->mn_const.'FROM_WHICH_LANG',
                  $this->mn_const.'ADD_LANGUAGE_ALLOWED', 
-                 $this->mn_const.'INTO_WHICH_LANGS',
-                 $this->mn_const.'INTO_ENGLISH_BRITISH',
-                 $this->mn_const.'LANGUAGE_FILES',
-                 $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',
+                 $this->mn_const.'VERIFY_KEY_ON_SAVE',
+                 $this->mn_const.'TEMP_SHOP_TOKEN',
+                 $this->mn_const.'TST_VALID_UNTIL',
                  //$this->mn_const.'BROWSER_TEST'
                 );
   }
