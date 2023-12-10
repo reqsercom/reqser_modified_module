@@ -18,6 +18,7 @@
 $nr_reqser_default_tables = array('categories_description',
                                   'content_manager',
                                   'content_manager_content',
+                                  'customers_status',
                                   'orders_status',
                                   'products_content',
                                   'products_description',
