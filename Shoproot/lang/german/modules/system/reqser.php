@@ -31,7 +31,7 @@ define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_DESC', 'Tempor&auml;rer Sicherheits
 define('MODULE_SYSTEM_REQSER_TST_VALID_UNTIL_TITLE', 'G&uuml;ltigkeit des tempor&auml;ren Sicherheits-Tokens');
 define('MODULE_SYSTEM_REQSER_TST_VALID_UNTIL_DESC', 'Der tempor&auml;re Sicherheits-Token ist g&uuml;ltig bis (s.u.).<br />Wenn er abgelaufen ist wird auf Anfrage von Extern ein neuer erstellt, der dann hier angezeigt wird.');
 define('MODULE_SYSTEM_REQSER_ALLOW_ALL_ROW_ACCESS_TITLE', '<hr />Reqser.com Zugriff auf alle Spalten der freigegebenen Tabelle geben ?');
-define('MODULE_SYSTEM_REQSER_ALLOW_ALL_ROW_ACCESS_DESC', '"Ja" gibt Reqser Zugriff auf alle Spalteneintr&auml;ge der freigegebenen Tabellen, ein "Nein" kann zu Fehler bei alten Shopversionen oder nicht vorhandenen Eintr&auml;gen f&uuml;hren.');
+define('MODULE_SYSTEM_REQSER_ALLOW_ALL_ROW_ACCESS_DESC', '"Ja" gibt Reqser Zugriff auf alle Spalteneintr&auml;ge der freigegebenen Tabellen, ein "Nein" kann bei alten Shopversionen oder bei Verwendung von nicht Standard Template zu Fehler f&uuml;hren.');
 define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_TITLE', 'DB-Tabellen');
 define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_DESC', 'Standard-DB-Tabellen die &uuml;bersetzt werden sollen.');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE', 'Weitere DB-Tabellen');
@@ -45,7 +45,7 @@ define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Von welcher Sprache aus sol
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'In welche Sprachen &uuml;bersetzen? '.draw_tooltip('Wenn Sie hier eine Sprache markieren die zum modified-Standard geh&ouml;rt (z.B. Englisch):<br />In dem Fall k&ouml;nnen die zugeh&ouml;rigen Sprachdateien nach &Uuml;bersetzung durch Reqser von den von modified gelieferten Dateien abweichen.<br />
 Wenn Sie lediglich Dateien f&uuml;r Erweiterungen &uuml;bersetzen lassen m&ouml;chten stellen Sie "Sprachdateien automatisch &uuml;bertragen ?" auf "Nein"<br />Auf Reqser.com kann ebenfalls eingestellt werden ob schon vorhandene Fremdsprachen Texte &uuml;bernommen werden sollen, oder ob die komplette Sprache neu &uuml;bersetzt wird.
 und markieren die zu übersetzenden Dateien manuell auf reqser.com.'));
-define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', 'In welche Sprachen soll &uuml;bersetzt werden ?<br />F&uuml;r neue Sprachen, siehe bitte einen Eintrag h&ouml;her.');
+define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', 'In welche Sprachen soll &uuml;bersetzt werden ?');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Englisch wird standardm&auml;ssig als US-Englisch verwendet');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'M&ouml;chten Sie lieber die Britische Schreibweise ?<br />Ja = Britisch / Nein = USA');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', 'Soll auf <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> eine neue Sprache hinzugef&uuml;gt werden d&uuml;rfen ?'); 

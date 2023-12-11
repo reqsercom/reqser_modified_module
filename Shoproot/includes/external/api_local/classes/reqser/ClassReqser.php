@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '1.8';
+    $this->api_reqser_version = '1.9';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -1110,6 +1110,11 @@ class ClassReqser extends api_local\ApiBase {
    */
   private function nameTablesFields($table) {
     switch($table) {
+      case 'banners':
+        $fields = array('fields' => array('banners_title'),
+                        'unique_key' => 'banners_group_id',
+                        'lang' => 'languages_id');
+        break;
       case 'categories_description':
         $fields = array('fields' => array('categories_name', 'categories_heading_title', 'categories_description', 'categories_meta_title', 'categories_meta_description'),
                         'unique_key' => 'categories_id',
@@ -1128,18 +1133,23 @@ class ClassReqser extends api_local\ApiBase {
         break;
       case 'coupons_description':
         $fields = array('fields' => array('coupon_name', 'coupon_description'),
-                        'unique_key' => 'coupon_id ',
+                        'unique_key' => 'coupon_id',
                         'lang' => 'language_id');
         break;
       case 'customers_status':
         $fields = array('fields' => array('customers_status_name'),
-                        'unique_key' => 'customers_status_id ',
-                        'lang' => 'language_id ');
+                        'unique_key' => 'customers_status_id',
+                        'lang' => 'language_id');
+        break;
+      case 'email_content':
+        $fields = array('fields' => array('content_name'),
+                        'unique_key' => 'customers_status_id',
+                        'lang' => 'languages_id');
         break;
       case 'manufacturers_info':
-        $fields = array('fields' => array('manufacturers_title', 'manufacturers_description', 'manufacturers_description', 'manufacturers_meta_description'),
-                        'unique_key' => 'manufacturers_id  ',
-                        'lang' => 'languages_id ');
+        $fields = array('fields' => array('manufacturers_title', 'manufacturers_description'),
+                        'unique_key' => 'manufacturers_id',
+                        'lang' => 'languages_id');
         break;
       case 'orders_status':
         $fields = array('fields' => array('orders_status_name'),
@@ -1155,6 +1165,11 @@ class ClassReqser extends api_local\ApiBase {
       case 'products_description':
         $fields = array('fields' => array('products_name', 'products_heading_title', 'products_description', 'products_short_description', 'products_meta_title', 'products_meta_description', 'products_order_description', 'last_update'),
                         'unique_key' => 'products_id',
+                        'lang' => 'language_id');
+        break;
+      case 'products_images_description':
+        $fields = array('fields' => array('image_title', 'image_alt'),
+                        'unique_key' => 'image_id',
                         'lang' => 'language_id');
         break;
       case 'products_options':
@@ -1187,8 +1202,13 @@ class ClassReqser extends api_local\ApiBase {
                         'unique_key' => 'products_xsell_grp_name_id',
                         'lang' => 'language_id');
         break;
+      case 'reviews_description':
+        $fields = array('fields' => array('reviews_text'),
+                        'unique_key' => 'reviews_id',
+                        'lang' => 'languages_id');
+        break;
       case 'shipping_status':
-        $fields = array('fields' => array('shipping_status_name '),
+        $fields = array('fields' => array('shipping_status_name'),
                         'unique_key' => 'shipping_status_id',
                         'lang' => 'language_id');
         break;
