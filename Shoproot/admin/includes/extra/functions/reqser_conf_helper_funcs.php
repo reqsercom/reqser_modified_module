@@ -15,25 +15,36 @@
 
 ***********************************************************/
 
-$nr_reqser_default_tables = array('categories_description',
+$nr_reqser_default_tables = array('banners',
+                                  'categories_description',
                                   'content_manager',
                                   'content_manager_content',
+                                  'coupons_description',
                                   'customers_status',
+                                  'email_content', 
+                                  'manufacturers_info',
                                   'orders_status',
                                   'products_content',
                                   'products_description',
                                   'products_options',
-                                  'products_options_values');
+                                  'products_options_values',
+                                  'products_tags_options',
+                                  'products_tags_values',
+                                  'products_vpe',
+                                  'products_xsell_grp_name',
+                                  'shipping_status',
+                                );
 
+//JorisK 12-2023 Tabellen die nicht ausgewählt werden können bzw. auch nicht manuell hinzugefügt werden können
 $nr_reqser_exclude_tables = array('admin_access',
-                                  'banners',
+                                  'address_book',
+                                  'banners_history',
                                   'cookie_consent_categories',
                                   'cookie_consent_cookies',
-                                  'email_content',
-                                  'languages',
+                                  'customers',
+                                  'languages', //JorisK 12-2023 wird über die API gemanaged
                                   'orders',
-                                  //'products_tags_options', //why did I exclude this ?, noRiddle, 09-2023
-                                  'reviews_description');
+                                  );
 
 if(!function_exists('nr_cfg_multi_checkbox')) {
   function nr_cfg_multi_checkbox($format, $separator, $checked, $key = '') {   
@@ -106,7 +117,7 @@ if(!function_exists('get_more_tables_to_translate')) {
     global $nr_reqser_default_tables;
     global $nr_reqser_exclude_tables;
     $default_tables_arr = $nr_reqser_default_tables;
-    //JorisK
+    //JorisK für Template resolution
     $plugin_sq_ajax_add_to_cart_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_sq_ajax_add_to_cart_data'");
     if (xtc_db_num_rows($plugin_sq_ajax_add_to_cart_data) > 0) {
       $default_tables_arr[] = 'plugin_sq_ajax_add_to_cart_data';
