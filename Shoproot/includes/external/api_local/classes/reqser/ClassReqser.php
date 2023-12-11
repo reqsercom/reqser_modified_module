@@ -1167,6 +1167,11 @@ class ClassReqser extends api_local\ApiBase {
                         'unique_key' => 'products_id',
                         'lang' => 'language_id');
         break;
+      case 'products_images_description':
+        $fields = array('fields' => array('image_title', 'image_alt'),
+                        'unique_key' => 'image_id',
+                        'lang' => 'language_id');
+        break;
       case 'products_options':
         $fields = array('fields' => array('products_options_name'),
                         'unique_key' => 'products_options_id',
@@ -1196,6 +1201,11 @@ class ClassReqser extends api_local\ApiBase {
         $fields = array('fields' => array('groupname'),
                         'unique_key' => 'products_xsell_grp_name_id',
                         'lang' => 'language_id');
+        break;
+      case 'reviews_description':
+        $fields = array('fields' => array('reviews_text'),
+                        'unique_key' => 'reviews_id',
+                        'lang' => 'languages_id');
         break;
       case 'shipping_status':
         $fields = array('fields' => array('shipping_status_name'),
