@@ -1139,7 +1139,7 @@ class ClassReqser extends api_local\ApiBase {
       case 'customers_status':
         $fields = array('fields' => array('customers_status_name'),
                         'unique_key' => 'customers_status_id',
-                        'lang' => 'language_id ');
+                        'lang' => 'language_id');
         break;
       case 'email_content':
         $fields = array('fields' => array('content_name'),
