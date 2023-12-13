@@ -34,7 +34,7 @@ class reqser {
 
     $this->langs_arr_str = get_langs_from_translate();
 
-    $this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
+    /*$this->shop_version_lt_2060 = (defined('PROJECT_MAJOR_VERSION') && PROJECT_MAJOR_VERSION == '2' && defined('PROJECT_MINOR_VERSION') && str_replace('.', '', PROJECT_MINOR_VERSION) < str_replace('.', '', '0.6.0')) || !function_exists('xtc_cfg_multi_checkbox');
 
     //BOC check for new version, Joris, noRiddle, 11-2023
     static $reqser_update_request = false;
@@ -60,7 +60,7 @@ class reqser {
       $reqser_update_request = true;
     } elseif ($reqser_update_request === true && $reqser_error_message != '') {
       $this->title .= '<br><span style="color:red;">'.$reqser_error_message.'</span>';
-    }
+    }*/
     //EOC check for new version, Joris, noRiddle, 11-2023
 
 
