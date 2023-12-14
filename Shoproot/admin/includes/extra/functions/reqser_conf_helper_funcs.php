@@ -91,6 +91,25 @@ if(!function_exists('nr_cfg_select_option')) {
   }
 }
 
+if(!function_exists('nr_cfg_select_option_langs')) {
+  function nr_cfg_select_option_langs($select_array, $key_value, $key = '') {
+    $select_array = get_langs_from_translate_as_array();
+    $string = '';
+    $name = (($key) ? 'configuration['.$key.']' : 'configuration_value');
+
+    $option_array = array();
+    foreach($select_array as $txt => $id) {
+      $option_array[] = array(
+        'id' => $id,
+        'text' => xtc_multi_lang_values($txt),
+      );
+    }
+    $string = xtc_draw_pull_down_menu($name, $option_array, $key_value);
+
+    return $string;
+  }
+}
+
 if(!function_exists('get_default_tables_to_translate')) {
   function get_default_tables_to_translate() {
     global $nr_reqser_default_tables;
@@ -204,6 +223,21 @@ if(!function_exists('get_langs_from_translate')) {
     $lang_arr_str .= ')';
 
     return $lang_arr_str;
+  }
+}
+
+if(!function_exists('get_langs_from_translate_as_array')) {
+  function get_langs_from_translate_as_array() {
+    $lang_qu = xtc_db_query("SELECT code, languages_id
+                               FROM ".TABLE_LANGUAGES."
+                           ORDER BY sort_order");
+
+    $lang_array = array();
+    while($lang_arr = xtc_db_fetch_array($lang_qu)) {
+      $lang_array[strtoupper($lang_arr['code'])] = $lang_arr['languages_id'];
+    }
+
+    return $lang_array;
   }
 }
 ?>
