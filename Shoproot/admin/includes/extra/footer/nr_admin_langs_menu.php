@@ -14,7 +14,8 @@
 
 ********************************************************************/
 
-if(isset($languages_array) && count($languages_array) > 2) {
+//JorisK 12-2023 auf 10 Sprachen erweitert, da im Admin sonst zu viele Flaggen das Menu unbrauchbar machen
+if(isset($languages_array) && count($languages_array) > 10) {
   $nr_new_languages_string = '<div id="new-lng-str"><span class="op">&raquo; languages</span>';
   $nr_new_languages_string .= '<span class="lngs">'.implode('</span><span class="lngs">', $languages_array).'</span>';
   $nr_new_languages_string .= '</div>';
