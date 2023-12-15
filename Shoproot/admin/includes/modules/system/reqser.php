@@ -24,7 +24,7 @@ class reqser {
   function __construct() {
     global $messageStack;
 
-    $this->module_version = '1.9';
+    $this->module_version = '2.0';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version);
@@ -45,12 +45,12 @@ class reqser {
       $api_base = new api_local\ApiBase();
       $url_credential = 'https://reqser.com/api/token';
       $vals_credential = array('key' => $local_api_key);
-      //JorisK 12-2023 Timout 1 second
+      //JorisK 12-2023 Timeout 1 second
       $token_verify = $api_base->doRequest($url_credential, 'post', 'normal', 'json', $vals_credential, array('token' => $local_api_key), NULL, 'y', 1);
       if(isset($token_verify['access_token']) && !isset($token_verify['warning_message'])) {
         $url_requ = 'https://reqser.com/api/module_request';
         $post_fields = array('cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'php_version' => phpversion(), 'module_version' => $this->module_version);
-        //JorisK 12-2023 Timout 1 second
+        //JorisK 12-2023 Timeout 1 second
         $result_request = $api_base->doRequest($url_requ, 'post', 'json', 'json', $post_fields, array('token' => $token_verify['access_token']), NULL, 'y', 1);
         if(isset($result_request['warning_message']) && $result_request['warning_message'] != ''){
           $this->title .= '<br><span style="color:red;">'.$result_request["warning_message"].'</span>';
@@ -117,7 +117,7 @@ class reqser {
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TST_VALID_UNTIL', '', '6', '5', now())");
 
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_ALL_ROW_ACCESS'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    $default_tables = 'banners,categories_description,content_manager,content_manager_content,coupons_description,customers_status,email_content,manufacturers_info,orders_status,products_content,products_description,products_options,products_options_values,products_tags_options,products_tags_values,products_vpe,products_xsell_grp_name,shipping_status';
+    $default_tables = 'banners,categories_description,content_manager,content_manager_content,coupons_description,customers_status,email_content,manufacturers_info,orders_status,products_content,products_description,products_options,products_options_values,products_tags_options,products_tags_values,products_vpe,products_xsell_grp_name,shipping_status,products_images_description,reviews_description';
     //Prüfen ob plugin_sq_ajax_add_to_cart_data und/oder plugin_language_snippets_data wenn ja in default nehmen, wegen Spezialfall für Language
     $check_plugin_sq_ajax_add_to_cart_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_sq_ajax_add_to_cart_data'");
     if (xtc_db_num_rows($check_plugin_sq_ajax_add_to_cart_data) > 0) {
@@ -134,7 +134,7 @@ class reqser {
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."MORE_TABLES_ADD', '', '6', '8', now())");
     //xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."LESS_TABLES', '', '6', '9', now())");
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."FROM_WHICH_LANG', '2',  '6', '10', '', 'nr_cfg_select_option(".$this->langs_arr_str.",', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."FROM_WHICH_LANG', '2',  '6', '10', '', 'nr_cfg_select_option_langs(array(),', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."INTO_WHICH_LANGS', '',  '6', '11', '', 'nr_cfg_multi_checkbox(\'get_langs_to_translate\', \'chr(44)\',', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'INTO_ENGLISH_BRITISH'."', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ADD_LANGUAGE_ALLOWED'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
@@ -193,6 +193,8 @@ class reqser {
       } else {
         $messageStack->add_session(MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR, 'warning');
       }*/
+    } else if (is_array($token_verify) && isset($token_verify['message'])) {
+      $messageStack->add_session($token_verify['message'], 'warning');
     } else {
       $messageStack->add_session(sprintf(MODULE_SYSTEM_REQSER_CURL_ERR, (is_array($token_verify) ? '<pre>'.print_r($token_verify, true).'</pre>' : $token_verify)), 'warning');
     }
