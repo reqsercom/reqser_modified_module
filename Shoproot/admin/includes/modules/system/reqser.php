@@ -193,6 +193,8 @@ class reqser {
       } else {
         $messageStack->add_session(MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR, 'warning');
       }*/
+    } else if (is_array($token_verify) && isset($token_verify['message'])) {
+      $messageStack->add_session(sprintf(MODULE_SYSTEM_REQSER_CURL_ERR, (is_array($token_verify) ? '<pre>'.$token_verify['message'].'</pre>' : $token_verify)), 'warning');
     } else {
       $messageStack->add_session(sprintf(MODULE_SYSTEM_REQSER_CURL_ERR, (is_array($token_verify) ? '<pre>'.print_r($token_verify, true).'</pre>' : $token_verify)), 'warning');
     }
