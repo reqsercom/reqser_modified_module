@@ -16,7 +16,13 @@
 
 //JorisK 12-2023 auf 10 Sprachen erweitert, da im Admin sonst zu viele Flaggen das Menu unbrauchbar machen
 if(isset($languages_array) && count($languages_array) > 10) {
-  $nr_new_languages_string = '<div id="new-lng-str"><span class="op">&raquo; languages</span>';
+  // PatrickK 12-2023 Remove current language from array
+  $current_language_icon = '../lang/' .  $_SESSION['language'] .'/admin/images/' . 'icon.gif';
+  $languages_array = array_filter($languages_array, function($lang) use ($current_language_icon) {
+    return strpos($lang, 'src="' . $current_language_icon . '"') === false;
+  });
+
+  $nr_new_languages_string = '<div id="new-lng-str"><span class="op">' . xtc_image('../lang/' .  $_SESSION['language'] .'/admin/images/' . 'icon.gif', $_SESSION['language']). '</span>';
   $nr_new_languages_string .= '<span class="lngs">'.implode('</span><span class="lngs">', $languages_array).'</span>';
   $nr_new_languages_string .= '</div>';
   echo $nr_new_languages_string;
@@ -24,12 +30,12 @@ if(isset($languages_array) && count($languages_array) > 10) {
 <style>
 #new-lng-str {
   padding:7px 10px 7px;
-  color:#fff;
+  color:#222;
 }
 #new-lng-str span {
   padding:5px 8px;
-  background:#fff;
-  color:#000;
+  background:#222;
+  color:#fff;
 }
 .row_adminbar ul li.language #new-lng-str span a {
   padding:0 !important;
@@ -45,7 +51,9 @@ if(isset($languages_array) && count($languages_array) > 10) {
   padding:0;
 }
 #new-lng-str span.op {
-  display:block;
+  padding-top: 3px !important;
+  margin-bottom: 5px;
+  display:inline-block;
   cursor:pointer;
 }
 #new-lng-str span.lngs {
