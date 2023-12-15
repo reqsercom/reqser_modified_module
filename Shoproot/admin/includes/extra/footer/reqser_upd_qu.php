@@ -31,14 +31,14 @@ $(function() {
     msreq_params,
     function(data) {
       if(data != '') {
-        $(data).insertAfter('.fixed-header-height');
+        $('div[id="module_export_reqser_header"]').html(data);
+        $('div[id="module_export_reqser_header"]').css('color', 'red');
       }
     }
   );
 });
 </script>
 <?php
-        $_SESSION['msreq_upd_requested'] = true;
       }
     }
   }
