@@ -424,7 +424,7 @@ class ClassReqser extends api_local\ApiBase {
               }
             }
             if ($current_language_exists == false && sizeof($check_for_entry) > 0){
-              //JorisK den ersten Eintrag kopieren, sollte meistens der Deutsche sein bei Modified
+              //JorisK den englischen Eintrag kopieren, falls nicht vorhanden den ersten Eintrag
               if ($english_entry_found == false){
                 $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($check_for_entry[0], strpos($check_for_entry[0], '::')+2);
               } else {
