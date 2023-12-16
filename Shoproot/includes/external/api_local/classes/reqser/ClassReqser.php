@@ -417,8 +417,8 @@ class ClassReqser extends api_local\ApiBase {
               //JorisK den ersten Eintrag kopieren, sollte meistens der Deutsche sein bei Modified
               $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($check_for_entry[0], strpos($check_for_entry[0], '::')+2);
               $updated_entry = implode("||", $check_for_entry);
-              $upd_conf_qu_str = "UPDATE configuration SET configuration_value = ".$updated_entry." WHERE configuration_key = '".$configuration_email_key."'";
-              if($upd_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str)) {
+              $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$updated_entry."' WHERE configuration_key = ?";
+              if($upd_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, $configuration_email_key)) {
                 $this->api_db_conn->apiDbStmtClose($upd_qu);
               }
             }
