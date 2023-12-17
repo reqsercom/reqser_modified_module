@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '1.9';
+    $this->api_reqser_version = '2.0';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -1111,17 +1111,17 @@ class ClassReqser extends api_local\ApiBase {
   private function nameTablesFields($table) {
     switch($table) {
       case 'banners':
-        $fields = array('fields' => array('banners_title'),
+        $fields = array('fields' => array('banners_title', 'banners_image_title', 'banners_image_alt', 'banners_html_text'),
                         'unique_key' => 'banners_group_id',
                         'lang' => 'languages_id');
         break;
       case 'categories_description':
-        $fields = array('fields' => array('categories_name', 'categories_heading_title', 'categories_description', 'categories_meta_title', 'categories_meta_description'),
+        $fields = array('fields' => array('categories_name', 'categories_heading_title', 'categories_description', 'categories_meta_title', 'categories_meta_description', 'categories_meta_keywords'),
                         'unique_key' => 'categories_id',
                         'lang' => 'language_id');
         break;
       case 'content_manager':
-        $fields = array('fields' => array('content_title', 'content_heading', 'content_text', 'content_meta_title', 'content_meta_description', 'last_modified'),
+        $fields = array('fields' => array('content_title', 'content_heading', 'content_text', 'content_meta_title', 'content_meta_description', 'content_meta_keywords', 'last_modified'),
                         'unique_key' => 'content_group',
                         'lang' => 'languages_id');
         break;
@@ -1142,12 +1142,12 @@ class ClassReqser extends api_local\ApiBase {
                         'lang' => 'language_id');
         break;
       case 'email_content':
-        $fields = array('fields' => array('content_name'),
+        $fields = array('fields' => array('content_name', 'file_comment'),
                         'unique_key' => 'customers_status_id',
                         'lang' => 'languages_id');
         break;
       case 'manufacturers_info':
-        $fields = array('fields' => array('manufacturers_title', 'manufacturers_description'),
+        $fields = array('fields' => array('manufacturers_title', 'manufacturers_description', 'manufacturers_meta_title', 'manufacturers_meta_description', 'manufacturers_meta_keywords'),
                         'unique_key' => 'manufacturers_id',
                         'lang' => 'languages_id');
         break;
