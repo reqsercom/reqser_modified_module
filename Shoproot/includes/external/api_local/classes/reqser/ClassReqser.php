@@ -391,6 +391,55 @@ class ClassReqser extends api_local\ApiBase {
         if(isset($new_lang_id)) { //added condition, noRiddle, 10-2023
           $iwl_arr[] = $new_lang_id;
         }
+
+        //BOC configuration
+        //JorisK Prüfen ob für diese Sprache die Configuration Keys exisitieren, falls nicht erweitern
+        //Hier wird einfachheitshalber immer der Englische verwendet, falls nicht vorhanden der erste Eintrag kopiert
+        $configuration_email_key_array = array('CONTACT_US_EMAIL_ADDRESS',
+                                         'CONTACT_US_REPLY_ADDRESS',
+                                         'EMAIL_SUPPORT_ADDRESS',
+                                         'EMAIL_SUPPORT_REPLY_ADDRESS',
+                                         'EMAIL_BILLING_ADDRESS',
+                                         'EMAIL_BILLING_REPLY_ADDRESS',
+                                         'EMAIL_BILLING_FORWARDING_STRING',
+                                         'CONTACT_US_EMAIL_SUBJECT',
+                                         'EMAIL_SUPPORT_NAME',
+                                         'EMAIL_SUPPORT_SUBJECT',
+                                         'EMAIL_BILLING_NAME',
+                                         'EMAIL_BILLING_SUBJECT',
+                                         'EMAIL_BILLING_SUBJECT_ORDER',
+                                         'CUSTOM_SHIPPING_TITLE',
+                                         'CONTACT_US_NAME');
+        foreach($configuration_email_key_array as $configuration_email_key) {
+          if (defined($configuration_email_key)){
+            $check_for_entry = explode("||", constant($configuration_email_key));
+            $current_language_exists = false;
+            $english_entry_found = false;
+            foreach($check_for_entry as $entry){
+              if (strpos($entry, strtoupper($dec_rec_data['code']).'::') !== false){
+                $current_language_exists = true;
+              } 
+              if (strtoupper($dec_rec_data['code']) != 'EN' && strpos($entry, 'EN::') !== false){
+                $english_entry_found = $entry;
+              }
+            }
+            if ($current_language_exists == false && sizeof($check_for_entry) > 0){
+              //JorisK den englischen Eintrag kopieren, falls nicht vorhanden den ersten Eintrag
+              if ($english_entry_found == false){
+                $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($check_for_entry[0], strpos($check_for_entry[0], '::')+2);
+              } else {
+                $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($english_entry_found, strpos($english_entry_found, '::')+2);
+              }
+              $updated_entry = implode("||", $check_for_entry);
+              $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$updated_entry."' WHERE configuration_key = ?";
+              if($upd_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, $configuration_email_key)) {
+                $this->api_db_conn->apiDbStmtClose($upd_qu);
+              }
+            }
+          }
+        }
+        //EOC configuration
+
       } else {
         //JorisK Sprache existiert bereits somit alles i.o.
         if($dec_rec_data['set_active'] == 'true') {
