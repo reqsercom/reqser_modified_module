@@ -15,29 +15,29 @@
 
 ***********************************************************/
 
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatische Deepl &Uuml;bersetzungen via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatische DeepL &Uuml;bersetzungen via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
 System-Modul f&uuml;r die Aktivierung und Konfiguration von &Uuml;bersetzungen via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 
-define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundeinstellungen</h2>Modul aktivieren ?');
+define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundeinstellungen</h2>Modul aktivieren?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser API-Key');
-define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_DESC', 'Hier den API-Key von <i>Reqser.com</i> eintragen. Wird bei der Verbindung zu Modified auf Reqser angezeigt. <a href="https://www.reqser.com/translation/new-website/Modified" target="_blank" title="Direkt Link">&raquo Direkt-Link hier</a> ');
+define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_DESC', 'Hier können Sie den API-Key von <i>Reqser.com</i> eintragen. Wird bei der Verbindung zu Modified auf Reqser angezeigt. <a href="https://www.reqser.com/translation/new-website/Modified" target="_blank" title="Direkt Link">&raquo Direkt-Link hier</a> ');
 define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_TITLE', 'Tempor&auml;rer Sicherheits-Token');
 define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_DESC', 'Tempor&auml;rer Sicherheits-Token f&uuml;r externe Abfragen an den Shop.<br /><span  class="alrt">Wird automatisch vergeben !</span>');
 define('MODULE_SYSTEM_REQSER_TST_VALID_UNTIL_TITLE', 'G&uuml;ltigkeit des tempor&auml;ren Sicherheits-Tokens');
 define('MODULE_SYSTEM_REQSER_TST_VALID_UNTIL_DESC', 'Der tempor&auml;re Sicherheits-Token ist g&uuml;ltig bis (s.u.).<br />Wenn er abgelaufen ist wird auf Anfrage von Extern ein neuer erstellt, der dann hier angezeigt wird.');
 define('MODULE_SYSTEM_REQSER_ALLOW_ALL_ROW_ACCESS_TITLE', '<hr /><h2>Sprachtabellen</h2>Reqser.com Zugriff auf alle Spalten der freigegebenen Tabelle geben ?');
 define('MODULE_SYSTEM_REQSER_ALLOW_ALL_ROW_ACCESS_DESC', '"Ja" gibt Reqser Zugriff auf alle Spalteneintr&auml;ge der freigegebenen Tabellen, ein "Nein" kann bei alten Shopversionen oder bei Verwendung von nicht Standard Template zu Fehler f&uuml;hren.');
-define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_TITLE', 'DB-Tabellen');
-define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_DESC', 'Standard-DB-Tabellen die &uuml;bersetzt werden sollen.');
-define('MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE', 'Weitere DB-Tabellen');
-define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'Hier weitere DB-Tabellen w&auml;hlen die &uuml;bersetzt werden sollen');
-define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Weitere DB-Tabellen (die oben nicht zur Auswahl stehen)');
-define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Hier weitere DB-Tabellen komma-separiert eingeben die &uuml;bersetzt werden sollen.<br />(F&uuml;r Erweiterungen mit neuen "Nicht modified Standard"-Tabellen)');
+define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_TITLE', 'Datenbank-Tabellen');
+define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_DESC', 'Standard-Datenbank-Tabellen die &uuml;bersetzt werden sollen.');
+define('MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE', 'Weitere Datenbank-Tabellen');
+define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'Hier weitere Datenbank-Tabellen w&auml;hlen die &uuml;bersetzt werden sollen');
+define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Weitere Datenbank-Tabellen (die oben nicht zur Auswahl stehen)');
+define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Hier weitere Datenbank-Tabellen komma-separiert eingeben die &uuml;bersetzt werden sollen.<br />(F&uuml;r Erweiterungen mit neuen "Nicht modified Standard"-Tabellen)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Tabellen ausschließen');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Hier-komma-separiert Tabellen eintragen, die von &Uuml;bersetzungen ausgeschlossen werden sollen.<br />(Nur n&ouml;tig wenn oben alle Standard-Tabellen markiert sind und es sollen welche davon ausgeschlossen werden.)');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Hier komma-separiert Tabellen eintragen, die von &Uuml;bersetzungen ausgeschlossen werden sollen.<br />(Nur n&ouml;tig wenn oben alle Standard-Tabellen markiert sind und es sollen welche davon ausgeschlossen werden.)');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'Von welcher Sprache &uuml;bersetzen?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Von welcher Sprache aus soll &uuml;bersetzt werden?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'In welche Sprachen &uuml;bersetzen? '.draw_tooltip('Weitere Sprachen k&ouml;nnen auf <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> hinzugef&uuml;gt werden.'));
