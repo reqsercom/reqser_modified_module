@@ -16,7 +16,6 @@
 
 if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'true') {
   if(basename($PHP_SELF) == 'module_export.php' && isset($_GET['set']) && $_GET['set'] == 'system') {
-    if(!isset($_SESSION['msreq_upd_requested'])) {
       $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
       if($msreq_local_api_key != '') {
 ?>
@@ -40,6 +39,5 @@ $(function() {
 </script>
 <?php
       }
-    }
   }
 }
