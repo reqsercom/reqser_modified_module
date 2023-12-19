@@ -38,7 +38,7 @@ class ApiBase {
     $this->debug_curl == false;
 
     //JorisK Only if file_exists
-    if (file_exists(DIR_ADMIN.'includes/version.php')){
+    if(file_exists(DIR_ADMIN.'includes/version.php')) {
       require_once(DIR_ADMIN.'includes/version.php');
       $this->shop_version = PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION.(defined('PROJECT_REVISION') && PROJECT_REVISION != '' ? ' rev'.PROJECT_REVISION : '');
     } else {
@@ -372,7 +372,7 @@ class ApiBase {
         if($headers !== false && !empty($headers)) {
           if($api_call == 'temp_token' && ($action == 'fetch' || $action == 'renew')) {
             if(isset($headers['Authorization'])) {
-              if ($api_key == ''){
+              if($api_key == '') {
                 $err = array('error' => 'no API Key Set'); //array('auth' => base64_decode($headers['Authorization']));
               } elseif(base64_decode($headers['Authorization']) != $api_key) {
                 $err = array('error' => ($this->dev_mode === true ? 'wrong API Key' : 'restricted area, not authorized')); //array('auth' => base64_decode($headers['Authorization']));

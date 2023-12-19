@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.0';
+    $this->api_reqser_version = '2.1';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -256,7 +256,6 @@ class ClassReqser extends api_local\ApiBase {
     $iwl_arr = explode(',', $this->iwl);
     if($this->fwl != '') {
       //BOC use new param for getShopLanguages(), noRiddle, 10-2023
-      //$language_array = $this->shop_languages;
       $language_array = $this->getShopLanguages('languages_id');
       if(is_array($language_array) && sizeof($language_array) > 0) {
         if(array_key_exists($this->fwl, $language_array)) {
@@ -359,17 +358,7 @@ class ClassReqser extends api_local\ApiBase {
         }
       }
       if(!array_key_exists($dec_rec_data['code'], $check_langs_arr)) { //Prüfen ob es language_code schon gibt
-        /*$ins_qu_str = "INSERT INTO languages (name, code, image, directory, sort_order, language_charset, status, status_admin) 
-                            VALUES ('".xtc_db_input($dec_rec_data['name'])."', 
-                                    '".nr_input_validation($dec_rec_data['code'], 'lang')."', 
-                                    '".xtc_db_input($dec_rec_data['image'])."', 
-                                    '".xtc_db_input($dec_rec_data['directory'])."', 
-                                    ".(int)$dec_rec_data['sort_order'].", 
-                                    '".xtc_db_input($dec_rec_data['language_charset'])."', 
-                                    ".(int)$dec_rec_data['status'].", 
-                                    ".(int)$dec_rec_data['status_admin'].")";*/
         $ins_qu_str = "INSERT INTO languages (name, code, image, directory, sort_order, language_charset, status, status_admin) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-        //if(xtc_db_query($ins_qu_str)) {
         $ins_vals_arr = array($dec_rec_data['name'],
                               nr_input_validation($dec_rec_data['code'], 'lang'),
                               $dec_rec_data['image'],
@@ -380,7 +369,6 @@ class ClassReqser extends api_local\ApiBase {
                               (int)$dec_rec_data['status_admin']
                              );
         if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
-          //$new_lang_id = xtc_db_insert_id();
           $new_lang_id = $this->api_db_conn->apiDbLastInsertId();
           $this->api_db_conn->apiDbStmtClose($ins_qu);
           $return_array = array('success' => 'new language '.$dec_rec_data['code'].' created in DB table languages');
@@ -411,21 +399,21 @@ class ClassReqser extends api_local\ApiBase {
                                          'CUSTOM_SHIPPING_TITLE',
                                          'CONTACT_US_NAME');
         foreach($configuration_email_key_array as $configuration_email_key) {
-          if (defined($configuration_email_key)){
+          if(defined($configuration_email_key)) {
             $check_for_entry = explode("||", constant($configuration_email_key));
             $current_language_exists = false;
             $english_entry_found = false;
-            foreach($check_for_entry as $entry){
-              if (strpos($entry, strtoupper($dec_rec_data['code']).'::') !== false){
+            foreach($check_for_entry as $entry) {
+              if(strpos($entry, strtoupper($dec_rec_data['code']).'::') !== false) {
                 $current_language_exists = true;
               } 
-              if (strtoupper($dec_rec_data['code']) != 'EN' && strpos($entry, 'EN::') !== false){
+              if(strtoupper($dec_rec_data['code']) != 'EN' && strpos($entry, 'EN::') !== false) {
                 $english_entry_found = $entry;
               }
             }
-            if ($current_language_exists == false && sizeof($check_for_entry) > 0){
+            if($current_language_exists == false && sizeof($check_for_entry) > 0) {
               //JorisK den englischen Eintrag kopieren, falls nicht vorhanden den ersten Eintrag
-              if ($english_entry_found == false){
+              if($english_entry_found == false) {
                 $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($check_for_entry[0], strpos($check_for_entry[0], '::')+2);
               } else {
                 $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($english_entry_found, strpos($english_entry_found, '::')+2);
@@ -444,7 +432,6 @@ class ClassReqser extends api_local\ApiBase {
         //JorisK Sprache existiert bereits somit alles i.o.
         if($dec_rec_data['set_active'] == 'true') {
           $upd_qu_str = "UPDATE languages SET status = 1, status_admin = 1 WHERE code = ?";
-          //if(xtc_db_query('UPDATE languages SET status = 1, status_admin = 1 WHERE code = "'.$dec_rec_data['code'].'"'))
           if($upd_qu = $this->api_db_conn->apiDbQuery($upd_qu_str, nr_input_validation($dec_rec_data['code'], 'lang'))) {
             $this->api_db_conn->apiDbStmtClose($upd_qu);
             $return_array = array('success' => 'status of language '.$dec_rec_data['code'].' activated');
@@ -456,10 +443,9 @@ class ClassReqser extends api_local\ApiBase {
       if(count($iwl_arr) > 0) {
         sort($iwl_arr);
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = ? WHERE configuration_key = ?";
-        //if(xtc_db_query("UPDATE configuration SET configuration_value = '".implode(',', $iwl_arr)."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'")) {
         if($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, implode(',', $iwl_arr), 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS')) {
           $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
-          if (isset($return_array['success'])){
+          if(isset($return_array['success'])) {
             $return_array['success'] .= ' and language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
           } else {
             $return_array['success'] = 'Language '.$dec_rec_data['code'].' added to "Into which languages shall be translated"';
@@ -610,9 +596,7 @@ class ClassReqser extends api_local\ApiBase {
       return array('error' => 'table '.$table.' in shop not allowed');
     }
     //Get the table row information from this table 
-    //$query = xtc_db_query("DESCRIBE " . $table);
     $qu = $this->api_db_conn->apiDbQuery("DESCRIBE " . $table);
-    //while($row = xtc_db_fetch_array($query)) {
     while($row = $this->api_db_conn->apiDbFetchArray($qu)) {
         $out_arr[] = $row;
     }
@@ -630,9 +614,7 @@ class ClassReqser extends api_local\ApiBase {
     if($this->at != '' || $this->mt != '' || $this->mtad != '' && ($this->fwl != '' && $this->iwl != '')) {
       $allowed_tables = $this->allowedTables();
       foreach($allowed_tables as $table) {
-        //$tbl_exists_qu = xtc_db_query("SHOW TABLES LIKE '".$table."'");
         $tbl_exists_qu = $this->api_db_conn->apiDbQuery("SHOW TABLES LIKE '".$table."'");
-        //if(!xtc_db_num_rows($tbl_exists_qu) > 0) {
         if(!$this->api_db_conn->apiDbNumRows($tbl_exists_qu, true) > 0) {
           $key = array_search($table, $allowed_tables);
           $allowed_tables[$key] .= ' !! non existent table';
@@ -696,16 +678,12 @@ class ClassReqser extends api_local\ApiBase {
             $out_arr = array('error' => 'Language Field '.$language_field.' not allowed use '.$fields['lang'].' instead!');
             return $out_arr;
           }
-          //return array('error' => 'test', 'text' => 'Language_FIeld '.$language_field);
           $language_field = preg_replace('#[^a-z0-9\_]#', '', $language_field);
           if($use_language_code == 1) {
             $lang_id = strtolower(nr_input_validation($lang, 'lang'));
           }
-          //$qu_str = "SELECT COUNT(*) AS records FROM ".$table." WHERE ".$language_field." = '".$lang_id."'";
           $qu_str = "SELECT COUNT(*) AS records FROM ".$table." WHERE ".$language_field." = ?";
-          //if($qu = xtc_db_query($qu_str)) {
           if($qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id)) {
-            //$qu_arr = xtc_db_fetch_array($qu);
             $qu_arr = $this->api_db_conn->apiDbFetchArray($qu, true);
             $out_arr = array('table' => $table, 'lang' => $lang, 'records' => $qu_arr['records'], 'sql_request' => $qu_str);
           } else {
@@ -784,15 +762,8 @@ class ClassReqser extends api_local\ApiBase {
                     $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
            
                     //JorisK Fehler falls eine ältere Shopversion verwendet wird die ggf diese Spalten gar nicht hat!
-                    /*$qu = xtc_db_query("SELECT ".$uk.", ".$sel_fields."
-                                        FROM ".$table."
-                                        WHERE ".$language_field." = '".$lang_id."'
-                                        ORDER BY ".$uk." ASC
-                                        ".$limit."
-                                       ");*/
                     $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? ORDER BY ".$uk." ASC".$limit;
                     $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
-                    //if(xtc_db_num_rows($qu) > 0) {
                     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
                       $chrst = $this->getShopCharset();
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
@@ -890,7 +861,6 @@ class ClassReqser extends api_local\ApiBase {
                       if(strtoupper($dec_rec_data['charset']) != 'UTF-8') {
                         $field_value = mb_convert_encoding($field_value, strtoupper($dec_rec_data['charset']), 'UTF-8');
                       }
-                      //$update_string .= $field_name." = '".xtc_db_input($field_value)."', ";
                       $update_string .= $field_name." = ?, ";
                       $update_param_arr[] = $field_value;
                       $upd_sql_arr[$field_name] = $field_value; //better version ?, noRiddle, 10-2023
@@ -905,7 +875,6 @@ class ClassReqser extends api_local\ApiBase {
                       $check_for_auto_increment_qu_str = "SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'";
                       //$check_for_auto_increment_query = xtc_db_query("SHOW COLUMNS FROM ".$table." WHERE Extra = 'auto_increment'");
                       $check_for_auto_increment_query = $this->api_db_conn->apiDbQuery($check_for_auto_increment_qu_str);
-                      //if(xtc_db_num_rows($check_for_auto_increment_query) > 0) {
                       if($this->api_db_conn->apiDbNumRows($check_for_auto_increment_query) > 0) {
                         //$check_for_auto_increment = xtc_db_fetch_array($check_for_auto_increment_query);
                         $check_for_auto_increment = $this->api_db_conn->apiDbFetchArray($check_for_auto_increment_query, true);
@@ -915,11 +884,9 @@ class ClassReqser extends api_local\ApiBase {
                       $check_entry_exist_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
                       //$check_entry_exist_query = xtc_db_query("SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = '".$unique_key."' AND ".$dec_rec_data['language_field']." = ".$lang_id);
                       $check_entry_exist_query = $this->api_db_conn->apiDbQuery($check_entry_exist_qu_str, array((int)$unique_key, $lang_id));
-                      //if(xtc_db_num_rows($check_entry_exist_query) == 0) {
                       if($this->api_db_conn->apiDbNumRows($check_entry_exist_query, true) == 0) {
                         //Eintrag von Muttersprache holen 
                         if($dec_rec_data['use_language_code'] == 1) {
-                          //$language_array = $this->shop_languages;
                           $language_array = $this->getShopLanguages('languages_id');
                           if(isset($language_array[$this->fwl])) $fwl_language = $language_array[$this->fwl]['code'];
                           if(!isset($fwl_language)) {
@@ -930,28 +897,17 @@ class ClassReqser extends api_local\ApiBase {
                           $fwl_language = (int)$this->fwl;
                         }
 
-                        //$query = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = '".$unique_key."' AND ".$dec_rec_data['language_field']." = '".$fwl_language."'";
                         $get_muttersprach_entry_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
-                        //$get_muttersprach_entry_query = xtc_db_query($query);
                         $get_muttersprach_entry_query = $this->api_db_conn->apiDbQuery($get_muttersprach_entry_qu_str, array((int)$unique_key, $fwl_language));
-                        //if(xtc_db_num_rows($get_muttersprach_entry_query) > 0) {
                         if($this->api_db_conn->apiDbNumRows($get_muttersprach_entry_query) > 0) {
-                          //$get_muttersprach_entry = xtc_db_fetch_array($get_muttersprach_entry_query);
                           $get_muttersprach_entry = $this->api_db_conn->apiDbFetchArray($get_muttersprach_entry_query, true);
                           $insert_array = array();
                           foreach($get_muttersprach_entry as $column => $field_value) {
                             if($column == $auto_increment) continue;
                             if($column == $dec_rec_data['language_field']) $field_value = $lang_id;
-                            //$insert_array[] = array("field" => $column, "value" => xtc_db_input($field_value));
                             $insert_array[$column] = $field_value;
                           }
                           if(sizeof($insert_array) > 0) {
-                            /*$fields = array_column($insert_array, 'field');
-                            $values = array_map(function($item) {
-                              return "'" . $item['value'] . "'";
-                            }, $insert_array);
-                            $sql = "INSERT INTO ".$table." (".implode(', ', $fields).") VALUES (".implode(', ', $values).")";*/
-                            //if(xtc_db_query($sql)) {
                             if($insert_qu = $this->api_db_conn->apiDbArrayToTable($table, $insert_array)) {
                               $this->api_db_conn->apiDbStmtClose($insert_qu);
                               $out_arr[$unique_key]['success_duplicate'] = 'successfully duplicated '.$sql;
@@ -968,7 +924,6 @@ class ClassReqser extends api_local\ApiBase {
                     }
                     if($update_string != '') {
                       $update_string = rtrim($update_string, ', ');
-                      //$update_string .= " WHERE ".$dec_rec_data['unique_field']." = '".$unique_key."' AND ".$dec_rec_data['language_field']." = '".$lang_id."'";
                       $update_string .= " WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
                       $update_param_arr = array_merge($update_param_arr, array($unique_key, (int)$lang_id));
                       $update_string = "UPDATE ".$table." SET ".$update_string;
@@ -976,10 +931,8 @@ class ClassReqser extends api_local\ApiBase {
                       if($this->write_control_mode === true) {
                         $out_arr['debug'][$table][$id] = $update_string;
                       } else {
-                        //if(xtc_db_query($update_string)) {
                         if($update_qu = $this->api_db_conn->apiDbQuery($update_string, $update_param_arr)) {
                         //we could use apiDbArrayToTable() also, better version ?, noRiddle
-                        //if($update_qu = $this->api_db_conn->apiDbArrayToTable($table, $upd_sql_arr, 'update', array($dec_rec_data['unique_field'] => (int)$unique_key, $dec_rec_data['language_field'] => (int)$lang_id))) {
                           $out_arr['success'][$unique_key] = 'executed successfully';
                         } else {
                           $update_string = str_replace('?', '%s', $update_string);
@@ -1021,9 +974,7 @@ class ClassReqser extends api_local\ApiBase {
   protected function getShopCharset() {
     if($this->fwl != '') {
       $chrst_qu_str = "SELECT language_charset FROM languages WHERE languages_id = ?";
-      //$chrst_qu = xtc_db_query("SELECT language_charset FROM languages WHERE languages_id = ".(int)$this->fwl);
       $chrst_qu = $this->api_db_conn->apiDbQuery($chrst_qu_str, (int)$this->fwl);
-      //$chrst_arr = xtc_db_fetch_array($chrst_qu);
       $chrst_arr = $this->api_db_conn->apiDbFetchArray($chrst_qu, true);
       return $chrst_arr['language_charset'];
     }
@@ -1091,9 +1042,7 @@ class ClassReqser extends api_local\ApiBase {
     $token = xtc_RandomString(32);
     $now = date('Y-m-d H:i:s');
     $time = date('Y-m-d H:i:s', strtotime($now.' +1 month'));
-    //xtc_db_query("UPDATE configuration SET configuration_value = '".$token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN'");
     $tok_upd_qu = $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN'");
-    //xtc_db_query("UPDATE configuration SET configuration_value = '".$time."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_TST_VALID_UNTIL'");
     $tme_upd_qu = $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$time."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_TST_VALID_UNTIL'");
     return array('token' => $token,
                  'expiry' => $time);
@@ -1106,16 +1055,12 @@ class ClassReqser extends api_local\ApiBase {
    */
   protected function haveTableRecord($tbl, $id_field, $id, $lng_field, $lng, $orig_lng) {
     $verify_qu1_str = "SELECT ".$id_field." FROM ".$tbl." WHERE ".$id_field." = ? AND ".$lng_field." = ?";
-    //$verify_qu1 = xtc_db_query("SELECT ".$id_field." FROM ".$tbl." WHERE ".$id_field." = ".(int)$id." AND ".$lng_field." = ".(int)$lng);
     $verify_qu1 = $this->api_db_conn->apiDbQuery($verify_qu1_str, array((int)$id, (int)$lng));
-    //if(xtc_db_num_rows($verify_qu1) == 0) {
     if($this->api_db_conn->apiDbNumRows($verify_qu1) == 0) {
       $fields = false;
     } else {
       $verify_qu2_str = "SELECT * FROM ".$tbl." WHERE ".$id_field." = ? AND ".$lng_field." = ?";
-      //$verify_qu2 = xtc_db_query("SELECT * FROM ".$tbl." WHERE ".$id_field." = ".(int)$id." AND ".$lng_field." = ".(int)$orig_lng);
       $verify_qu2 = $this->api_db_conn->apiDbQuery($verify_qu2_str, array((int)$id, (int)$orig_lng));
-      //$verify_arr2 = xtc_db_fetch_array($verify_qu2);
       $verify_arr2 = $this->api_db_conn->apiDbFetchArray($verify_qu2);
       $fields = $verify_arr2;
     }
