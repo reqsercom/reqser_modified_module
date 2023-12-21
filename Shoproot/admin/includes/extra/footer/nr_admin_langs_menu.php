@@ -14,7 +14,7 @@
 
 ********************************************************************/
 
-//JorisK 12-2023 auf 10 Sprachen erweitert, da im Admin sonst zu viele Flaggen das Menu unbrauchbar machen
+//JorisK 12-2023 von 2 auf 10 Sprachen erweitert, bis zu 10 Flaggen sollte original Adminbar noch darstellen können
 if(isset($languages_array) && count($languages_array) > 10) {
   // PatrickK 12-2023 Remove current language from array
   $current_language_icon = '../lang/' .  $_SESSION['language'] .'/admin/images/' . 'icon.gif';
@@ -65,6 +65,17 @@ if(isset($languages_array) && count($languages_array) > 10) {
 }
 #new-lng-str:hover span.lngs {
   display:block;
+}
+#new-lng-str span.op::after {
+  content: '';
+  display: inline-block;
+  width: 0; 
+  height: 0; 
+  margin-left: 5px;
+  vertical-align: middle;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid white; /* Adjust color and size as needed */
 }
 </style>
 <script>
