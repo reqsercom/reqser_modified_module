@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.1';
+    $this->api_reqser_version = '2.2';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -768,7 +768,7 @@ class ClassReqser extends api_local\ApiBase {
                       $chrst = $this->getShopCharset();
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
                         foreach($qu_arr as $key => $value) {
-                          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 12.11.2023
+                          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
                           $out_arr[$qu_arr[$uk]][$key] = $value;      
                         }
                       }
