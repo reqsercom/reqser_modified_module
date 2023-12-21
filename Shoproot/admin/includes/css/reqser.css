@@ -25,6 +25,12 @@ background:#4f4f4f;
 color:#ededed;
 padding:10px !important;
 }
+.infoBoxContent b h2 {
+  margin:5px 0 12px;
+  padding:0 0 4px;
+  /*width:min-content;*/
+  border-bottom:1px solid #fff;
+}
 .infoBoxContent a {
   font-size:12px;
   color:#6ee2fd;
