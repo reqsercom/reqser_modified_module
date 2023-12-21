@@ -102,7 +102,7 @@ class DbFuncs {
 
     if(version_compare(PHP_VERSION, '7.4', '<')) {
       //JorisK the get_magic_quotes_gpc is not always actiavated also before 7.4
-      if (function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
+      if(function_exists('get_magic_quotes_gpc') && get_magic_quotes_gpc()) {
         $gmqu = get_magic_quotes_gpc();
       }
     }

@@ -26,14 +26,14 @@ $nr_reqser_default_tables = array('banners',
                                   'orders_status',
                                   'products_content',
                                   'products_description',
-                                  'products_images_description',
+                                  //'products_images_description',
                                   'products_options',
                                   'products_options_values',
                                   'products_tags_options',
                                   'products_tags_values',
                                   'products_vpe',
                                   'products_xsell_grp_name',
-                                  'reviews_description',
+                                  //'reviews_description',
                                   'shipping_status',
                                 );
 
@@ -50,7 +50,7 @@ $nr_reqser_exclude_tables = array('admin_access',
 
 if(!function_exists('nr_cfg_multi_checkbox')) {
   function nr_cfg_multi_checkbox($format, $separator, $checked, $key = '') {   
-    if (preg_match("'chr\(([0-9]{1,3})\)'",$separator, $matches)) {
+    if(preg_match("'chr\(([0-9]{1,3})\)'",$separator, $matches)) {
       $separator  = chr($matches[1]);
     }
     $checkboxes = '';
@@ -60,7 +60,7 @@ if(!function_exists('nr_cfg_multi_checkbox')) {
     $cnt_fa = count($format_array);
     $cntr = 1;
     foreach($format_array as $k => $val) {
-      if (is_array($val)) {
+      if(is_array($val)) {
         $k   = isset($val['id'])   ? $val['id']   : $k;
         $val = isset($val['text']) ? $val['text'] : $val;
       }
@@ -116,11 +116,11 @@ if(!function_exists('get_default_tables_to_translate')) {
     $tables_arr = $nr_reqser_default_tables;
     //JorisK Prüfen ob plugin_sq_ajax_add_to_cart_data und/oder plugin_language_snippets_data wenn ja in default nehmen, wegen Spezialfall für Language
     $plugin_sq_ajax_add_to_cart_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_sq_ajax_add_to_cart_data'");
-    if (xtc_db_num_rows($plugin_sq_ajax_add_to_cart_data) > 0) {
+    if(xtc_db_num_rows($plugin_sq_ajax_add_to_cart_data) > 0) {
       $tables_arr[] = 'plugin_sq_ajax_add_to_cart_data';
     }
     $plugin_language_snippets_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_language_snippets_data'");
-    if (xtc_db_num_rows($plugin_language_snippets_data) > 0) {
+    if(xtc_db_num_rows($plugin_language_snippets_data) > 0) {
       $tables_arr[] = 'plugin_language_snippets_data';
     }
     $tbls_arr = array();
@@ -140,11 +140,11 @@ if(!function_exists('get_more_tables_to_translate')) {
     $default_tables_arr = $nr_reqser_default_tables;
     //JorisK für Template resolution
     $plugin_sq_ajax_add_to_cart_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_sq_ajax_add_to_cart_data'");
-    if (xtc_db_num_rows($plugin_sq_ajax_add_to_cart_data) > 0) {
+    if(xtc_db_num_rows($plugin_sq_ajax_add_to_cart_data) > 0) {
       $default_tables_arr[] = 'plugin_sq_ajax_add_to_cart_data';
     }
     $plugin_language_snippets_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_language_snippets_data'");
-    if (xtc_db_num_rows($plugin_language_snippets_data) > 0) {
+    if(xtc_db_num_rows($plugin_language_snippets_data) > 0) {
       $default_tables_arr[] = 'plugin_language_snippets_data';
     }
 
