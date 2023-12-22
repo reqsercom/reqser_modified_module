@@ -84,6 +84,12 @@ class reqser {
   }
 
   function install() {
+    global $messageStack;
+    if(version_compare(PHP_VERSION, '7.0', '<')) {
+      $messageStack->add_session('PHP version must be minimum 7.0 or higher', 'warning');
+      return;
+    }
+
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'STATUS'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."REQSER_API_KEY', '', '6', '2', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TEMP_SHOP_TOKEN', '', '6', '4', now())");
