@@ -32,6 +32,10 @@ class reqser {
     $this->sort_order = $this->get_const('SORT_ORDER');
     $this->enabled = $this->get_const('STATUS') == 'true' ? true : false;
 
+    if(version_compare(PHP_VERSION, '7.0', '<')) {
+      $this->title .= '<br><span style="color:red;">PHP Version is too low, min. 7.0 required!</span>';
+    }
+
     $this->langs_arr_str = get_langs_from_translate();
 
     if(isset($_GET['module']) && $_GET['module'] == $this->code && isset($_GET['action']) && $_GET['action'] == 'save') {
