@@ -89,7 +89,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
-                                                                                        'reseller_id' => getResellerId(),
+                                                                                        'reseller_id' => $this->getResellerId(),
                                                                                        )
                                                                        )
                                                        ),
