@@ -263,7 +263,7 @@ class ClassReqser extends api_local\ApiBase {
         }
         if(sizeof($iwl_arr) > 0) {
           foreach($iwl_arr as $iwl_id) {
-            if(array_key_exists($this->iwl, $language_array)) {
+            if(array_key_exists($iwl_id, $language_array)) {
               $iwl_array[] = $language_array[$iwl_id];
             }
           }
