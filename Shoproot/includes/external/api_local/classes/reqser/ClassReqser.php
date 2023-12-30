@@ -88,7 +88,8 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'shop_version' => $this->getShopVersion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
-                                                                                        'language_add_allowed' => ($this->ala === true ? '1' : '0')
+                                                                                        'language_add_allowed' => ($this->ala === true ? '1' : '0'),
+                                                                                        'reseller_id' => getResellerId(),
                                                                                        )
                                                                        )
                                                        ),
@@ -1210,5 +1211,20 @@ class ClassReqser extends api_local\ApiBase {
 
     return $fields;
   }
+
+    /**  
+   * public method getResellerID
+   *
+   * @return if Reseller ID File exists, return Reseller ID, else return false
+   */
+  public function getResellerID() {
+    if (file_exists(DIR_FS_EXTERNAL.'api_local/classes/reqser/reseller_id.txt')){
+      $reseller_id = file_get_contents(DIR_FS_EXTERNAL.'api_local/classes/reqser/reseller_id.txt');
+      return $reseller_id;
+    } else {
+      return false;
+    }
+  }
+
 }
 ?>
