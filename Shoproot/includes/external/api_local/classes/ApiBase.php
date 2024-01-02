@@ -34,7 +34,7 @@ class ApiBase {
   public function __construct($subp = '') {
     global $api_db_conn;
 
-    $this->api_base_version = '1.3';
+    $this->api_base_version = '1.4';
     $this->debug_curl == false;
 
     //JorisK Only if file_exists
@@ -178,7 +178,7 @@ class ApiBase {
     $langs_array = array();
     //while($langs_arr = xtc_db_fetch_array($langs_qu)) {
     while($langs_arr = $this->api_db_conn->apiDbFetchArray($langs_qu)) {
-      if($select != '' && array_key_exists($langs_arr[$select])) {
+      if($select != '' && array_key_exists($select, $langs_arr)) {
         if(in_array($key, $allwd_keys))
           $langs_array[$langs_arr[$key]] = $langs_arr[$select];
       } else {
@@ -370,6 +370,10 @@ class ApiBase {
       if($this->browser_mode === false) {
         $headers = $this->getHeaders();
         if($headers !== false && !empty($headers)) {
+          //JorisK 01-2024 Bugfix es gibt Systeme welche "Authorization" obwohl im Call mitgegeben nicht im Header des Calls haben, deswegen wird immer ein Backup Authrorization mitgesendet
+          if (!isset($headers['Authorization']) && isset($headers['Reqserauthorization'])) {
+            $headers['Authorization'] = $headers['Reqserauthorization'];
+          }
           if($api_call == 'temp_token' && ($action == 'fetch' || $action == 'renew')) {
             if(isset($headers['Authorization'])) {
               if($api_key == '') {
