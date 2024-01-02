@@ -36,8 +36,9 @@ class reqser {
       $this->title .= '<br><span style="color:red;">PHP Version is too low, min. 7.0 required!</span>';
     }
 
+    //JorisK 01-2024, falls in einer neuen Modul Version Konfigurationsfelder benötigt werden wird es hier geprüft
     $new_installation_needed = false;
-    if ($this->mn_const.'INSTALLED_MODUL_VERSION' != '' && $this->mn_const.'INSTALLED_MODUL_VERSION' != $this->module_version){
+    if ($this->mn_const.'INSTALLED_MODUL_VERSION' != '' && $this->mn_const.'INSTALLED_MODUL_VERSION' != $this->module_version && $new_installation_needed == true){
       $this->title .= '<br><span style="color:red;">Installed Modul Version not the same as uploaded, please reinstall this module!</span>';
     }
 
