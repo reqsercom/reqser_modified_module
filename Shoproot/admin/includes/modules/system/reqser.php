@@ -38,7 +38,7 @@ class reqser {
 
     //JorisK 01-2024, falls in einer neuen Modul Version Konfigurationsfelder benötigt werden wird es hier geprüft
     $new_installation_needed = false;
-    if ($this->mn_const.'INSTALLED_MODUL_VERSION' != '' && $this->mn_const.'INSTALLED_MODUL_VERSION' != $this->module_version && $new_installation_needed == true){
+    if ($this->mn_const.'INSTALLED_MODULE_VERSION' != '' && $this->mn_const.'INSTALLED_MODULE_VERSION' != $this->module_version && $new_installation_needed == true){
       $this->title .= '<br><span style="color:red;">Installed Modul Version not the same as uploaded, please reinstall this module!</span>';
     }
 
@@ -100,7 +100,7 @@ class reqser {
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."REQSER_API_KEY', '', '6', '2', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TEMP_SHOP_TOKEN', '', '6', '4', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TST_VALID_UNTIL', '', '6', '5', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."INSTALLED_MODUL_VERSION', '".$this->module_version."', '6', '5', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."INSTALLED_MODULE_VERSION', '".$this->module_version."', '6', '5', now())");
 
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_ALL_ROW_ACCESS'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     $default_tables = 'banners,categories_description,content_manager,content_manager_content,coupons_description,customers_status,email_content,manufacturers_info,orders_status,products_content,products_description,products_options,products_options_values,products_tags_options,products_tags_values,products_vpe,products_xsell_grp_name,shipping_status';
