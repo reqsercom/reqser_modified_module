@@ -23,7 +23,7 @@ System-Modul f&uuml;r die Aktivierung und Konfiguration von &Uuml;bersetzungen v
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundeinstellungen</h2>Modul aktivieren?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser API-Key');
-define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_DESC', 'Hier können Sie den API-Key von <i>Reqser.com</i> eintragen. Wird bei der Verbindung zu Modified auf Reqser angezeigt. <a href="https://www.reqser.com/translation/new-website/Modified" target="_blank" title="Direkt Link">&raquo Direkt-Link hier</a> ');
+define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_DESC', 'Hier k&ouml;nnen Sie den API-Key von <i>Reqser.com</i> eintragen. Wird bei der Verbindung zu Modified auf Reqser angezeigt. <a href="https://www.reqser.com/translation/new-website/Modified" target="_blank" title="Direkt Link">&raquo Direkt-Link hier</a> ');
 define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_TITLE', 'Tempor&auml;rer Sicherheits-Token');
 define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_DESC', 'Tempor&auml;rer Sicherheits-Token f&uuml;r externe Abfragen an den Shop.<br /><span  class="alrt">Wird automatisch vergeben !</span>');
 define('MODULE_SYSTEM_REQSER_TST_VALID_UNTIL_TITLE', 'G&uuml;ltigkeit des tempor&auml;ren Sicherheits-Tokens');

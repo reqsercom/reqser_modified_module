@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.2';
+    $this->api_reqser_version = '2.3';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -1218,8 +1218,8 @@ class ClassReqser extends api_local\ApiBase {
    * @return if Reseller ID File exists, return Reseller ID, else return false
    */
   public function getResellerID() {
-    if (file_exists(DIR_FS_EXTERNAL.'api_local/classes/reqser/reseller_id.txt')){
-      $reseller_id = file_get_contents(DIR_FS_EXTERNAL.'api_local/classes/reqser/reseller_id.txt');
+    if (file_exists(DIR_FS_API.'reqser/reseller_id.txt')){
+      $reseller_id = file_get_contents(DIR_FS_API.'reqser/reseller_id.txt');
       return $reseller_id;
     } else {
       return false;
