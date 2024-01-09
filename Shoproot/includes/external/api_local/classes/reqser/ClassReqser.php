@@ -883,8 +883,7 @@ class ClassReqser extends api_local\ApiBase {
                       }
                       //Prüfen ob Eintrag wirklich nicht existiert 
                       $check_entry_exist_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
-                      //$check_entry_exist_query = xtc_db_query("SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = '".$unique_key."' AND ".$dec_rec_data['language_field']." = ".$lang_id);
-                      $check_entry_exist_query = $this->api_db_conn->apiDbQuery($check_entry_exist_qu_str, array((int)$unique_key, $lang_id));
+                      $check_entry_exist_query = $this->api_db_conn->apiDbQuery($check_entry_exist_qu_str, array($unique_key, $lang_id));
                       if($this->api_db_conn->apiDbNumRows($check_entry_exist_query, true) == 0) {
                         //Eintrag von Muttersprache holen 
                         if($dec_rec_data['use_language_code'] == 1) {
@@ -899,7 +898,7 @@ class ClassReqser extends api_local\ApiBase {
                         }
 
                         $get_muttersprach_entry_qu_str = "SELECT * FROM ".$table." WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
-                        $get_muttersprach_entry_query = $this->api_db_conn->apiDbQuery($get_muttersprach_entry_qu_str, array((int)$unique_key, $fwl_language));
+                        $get_muttersprach_entry_query = $this->api_db_conn->apiDbQuery($get_muttersprach_entry_qu_str, array($unique_key, $fwl_language));
                         if($this->api_db_conn->apiDbNumRows($get_muttersprach_entry_query) > 0) {
                           $get_muttersprach_entry = $this->api_db_conn->apiDbFetchArray($get_muttersprach_entry_query, true);
                           $insert_array = array();
@@ -926,7 +925,7 @@ class ClassReqser extends api_local\ApiBase {
                     if($update_string != '') {
                       $update_string = rtrim($update_string, ', ');
                       $update_string .= " WHERE ".$dec_rec_data['unique_field']." = ? AND ".$dec_rec_data['language_field']." = ?";
-                      $update_param_arr = array_merge($update_param_arr, array($unique_key, (int)$lang_id));
+                      $update_param_arr = array_merge($update_param_arr, array($unique_key, $lang_id));
                       $update_string = "UPDATE ".$table." SET ".$update_string;
 
                       if($this->write_control_mode === true) {
