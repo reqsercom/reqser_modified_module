@@ -13,6 +13,8 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
+* © copyright 01-2024, JorisK, some Bugfixes and additions
+
 ***********************************************************/
 
 namespace api_local;
@@ -210,6 +212,9 @@ class DbFuncs {
     $sql_arr = array();
     foreach($data_arr as $column => $param) {
       switch($param) {
+        case '0': //JorisK 01-2024 Bugfix for ID 0
+          $sql_arr[$column] = '0';
+          break;
         case 'now()':
           $sql_arr[$column] = 'now()';
           break;

@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.3';
+    $this->api_reqser_version = '2.4';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -164,7 +164,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_table_row_information?table=X',
                                                                                                           'params' => array('table=TABLE_NAME' => 'for the specified table'),
                                                                                                           'desc' => 'get row names and type',
-                                                                                                          'returns' => 'an array with the row information, needed to add more than predefined rows for translation'
+                                                                                                          'returns' => 'an array with the row information, needed to add more than predefined rows for translation, and also if an older Shop version is not having these rows, could lead to sql errors'
                                                                                                          )
                                                                                          ),
                                                   ),
