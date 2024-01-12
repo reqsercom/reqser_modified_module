@@ -618,7 +618,9 @@ class ClassReqser extends api_local\ApiBase {
         $tbl_exists_qu = $this->api_db_conn->apiDbQuery("SHOW TABLES LIKE '".$table."'");
         if(!$this->api_db_conn->apiDbNumRows($tbl_exists_qu, true) > 0) {
           $key = array_search($table, $allowed_tables);
-          $allowed_tables[$key] .= ' !! non existent table';
+          //JorisK 01-2024, für ältere Shopversionen, besser wenn die Tabelle einfach nicht mitgegeben wird, falls ein Shop update gemacht wird kommt die dann automatisch dazu
+          unset($allowed_tables[$key]);
+          //$allowed_tables[$key] .= ' !! non existent table'; alte Version
         }
       }
     } else {
