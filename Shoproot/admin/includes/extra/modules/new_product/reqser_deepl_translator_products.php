@@ -12,6 +12,11 @@
   if(constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
         echo '<div class="success_message">Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.</div>';
+        if (isset($_GET['pID']) && $_GET['pID'] > 0) {
+          $reqser_pid = $_GET['pID'];
+        } else {
+          $reqser_pid = 'new_product';
+        }
         $reqser_post_fields = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'products_description', 'id' => $reqser_pid);
         $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
         ?>
