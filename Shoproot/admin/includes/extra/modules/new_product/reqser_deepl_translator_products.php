@@ -12,42 +12,32 @@
   if(constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
         echo '<div class="success_message">Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.</div>';
-
-        /* JorisK funktioniert irgendwie noch nicht
-        $reqser_local_api_key = constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY');
-        $reqser_url = ''; 
-        $reqser_pid = ((isset($_GET['pID']) && $_GET['pID'] > 0 ) ? $_GET['pID'] : 'new_product');
-        $reqser_vals = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'products_description', 'id' => $reqser_pid);
-        $reqser_headers = array();
-        $reqser_headers[] = 'Accept: application/json';
+        $reqser_post_fields = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'products_description', 'id' => $reqser_pid);
+        $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
         ?>
         <script>
           $(document).ready(function() {
-              $('new_product').submit(function(e) {
-                  e.preventDefault(); 
-                  alert('Form submitted. Preventing default behavior.');
-                  console.log('Form submitted. Preventing default behavior.');
-                  $.ajax({
-                        type: 'POST',
-                        url: 'https://reqser.com/api/translator/request_translation',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            reqser_vals: <?php echo json_encode($reqser_vals); ?>
-                        }),
-                        success: function(response) {
-                            // Handle the success response
-                            console.log(response);
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle errors
-                            console.error(xhr.responseText);
-                        }
-                    });
-              });
+            $('#new_product').submit(function(e) {
+              e.preventDefault();
+              let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+                  msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+
+              msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_instant_translate: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>', 'reqser_post_fields': '<?php echo json_encode($reqser_post_fields); ?>'};
+              msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+              $.post("../ajax.php",
+                msreq_params,
+                function(data) {
+                  if(data != '') {
+                    $('div[id="module_export_reqser_header"]').html(data);
+                    $('div[id="module_export_reqser_header"]').css('color', 'red');
+                  }
+                }
+              );
+            });
           });
           </script> 
         <?php
-        */
+        
     } else {
       echo '<div class="messageStackError">Reqser Deepl Translator Modul hat kein API Key, bitte ein API Key hinterlegen</div>';
     }
