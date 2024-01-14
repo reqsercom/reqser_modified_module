@@ -762,11 +762,17 @@ class ClassReqser extends api_local\ApiBase {
                   if((isset($fields['unique_key']) && $uk != $fields['unique_key']) && $this->aara === false) {
                     $out_arr = array('error' => 'Unique Field '.$uk.' not allowed');
                   } elseif($uk != '') {
-                    $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
-           
-                    //JorisK Fehler falls eine ältere Shopversion verwendet wird die ggf diese Spalten gar nicht hat!
-                    $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? ORDER BY ".$uk." ASC".$limit;
-                    $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
+                    //JorisK Falls nur ein Eintrag abgefragt wird
+                    if ($from != 'single_entry'){
+                      //JorisK Fehler falls eine ältere Shopversion verwendet wird die ggf diese Spalten gar nicht hat!
+                      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+                      $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? ORDER BY ".$uk." ASC".$limit;
+                      $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
+                    } else {
+                      $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? AND ".$uk." = ?";
+                      $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id, $chunks); 
+                    }
+
                     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
                       $chrst = $this->getShopCharset();
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
