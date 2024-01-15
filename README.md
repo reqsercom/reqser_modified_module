@@ -21,7 +21,10 @@ Trage den API Key ein, definiere deine Muttersprache von welcher übersetzt werd
 ### 3. Verbindungs Test
 
 Schliesse die Verbindung in Reqser.com ab und prüfe ob die Verbindung erfolgreich war.
-Innerhalb der nächsten 15 Minuten werden die vordefinierten Tabellen cecrawlt und nach 24h-72h übersetzt und in dein Shopsystem übertragen.
+
+### 4. Live Modus
+
+Innerhalb der nächsten 15 Minuten werden die vordefinierten Tabellen cecrawlt und nach 24h-72h übersetzt und in dein Shopsystem übertragen. Beim abändern von Produkt Texten oder Kategorien werden Texte umgehend übersetzt und in den Shop übertragen.
 
 
 ## Weitere technische Informationen
