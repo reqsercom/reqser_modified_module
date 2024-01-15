@@ -1,7 +1,7 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-* file: reqser_deepl_translator_products.php
-* path: \admin\includes\extra\modules\new_product\
+* file: reqser_deepl_translator_categories.php
+* path: \admin\includes\extra\modules\new_category\
 * use: system module for DeepL translation via API
 * Reqser.com Deepl Translator automation for Modified Shop
 * JorisK 01-2024
@@ -11,19 +11,19 @@
 
   if(constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
-        echo '<div class="success_message">Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.</div>';
-        if (isset($_GET['pID']) && $_GET['pID'] > 0) {
-          $reqser_pid = $_GET['pID'];
+        echo '<div class="success_message">Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für diese Kategorie übersetzen.</div>';
+        if (isset($_GET['cID']) && $_GET['cID'] > 0) {
+          $reqser_cid = $_GET['cID'];
         } else {
-          $reqser_pid = 'new_entry';
+          $reqser_cid = 'new_entry';
         }
-        $reqser_post_fields = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'products_description', 'id' => $reqser_pid);
+        $reqser_post_fields = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'categories_description', 'id' => $reqser_cid);
         $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
         ?>
         <script>
           $(document).ready(function() {
-            $('#new_product').submit(function(e) {
-              e.preventDefault();
+            $('form[name="new_category"]').submit(function(e) {
+              //e.preventDefault();
               let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
                   msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
 
