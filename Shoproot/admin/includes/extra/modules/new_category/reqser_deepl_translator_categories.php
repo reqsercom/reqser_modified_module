@@ -33,7 +33,10 @@
                 msreq_params,
                 function(data) {
                   if(data != '') {
-                    alert(data);
+                    var userConfirmed = confirm(data);
+                    if(userConfirmed) {
+                        e.currentTarget.submit();
+                    }
                   }
                 }
               );
