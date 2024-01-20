@@ -30,7 +30,12 @@
               msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_instant_translate: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>', 'reqser_post_fields': '<?php echo json_encode($reqser_post_fields); ?>'};
               msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
               $.post("../ajax.php",
-                msreq_params
+                msreq_params,
+                function(data) {
+                  if(data != '') {
+                    alert(data);
+                  }
+                }
               );
             });
           });
