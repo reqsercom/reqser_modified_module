@@ -11,7 +11,8 @@
 
   if(constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
-        echo '<div class="success_message">Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.</div>';
+      include_once (DIR_FS_CATALOG . 'lang/'.$_SESSION['language'].'/modules/system/reqser.php');
+      echo '<div class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE.'</div>';
         if (isset($_GET['pID']) && $_GET['pID'] > 0) {
           $reqser_pid = $_GET['pID'];
         } else {
@@ -23,33 +24,52 @@
         <script>
           $(document).ready(function() {
             $('#new_product').submit(function(e) {
-              e.preventDefault();
-              let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-                  msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+                e.preventDefault();
 
-              msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_instant_translate: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>', 'reqser_post_fields': '<?php echo json_encode($reqser_post_fields); ?>'};
-              msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
-              $.post("../ajax.php",
-                msreq_params,
-                function(data) {
-                  if(data != '') {
-                    var userConfirmed = confirm(data);
-                    if(userConfirmed) {
+                let ajaxResponseReceived = false;
+
+                let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+                    msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+
+                msreq_params = {
+                    ext: 'reqser_upd_qu_ajax', 
+                    type: 'plain', 
+                    reqser_instant_translate: 'true', 
+                    msreq_api_key: '<?php echo $msreq_local_api_key; ?>', 
+                    'reqser_post_fields': '<?php echo json_encode($reqser_post_fields); ?>'
+                };
+                msreq_params[msreq_tok_key] = "" + msreq_tok_val + "";
+
+                // AJAX request
+                $.post("../ajax.php", msreq_params, function(data) {
+                    ajaxResponseReceived = true;
+
+                    if (data != '') {
+                        var userConfirmed = confirm(data);
+                        if (userConfirmed) {
+                            e.currentTarget.submit();
+                        }
+                    } else {
                         e.currentTarget.submit();
                     }
-                  }
-                }
-              );
+                });
+
+                // Timeout check
+                setTimeout(function() {
+                    if (!ajaxResponseReceived) {
+                        e.currentTarget.submit();
+                    }
+                }, 1000); //Wait max 1 second for response
             });
-          });
+        });
           </script> 
         <?php
         
     } else {
-      echo '<div class="messageStackError">Reqser Deepl Translator Modul hat kein API Key, bitte ein API Key hinterlegen</div>';
+      echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY.'</div>';
     }
   } elseif (constant('MODULE_SYSTEM_REQSER_STATUS') == 'false') {
-    echo '<div class="messageStackError">Reqser Deepl Translator Modul nicht aktiviert, bitte aktivieren Sie das Modul in den Einstellungen</div>';
+    echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED.'</div>';
   }
 
 
