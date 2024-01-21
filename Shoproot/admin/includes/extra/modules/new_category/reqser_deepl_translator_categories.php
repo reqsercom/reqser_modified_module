@@ -31,7 +31,6 @@
 
               msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_instant_translate: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>', 'reqser_post_fields': '<?php echo json_encode($reqser_post_fields); ?>'};
               msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
-              // AJAX request
               $.post("../ajax.php", msreq_params, function(data) {
                     ajaxResponseReceived = true;
                     if (data != '') {
@@ -47,7 +46,7 @@
                     if (!ajaxResponseReceived) {
                         e.currentTarget.submit();
                     }
-                }, 1000); //Wait max 1 second for response
+                }, 700); //Wait max 0.7 second for response
             });
           });
           </script> 
