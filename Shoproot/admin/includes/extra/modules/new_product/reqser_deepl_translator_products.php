@@ -25,12 +25,9 @@
           $(document).ready(function() {
             $('#new_product').submit(function(e) {
                 e.preventDefault();
-
                 let ajaxResponseReceived = false;
-
                 let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
                     msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
-
                 msreq_params = {
                     ext: 'reqser_upd_qu_ajax', 
                     type: 'plain', 
@@ -39,11 +36,8 @@
                     'reqser_post_fields': '<?php echo json_encode($reqser_post_fields); ?>'
                 };
                 msreq_params[msreq_tok_key] = "" + msreq_tok_val + "";
-
-                // AJAX request
                 $.post("../ajax.php", msreq_params, function(data) {
                     ajaxResponseReceived = true;
-
                     if (data != '') {
                         var userConfirmed = confirm(data);
                         if (userConfirmed) {
@@ -53,8 +47,6 @@
                         e.currentTarget.submit();
                     }
                 });
-
-                // Timeout check
                 setTimeout(function() {
                     if (!ajaxResponseReceived) {
                         e.currentTarget.submit();

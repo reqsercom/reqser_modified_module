@@ -24,7 +24,8 @@
         <script>
           $(document).ready(function() {
             $('form[name="new_category"]').submit(function(e) {
-              //e.preventDefault();
+              e.preventDefault();
+              let ajaxResponseReceived = false;
               let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
                   msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
 
@@ -33,7 +34,6 @@
               // AJAX request
               $.post("../ajax.php", msreq_params, function(data) {
                     ajaxResponseReceived = true;
-
                     if (data != '') {
                         var userConfirmed = confirm(data);
                         if (userConfirmed) {
@@ -43,8 +43,6 @@
                         e.currentTarget.submit();
                     }
                 });
-
-                // Timeout check
                 setTimeout(function() {
                     if (!ajaxResponseReceived) {
                         e.currentTarget.submit();
