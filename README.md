@@ -11,7 +11,7 @@ Dieses Modul verbindet den Modified Shop mit einer API Schnittstelle zu Reqser.c
 ## Installation
 ### 1. Reqser.com
 
-Eine detailierte Installationsanleitung im PDF Format finden Sie [hier](https://github.com/reqsercom/reqser_modified_module/blob/main/Installationsanleitung_de.pdf)
+Eine detailierte Installationsanleitung im PDF Format finden Sie [hier](https://github.com/reqsercom/reqser_modified_module/blob/main/Installationsanleitung_de.pdf).
 Registrieren dich bei Reqser.com [hier](https://www.reqser.com/register) und erstelle/kopiere dein API Key [hier](https://www.reqser.com/translation/new-website/Modified).
 
 ### 2. Modified Modul
