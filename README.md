@@ -24,7 +24,7 @@ Schliesse die Verbindung in Reqser.com ab und prüfe ob die Verbindung erfolgrei
 
 ### 4. Live Modus
 
-Innerhalb der nächsten 15 Minuten werden die vordefinierten Tabellen cecrawlt und nach 24h-72h übersetzt und in dein Shopsystem übertragen. Beim abändern von Produkt Texten oder Kategorien werden Texte umgehend übersetzt und in den Shop übertragen.
+Im Live Modus werden sämtliche Fremdsprach Texte durch das Modul übernommen, der Shopbetreiber muss nur noch in seiner Grundsprache arbeiten.
 
 
 ## Weitere technische Informationen
@@ -36,16 +36,11 @@ Ebenfalls können die Sprachdateien mit übersetzt werden, alle Dateien in der M
 
 Es ist nicht möglich die Muttersprache zu ändern, dafür muss die Verbindung gelöscht werden und neu in Reqser eingetragen werden. Weitere Sprachen in welche übersetzt werden soll können jederzeit im Modul aktiviert werden, Reqser erkennt die Einstellungen automatisch.
 
-Standardmässig werden folgende Tabellen übersetzt, das lässt sich jedoch ebenfalls in Reqser sowie im Modul einstellen: categories_description, content_manager, orders_status, products_description, products_options, products_options_values
-
 Wichtig, sobald das Modul läuft sind im Shop Änderungen an Fremdsprachen nicht mehr nötig oder machbar, das Modul würde diese Einträge wieder überschreiben. Die Fremdsprachen Texte können auf Reqser manuell angepasst werden oder durch ein Übersetzer perfektioniert werden.
 
-Eine erstmalige Übersetzung ist nach 24h-72h im Shop ersichtlich, Reqser Crawlt alle Texte einmal pro Tag und erkennt automatisch Änderungen und neue Texte.
+Eine erstmalige Übersetzung ist nach 6h-72h im Shop ersichtlich, Änderungen an Produkten werden automatisch erkannt.
 
 
 ## Preis
 
-Der Dienst kann kostenlos getestet werden, dabei werden nur eine geringe Anzahl an Einträgen pro Tabelle und Files übersetzt. Die Vollversion ist kostenpflichtig pro Monat.
-Im Paket inbegriffen sind 5Mio Zeichen die übersetzt werden, darüber wird pro effektivem Verbrauch verrechnet.
-
-Zusätzlich ist es möglich einen professionellen Übersetzer auf Reqser für die Texte zu buchen, er wird den Shop prüfen und die Deepl Texte verbessern. Dabei wird ein Wörterbuch für jeden Shop individuell angelegt um zukünftig die automatischen Übersetzungen zu perfektionieren.
+Der Dienst kann kostenlos getestet werden im Demo Modus, danach wird der Service kostenpflichtig. Die Preise sind auf der Website ersichtlich.
