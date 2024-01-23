@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', '<i>Reqser.</i>comによるDeeplの自動翻訳、モジュールバージョン%s。<br /><i>- Reqser</i>.comのためのビルド<br />&copy;<a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a>および&copy;<a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a>。(07-2023 -' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Reqser<i>.</i>comによるDeepLの自動翻訳、モジュールバージョン%s。<br /><i>- Reqser</i>.comのためのビルド<br />&copy;<a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a>および&copy;<a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a>。(07-2023 -' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
 <i><a href="https://reqser.com/" target="_blank">reqser.com</i>を介した翻訳の有効化と設定のためのシステムモジュール</a>');
@@ -63,3 +63,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'APIキーが入力されてい
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR：<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', '選択された言語に翻訳されることはありません！');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"どの言語に翻訳しますか？"には、"どの言語から翻訳しますか？"で選択された言語を含んではなりません。');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepLモジュールは、保存後、この製品のモジュールで有効化されたすべての外国語を自動的に翻訳します。');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl TranslatorモジュールにAPIキーがありません。');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator モジュールが有効になっていません。モジュール->システムモジュールの下でモジュールを有効にしてください。');

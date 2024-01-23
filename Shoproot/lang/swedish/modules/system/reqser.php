@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiska Deepl-&ouml;vers&auml;ttningar via <i>Reqser.</i>com, modulversion %s<br />- byggd f&ouml;r <i>Reqser</i>.com - &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;"> Reqser.com<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> och &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiska DeepL &ouml;vers&auml;ttningar via Reqser <i>.</i>com, modulversion %s<br />- byggd f&ouml;r <i>Reqser</i>.com - &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;"> Reqser.com<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> och &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Systemmodul f&ouml;r aktivering och konfiguration av &ouml;vers&auml;ttningar via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundl&auml;ggande inst&auml;llningar</h2>Aktivera modul?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Ingen API-nyckel har angetts! 
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL-fel:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Inget spr&aring;k att &ouml;vers&auml;tta till valt !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"&Ouml;vers&auml;tt till vilka spr&aring;k?" f&aring;r inte inneh&aring;lla ett spr&aring;k som valts i "&Ouml;vers&auml;tt fr&aring;n vilket spr&aring;k?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL-modulen kommer automatiskt att &ouml;vers&auml;tta alla fr&auml;mmande spr&aring;k som &auml;r aktiverade i modulen f&ouml;r denna produkt efter lagring.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator-modulen har ingen API-nyckel, ange en API-nyckel');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen &auml;r inte aktiverad, v&auml;nligen aktivera modulen under Modul->Systemmodul');

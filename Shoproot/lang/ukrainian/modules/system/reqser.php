@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Автоматичний переклад DeepL через <i>Reqser</i>.com, версія модуля %s<br />- збірка для <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> та &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Автоматичний переклад DeepL через Reqser <i>.</i>com, версія модуля %s<br />- збірка для <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> та &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
 Системний модуль для активації та налаштування перекладів через <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
@@ -63,3 +63,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Ключ API не введен
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Мову для перекладу не вибрано!');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Перекласти на які мови?" не повинно містити мову, яка була обрана в "Перекласти з якої мови?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Модуль Reqser.com DeepL автоматично перекладе всі іноземні мови, активовані в модулі для цього товару, після збереження.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Модуль Reqser.com Deepl Translator не має API ключа, будь ласка, введіть API ключ');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Модуль Reqser.com Deepl Translator не активовано, будь ласка, активуйте модуль у розділі Модуль->Системний модуль');

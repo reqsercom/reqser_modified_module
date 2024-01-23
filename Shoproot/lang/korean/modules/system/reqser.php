@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', '<i>Reqser</i>.com을 통한 자동 심층 번역, 모듈 버전 %s<br />- <i>Reqser</i>.com용 빌드 -.<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> 및 &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Reqser. <i>com을</i> 통한 자동 DeepL 번역, 모듈 버전 %s<br />- <i>Reqser</i>.com용 빌드 -.<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> 및 &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
  <i><a href="https://reqser.com/" target="_blank">reqser.com을</i> 통한 번역 활성화 및 구성을 위한 시스템 모듈</a>');
@@ -63,3 +63,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API 키를 입력하지 않았
 define('MODULE_SYSTEM_REQSER_CURL_ERR', '컬 에러:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', '번역할 언어가 선택되지 않았습니다!');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"어떤 언어로 번역하시겠습니까?"에는 "어떤 언어에서 번역하시겠습니까?"에서 선택한 언어가 포함되어서는 안 됩니다.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL 모듈은 저장 후 이 제품에 대해 모듈에서 활성화된 모든 외국어를 자동으로 번역합니다.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com 심층 번역기 모듈에 API 키가 없습니다. API 키를 입력하세요.');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com 심층 번역기 모듈이 활성화되지 않은 경우 모듈->시스템 모듈에서 모듈을 활성화하세요.');

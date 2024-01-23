@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', '通过<i>Reqser.</i>com 进行 DeepL 自动翻译，模块版本 %s<br />- 为<i>Reqser</i>.com 构建 -<br />&copy;<a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a>和&copy;<a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com[[2](07-2023 -' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', '通过 Reqser<i>.</i>com 自动 DeepL 翻译，模块版本 %s<br />- 为<i>Reqser</i>.com 构建 -<br />&copy;<a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a>和&copy;<a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com[[2](07-2023 -' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
 通过<i><a href="https://reqser.com/" target="_blank">reqser.com</i>激活和配置翻译的系统模块</a>');
@@ -63,3 +63,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', '未输入 API 密钥！请登�
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR：<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', '没有选择要翻译的语言！');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"翻译成哪种语言？"不得包含在 "从哪种语言翻译？"中选择的语言。');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', '保存后，Reqser.com DeepL 模块将自动翻译该产品在模块中激活的所有外语。');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator 模块没有 API 密钥，请输入 API 密钥');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator 模块未激活，请激活模块->系统模块下的模块');

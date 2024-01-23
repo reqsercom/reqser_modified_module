@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,7 +16,7 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
 define('MODULE_SYSTEM_REQSER_TITLE', 'Automatyczne tłumaczenia DeepL przez Reqser <i>.</i>com, wersja modułu %s<br />- build dla <i>Reqser</i>.com - %s<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> i &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nie wprowadzono klucza API! Za
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Nie wybrano języka do przetłumaczenia!');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', 'Opcja "Przetłumacz na jakie języki?" nie może zawierać języka wybranego w opcji "Przetłumacz z jakiego języka?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Moduł Reqser.com DeepL automatycznie przetłumaczy wszystkie języki obce aktywowane w module dla tego produktu po zapisaniu.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Moduł Reqser.com Deepl Translator nie ma klucza API, wprowadź klucz API');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Moduł Reqser.com Deepl Translator nie został aktywowany, należy aktywować moduł w sekcji Module->System Module.');

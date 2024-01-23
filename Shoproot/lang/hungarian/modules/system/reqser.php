@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatikus DeepL ford&iacute;t&aacute;sok a <i>Reqser.</i>com-on kereszt&uuml;l, modul verzi&oacute; %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> &eacute;s &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatikus DeepL ford&iacute;t&aacute;sok a Reqser <i>.</i>com-on kereszt&uuml;l, modul verzi&oacute; %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> &eacute;s &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Rendszermodul a ford&iacute;t&aacute;sok aktiv&aacute;l&aacute;s&aacute;hoz &eacute;s konfigur&aacute;l&aacute;s&aacute;hoz <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Alapbe&aacute;ll&iacute;t&aacute;sok</h2>Modul aktiv&aacute;l&aacute;sa?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nincs API-kulcs megadva! K&eac
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Nincs kiv&aacute;lasztott nyelvre ford&iacute;tand&oacute; nyelv !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', 'A "Ford&iacute;t&aacute;s mely nyelvekre?" nem tartalmazhat olyan nyelvet, amely a "Ford&iacute;t&aacute;s mely nyelvekről?" mezőben lett kiv&aacute;lasztva.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'A Reqser.com DeepL modul a ment&eacute;s ut&aacute;n automatikusan leford&iacute;tja a modulban aktiv&aacute;lt &ouml;sszes idegen nyelvet.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'A Reqser.com Deepl Translator modulnak nincs API kulcsa, k&eacute;rj&uuml;k, adjon meg egy API kulcsot.');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nem aktiv&aacute;lva, k&eacute;rj&uuml;k, aktiv&aacute;lja a modult a Modul->Rendszermodul alatt.');

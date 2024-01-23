@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Traduction automatique de DeepL via <i>Reqser.com</i>, version du module %s.<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> et &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Traductions automatiques DeepL via <i>Reqser.com</i>, version du module %s.<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> et &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Module syst&egrave;me pour l\'activation et la configuration des traductions via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Param&egrave;tres de base</h2>Activer le module ?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Aucune cl&eacute; API n\'a &ea
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR :<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Pas de langue s&eacute;lectionn&eacute;e dans laquelle traduire !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Traduire en quelles langues ?" ne doit pas contenir une langue s&eacute;lectionn&eacute;e dans "Traduire de quelle langue ?');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Le module Reqser.com DeepL traduira automatiquement toutes les langues &eacute;trang&egrave;res activ&eacute;es dans le module apr&egrave;s les avoir enregistr&eacute;es pour ce produit.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator Module n\'a pas de cl&eacute; API, veuillez d&eacute;poser une cl&eacute; API');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator Module non activ&eacute;, veuillez activer le module sous Module->System Module');

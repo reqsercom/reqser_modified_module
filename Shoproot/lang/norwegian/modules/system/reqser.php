@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiske Deepl-oversettelser via <i>Reqser.</i>com, modulversjon %s.<br />- bygget for <i>Reqser</i>.com - &copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;"> noRiddle<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;"> noRiddle</a> og &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;"> Reqser.com</a>. (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiske DeepL oversettelser via Reqser <i>.</i>com, modulversjon %s.<br />- bygget for <i>Reqser</i>.com - &copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;"> noRiddle<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> og &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Systemmodul for aktivering og konfigurering av oversettelser via <i><a href="https://reqser.com/" target="_blank"> reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grunnleggende innstillinger</h2>Aktivere modul?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Ingen API-n&oslash;kkel er lag
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL FEIL:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ingen spr&aring;k &aring; oversette til valgt !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Oversett til hvilke spr&aring;k?" m&aring; ikke inneholde et spr&aring;k som ble valgt i "Oversett fra hvilket spr&aring;k?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modulen Reqser.com DeepL oversetter automatisk alle fremmedspr&aring;k som er aktivert i modulen for dette produktet etter lagring.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator-modulen har ingen API-n&oslash;kkel, vennligst oppgi en API-n&oslash;kkel.');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen ikke aktivert, vennligst aktiver modulen under Modul->Systemmodul');

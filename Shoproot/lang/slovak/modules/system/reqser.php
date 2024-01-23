@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatick&eacute; preklady DeepL cez <i>Reqser.</i>com, verzia modulu %s<br />- zostavenie pre <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> a &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatick&eacute; preklady DeepL cez Reqser <i>.</i>com, verzia modulu %s<br />- zostavenie pre <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> a &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Syst&eacute;mov&yacute; modul na aktiv&aacute;ciu a konfigur&aacute;ciu prekladov prostredn&iacute;ctvom <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Z&aacute;kladn&eacute; nastavenia</h2>Aktivovať modul?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nebol zadan&yacute; žiadny k�
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Žiadny jazyk, ktor&yacute; sa m&aacute; preložiť do vybran&eacute;ho jazyka !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Preložiť do ktor&yacute;ch jazykov?" nesmie obsahovať jazyk, ktor&yacute; bol vybran&yacute; v položke "Preložiť z ktor&eacute;ho jazyka?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL po uložen&iacute; automaticky prelož&iacute; v&scaron;etky cudzie jazyky aktivovan&eacute; v module pre tento produkt.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Deepl Translator od Reqser.com nem&aacute; kľ&uacute;č API, zadajte pros&iacute;m kľ&uacute;č API');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nie je aktivovan&yacute;, aktivujte modul v časti Module->Syst&eacute;mov&yacute; modul');

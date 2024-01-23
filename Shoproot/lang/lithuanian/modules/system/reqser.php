@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatinis DeepL vertimas per <i>Reqser.</i>com, modulio versija %s<br />- sukurti <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ir &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiniai DeepL vertimai per Reqser <i>.</i>com, modulio versija %s<br />- sukurti <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ir &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sisteminis modulis, skirtas vertimams aktyvuoti ir konfigūruoti per <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Pagrindiniai nustatymai</h2>Įjungti modulį?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API raktas neįvestas! Prisiju
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL Klaida:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Nėra pasirinktos kalbos, į kurią reikia versti !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Versti į kokias kalbas?" neturi būti kalbos, kuri buvo pasirinkta "Versti i&scaron; kokios kalbos?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'I&scaron;saugojus Reqser.com DeepL modulis automati&scaron;kai i&scaron;verčia visas užsienio kalbas, aktyvuotas &scaron;io gaminio modulyje.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com "Deepl Translator" modulis neturi API rakto, įveskite API raktą');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nėra aktyvuotas, pra&scaron;ome aktyvuoti modulį pagal Modulis->Sistemos modulis');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', '&Alpha;&upsilon;&tau;ό&mu;&alpha;&tau;&epsilon;&sigmaf; &mu;&epsilon;&tau;&alpha;&phi;&rho;ά&sigma;&epsilon;&iota;&sigmaf; DeepL &mu;έ&sigma;&omega; <i>Reqser.</i>com, έ&kappa;&delta;&omicron;&sigma;&eta; &mu;&omicron;&nu;ά&delta;&alpha;&sigmaf; %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> &kappa;&alpha;&iota; &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', '&Alpha;&upsilon;&tau;ό&mu;&alpha;&tau;&epsilon;&sigmaf; &mu;&epsilon;&tau;&alpha;&phi;&rho;ά&sigma;&epsilon;&iota;&sigmaf; DeepL &mu;έ&sigma;&omega; <i>&tau;&omicron;&upsilon;</i> Reqser <i>.com</i>, έ&kappa;&delta;&omicron;&sigma;&eta; &mu;&omicron;&nu;ά&delta;&alpha;&sigmaf; %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> &kappa;&alpha;&iota; &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> &Epsilon;&nu;ό&tau;&eta;&tau;&alpha; &sigma;&upsilon;&sigma;&tau;ή&mu;&alpha;&tau;&omicron;&sigmaf; &gamma;&iota;&alpha; &tau;&eta;&nu; &epsilon;&nu;&epsilon;&rho;&gamma;&omicron;&pi;&omicron;ί&eta;&sigma;&eta; &kappa;&alpha;&iota; &tau;&eta; &delta;&iota;&alpha;&mu;ό&rho;&phi;&omega;&sigma;&eta; &mu;&epsilon;&tau;&alpha;&phi;&rho;ά&sigma;&epsilon;&omega;&nu; &mu;έ&sigma;&omega; <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>&Beta;&alpha;&sigma;&iota;&kappa;έ&sigmaf; &rho;&upsilon;&theta;&mu;ί&sigma;&epsilon;&iota;&sigmaf;</h2>&Epsilon;&nu;&epsilon;&rho;&gamma;&omicron;&pi;&omicron;ί&eta;&sigma;&eta; &mu;&omicron;&nu;ά&delta;&alpha;&sigmaf;?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', '&Delta;&epsilon;&nu; έ&chi;&e
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', '&Delta;&epsilon;&nu; έ&chi;&epsilon;&iota; &epsilon;&pi;&iota;&lambda;&epsilon;&gamma;&epsilon;ί &kappa;ά&pi;&omicron;&iota;&alpha; &gamma;&lambda;ώ&sigma;&sigma;&alpha; &pi;&rho;&omicron;&sigmaf; &mu;&epsilon;&tau;ά&phi;&rho;&alpha;&sigma;&eta; !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '&Tau;&omicron; "&Mu;&epsilon;&tau;ά&phi;&rho;&alpha;&sigma;&eta; &sigma;&epsilon; &pi;&omicron;&iota;&epsilon;&sigmaf; &gamma;&lambda;ώ&sigma;&sigma;&epsilon;&sigmaf;;" &delta;&epsilon;&nu; &pi;&rho;έ&pi;&epsilon;&iota; &nu;&alpha; &pi;&epsilon;&rho;&iota;έ&chi;&epsilon;&iota; &gamma;&lambda;ώ&sigma;&sigma;&alpha; &pi;&omicron;&upsilon; έ&chi;&epsilon;&iota; &epsilon;&pi;&iota;&lambda;&epsilon;&gamma;&epsilon;ί &sigma;&tau;&omicron; "&Mu;&epsilon;&tau;ά&phi;&rho;&alpha;&sigma;&eta; &alpha;&pi;ό &pi;&omicron;&iota;&alpha; &gamma;&lambda;ώ&sigma;&sigma;&alpha;;".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', '&Eta; &epsilon;&nu;ό&tau;&eta;&tau;&alpha; Reqser.com DeepL &theta;&alpha; &mu;&epsilon;&tau;&alpha;&phi;&rho;ά&sigma;&epsilon;&iota; &alpha;&upsilon;&tau;ό&mu;&alpha;&tau;&alpha; ό&lambda;&epsilon;&sigmaf; &tau;&iota;&sigmaf; &xi;έ&nu;&epsilon;&sigmaf; &gamma;&lambda;ώ&sigma;&sigma;&epsilon;&sigmaf; &pi;&omicron;&upsilon; έ&chi;&omicron;&upsilon;&nu; &epsilon;&nu;&epsilon;&rho;&gamma;&omicron;&pi;&omicron;&iota;&eta;&theta;&epsilon;ί &sigma;&tau;&eta;&nu; &epsilon;&nu;ό&tau;&eta;&tau;&alpha; &gamma;&iota;&alpha; &alpha;&upsilon;&tau;ό &tau;&omicron; &pi;&rho;&omicron;ϊό&nu; &mu;&epsilon;&tau;ά &tau;&eta;&nu; &alpha;&pi;&omicron;&theta;ή&kappa;&epsilon;&upsilon;&sigma;&eta;.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', '&Eta; &epsilon;&nu;ό&tau;&eta;&tau;&alpha; Deepl Translator &tau;&omicron;&upsilon; Reqser.com &delta;&epsilon;&nu; έ&chi;&epsilon;&iota; &kappa;&lambda;&epsilon;&iota;&delta;ί API, &pi;&alpha;&rho;&alpha;&kappa;&alpha;&lambda;ώ &epsilon;&iota;&sigma;ά&gamma;&epsilon;&tau;&epsilon; έ&nu;&alpha; &kappa;&lambda;&epsilon;&iota;&delta;ί API');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com &Eta; &epsilon;&nu;ό&tau;&eta;&tau;&alpha; Deepl Translator &delta;&epsilon;&nu; &epsilon;ί&nu;&alpha;&iota; &epsilon;&nu;&epsilon;&rho;&gamma;&omicron;&pi;&omicron;&iota;&eta;&mu;έ&nu;&eta;, &pi;&alpha;&rho;&alpha;&kappa;&alpha;&lambda;&omicron;ύ&mu;&epsilon; &epsilon;&nu;&epsilon;&rho;&gamma;&omicron;&pi;&omicron;&iota;ή&sigma;&tau;&epsilon; &tau;&eta;&nu; &epsilon;&nu;ό&tau;&eta;&tau;&alpha; &sigma;&tau;&omicron; Module->System Module');

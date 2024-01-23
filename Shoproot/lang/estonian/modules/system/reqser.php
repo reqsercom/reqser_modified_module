@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automaatne DeepL t&otilde;lge <i>Reqser.</i>com kaudu, mooduli versioon %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automaatne DeepL t&otilde;lked Reqser <i>.</i>com kaudu, mooduli versioon %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> s&uuml;steemimoodul t&otilde;lgete aktiveerimiseks ja konfigureerimiseks <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> kaudu.');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>P&otilde;hiseaded</h2>Aktiveerige moodul?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API v&otilde;tit ei ole sisest
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ei ole valitud keelde t&otilde;lkimiseks !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Millistesse keeltesse t&otilde;lkida?" ei tohi sisaldada keelt, mis on valitud jaotises "Millisest keelest t&otilde;lkida?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL moodul t&otilde;lgib p&auml;rast salvestamist automaatselt k&otilde;ik selle toote jaoks moodulis aktiveeritud v&otilde;&otilde;rkeeled.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator moodulil puudub API v&otilde;ti, palun sisestage API v&otilde;ti.');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator moodul ei ole aktiveeritud, palun aktiveerige moodul moodulite all Moodul->S&uuml;steemi moodul');

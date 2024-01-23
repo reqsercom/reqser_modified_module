@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automātiskie DeepL tulkojumi, izmantojot <i>Reqser.</i>com, moduļa versija %s<br />- <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> un &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automātiskie tulkojumi DeepL, izmantojot Reqser <i>.</i>com, moduļa versija %s<br />- <i>Reqser</i>.com izveide -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> un &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sistēmas modulis tulkojumu aktivizē&scaron;anai un konfigurē&scaron;anai, izmantojot <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Pamata iestatījumi</h2>Aktivizēt moduli?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API atslēga nav ievadīta! L�
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL kļūda:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Izvēlētā valoda nav tulkojama !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Tulkot uz kādām valodām?" nedrīkst ietvert valodu, kas tika izvēlēta sadaļā "Tulkot no kādas valodas?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL modulis pēc saglabā&scaron;anas automātiski iztulkos visas sve&scaron;valodas, kas modulī aktivizētas &scaron;im produktam.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator modulim nav API atslēgas, lūdzu, ievadiet API atslēgu');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nav aktivizēts, lūdzu, aktivizējiet moduli sadaļā Module->Sistēmas modulis');

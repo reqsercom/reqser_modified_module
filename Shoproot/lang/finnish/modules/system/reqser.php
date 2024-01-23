@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automaattiset Deepl-k&auml;&auml;nn&ouml;kset <i>Reqser.</i>comin kautta, moduuliversio %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automaattiset DeepL k&auml;&auml;nn&ouml;kset Reqser <i>.</i>comin kautta, moduulin versio %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> J&auml;rjestelm&auml;moduuli k&auml;&auml;nn&ouml;sten aktivointiin ja konfigurointiin <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> kautta[[3]]');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Perusasetukset</h2>Aktivoi moduuli?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API-avainta ei ole annettu! Ki
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ei kieli k&auml;&auml;nnett&auml;v&auml;ksi valittu !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"K&auml;&auml;nn&auml; mille kielille?" ei saa sis&auml;lt&auml;&auml; kielt&auml;, joka on valittu kohdassa "K&auml;&auml;nn&auml; milt&auml; kielelt&auml;?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL -moduuli k&auml;&auml;nt&auml;&auml; automaattisesti kaikki t&auml;m&auml;n tuotteen moduulissa aktivoidut vieraat kielet tallennuksen j&auml;lkeen.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator -moduulilla ei ole API-avainta, anna API-avain.');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator -moduuli ei ole aktivoitu, aktivoi moduuli Moduuli->J&auml;rjestelm&auml;moduuli -kohdassa.');

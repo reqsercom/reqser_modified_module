@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.4 on the 18.12.4023
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -16,10 +16,10 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* Edit by JorisK Reqser.com 08-2023
+* © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Traducciones autom&aacute;ticas DeepL v&iacute;a <i>Reqser.</i>com, m&oacute;dulo versi&oacute;n %s<br />- construido para <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> y &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Traducciones autom&aacute;ticas DeepL a trav&eacute;s de Reqser <i>.</i>com, m&oacute;dulo versi&oacute;n %s<br />- construido para <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> y &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> M&oacute;dulo del sistema para la activaci&oacute;n y configuraci&oacute;n de traducciones a trav&eacute;s de <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Configuraci&oacute;n b&aacute;sica</h2>&iquest;Activar m&oacute;dulo?');
@@ -62,3 +62,6 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'No se ha introducido ninguna c
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'ERROR cURL:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'No se ha seleccionado ning&uacute;n idioma para traducir');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"&iquest;Traducir a qu&eacute; idiomas?" no debe contener un idioma seleccionado en "&iquest;Traducir desde qu&eacute; idioma?".');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'El m&oacute;dulo DeepL de Reqser.com traducir&aacute; autom&aacute;ticamente todos los idiomas extranjeros activados en el m&oacute;dulo para este producto despu&eacute;s de guardarlo.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'El m&oacute;dulo Traductor Deepl de Reqser.com no tiene clave API, por favor introduzca una clave API');
+define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'El m&oacute;dulo Reqser.com Deepl Translator no est&aacute; activado, por favor, act&iacute;velo en M&oacute;dulo->M&oacute;dulo del sistema');
