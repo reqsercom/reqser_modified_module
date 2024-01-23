@@ -13,7 +13,8 @@
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
       include_once (DIR_FS_CATALOG . 'lang/'.$_SESSION['language'].'/modules/system/reqser.php');
       echo '<div class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE.'</div>';
-      echo '<div id="reqser_check_activ" class="error_message" hidden></div>';
+      echo '<div id="reqser_check_activ_error" class="error_message" hidden></div>';
+      echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0" hidden></div>';
         if (isset($_GET['cID']) && $_GET['cID'] > 0) {
           $reqser_cid = (int)$_GET['cID'];
         } else {
@@ -38,8 +39,14 @@
             msreq_check_activ_params[msreq_tok_key] = msreq_tok_val;
             $.post("../ajax.php", msreq_check_activ_params, function(data) {
               if(data != '') {
-                $('div[id="reqser_check_activ"]').removeAttr('hidden').html(data);
-                alert(data);
+                var data_message = JSON.parse(data);
+                console.log("Response from server:", data_message);
+                if (data_message['warning_message'] && data_message['warning_message'] != ''){
+                  $('div[id="reqser_check_activ_error"]').removeAttr('hidden').html(data_message['warning_message']);
+                  alert(data_message['warning_message']);
+                } else if (data_message['info_message'] && data_message['info_message'] != ''){
+                  $('div[id="reqser_check_activ_info"]').removeAttr('hidden').html(data_message['info_message']);
+                }
               }
             });
             $('form[name="new_category"]').submit(function(e) {
