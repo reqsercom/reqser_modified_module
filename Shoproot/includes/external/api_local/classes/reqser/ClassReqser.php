@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.4';
+    $this->api_reqser_version = '2.5';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -618,7 +618,9 @@ class ClassReqser extends api_local\ApiBase {
         $tbl_exists_qu = $this->api_db_conn->apiDbQuery("SHOW TABLES LIKE '".$table."'");
         if(!$this->api_db_conn->apiDbNumRows($tbl_exists_qu, true) > 0) {
           $key = array_search($table, $allowed_tables);
-          $allowed_tables[$key] .= ' !! non existent table';
+          //JorisK 01-2024, für ältere Shopversionen, besser wenn die Tabelle einfach nicht mitgegeben wird, falls ein Shop update gemacht wird kommt die dann automatisch dazu
+          unset($allowed_tables[$key]);
+          //$allowed_tables[$key] .= ' !! non existent table'; alte Version
         }
       }
     } else {
@@ -760,11 +762,17 @@ class ClassReqser extends api_local\ApiBase {
                   if((isset($fields['unique_key']) && $uk != $fields['unique_key']) && $this->aara === false) {
                     $out_arr = array('error' => 'Unique Field '.$uk.' not allowed');
                   } elseif($uk != '') {
-                    $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
-           
-                    //JorisK Fehler falls eine ältere Shopversion verwendet wird die ggf diese Spalten gar nicht hat!
-                    $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? ORDER BY ".$uk." ASC".$limit;
-                    $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
+                    //JorisK Falls nur ein Eintrag abgefragt wird
+                    if ($from != 'single_entry'){
+                      //JorisK Fehler falls eine ältere Shopversion verwendet wird die ggf diese Spalten gar nicht hat!
+                      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+                      $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? ORDER BY ".$uk." ASC".$limit;
+                      $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id);
+                    } else {
+                      $qu_str = "SELECT ".$uk.", ".$sel_fields." FROM ".$table." WHERE ".$language_field." = ? AND ".$uk." = ?";
+                      $qu = $this->api_db_conn->apiDbQuery($qu_str, $lang_id, $chunks); 
+                    }
+
                     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
                       $chrst = $this->getShopCharset();
                       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
