@@ -15,7 +15,7 @@
       echo '<div class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE.'</div>';
       echo '<div id="reqser_check_activ" class="error_message" hidden></div>';
         if (isset($_GET['pID']) && $_GET['pID'] > 0) {
-          $reqser_pid = $_GET['pID'];
+          $reqser_pid = (int)$_GET['pID'];
         } else {
           $reqser_pid = 'new_entry';
         }
