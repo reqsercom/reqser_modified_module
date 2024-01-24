@@ -40,7 +40,6 @@
           $.post("../ajax.php", msreq_check_activ_params, function(data) {
             if(data != '') {
               var data_message = JSON.parse(data);
-              console.log("Response from server:", data_message);
               if (data_message['warning_message'] && data_message['warning_message'] != ''){
                 $('div[id="reqser_check_activ_error"]').removeAttr('hidden').html(data_message['warning_message']);
                 alert(data_message['warning_message']);
