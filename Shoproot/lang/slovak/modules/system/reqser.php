@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Preložiť do ktor&yacute;ch jaz
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL po uložen&iacute; automaticky prelož&iacute; v&scaron;etky cudzie jazyky aktivovan&eacute; v module pre tento produkt.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Deepl Translator od Reqser.com nem&aacute; kľ&uacute;č API, zadajte pros&iacute;m kľ&uacute;č API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nie je aktivovan&yacute;, aktivujte modul v časti Module->Syst&eacute;mov&yacute; modul');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Reqser.com Deepl Translator nem&aacute; žiadne pripojenie!');

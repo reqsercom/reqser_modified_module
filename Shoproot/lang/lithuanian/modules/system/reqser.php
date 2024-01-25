@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Versti į kokias kalbas?" neturi
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'I&scaron;saugojus Reqser.com DeepL modulis automati&scaron;kai i&scaron;verčia visas užsienio kalbas, aktyvuotas &scaron;io gaminio modulyje.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com "Deepl Translator" modulis neturi API rakto, įveskite API raktą');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nėra aktyvuotas, pra&scaron;ome aktyvuoti modulį pagal Modulis->Sistemos modulis');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator modulis neturi ry&scaron;io!');

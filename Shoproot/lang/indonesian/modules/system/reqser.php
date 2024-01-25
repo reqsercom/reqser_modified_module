@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Terjemahkan ke bahasa apa?" tida
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL akan secara otomatis menerjemahkan semua bahasa asing yang diaktifkan dalam modul untuk produk ini setelah disimpan.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Penerjemah Reqser.com Deepl tidak memiliki kunci API, harap masukkan kunci API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Penerjemah Reqser.com Deepl tidak diaktifkan, silakan aktifkan modul di bawah Modul- > Modul Sistem');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Penerjemah Reqser.com Deepl tidak memiliki koneksi!');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -39,7 +39,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'V&auml;lj ytterligare databasta
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Andra databastabeller (ej tillg&auml;ngliga f&ouml;r urvalet ovan)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Ange ytterligare databastabeller som ska &ouml;vers&auml;ttas h&auml;r, &aring;tskilda med kommatecken.<br />(F&ouml;r till&auml;gg med nya "icke modifierade standard"-tabeller)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Exklusive bord');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Ange h&auml;r de tabeller som inte ska &ouml;vers&auml;ttas, &aring;tskilda av kommatecken.<br />(Endast n&ouml;dv&auml;ndigt om alla standardtabeller har valts ovan och vissa av dem ska exkluderas).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Ange de tabeller som ska undantas fr&aring;n &ouml;vers&auml;ttningar h&auml;r, &aring;tskilda av kommatecken.<br />(Endast n&ouml;dv&auml;ndigt om alla standardtabeller har valts ovan och vissa av dem ska exkluderas).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', '&Ouml;vers&auml;tt fr&aring;n vilket spr&aring;k?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Fr&aring;n vilket spr&aring;k ska &ouml;vers&auml;ttningen g&ouml;ras?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'Vilka spr&aring;k kan jag &ouml;vers&auml;tta till? ' . draw_tooltip('Ytterligare spr&aring;k kan l&auml;ggas till p&aring; <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.'));
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"&Ouml;vers&auml;tt till vilka sp
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL-modulen kommer automatiskt att &ouml;vers&auml;tta alla fr&auml;mmande spr&aring;k som &auml;r aktiverade i modulen f&ouml;r denna produkt efter lagring.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator-modulen har ingen API-nyckel, ange en API-nyckel');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen &auml;r inte aktiverad, v&auml;nligen aktivera modulen under Modul->Systemmodul');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator-modulen har ingen anslutning!');

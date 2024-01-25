@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"&iquest;Traducir a qu&eacute; id
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'El m&oacute;dulo DeepL de Reqser.com traducir&aacute; autom&aacute;ticamente todos los idiomas extranjeros activados en el m&oacute;dulo para este producto despu&eacute;s de guardarlo.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'El m&oacute;dulo Traductor Deepl de Reqser.com no tiene clave API, por favor introduzca una clave API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'El m&oacute;dulo Reqser.com Deepl Translator no est&aacute; activado, por favor, act&iacute;velo en M&oacute;dulo->M&oacute;dulo del sistema');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', '&iexcl;El m&oacute;dulo Reqser.com Deepl Translator no tiene conexi&oacute;n!');

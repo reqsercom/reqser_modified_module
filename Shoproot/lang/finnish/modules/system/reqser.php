@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"K&auml;&auml;nn&auml; mille kiel
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL -moduuli k&auml;&auml;nt&auml;&auml; automaattisesti kaikki t&auml;m&auml;n tuotteen moduulissa aktivoidut vieraat kielet tallennuksen j&auml;lkeen.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator -moduulilla ei ole API-avainta, anna API-avain.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator -moduuli ei ole aktivoitu, aktivoi moduuli Moduuli->J&auml;rjestelm&auml;moduuli -kohdassa.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator module ei ole yhteydess&auml;!');

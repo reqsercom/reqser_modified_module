@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Перекласти на які
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Модуль Reqser.com DeepL автоматично перекладе всі іноземні мови, активовані в модулі для цього товару, після збереження.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Модуль Reqser.com Deepl Translator не має API ключа, будь ласка, введіть API ключ');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Модуль Reqser.com Deepl Translator не активовано, будь ласка, активуйте модуль у розділі Модуль->Системний модуль');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Модуль Reqser.com Deepl Translator не має зв\'язку!');

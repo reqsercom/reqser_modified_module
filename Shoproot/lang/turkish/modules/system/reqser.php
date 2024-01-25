@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Hangi dillere &ccedil;evir?", "H
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL mod&uuml;l&uuml;, kaydedildikten sonra bu &uuml;r&uuml;n i&ccedil;in mod&uuml;lde etkinleştirilen t&uuml;m yabancı dilleri otomatik olarak &ccedil;evirecektir.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator mod&uuml;l&uuml;n&uuml;n API anahtarı yok, l&uuml;tfen bir API anahtarı girin');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator mod&uuml;l&uuml; etkinleştirilmemiş, l&uuml;tfen Mod&uuml;l->Sistem Mod&uuml;l&uuml; altındaki mod&uuml;l&uuml; etkinleştirin');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator mod&uuml;l&uuml;n&uuml;n bağlantısı yok!');

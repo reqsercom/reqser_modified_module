@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 23.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -65,3 +65,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Vertalen naar welke talen?" mag 
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'De module Reqser.com DeepL zal na het opslaan automatisch alle vreemde talen vertalen die in de module voor dit product zijn geactiveerd.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator module heeft geen API sleutel, voer alstublieft een API sleutel in');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator module niet geactiveerd, activeer de module onder Module->System Module');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator module heeft geen verbinding!');
