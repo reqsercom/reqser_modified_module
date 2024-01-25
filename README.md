@@ -37,7 +37,7 @@ Ebenfalls können die Sprachdateien mit übersetzt werden, alle Dateien in der M
 
 Es ist nicht möglich die Muttersprache zu ändern, dafür muss die Verbindung gelöscht werden und neu in Reqser eingetragen werden. Weitere Sprachen in welche übersetzt werden soll können jederzeit im Modul aktiviert werden, Reqser erkennt die Einstellungen automatisch.
 
-Wichtig, sobald das Modul läuft sind im Shop Änderungen an Fremdsprachen nicht mehr nötig oder machbar, das Modul würde diese Einträge wieder überschreiben. Die Fremdsprachen Texte können auf Reqser manuell angepasst werden oder durch ein Übersetzer perfektioniert werden.
+Wichtig, sobald das Modul aktiv läuft, sind Änderungen an den Produkttexten in einer Fremdsprache im Shop nicht mehr nötig. Sie sollten auch nicht gemacht werden, denn solche Änderungen würden vom Modul überschrieben. Die Fremdsprachen Texte können auf Reqser manuell angepasst werden oder durch ein Übersetzer perfektioniert werden.
 
 Eine erstmalige Übersetzung ist nach 6h-72h im Shop ersichtlich, Änderungen an Produkten werden automatisch erkannt.
 
