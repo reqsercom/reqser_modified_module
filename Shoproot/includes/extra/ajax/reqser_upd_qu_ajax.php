@@ -62,7 +62,8 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   }
   if(isset($msreq_token_verify['access_token']) && !isset($msreq_token_verify['warning_message'])) {
     $msreq_url_requ = 'https://reqser.com/api/instant_translate';
-    $post_fields = json_decode($_POST['reqser_post_fields']);
+    $jsonString = trim(stripslashes($_POST['reqser_post_fields']));
+    $post_fields = json_decode($jsonString, true);
     $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', 5);
     if(isset($msreq_result_request['warning_message']) && $msreq_result_request['warning_message'] != '') {
       echo $msreq_result_request['warning_message']; exit;
@@ -93,10 +94,11 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   
   if(isset($msreq_token_verify['access_token']) && !isset($msreq_token_verify['warning_message'])) {
     $msreq_url_requ = 'https://reqser.com/api/check_activ';
-    $post_fields = json_decode($_POST['reqser_post_fields']);
+    $jsonString = trim(stripslashes($_POST['reqser_post_fields']));
+    $post_fields = json_decode($jsonString, true);
     $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', 5);
     
-    if((isset($msreq_result_request['warning_message']) && $msreq_result_request['warning_message'] != '') || (isset($msreq_result_request['info_message']) && $msreq_result_request['info_message'] != '')) {
+    if((isset($msreq_result_request['warning_message']) && $msreq_result_request['warning_message'] != '') || (isset($msreq_result_request['info_message']) && $msreq_result_request['info_message'] != '') || (isset($msreq_result_request['success_message']) && $msreq_result_request['success_message'] != '')){
       echo json_encode($msreq_result_request); exit;
     } else {
       exit;

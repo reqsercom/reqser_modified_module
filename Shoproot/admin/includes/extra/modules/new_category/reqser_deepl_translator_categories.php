@@ -12,8 +12,8 @@
   if(constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
       include_once (DIR_FS_CATALOG . 'lang/'.$_SESSION['language'].'/modules/system/reqser.php');
-      echo '<div class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE.'</div>';
-      echo '<div id="reqser_check_activ_error" class="error_message" hidden></div>';
+      echo '<div id="reqser_check_activ_success" class="success_message" hidden></div>';
+      echo '<div id="reqser_check_activ_error" class="error_message" hidden>'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION.'</div>';
       echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0" hidden></div>';
         if (isset($_GET['cID']) && $_GET['cID'] > 0) {
           $reqser_cid = (int)$_GET['cID'];
@@ -25,8 +25,8 @@
         $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
         ?>
         <script>
-          $(document).ready(function() {
-            
+        //$(document).ready(function() { //JorisK On some Shops not working so never ready, on Buglist
+          //$(function() { //JorisK On some Shops not working so never ready, on Buglist
             const msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
                   msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
             const msreq_check_activ_params = {
@@ -39,15 +39,20 @@
             msreq_check_activ_params[msreq_tok_key] = msreq_tok_val;
             $.post("../ajax.php", msreq_check_activ_params, function(data) {
               if(data != '') {
-                var data_message = JSON.parse(data);
-                console.log("Response from server:", data_message);
-                if (data_message['warning_message'] && data_message['warning_message'] != ''){
-                  $('div[id="reqser_check_activ_error"]').removeAttr('hidden').html(data_message['warning_message']);
-                  alert(data_message['warning_message']);
-                } else if (data_message['info_message'] && data_message['info_message'] != ''){
-                  $('div[id="reqser_check_activ_info"]').removeAttr('hidden').html(data_message['info_message']);
-                }
+              var data_message = JSON.parse(data);
+              if (data_message['warning_message'] && data_message['warning_message'] != ''){
+                $('div[id="reqser_check_activ_error"]').removeAttr('hidden').html(data_message['warning_message']);
+                alert(data_message['warning_message']);
+              } else if (data_message['info_message'] && data_message['info_message'] != ''){
+                $('div[id="reqser_check_activ_info"]').removeAttr('hidden').html(data_message['info_message']);
+              } else if (data_message['success_message'] && data_message['success_message'] != '') {
+                $('div[id="reqser_check_activ_success"]').removeAttr('hidden').html(data_message['success_message']);
+              } else {
+                $('div[id="reqser_check_activ_error"]').removeAttr('hidden');
               }
+            } else {
+                $('div[id="reqser_check_activ_error"]').removeAttr('hidden');
+            }
             });
             $('form[name="new_category"]').submit(function(e) {
               const msreq_params = {
@@ -61,7 +66,7 @@
               $.post("../ajax.php", msreq_params);
             });
 
-          });
+          //});
         </script> 
         <?php
         

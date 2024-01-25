@@ -68,3 +68,4 @@ define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"In welche Sprachen &uuml;bersetz
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator Modul hat kein API Key, bitte ein API Key hinterlegen');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator Modul nicht aktiviert, bitte aktivieren Sie das Modul unter Module->System Module');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator Modul hat keine Verbindung!');
