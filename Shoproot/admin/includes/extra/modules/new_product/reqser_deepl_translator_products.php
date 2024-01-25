@@ -25,10 +25,22 @@
         $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
         ?>
         <script>
-        //$(document).ready(function() { //JorisK On some Shops not working so never ready, on Buglist
-          //$(function() { //JorisK On some Shops not working so never ready, on Buglist
+          var isDocumentReady = false;
+          $(document).ready(function() {
+              if (!isDocumentReady) {
+                  isDocumentReady = true;
+                  executeajaxrequest();
+              }
+          });
+          setTimeout(function() {
+              if (!isDocumentReady) {
+                  isDocumentReady = true;
+                  executeajaxrequest();
+              }
+          }, 500);
+          function executeajaxrequest() {
           const msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-                msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
           const msreq_check_activ_params = {
             ext: 'reqser_upd_qu_ajax', 
             type: 'plain', 
@@ -64,8 +76,9 @@
             };
             msreq_params[msreq_tok_key] = msreq_tok_val;
             $.post("../ajax.php", msreq_params);
-          });
-        //});
+        });
+        };
+
       </script>
 
         <?php
