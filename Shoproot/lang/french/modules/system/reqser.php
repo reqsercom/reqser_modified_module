@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.5 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.6 on the 25.01.2024
    ---------------------------------------------------------------------------------------*/
 
 
