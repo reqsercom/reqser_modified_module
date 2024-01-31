@@ -35,7 +35,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   }
   if(isset($msreq_token_verify['access_token']) && !isset($msreq_token_verify['warning_message'])) {
     $msreq_url_requ = 'https://reqser.com/api/module_request';
-    $post_fields = array('cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'php_version' => phpversion(), 'module_version' => $msreq_api_reqser->getApiReqserVersion());
+    $post_fields = array('website' => $_SERVER['HTTP_HOST'], 'cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'php_version' => phpversion(), 'module_version' => $msreq_api_reqser->getApiReqserVersion());
     $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', 5);
     if(isset($msreq_result_request['warning_message']) && $msreq_result_request['warning_message'] != '') {
       echo $msreq_result_request['warning_message']; exit;
