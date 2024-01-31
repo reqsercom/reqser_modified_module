@@ -1080,12 +1080,7 @@ class ClassReqser extends api_local\ApiBase {
     return array('token' => $token,
                  'expiry' => $time);
   }
-    /**  
-   * protected method generateToken
-   *
-   * @return array of token and expiry
-   */
-  get_send_token
+
 
   /**  
    * protected method haveTableRecord
