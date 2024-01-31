@@ -1041,6 +1041,31 @@ class ClassReqser extends api_local\ApiBase {
     return $ret_arr;
   }
 
+    /**  
+   * protected method getToken
+   *
+   * @return array of token and expiry
+   */
+  public function getsendToken() {   
+      if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL) > time()) {
+        $ret_arr = array('access_token' => $token,
+                          'expiry' => MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL);
+      } else {
+        $msreq_url_credential = 'https://reqser.com/api/token';
+        //authenticate ?
+        $api_key = constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY');
+        $msreq_vals_credential = array('key' => $api_key);
+        $ret_arr = $this->doRequest($msreq_url_credential, 'post', 'normal', 'json', $msreq_vals_credential, array('token' => $api_key), NULL, 'y', 5);
+        if (isset($ret_arr['access_token']) && $ret_arr['access_token'] != '') {
+          $token = $ret_arr['access_token'];
+          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN'");
+          //$time = time() + $ret_arr['expires_in'];
+          //$this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$time."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'");
+        }
+      }
+    return $ret_arr;
+  }
+
   /**  
    * protected method generateToken
    *
@@ -1055,6 +1080,12 @@ class ClassReqser extends api_local\ApiBase {
     return array('token' => $token,
                  'expiry' => $time);
   }
+    /**  
+   * protected method generateToken
+   *
+   * @return array of token and expiry
+   */
+  get_send_token
 
   /**  
    * protected method haveTableRecord
@@ -1231,6 +1262,16 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       return false;
     }
+  }
+
+
+   /**  
+   * public method getSendToken
+   *
+   * @return string token
+   */
+  public function get_send_token($api_key) {
+    if ()  
   }
 
 }
