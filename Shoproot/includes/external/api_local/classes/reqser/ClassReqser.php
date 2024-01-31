@@ -1260,14 +1260,5 @@ class ClassReqser extends api_local\ApiBase {
   }
 
 
-   /**  
-   * public method getSendToken
-   *
-   * @return string token
-   */
-  public function get_send_token($api_key) {
-    if ()  
-  }
-
 }
 ?>
