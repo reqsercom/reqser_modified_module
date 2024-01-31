@@ -1048,8 +1048,8 @@ class ClassReqser extends api_local\ApiBase {
    */
   public function getsendToken() {   
       if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL) > time()) {
-        $ret_arr = array('access_token' => $token,
-                          'expiry' => MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL);
+        $ret_arr = array('access_token' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN'),
+                          'expiry' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'));
       } else {
         $msreq_url_credential = 'https://reqser.com/api/token';
         //authenticate ?
@@ -1059,8 +1059,12 @@ class ClassReqser extends api_local\ApiBase {
         if (isset($ret_arr['access_token']) && $ret_arr['access_token'] != '') {
           $token = $ret_arr['access_token'];
           $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN'");
-          //$time = time() + $ret_arr['expires_in'];
-          //$this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$time."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'");
+          $parts = explode('.', $token);
+          $payload = $parts[1];
+          $decoded_payload = base64_decode(str_replace(['-', '_'], ['+', '/'], $payload) . str_repeat('=', 3 - (3 + strlen($payload)) % 4));
+          $payload_array = json_decode($decoded_payload, true);
+          $expire_token = date("Y-m-d H:i:s", $payload_array['exp']);
+          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$expire_token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'");
         }
       }
     return $ret_arr;

@@ -25,10 +25,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   }
   require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
   $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
-  $msreq_url_credential = 'https://reqser.com/api/token';
-  //authenticate ?
-  $msreq_vals_credential = array('key' => $msreq_local_api_key);
-  $msreq_token_verify = $msreq_api_reqser->doRequest($msreq_url_credential, 'post', 'normal', 'json', $msreq_vals_credential, array('token' => $msreq_local_api_key), NULL, 'y', 5);
+  $msreq_token_verify = $msreq_api_reqser->getsendToken();
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];
     echo $msreq_token_verify['message']; exit;
@@ -53,9 +50,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   }
   require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
   $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
-  $msreq_url_credential = 'https://reqser.com/api/token';
-  $msreq_vals_credential = array('key' => $msreq_local_api_key);
-  $msreq_token_verify = $msreq_api_reqser->doRequest($msreq_url_credential, 'post', 'normal', 'json', $msreq_vals_credential, array('token' => $msreq_local_api_key), NULL, 'y', 5);
+  $msreq_token_verify = $msreq_api_reqser->getsendToken();
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];
     echo json_encode($msreq_result_request); exit;
@@ -84,12 +79,6 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
   $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
   $msreq_token_verify = $msreq_api_reqser->getsendToken();
-  /*
-  $msreq_url_credential = 'https://reqser.com/api/token';
-  //authenticate ?
-  $msreq_vals_credential = array('key' => $msreq_local_api_key);
-  $msreq_token_verify = $msreq_api_reqser->doRequest($msreq_url_credential, 'post', 'normal', 'json', $msreq_vals_credential, array('token' => $msreq_local_api_key), NULL, 'y', 5);
-  */
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];
     echo json_encode($msreq_result_request); exit;
