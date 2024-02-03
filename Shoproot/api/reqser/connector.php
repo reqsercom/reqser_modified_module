@@ -36,13 +36,11 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     $reqser_token_validity = MODULE_SYSTEM_REQSER_TST_VALID_UNTIL;
 
     if($reqser_api_key == '') {
-      $reqser_connector_error = array('error' => 'API key is not set in shop');
-    }
-    if($reqser_token == '') {
-      $reqser_connector_error = array('error' => 'API token is not set in shop');
-    }
-    if($reqser_token_validity == '') {
-      $reqser_connector_error = array('error' => 'API token validity is not set in shop');
+      $reqser_connector_error = array('error' => 'API key is not set in shop', 'error_code' => '1202');
+    } elseif($reqser_token == '') {
+      $reqser_connector_error = array('error' => 'API token is not set in shop', 'error_code' => '1101');
+    } elseif($reqser_token_validity == '') {
+      $reqser_connector_error = array('error' => 'API token validity is not set in shop', 'error_code' => '1203');
     }
   }
 
