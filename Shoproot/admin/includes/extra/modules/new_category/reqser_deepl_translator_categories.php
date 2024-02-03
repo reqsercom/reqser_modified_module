@@ -9,7 +9,7 @@
 
   defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
   include_once (DIR_FS_CATALOG . 'lang/'.$_SESSION['language'].'/modules/system/reqser.php');
-  if(constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
+  if(defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
       echo '<div id="reqser_check_activ_success" class="success_message" hidden></div>';
       echo '<div id="reqser_check_activ_error" class="error_message" hidden>'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION.'</div>';
@@ -83,7 +83,7 @@
     } else {
       echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY.'</div>';
     }
-  } elseif (constant('MODULE_SYSTEM_REQSER_STATUS') == 'false') {
+  } elseif (!defined('MODULE_SYSTEM_REQSER_STATUS') || constant('MODULE_SYSTEM_REQSER_STATUS') == 'false') {
     echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED.'</div>';
-  }
+  }  
   ?>
