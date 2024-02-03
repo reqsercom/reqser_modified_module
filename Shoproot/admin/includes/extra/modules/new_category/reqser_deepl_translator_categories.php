@@ -11,6 +11,9 @@
   include_once (DIR_FS_CATALOG . 'lang/'.$_SESSION['language'].'/modules/system/reqser.php');
   if(defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
+      if (defined('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS') && constant('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS') == ''){
+        echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR.'</div>';   
+      } else {
       echo '<div id="reqser_check_activ_success" class="success_message" hidden></div>';
       echo '<div id="reqser_check_activ_error" class="error_message" hidden>'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION.'</div>';
       echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0" hidden></div>';
@@ -79,11 +82,11 @@
           };
         </script> 
         <?php
-        
+      }
     } else {
       echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY.'</div>';
     }
   } elseif (!defined('MODULE_SYSTEM_REQSER_STATUS') || constant('MODULE_SYSTEM_REQSER_STATUS') == 'false') {
     echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED.'</div>';
   }  
-  ?>
+?>
