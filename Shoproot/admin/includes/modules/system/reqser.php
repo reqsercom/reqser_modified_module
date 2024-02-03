@@ -39,7 +39,7 @@ class reqser {
     //JorisK 01-2024, Update to new Modul Versions
     if ($this->mn_const.'INSTALLED_MODULE_VERSION' != '' && $this->mn_const.'INSTALLED_MODULE_VERSION' != $this->module_version){
       //Jump from each Installation step to the next, so there is no reinstallation neeeded
-      if (defined($this->mn_const.'STATUS') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) <= '2.6') {
+      if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) <= '2.6') {
         $new_version = '2.7';
         if (!defined($this->mn_const.'SEND_TOKEN')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
         if (!defined($this->mn_const.'SEND_TOKEN_VALID_UNTILL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
