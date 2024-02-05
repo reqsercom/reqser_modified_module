@@ -62,7 +62,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API Key erfolgreich hinterlegt')
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Es wurde kein API Key eingetragen! Bitte bei <i>reqser.com</i> einloggen und den API-Key für diese Website holen und hier im Modul speichern.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Keine Sprache in welche &uuml;bersetzt werden soll ausgew&auml;hlt !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul keine Sprache in welche &uuml;bersetzt werden soll ausgew&auml;hlt !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"In welche Sprachen &uuml;bersetzen?" darf nicht eine Sprache enthalten die in "Von welcher Sprache &uuml;bersetzen?" ausgew&auml;hlt wurde.');
 
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.');

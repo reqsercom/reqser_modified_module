@@ -24,7 +24,7 @@ class reqser {
   function __construct() {
     global $messageStack;
 
-    $this->module_version = '2.6';
+    $this->module_version = '2.7';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version).'<div id="module_export_reqser_header"></div>';
@@ -36,10 +36,16 @@ class reqser {
       $this->title .= '<br><span style="color:red;">PHP Version is too low, min. 7.0 required!</span>';
     }
 
-    //JorisK 01-2024, falls in einer neuen Modul Version Konfigurationsfelder benötigt werden wird es hier geprüft
-    $new_installation_needed = false;
-    if ($this->mn_const.'INSTALLED_MODULE_VERSION' != '' && $this->mn_const.'INSTALLED_MODULE_VERSION' != $this->module_version && $new_installation_needed == true){
-      $this->title .= '<br><span style="color:red;">Installed Modul Version not the same as uploaded, please reinstall this module!</span>';
+    //JorisK 01-2024, Update to new Modul Versions
+    if ($this->mn_const.'INSTALLED_MODULE_VERSION' != '' && $this->mn_const.'INSTALLED_MODULE_VERSION' != $this->module_version){
+      //Jump from each Installation step to the next, so there is no reinstallation neeeded
+      if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) <= '2.6') {
+        $new_version = '2.7';
+        if (!defined($this->mn_const.'SEND_TOKEN')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
+        if (!defined($this->mn_const.'SEND_TOKEN_VALID_UNTILL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
+        xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$new_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
+        $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$new_version.' success</span>';
+      }
     }
 
     $this->langs_arr_str = get_langs_from_translate();
@@ -130,6 +136,10 @@ class reqser {
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES_SETTING'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'PROTOCOL_ACC'."', 'false', '6', '12', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+
+    //JorisK From Version 2.7 on
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
   }
 
   function remove() {

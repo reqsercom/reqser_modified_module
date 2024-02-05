@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.6';
+    $this->api_reqser_version = '2.7';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -1041,6 +1041,35 @@ class ClassReqser extends api_local\ApiBase {
     return $ret_arr;
   }
 
+    /**  
+   * protected method getToken
+   *
+   * @return array of token and expiry
+   */
+  public function getsendToken() {   
+      if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL) > time()) {
+        $ret_arr = array('access_token' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN'),
+                          'expiry' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'));
+      } else {
+        $msreq_url_credential = 'https://reqser.com/api/token';
+        //authenticate ?
+        $api_key = constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY');
+        $msreq_vals_credential = array('key' => $api_key);
+        $ret_arr = $this->doRequest($msreq_url_credential, 'post', 'normal', 'json', $msreq_vals_credential, array('token' => $api_key), NULL, 'y', 5);
+        if (isset($ret_arr['access_token']) && $ret_arr['access_token'] != '') {
+          $token = $ret_arr['access_token'];
+          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN'");
+          $parts = explode('.', $token);
+          $payload = $parts[1];
+          $decoded_payload = base64_decode(str_replace(['-', '_'], ['+', '/'], $payload) . str_repeat('=', 3 - (3 + strlen($payload)) % 4));
+          $payload_array = json_decode($decoded_payload, true);
+          $expire_token = date("Y-m-d H:i:s", $payload_array['exp']);
+          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$expire_token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'");
+        }
+      }
+    return $ret_arr;
+  }
+
   /**  
    * protected method generateToken
    *
@@ -1055,6 +1084,7 @@ class ClassReqser extends api_local\ApiBase {
     return array('token' => $token,
                  'expiry' => $time);
   }
+
 
   /**  
    * protected method haveTableRecord
@@ -1232,6 +1262,7 @@ class ClassReqser extends api_local\ApiBase {
       return false;
     }
   }
+
 
 }
 ?>
