@@ -1005,8 +1005,10 @@ class ClassReqser extends api_local\ApiBase {
       $cur_encoding = (!empty($encoding) && $encoding !== false) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
       if($cur_encoding == 'UTF-8' && mb_check_encoding($string, 'UTF-8')) {
         return $string;
-      } else {
+      } elseif ($cur_encoding !== false) {
         return mb_convert_encoding($string, 'UTF-8', $cur_encoding);
+      } else {
+        return mb_convert_encoding($string, 'UTF-8', strtoupper($charset));
       }
     } else {
       return $string;
