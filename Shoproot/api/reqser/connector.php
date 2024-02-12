@@ -68,6 +68,6 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     }
   }
 } else {
-  echo json_encode(array('error' => 'API not active'));
+  echo json_encode(array('error' => 'API not active', 'error_code' => '1204'));
 }
 ?>
