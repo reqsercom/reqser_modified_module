@@ -37,7 +37,7 @@ class reqser {
     }
 
     //JorisK 01-2024, Update to new Modul Versions
-    if ($this->mn_const.'INSTALLED_MODULE_VERSION' != '' && $this->mn_const.'INSTALLED_MODULE_VERSION' != $this->module_version){
+    if (constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
       //Jump from each Installation step to the next, so there is no reinstallation neeeded
       if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '2.7') {
         //Update from 2.6 to 2.7 Version
@@ -48,7 +48,7 @@ class reqser {
         xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_group_id = '6', sort_order = '7' WHERE configuration_key = '".$this->mn_const."MORE_TABLES'");
       } 
       xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$this->module_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
-      $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$new_version.' success</span>';
+      $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
     }
 
     $this->langs_arr_str = get_langs_from_translate();
