@@ -43,12 +43,12 @@ class reqser {
         //Update from 2.6 to 2.7 Version
         if (!defined($this->mn_const.'SEND_TOKEN')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
         if (!defined($this->mn_const.'SEND_TOKEN_VALID_UNTILL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
-        $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$new_version.' success</span>';
       }
       if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '2.8'){
         xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_group_id = '6', sort_order = '7' WHERE configuration_key = '".$this->mn_const."MORE_TABLES'");
       } 
       xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$this->module_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
+      $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$new_version.' success</span>';
     }
 
     $this->langs_arr_str = get_langs_from_translate();
