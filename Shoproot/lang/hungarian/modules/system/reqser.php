@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'A Reqser.com DeepL modul a ment&ea
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'A Reqser.com Deepl Translator modulnak nincs API kulcsa, k&eacute;rj&uuml;k, adjon meg egy API kulcsot.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nem aktiv&aacute;lva, k&eacute;rj&uuml;k, aktiv&aacute;lja a modult a Modul->Rendszermodul alatt.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'A Reqser.com Deepl Translator modulnak nincs kapcsolata!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'A Reqser.com kapcsolat ellenőrz&eacute;se folyamatban van, k&eacute;rj&uuml;k v&aacute;rjon.');

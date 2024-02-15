@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL moodul t&otilde;l
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator moodulil puudub API v&otilde;ti, palun sisestage API v&otilde;ti.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator moodul ei ole aktiveeritud, palun aktiveerige moodul moodulite all Moodul->S&uuml;steemi moodul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator moodulil puudub &uuml;hendus!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com &uuml;hendust kontrollitakse, palun oodake.');

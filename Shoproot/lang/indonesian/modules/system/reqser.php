@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL akan secara
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Penerjemah Reqser.com Deepl tidak memiliki kunci API, harap masukkan kunci API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Penerjemah Reqser.com Deepl tidak diaktifkan, silakan aktifkan modul di bawah Modul- > Modul Sistem');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Penerjemah Reqser.com Deepl tidak memiliki koneksi!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Koneksi Reqser.com sedang diperiksa, harap tunggu.');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -67,3 +67,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', '保存后，Reqser.com DeepL 模�
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator 模块没有 API 密钥，请输入 API 密钥');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator 模块未激活，请激活模块->系统模块下的模块');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator 模块没有连接！');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', '正在检查 Reqser.com 连接，请稍候。');

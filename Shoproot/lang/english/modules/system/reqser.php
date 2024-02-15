@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -63,6 +63,7 @@ define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'No language to be translated into selected !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Translate to which languages?" must not contain a language that was selected in "Translate from which language?".');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'The Reqser.com DeepL module will automatically translate all foreign languages activated in the module for this product after saving.');
-define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator module has no API key, please enter an API key');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator module has no API key, please provide an API key');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator module not activated, please activate the module under Module->System Module');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator module has no connection!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com connection is being checked, please wait.');

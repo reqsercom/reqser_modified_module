@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL po uložen&
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Reqser.com Deepl Translator nem&aacute; kl&iacute;č API, zadejte pros&iacute;m kl&iacute;č API.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Deepl Translator nen&iacute; aktivov&aacute;n, aktivujte jej pros&iacute;m v č&aacute;sti Module->Syst&eacute;mov&yacute; modul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Reqser.com Deepl Translator nem&aacute; ž&aacute;dn&eacute; připojen&iacute;!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Připojen&iacute; k serveru Reqser.com se kontroluje, vyčkejte pros&iacute;m.');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Модулът Reqser.com DeepL а
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Модулът Deepl Translator на Reqser.com няма API ключ, моля, въведете API ключ');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator модул не е активиран, моля, активирайте модула в Модул->Системен модул');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Модулът Deepl Translator на Reqser.com няма връзка!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Проверява се връзката с Reqser.com, моля, изчакайте.');

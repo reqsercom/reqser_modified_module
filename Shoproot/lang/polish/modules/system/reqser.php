@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -39,7 +39,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'Wybierz tutaj kolejne tabele ba
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Inne tabele bazy danych (niedostępne do wyboru powyżej)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Wprowadź kolejne tabele bazy danych do przetłumaczenia, oddzielając je przecinkami.<br />(Dla rozszerzeń z nowymi "niezmodyfikowanymi standardowymi" tabelami)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Wyklucz tabele');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'W tym miejscu wprowadź tabele, kt&oacute;re mają zostać wykluczone z tłumaczeń, oddzielając je przecinkami.<br />(Konieczne tylko wtedy, gdy powyżej wybrano wszystkie standardowe tabele, a niekt&oacute;re z nich mają zostać wykluczone).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Tutaj wprowadź tabele, kt&oacute;re mają zostać wykluczone z tłumaczeń, oddzielając je przecinkami.<br />(Konieczne tylko wtedy, gdy powyżej wybrano wszystkie standardowe tabele, a niekt&oacute;re z nich mają zostać wykluczone).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'Przetłumaczyć z jakiego języka?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Z jakiego języka powinno zostać wykonane tłumaczenie?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'Na jakie języki mogę tłumaczyć? ' . draw_tooltip('Dodatkowe języki można dodać na stronie <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.'));
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Moduł Reqser.com DeepL automatycz
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Moduł Reqser.com Deepl Translator nie ma klucza API, wprowadź klucz API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Moduł Reqser.com Deepl Translator nie został aktywowany, należy aktywować moduł w sekcji Module->System Module.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Moduł Reqser.com Deepl Translator nie ma połączenia!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Połączenie z Reqser.com jest sprawdzane, proszę czekać.');
