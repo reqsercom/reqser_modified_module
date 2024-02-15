@@ -37,7 +37,7 @@ class reqser {
     }
 
     //JorisK 01-2024, Update to new Modul Versions
-    if (constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
+    if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
       //Jump from each Installation step to the next, so there is no reinstallation neeeded
       if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '2.7') {
         //Update from 2.6 to 2.7 Version
