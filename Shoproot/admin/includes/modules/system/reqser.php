@@ -24,7 +24,7 @@ class reqser {
   function __construct() {
     global $messageStack;
 
-    $this->module_version = '2.7';
+    $this->module_version = '2.8';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version).'<div id="module_export_reqser_header"></div>';
@@ -37,15 +37,18 @@ class reqser {
     }
 
     //JorisK 01-2024, Update to new Modul Versions
-    if ($this->mn_const.'INSTALLED_MODULE_VERSION' != '' && $this->mn_const.'INSTALLED_MODULE_VERSION' != $this->module_version){
+    if (constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
       //Jump from each Installation step to the next, so there is no reinstallation neeeded
-      if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) <= '2.6') {
-        $new_version = '2.7';
+      if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '2.7') {
+        //Update from 2.6 to 2.7 Version
         if (!defined($this->mn_const.'SEND_TOKEN')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
         if (!defined($this->mn_const.'SEND_TOKEN_VALID_UNTILL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
-        xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$new_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
-        $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$new_version.' success</span>';
       }
+      if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '2.8'){
+        xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_group_id = '6', sort_order = '7' WHERE configuration_key = '".$this->mn_const."MORE_TABLES'");
+      } 
+      xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$this->module_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
+      $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
     }
 
     $this->langs_arr_str = get_langs_from_translate();
@@ -122,7 +125,7 @@ class reqser {
     }
  
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."TABLES_TO_TRANSL', '".$default_tables."',  '6', '6', '', 'nr_cfg_multi_checkbox(\'get_default_tables_to_translate\', \'chr(44)\',', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."MORE_TABLES', '".$default_more_tables."',  '7', '6', '', 'nr_cfg_multi_checkbox(\'get_more_tables_to_translate\', \'chr(44)\',', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."MORE_TABLES', '".$default_more_tables."',  '6', '7', '', 'nr_cfg_multi_checkbox(\'get_more_tables_to_translate\', \'chr(44)\',', now())");
     
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."MORE_TABLES_ADD', '', '6', '8', now())");
     //xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."LESS_TABLES', '', '6', '9', now())");

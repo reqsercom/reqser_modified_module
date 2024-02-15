@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -40,7 +40,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', '여기에서 번역할 추가 �
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', '기타 데이터베이스 테이블(위에서 선택할 수 없음)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', '여기에 번역할 데이터베이스 테이블을 쉼표로 구분하여 추가로 입력합니다.<br />(새로운 "수정되지 않은 표준" 테이블이 포함된 확장의 경우)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', '테이블 제외');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', '여기에 번역에서 제외할 표를 쉼표로 구분하여 입력합니다.<br />(위에서 모든 표준 표를 선택하고 일부 표를 제외할 경우에만 필요합니다.).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', '여기에 번역에서 제외할 표를 쉼표로 구분하여 입력합니다.<br />(위에서 모든 표준 표를 선택하고 일부 표를 제외하려는 경우에만 필요함).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', '어떤 언어로 번역하나요?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', '어떤 언어로 번역해야 하나요?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', '어떤 언어로 번역할 수 있나요? ' . draw_tooltip('추가 언어는 <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>에서 추가할 수 있습니다.'));
@@ -57,7 +57,7 @@ define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>보안</h2>API 액�
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'API 액세스를 기록해야 하나요?<br />(로그는 <i>/api/reqser/logs/에서</i> 찾을 수 있습니다).');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', '브라우저에서 테스트 ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', '헤더를 보내지 않고 브라우저에서 테스트하시겠습니까?<br /><span class="alrt">!!! API의 실시간 작동에서 비활성화해야 합니다 !!!</span>');
-define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '여기 모듈에 저장된 "Reqser API 키"가 <i>reqser.com에</i> 저장된 것과 일치하지 않습니다.<br /><i>reqser</i>.com에 로그인하여 API 키를 확인하거나 필요한 경우 다시 검색하여 여기에 저장하세요.');
+define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '여기 모듈에 저장된 "Reqser API 키"가 <i>reqser.com에</i> 저장된 키와 일치하지 않습니다.<br /><i>reqser</i>.com에 로그인하여 API 키를 확인하거나 필요한 경우 다시 검색하여 여기에 저장하세요.');
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API 키가 성공적으로 저장되었습니다.');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API 키를 입력하지 않았습니다! <i>reqser.com에</i> 로그인하여 이 웹사이트의 API 키를 받아 여기 모듈에 저장하세요.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', '컬 에러:<br />%s');
@@ -67,3 +67,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL 모듈은 저장 
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com 심층 번역기 모듈에 API 키가 없습니다. API 키를 입력하세요.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com 심층 번역기 모듈이 활성화되지 않은 경우 모듈->시스템 모듈에서 모듈을 활성화하세요.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com 심층 번역기 모듈이 연결되지 않았습니다!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com 연결을 확인하는 중입니다. 잠시만 기다려주세요.');

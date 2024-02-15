@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -56,7 +56,7 @@ define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Seguran&ccedil;a</h
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Os acessos &agrave; API devem ser registados?<br />(Os registos podem ser encontrados em <i>/api/reqser/logs/</i> ).');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Testar no browser ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testar no browser sem enviar cabe&ccedil;alhos?<br /><span class="alrt">!!! Deve ser desativado no funcionamento em direto da API !!!</span>');
-define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'A "Chave da API do Reqser" guardada aqui no m&oacute;dulo n&atilde;o corresponde &agrave; guardada em <i>reqser.com</i>.<br />Inicie sess&atilde;o em <i>reqser</i>.com e verifique a chave da API ou, se necess&aacute;rio, recupere-a novamente e guarde-a aqui.');
+define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'A "Chave da API do Reqser" armazenada aqui no m&oacute;dulo n&atilde;o corresponde &agrave; armazenada em <i>reqser.com</i>.<br />Inicie sess&atilde;o em <i>reqser</i>.com e verifique a chave da API ou, se necess&aacute;rio, recupere-a novamente e guarde-a aqui.');
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'Chave API armazenada com sucesso');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'N&atilde;o foi introduzida nenhuma chave API! Inicie sess&atilde;o em <i>reqser.com</i> e obtenha a chave API para este s&iacute;tio Web e guarde-a aqui no m&oacute;dulo.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'O m&oacute;dulo Reqser.com DeepL t
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'O m&oacute;dulo Reqser.com Deepl Translator n&atilde;o tem chave API, introduza uma chave API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'O m&oacute;dulo Reqser.com Deepl Translator n&atilde;o est&aacute; ativado, por favor active o m&oacute;dulo em Module->System Module');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'O m&oacute;dulo Reqser.com Deepl Translator n&atilde;o tem qualquer liga&ccedil;&atilde;o!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'A liga&ccedil;&atilde;o Reqser.com est&aacute; a ser verificada, aguarde.');

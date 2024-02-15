@@ -17,6 +17,7 @@
         echo '<div id="reqser_check_activ_success" class="success_message" hidden></div>';
         echo '<div id="reqser_check_activ_error" class="error_message" hidden>'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION.'</div>';
         echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0" hidden></div>';
+        echo '<div id="reqser_check_activ_loading" class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING.'</div>';
           if (isset($_GET['pID']) && $_GET['pID'] > 0) {
             $reqser_pid = (int)$_GET['pID'];
           } else {
@@ -56,16 +57,21 @@
                 var data_message = JSON.parse(data);
                 if (data_message['warning_message'] && data_message['warning_message'] != ''){
                   $('div[id="reqser_check_activ_error"]').removeAttr('hidden').html(data_message['warning_message']);
+                  $('div[id="reqser_check_activ_loading"]').attr('hidden', true);
                   alert(data_message['warning_message']);
                 } else if (data_message['info_message'] && data_message['info_message'] != ''){
                   $('div[id="reqser_check_activ_info"]').removeAttr('hidden').html(data_message['info_message']);
+                  $('div[id="reqser_check_activ_loading"]').attr('hidden', true);
                 } else if (data_message['success_message'] && data_message['success_message'] != '') {
                   $('div[id="reqser_check_activ_success"]').removeAttr('hidden').html(data_message['success_message']);
+                  $('div[id="reqser_check_activ_loading"]').attr('hidden', true);
                 } else {
                   $('div[id="reqser_check_activ_error"]').removeAttr('hidden');
+                  $('div[id="reqser_check_activ_loading"]').attr('hidden', true);
                 }
               } else {
                   $('div[id="reqser_check_activ_error"]').removeAttr('hidden');
+                  $('div[id="reqser_check_activ_loading"]').attr('hidden', true);
               }
             });
             $('#new_product').submit(function(e) {

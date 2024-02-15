@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -51,7 +51,7 @@ define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Hvis denne innstilling
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Oversette spr&aring;kfiler p&aring; serveren?' . draw_tooltip('Alle filer p&aring; serveren blir forespurt og oversatt</br>Dette gjelder ogs&aring; spr&aring;kfilene til modulene og utvidelsene. Alle spr&aring;kfiler regenereres, ogs&aring; eksisterende spr&aring;k.<br />Som standard overtas eksisterende fremmedspr&aring;klige tekster i Reqser og oversettes ikke p&aring; nytt, men dette kan endres i Reqser-innstillingene.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Uten spr&aring;kfiler fungerer ikke noe fremmedspr&aring;k i butikken, og det er en "hvit" side!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Overf&oslash;re spr&aring;kfiler automatisk?');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Skal de oversatte spr&aring;kfilene overf&oslash;res automatisk til butikken din, eller skal hver enkelt spr&aring;kfil velges manuelt i Reqser?<br />Ja = overf&oslash;r spr&aring;kfiler automatisk / Nei = overf&oslash;r manuelt');
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Skal de oversatte spr&aring;kfilene overf&oslash;res automatisk til butikken din, eller skal hver enkelt spr&aring;kfil velges manuelt i Reqser?<br />Ja = overf&oslash;re spr&aring;kfiler automatisk / Nei = overf&oslash;re manuelt');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Sikkerhet</h2>Logge API-tilganger?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'B&oslash;r API-tilganger logges?<br />(Du finner loggene i <i>/api/reqser/logs/</i> ).');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test i nettleseren?');
@@ -66,3 +66,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modulen Reqser.com DeepL oversette
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator-modulen har ingen API-n&oslash;kkel, vennligst oppgi en API-n&oslash;kkel.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen ikke aktivert, vennligst aktiver modulen under Modul->Systemmodul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator-modulen har ingen forbindelse!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com-tilkoblingen kontrolleres, vennligst vent.');

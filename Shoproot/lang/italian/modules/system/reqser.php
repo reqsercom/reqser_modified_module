@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.7 on the 25.01.2024
+   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -39,7 +39,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'Selezionate qui altre tabelle d
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Altre tabelle del database (non disponibili per la selezione di cui sopra)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Inserire qui altre tabelle del database da tradurre, separate da virgole.<br />(Per le estensioni con nuove tabelle "standard non modificate")');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Escludere le tabelle');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Inserire qui le tabelle da escludere dalle traduzioni, separate da virgole.<br />(necessario solo se tutte le tabelle standard sono state selezionate in precedenza e alcune di esse devono essere escluse).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Inserire qui le tabelle che devono essere escluse dalle traduzioni, separate da virgole.<br />(necessario solo se tutte le tabelle standard sono state selezionate in precedenza e alcune di esse devono essere escluse).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'Tradurre da quale lingua?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Da quale lingua deve essere effettuata la traduzione?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'In quali lingue posso tradurre? ' . draw_tooltip('&Egrave; possibile aggiungere altre lingue su <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.'));
@@ -63,6 +63,7 @@ define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERRORE:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Nessuna lingua da tradurre selezionata!');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Tradurre in quali lingue?" non deve contenere una lingua selezionata in "Tradurre da quali lingue?".');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Il modulo Reqser.com DeepL tradurr&agrave; automaticamente tutte le lingue straniere attivate nel modulo per questo prodotto dopo il salvataggio.');
-define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Il modulo Deepl Translator di Reqser.com non ha una chiave API, si prega di inserire una chiave API.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Il modulo Deepl Translator di Reqser.com non ha una chiave API, inserire una chiave API.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Il modulo Reqser.com Deepl Translator non &egrave; attivato, si prega di attivarlo in Module->System Module');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Il modulo Deepl Translator di Reqser.com non ha alcuna connessione!');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'La connessione a Reqser.com &egrave; in fase di verifica, si prega di attendere.');
