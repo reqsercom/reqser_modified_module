@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.8';
+    $this->api_reqser_version = '2.9';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -420,6 +420,8 @@ class ClassReqser extends api_local\ApiBase {
                 $check_for_entry[] = strtoupper($dec_rec_data['code']).'::'.substr($english_entry_found, strpos($english_entry_found, '::')+2);
               }
               $updated_entry = implode("||", $check_for_entry);
+              //JorisK problem falls ein vorhandener Eintrag ein ' enthält
+              $updated_entry = $this->api_db_conn->apiDbEscapeStr($updated_entry);
               $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$updated_entry."' WHERE configuration_key = ?";
               if($upd_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, $configuration_email_key)) {
                 $this->api_db_conn->apiDbStmtClose($upd_qu);
