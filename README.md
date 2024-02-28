@@ -45,3 +45,10 @@ Eine erstmalige Übersetzung ist nach 6h-72h im Shop ersichtlich, Änderungen an
 ## Preis
 
 Der Dienst kann kostenlos getestet werden im Demo Modus, danach wird der Service kostenpflichtig. Die Preise sind auf der Website ersichtlich.
+
+
+## Systemanforderungen
+
+Shopversion 2.x oder 3.x
+
+PHP min. 7.0
