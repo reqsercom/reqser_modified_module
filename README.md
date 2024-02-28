@@ -50,4 +50,5 @@ Der Dienst kann kostenlos getestet werden im Demo Modus, danach wird der Service
 ## Systemanforderungen
 
 Shopversion 2.x oder 3.x
+
 PHP min. 7.0
