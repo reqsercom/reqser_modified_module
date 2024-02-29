@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '2.9';
+    $this->api_reqser_version = '3.0';
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;
@@ -167,6 +167,13 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'returns' => 'an array with the row information, needed to add more than predefined rows for translation, and also if an older Shop version is not having these rows, could lead to sql errors'
                                                                                                          )
                                                                                          ),
+                                                      'get_manufacturers_names' => array('method' => 'get',
+                                                                                          'params' => array('table'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_manufacturers_names',
+                                                                                                          'desc' => 'get all entries from manufacturers table to keep the brand names',
+                                                                                                          'returns' => 'an array with all brand names stored in the manufacturers table'
+                                                                                                          )
+                                                                                          ),
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
@@ -240,8 +247,24 @@ class ClassReqser extends api_local\ApiBase {
   protected function callTemp_tokenRenew() {
     return $this->getToken('renew');
   }
+
+  /**  
+   * private method get_manufacturers_names
+   *
+   * @return array with all entries
+   */
+  protected function get_manufacturers_names() {
+    //JorisK necessary to create a glossary to keep the brand names in the foreign language
+    $out_arr = array();
+    $qu_str = "SELECT manufacturers_name FROM manufacturers";
+    $result = $this->api_db_conn->apiDbQuery($qu_str);
+    while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
+      $out_arr[] = $result_arr['manufacturers_name'];
+    }
+    return $out_arr;
+  }
   
-      /**  
+   /**  
    * private method callFilesGet_all_language_files
    *
    * @return array with language files to be translated
