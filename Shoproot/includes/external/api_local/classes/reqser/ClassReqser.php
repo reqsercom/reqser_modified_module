@@ -249,17 +249,17 @@ class ClassReqser extends api_local\ApiBase {
   }
 
   /**  
-   * private method get_manufacturers_names
+   * private method callTablesGet_manufacturers_names
    *
    * @return array with all entries
    */
-  protected function get_manufacturers_names() {
+  protected function callTablesGet_manufacturers_names() {
     //JorisK necessary to create a glossary to keep the brand names in the foreign language
     $out_arr = array();
-    $qu_str = "SELECT manufacturers_name FROM manufacturers";
+    $qu_str = "SELECT manufacturers_id, manufacturers_name FROM manufacturers";
     $result = $this->api_db_conn->apiDbQuery($qu_str);
     while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
-      $out_arr[] = $result_arr['manufacturers_name'];
+      $out_arr[$result_arr['manufacturers_id']] = $result_arr['manufacturers_name'];
     }
     return $out_arr;
   }
