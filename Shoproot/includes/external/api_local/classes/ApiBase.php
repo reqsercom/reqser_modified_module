@@ -152,7 +152,7 @@ class ApiBase {
   }
 
   /**  
-   * protected method getQueryStringParts
+   * protected method getQueryStringParts test
    *
    * @param $qu_str, GET string
    * @return array of sent GET params
