@@ -37,6 +37,7 @@ class ClassReqser extends api_local\ApiBase {
     parent::__construct($subp);
 
     $this->api_reqser_version = '3.0';
+
     $this->browser_mode = false;
     $this->dev_mode = true;
     $this->write_control_mode = false;

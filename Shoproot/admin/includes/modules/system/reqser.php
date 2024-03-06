@@ -23,7 +23,6 @@ class reqser {
 
   function __construct() {
     global $messageStack;
-
     $this->module_version = '3.0';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
