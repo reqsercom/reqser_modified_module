@@ -12,6 +12,8 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
+* © copyright 03-2024, JorisK Reqser.com
+
 ********************************************************************/
 
 if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'true') {
@@ -30,8 +32,14 @@ $(function() {
     msreq_params,
     function(data) {
       if(data != '') {
-        $('div[id="module_export_reqser_header"]').html(data);
-        $('div[id="module_export_reqser_header"]').css('color', 'red');
+        var data_message = JSON.parse(data);
+        if (data_message['warning_message'] && data_message['warning_message'] != ''){
+          $('div[id="module_export_reqser_header"]').html(data_message['warning_message']);
+          $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
+        } else if (data_message['success_message'] && data_message['success_message'] != '') {
+          $('div[id="module_export_reqser_header"]').html(data_message['success_message']);
+          $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
+        }
       }
     }
   );
