@@ -87,6 +87,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'api_base_version' => $this->getApiBaseVersion(),
                                                                                         'module_version' => $this->getApiReqserVersion(),
                                                                                         'shop_version' => $this->getShopVersion(),
+                                                                                        'php_version' => phpversion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
