@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.0';
+    $this->api_reqser_version = '3.1';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -87,6 +87,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'api_base_version' => $this->getApiBaseVersion(),
                                                                                         'module_version' => $this->getApiReqserVersion(),
                                                                                         'shop_version' => $this->getShopVersion(),
+                                                                                        'php_version' => phpversion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
