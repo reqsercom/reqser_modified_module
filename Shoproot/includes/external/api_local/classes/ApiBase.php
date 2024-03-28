@@ -141,9 +141,12 @@ class ApiBase {
    * @return array of requested URL path parts
    */
   protected function getUrlParts($url) {
-    if(isset($_SERVER['HTTPS']) && empty($_SERVER['HTTPS']) || !isset($_SERVER['HTTPS'])) {
-      return array('error' => 'call via ssl necessary');
+    //JorisK 03-2024 some Sevrver do not set the $_SERVER['HTTPS']
+    if ((!isset($_SERVER['HTTPS']) || empty($_SERVER['HTTPS'])) &&
+        (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) !== 'https')) {
+        return array('error' => 'call via ssl necessary');
     }
+
 
     $path_str = parse_url($url, PHP_URL_PATH);
     $url_arr = explode( '/', ltrim($path_str, '/'));
