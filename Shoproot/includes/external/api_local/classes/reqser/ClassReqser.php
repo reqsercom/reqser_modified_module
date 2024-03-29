@@ -92,9 +92,24 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
                                                                                         'reseller_id' => $this->getResellerId(),
+                                                                                        'request_on_start' => ((MODULE_SYSTEM_REQSER_REQUEST_ON_START == 'true') ? '1' : '0'),
                                                                                        )
                                                                        )
                                                        ),
+                                    'settings' => array('request_on_start' => array('method' => 'post',
+                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/settings/request_on_start',
+                                                                       'params' => array('request_on_start = true or false'),
+                                                                       'desc' => 'Change setting for request on start',
+                                                                       'returns' => 'array with success or error message'
+                                                                      )
+                                                      ),
+                                      'renew' => array('method' => 'get',
+                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/renew',
+                                                                       'desc' => 'renew token (e.g. because expired) for shop API calls (valid 1 month)',
+                                                                       'returns' => 'an array with the token and its expiry'
+                                                                      )
+                                                      )
+                                     ),
                             
                                    'temp_token' => array('fetch' => array('method' => 'get',
                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/fetch',
@@ -1161,6 +1176,28 @@ class ClassReqser extends api_local\ApiBase {
     sort($allowed_tables);
 
     return $allowed_tables;
+  }
+
+    /**  
+   * private method callFilesSend_file
+   * 
+   * @return array with success or error message
+   */
+  protected function callSettingsRequest_on_start() {
+    $received_data = file_get_contents('php://input');
+      if($received_data != '') {
+        $dec_rec_data = json_decode($received_data, true);
+        $dec_rec_data = $this->purifyResp($dec_rec_data);
+        if (isset($dec_rec_data['request_on_start']) && ($dec_rec_data['request_on_start'] === 'true' || $dec_rec_data['request_on_start'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_START'");
+        } else {
+          $out_arr = array('error' => 'Something went wrong, no correct data recieved');
+        }
+      } else {
+        $out_arr = array('error' => 'Something went wrong, no POST Data received');
+      }
+    return $out_arr;
   }
 
   /**  
