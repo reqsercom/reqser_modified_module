@@ -46,6 +46,9 @@ class reqser {
       if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '2.8'){
         xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_group_id = '6', sort_order = '7' WHERE configuration_key = '".$this->mn_const."MORE_TABLES'");
       } 
+      if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) < '3.1'){
+        if (!defined($this->mn_const.'REQUEST_ON_START')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_START'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+      } 
       xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$this->module_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
       $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
     }
@@ -142,6 +145,9 @@ class reqser {
     //JorisK From Version 2.7 on
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
+
+    //JorisK From Version 3.1
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_START'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
   }
 
   function remove() {
