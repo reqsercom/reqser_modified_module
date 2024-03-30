@@ -778,7 +778,7 @@ class ClassReqser extends api_local\ApiBase {
                 if(isset($fields['lang']) && $fields['lang'] != $language_field) {
                   $out_arr = array('error' => 'Language Field '.$language_field.' not allowed use '.$fields['lang'].' instead!');
                 } else {
-                  //JorisK 3-2024, on some Server an issue using ; as delimiter, so we add also to delimit with ,
+                  //JorisK 3-2024, on some Server an issue using ; as delimiter, so we allow some more delimiters plus the refering url encode value depending on server settings can be different
                   $select_fields = str_replace(',', ';', $select_fields);
                   $select_fields = str_replace('%2C', ';', $select_fields);
                   $select_fields = str_replace('|', ';', $select_fields);
