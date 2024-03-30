@@ -780,6 +780,9 @@ class ClassReqser extends api_local\ApiBase {
                 } else {
                   //JorisK Einschränkung auf Spalten bei vordefinierten Tabellen
                   if(isset($fields['fields']) && $this->aara === false) {
+                    //JorisK 3-2024, on some Server an issue using ; as delimiter, so we add also to delimit with ,
+                    $select_fields = str_replace(',', ';', $select_fields);
+                    $select_fields = str_replace('|', ';', $select_fields);
                     $select_fields_array = explode(";", $select_fields);
                     $field_not_allowed_array = array();
                     foreach($select_fields_array as $value) {
