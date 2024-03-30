@@ -80,7 +80,6 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                     $('.' + data_message['add_to_container']).prepend(newDiv);
                   }
                 }
-                console.log(data_message);
                 if (data_message['alert_message'] && data_message['alert_message'] != ''){
                   alert(data_message['alert_message']);
                 }
