@@ -115,7 +115,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   
   if(isset($msreq_token_verify['access_token']) && !isset($msreq_token_verify['warning_message'])) {
     $msreq_url_requ = 'https://reqser.com/api/module_request';
-    $post_fields = array('website' => $_SERVER['HTTP_HOST'], 'cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'reqser_request_on_start' => true, 'admincol_right_exists' => $_POST['admincol_right_exists']);
+    $post_fields = array('website' => $_SERVER['HTTP_HOST'], 'cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'reqser_request_on_start' => true, 'admincol_right_exists' => $_POST['admincol_right_exists'], 'admincol_left_exists' => $_POST['admincol_left_exists'], 'admincol_exists' => $_POST['admincol_exists'], 'admin_container_exists' => $_POST['admin_container_exists']);
     $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', 5);
     if(isset($msreq_result_request)) {
       echo json_encode($msreq_result_request); exit;

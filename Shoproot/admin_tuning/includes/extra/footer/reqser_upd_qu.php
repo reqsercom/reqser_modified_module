@@ -53,13 +53,19 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
           let admincolRightExists = $('.admincol_right').length > 0 ? 'true' : 'false';
+          let admincolLeftExists = $('.admincol_leftt').length > 0 ? 'true' : 'false';
+          let admincolExists = $('.admincol').length > 0 ? 'true' : 'false';
+          let admin_containerExists = $('.admin_container').length > 0 ? 'true' : 'false';
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax', 
             type: 'plain', 
             reqser_request_on_start: 'true', 
             msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
-            admincol_right_exists: admincolRightExists  // Adding the existence check to the parameters
+            admincol_right_exists: admincolRightExists,
+            admincol_left_exists: admincolLeftExists,
+            admincol_exists: admincolExists,
+            admin_container_exists: admin_containerExists
           };
           console.log(msreq_params);
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
