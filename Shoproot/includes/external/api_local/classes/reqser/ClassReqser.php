@@ -778,11 +778,14 @@ class ClassReqser extends api_local\ApiBase {
                 if(isset($fields['lang']) && $fields['lang'] != $language_field) {
                   $out_arr = array('error' => 'Language Field '.$language_field.' not allowed use '.$fields['lang'].' instead!');
                 } else {
+                  //JorisK 3-2024, on some Server an issue using ; as delimiter, so we add also to delimit with ,
+                  $select_fields = str_replace(',', ';', $select_fields);
+                  $select_fields = str_replace('%2C', ';', $select_fields);
+                  $select_fields = str_replace('|', ';', $select_fields);
+                  $select_fields = str_replace('%7C', ';', $select_fields);
+                  $select_fields = str_replace('%3B', ';', $select_fields);
                   //JorisK Einschränkung auf Spalten bei vordefinierten Tabellen
                   if(isset($fields['fields']) && $this->aara === false) {
-                    //JorisK 3-2024, on some Server an issue using ; as delimiter, so we add also to delimit with ,
-                    $select_fields = str_replace(',', ';', $select_fields);
-                    $select_fields = str_replace('|', ';', $select_fields);
                     $select_fields_array = explode(";", $select_fields);
                     $field_not_allowed_array = array();
                     foreach($select_fields_array as $value) {
