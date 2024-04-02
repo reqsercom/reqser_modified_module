@@ -92,14 +92,15 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
                                                                                         'reseller_id' => $this->getResellerId(),
-                                                                                        'request_on_start' => ((MODULE_SYSTEM_REQSER_REQUEST_ON_START == 'true') ? '1' : '0'),
+                                                                                        'request_on_start' => MODULE_SYSTEM_REQSER_REQUEST_ON_START,
+                                                                                        'request_on_orders_edit' => MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT,                                                                                  
                                                                                        )
                                                                        )
                                                        ),
-                                    'settings' => array('request_on_start' => array('method' => 'post',
-                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/settings/request_on_start',
-                                                                       'params' => array('request_on_start = true or false'),
-                                                                       'desc' => 'Change setting for request on start',
+                                    'settings' => array('change_reqser_config' => array('method' => 'post',
+                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/settings/change_reqser_config',
+                                                                       'params' => array('value => string'),
+                                                                       'desc' => 'Change some Reqser Config values as to control if the shop should make request on certain pages or not',
                                                                        'returns' => 'array with success or error message'
                                                                       )
                                                       ),
@@ -1189,14 +1190,17 @@ class ClassReqser extends api_local\ApiBase {
    * 
    * @return array with success or error message
    */
-  protected function callSettingsRequest_on_start() {
+  protected function callSettingsChange_reqser_config() {
     $received_data = file_get_contents('php://input');
-      if($received_data != '') {
+      if ($received_data != '') {
         $dec_rec_data = json_decode($received_data, true);
         $dec_rec_data = $this->purifyResp($dec_rec_data);
         if (isset($dec_rec_data['request_on_start']) && ($dec_rec_data['request_on_start'] === 'true' || $dec_rec_data['request_on_start'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_START'");
+        } elseif (isset($dec_rec_data['request_on_orders_edit']) && ($dec_rec_data['request_on_orders_edit'] === 'true' || $dec_rec_data['request_on_orders_edit'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT'");
         } else {
           $out_arr = array('error' => 'Something went wrong, no correct data recieved');
         }
