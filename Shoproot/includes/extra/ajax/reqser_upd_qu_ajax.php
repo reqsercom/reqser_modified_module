@@ -120,7 +120,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   
   if(isset($msreq_token_verify['access_token']) && !isset($msreq_token_verify['warning_message'])) {
     $msreq_url_requ = 'https://reqser.com/api/module_request';
-    $post_fields = array('website' => $_SERVER['HTTP_HOST'], 'cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION);
+    $post_fields = array('website' => $_SERVER['HTTP_HOST'], 'cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'module_version' => $msreq_api_reqser->getApiReqserVersion());
     if (isset($_POST['reqser_request_on_orders_edit']) && $_POST['reqser_request_on_orders_edit'] == 'true') {
       $post_fields['reqser_request_on_orders_edit'] = 'true';
       $post_fields['comments_exists'] = $_POST['comments_exists'];
@@ -133,7 +133,6 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
     } elseif (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true'){
       $post_fields['reqser_request_text_translation'] = 'true';
       $post_fields['text'] = $_POST['text'];
-
     }
     if (isset($_POST['fwl'])) $post_fields['fwl']  = $_POST['fwl'];
     if (isset($_POST['iwl'])) $post_fields['iwl']  = $_POST['iwl'];

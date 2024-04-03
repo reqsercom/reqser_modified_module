@@ -85,16 +85,17 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'desc' => 'get information about possible shop API calls',
                                                                                         'returns' => 'an array with the possible shop API calls',
                                                                                         'api_base_version' => $this->getApiBaseVersion(),
-                                                                                        'module_version' => $this->getApiReqserVersion(), //Version gemäss Files
-                                                                                        'module_version_installed' => MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION, //Version gemäss Datenbank
+                                                                                        'module_version' => $this->getApiReqserVersion(), //Version gemäss Funktion
+                                                                                        'module_version_files' => $this->api_reqser_version, //Version gemäss Files
+                                                                                        'module_version_database' => MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION, //Version gemäss Datenbank
                                                                                         'shop_version' => $this->getShopVersion(),
                                                                                         'php_version' => phpversion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
                                                                                         'reseller_id' => $this->getResellerId(),
-                                                                                        'request_on_start' => MODULE_SYSTEM_REQSER_REQUEST_ON_START,
-                                                                                        'request_on_orders_edit' => MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT, 
+                                                                                        'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
+                                                                                        'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -221,11 +222,63 @@ class ClassReqser extends api_local\ApiBase {
   }
 
   /**  
-   * public method getApiReqserVersion
+   * public method getApiReqserVersion, compare installed and file version and update if necessary
    *
    * @return version of present reqser api (which is an extension of BaseApi with its own version)
    */
   public function getApiReqserVersion() {
+    if (floatval($this->api_reqser_version) != floatval(constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
+        //Update from 2.6 to 2.7 Version
+        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, ?)";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN', '', '6', '4', 'now()');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 2.6 to 2.7 Version
+        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL', '', '6', '5');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        
+        //Update from 2.7 to 2.8 Version
+        if (defined('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION')){
+          $upd_conf_qu_str = "UPDATE configuration SET configuration_group_id = '6', sort_order = '7' WHERE configuration_key = ?";
+          if($upd_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_MORE_TABLES'))) {
+            $this->api_db_conn->apiDbStmtClose($upd_qu);
+          }
+        } 
+        
+        //Update from 3.0 to 3.1 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_START', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 3.0 to 3.1 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        } 
+
+        //Update to newest version
+        $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
+        if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
+          $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
+        }
+        
+    }
     return $this->api_reqser_version;
   }
   
