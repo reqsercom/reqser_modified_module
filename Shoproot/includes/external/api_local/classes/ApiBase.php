@@ -113,8 +113,13 @@ class ApiBase {
    *
    * @return base64-encoded with colon concatenated string of API key and temporary token
    */
-  protected function hashAuthHeader($api_key, $token) {
-    $hash = base64_encode($api_key.':'.$token);
+  protected function hashAuthHeader($value_1, $value_2 = '') {
+    if ($value_2 != ''){
+      $hash = base64_encode($value_1.':'.$value_2);
+    } else {
+      $hash = base64_encode($value_1);
+    }
+    
     return $hash;
   }
   
@@ -146,7 +151,6 @@ class ApiBase {
         (!isset($_SERVER['HTTP_X_FORWARDED_PROTO']) || strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) !== 'https')) {
         return array('error' => 'call via ssl necessary');
     }
-
 
     $path_str = parse_url($url, PHP_URL_PATH);
     $url_arr = explode( '/', ltrim($path_str, '/'));
@@ -389,18 +393,31 @@ class ApiBase {
             }
           } else {
             if(isset($headers['Authorization'])) {
-              if($this->hashAuthHeader($api_key, $api_token) == $headers['Authorization']) {
+              //JorisK 04-2024, ab Modul Version 3.1 werden Request auch nur mit dem Token akkzeptiert, es gilt als Sicherheitstechnisch besser nicht in jedem Call auch den API Key zu senden
+              if ($this->hashAuthHeader($api_key, $api_token) == $headers['Authorization'] || $this->hashAuthHeader($api_token) == $headers['Authorization']) {               
                 $headers_auth = base64_decode($headers['Authorization']);
-                $headers_auth_arr = explode(':', $headers_auth);
-                if($headers_auth_arr[0] != $api_key && $headers_auth_arr[1] != $api_token) {
-                  $err = array('error' => ($this->dev_mode === true ? 'API key and/or token are not right' : 'restricted area, not authorized'));
-                } else {
-                  $valid_until = strtotime((string)$api_valid_until); 
-                  $now = time();
-                  if($valid_until < $now) {
-                    $err = array('error' => ($this->dev_mode === true ? 'token validity expired' : 'restricted area, not authorized'));
+                if (strrpos($headers_auth, ':') !== false) {
+                  $headers_auth_arr = explode(':', $headers_auth);
+                  if ($headers_auth_arr[0] != $api_key && $headers_auth_arr[1] != $api_token) {
+                    $err = array('error' => ($this->dev_mode === true ? 'API key and/or token are not right' : 'restricted area, not authorized'));
+                  } else {
+                    $valid_until = strtotime((string)$api_valid_until); 
+                    $now = time();
+                    if ($valid_until < $now) {
+                      $err = array('error' => ($this->dev_mode === true ? 'token validity expired' : 'restricted area, not authorized'));
+                    }
                   }
-                }
+                } else {
+                  if ($headers_auth != $api_token) {
+                    $err = array('error' => ($this->dev_mode === true ? 'API key and/or token are not right' : 'restricted area, not authorized'));
+                  } else {
+                    $valid_until = strtotime((string)$api_valid_until); 
+                    $now = time();
+                    if ($valid_until < $now) {
+                      $err = array('error' => ($this->dev_mode === true ? 'token validity expired' : 'restricted area, not authorized'));
+                    }
+                  }
+                }              
               } else {
                 $err = array('error' => ($this->dev_mode === true ? 'hashed auth string doesn\'t correspond' : 'restricted area, not authorized'));
               }
