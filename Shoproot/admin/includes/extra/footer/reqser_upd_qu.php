@@ -56,6 +56,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           let admincolLeftExists = $('.admincol_leftt').length > 0 ? 'true' : 'false';
           let admincolExists = $('.admincol').length > 0 ? 'true' : 'false';
           let admin_containerExists = $('.admin_container').length > 0 ? 'true' : 'false';
+          let admincol_full_exists = $('.admincol_full').length > 0 ? 'true' : 'false';
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax', 
@@ -65,7 +66,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             admincol_right_exists: admincolRightExists,
             admincol_left_exists: admincolLeftExists,
             admincol_exists: admincolExists,
-            admin_container_exists: admin_containerExists
+            admin_container_exists: admin_containerExists,
+            admincol_full_exists: admincol_full_exists
           };
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",

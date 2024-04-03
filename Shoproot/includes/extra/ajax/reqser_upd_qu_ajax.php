@@ -130,6 +130,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['admincol_left_exists'] = $_POST['admincol_left_exists'];
       $post_fields['admincol_exists'] = $_POST['admincol_exists'];
       $post_fields['admin_container_exists'] = $_POST['admin_container_exists'];
+      $post_fields['admincol_full_exists'] = $_POST['admincol_full_exists'];
     } elseif (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true'){
       $post_fields['reqser_request_text_translation'] = 'true';
       $post_fields['text'] = $_POST['text'];
