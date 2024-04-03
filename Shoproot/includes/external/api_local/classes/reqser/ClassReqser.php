@@ -85,7 +85,8 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'desc' => 'get information about possible shop API calls',
                                                                                         'returns' => 'an array with the possible shop API calls',
                                                                                         'api_base_version' => $this->getApiBaseVersion(),
-                                                                                        'module_version' => $this->getApiReqserVersion(),
+                                                                                        'module_version' => $this->getApiReqserVersion(), //Version gemäss Files
+                                                                                        'module_version_installed' => MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION, //Version gemäss Datenbank
                                                                                         'shop_version' => $this->getShopVersion(),
                                                                                         'php_version' => phpversion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
@@ -93,7 +94,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
                                                                                         'reseller_id' => $this->getResellerId(),
                                                                                         'request_on_start' => MODULE_SYSTEM_REQSER_REQUEST_ON_START,
-                                                                                        'request_on_orders_edit' => MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT,                                                                                  
+                                                                                        'request_on_orders_edit' => MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT, 
                                                                                        )
                                                                        )
                                                        ),
