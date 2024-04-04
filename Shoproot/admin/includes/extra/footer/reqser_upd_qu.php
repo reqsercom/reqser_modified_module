@@ -67,7 +67,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             admincol_left_exists: admincolLeftExists,
             admincol_exists: admincolExists,
             admin_container_exists: admin_containerExists,
-            admincol_full_exists: admincol_full_exists
+            admincol_full_exists: admincol_full_exists,
+            admin_id: '<?php echo $_SESSION['customer_id']; ?>',
           };
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
@@ -114,6 +115,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             comments_exists: commentsExists,
             fwl: '<?php echo $_SESSION['language']; ?>',
             iwl: '<?php echo $order->info['language']; ?>',
+            admin_id: '<?php echo $_SESSION['customer_id']; ?>',
           };
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
@@ -158,6 +160,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             text: textareaContent,
             fwl: '<?php echo $_SESSION['language']; ?>',
             iwl: '<?php echo $order->info['language']; ?>',
+            admin_id: '<?php echo $_SESSION['customer_id']; ?>',
           };
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
