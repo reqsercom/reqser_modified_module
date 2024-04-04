@@ -24,7 +24,7 @@ defined('ENCODE_DEFINED_CHARSETS') || define('ENCODE_DEFINED_CHARSETS','ASCII,UT
 
 class ClassReqser extends api_local\ApiBase {
   public $browser_mode, $protoc;
-  protected $api_reqser_version, $dev_mode, $allowed_methods, $log_path, $shop_languages, $path, $path_file_name;
+  protected $api_reqser_version, $dev_mode, $allowed_methods, $log_path, $shop_languages, $path, $path_file_name, $fwl_and_iwl_arr;
   private $write_control_mode, $at, $mt, $mtad, $lt, $aara, $fwl, $iwl, $lf, $ala;
 
   /**  
