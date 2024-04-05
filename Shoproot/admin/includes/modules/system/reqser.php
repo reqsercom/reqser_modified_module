@@ -138,7 +138,6 @@ class reqser {
     //JorisK From Version 3.1
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_START'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_ORDERS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_ADMIN_DATA'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
      
   }
 
@@ -159,7 +158,6 @@ class reqser {
                  $this->mn_const.'ADD_LANGUAGE_ALLOWED', 
                  $this->mn_const.'LANGUAGE_FILES',
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
-                 $this->mn_const.'ALLOW_ADMIN_DATA',
                  $this->mn_const.'PROTOCOL_ACC',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',

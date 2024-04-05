@@ -97,7 +97,6 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
                                                                                         'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
-                                                                                        'allow_admin_data' => (defined('MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA')) ? MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -106,12 +105,6 @@ class ClassReqser extends api_local\ApiBase {
                                                                        'params' => array('value => string'),
                                                                        'desc' => 'Change some Reqser Config values as to control if the shop should make request on certain pages or not',
                                                                        'returns' => 'array with success or error message'
-                                                                      )
-                                                      ),                                                   
-                                                        'admin_data' => array('method' => 'get',
-                                                        'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/settings/admin_data',
-                                                                        'desc' => 'get admin data for personalization, only possible if MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA is true',
-                                                                        'returns' => 'an array with the admin data'
                                                                       )
                                                       ),
                                     'renew' => array('method' => 'get',
@@ -281,17 +274,7 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
         } 
-
-        //Update from 3.0 to 3.1 Version
-        if (!defined('MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA')){
-          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
-          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
-            $this->api_db_conn->apiDbStmtClose($ins_qu);
-          }
-        } 
         
-
         //Update to newest version
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
         if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
@@ -1284,31 +1267,6 @@ class ClassReqser extends api_local\ApiBase {
     return $out_arr;
   }
 
-      /**  
-   * private method callSettingsAdmin_Data
-   * 
-   * @return array with data or error message
-   */
-  protected function callSettingsAdmin_Data() {
-    //JorisK 04-2024 only possible if allowed in module
-    if (defined('MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA') && constant(MODULE_SYSTEM_REQSER_ALLOW_ADMIN_DATA) == 'true'){
-      //Only for Admin User with ccustomers_status = 0
-      $qu_str = "SELECT customers_id, customers_firstname, customers_lastname, customers_email_address FROM customers WHERE customers_status = 0";
-      $result = $this->api_db_conn->apiDbQuery($qu_str);
-      $user_array = array();
-      while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
-        $user_array[] = $result_arr;
-      }
-      if (sizeof($user_array) > 0) {
-        $out_arr = array('data' => $user_array);
-      } else {
-        $out_arr = array('error' => 'No Admin User Data found');
-      }
-    } else {
-      $out_arr = array('error' => 'Admin User Data not allowed');
-    }
-    return $out_arr;
-  }
 
   /**  
    * private method nameTablesFields
