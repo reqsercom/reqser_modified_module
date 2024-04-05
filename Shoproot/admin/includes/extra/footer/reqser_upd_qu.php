@@ -53,7 +53,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
           let admincolRightExists = $('.admincol_right').length > 0 ? 'true' : 'false';
-          let admincolLeftExists = $('.admincol_leftt').length > 0 ? 'true' : 'false';
+          let admincolLeftExists = $('.admincol_left').length > 0 ? 'true' : 'false';
           let admincolExists = $('.admincol').length > 0 ? 'true' : 'false';
           let admin_containerExists = $('.admin_container').length > 0 ? 'true' : 'false';
           let admincol_full_exists = $('.admincol_full').length > 0 ? 'true' : 'false';
