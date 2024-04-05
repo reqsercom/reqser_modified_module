@@ -24,7 +24,7 @@ defined('ENCODE_DEFINED_CHARSETS') || define('ENCODE_DEFINED_CHARSETS','ASCII,UT
 
 class ClassReqser extends api_local\ApiBase {
   public $browser_mode, $protoc;
-  protected $api_reqser_version, $dev_mode, $allowed_methods, $log_path, $shop_languages, $path, $path_file_name;
+  protected $api_reqser_version, $dev_mode, $allowed_methods, $log_path, $shop_languages, $path, $path_file_name, $fwl_and_iwl_arr;
   private $write_control_mode, $at, $mt, $mtad, $lt, $aara, $fwl, $iwl, $lf, $ala;
 
   /**  
@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.0';
+    $this->api_reqser_version = '3.1';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -85,15 +85,37 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'desc' => 'get information about possible shop API calls',
                                                                                         'returns' => 'an array with the possible shop API calls',
                                                                                         'api_base_version' => $this->getApiBaseVersion(),
-                                                                                        'module_version' => $this->getApiReqserVersion(),
+                                                                                        'module_version' => $this->getApiReqserVersion(), //Version gemäss Funktion
+                                                                                        'module_version_files' => $this->api_reqser_version, //Version gemäss Files
+                                                                                        'module_version_database' => MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION, //Version gemäss Datenbank
                                                                                         'shop_version' => $this->getShopVersion(),
+                                                                                        'php_version' => phpversion(),
                                                                                         'files_activated' => ($this->lf === true ? '1' : '0'),
                                                                                         'files_automated' => (($this->lf === true && MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING == 'true') ? '1' : '0'),
                                                                                         'language_add_allowed' => ($this->ala === true ? '1' : '0'),
                                                                                         'reseller_id' => $this->getResellerId(),
+                                                                                        'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
+                                                                                        'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
+                                                                                        'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
                                                                                        )
                                                                        )
                                                        ),
+                                    'settings' => array('change_reqser_config' => array('method' => 'post',
+                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/settings/change_reqser_config',
+                                                                       'params' => array('value => string'),
+                                                                       'desc' => 'Change some Reqser Config values as to control if the shop should make request on certain pages or not',
+                                                                       'returns' => 'array with success or error message'
+                                                                      )
+                                                      ),
+                                    'renew' => array('method' => 'get',
+                                                      'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/renew',
+                                                                      'desc' => 'renew token (e.g. because expired) for shop API calls (valid 1 month)',
+                                                                      'returns' => 'an array with the token and its expiry'
+                                                                    )
+                                                    )
+                                    ),
+
+
                             
                                    'temp_token' => array('fetch' => array('method' => 'get',
                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/fetch',
@@ -203,11 +225,63 @@ class ClassReqser extends api_local\ApiBase {
   }
 
   /**  
-   * public method getApiReqserVersion
+   * public method getApiReqserVersion, compare installed and file version and update if necessary
    *
    * @return version of present reqser api (which is an extension of BaseApi with its own version)
    */
   public function getApiReqserVersion() {
+    if (floatval($this->api_reqser_version) != floatval(constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
+        //Update from 2.6 to 2.7 Version
+        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, ?)";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN', '', '6', '4', 'now()');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 2.6 to 2.7 Version
+        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL', '', '6', '5');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        
+        //Update from 2.7 to 2.8 Version
+        if (defined('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION')){
+          $upd_conf_qu_str = "UPDATE configuration SET configuration_group_id = '6', sort_order = '7' WHERE configuration_key = ?";
+          if($upd_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_MORE_TABLES'))) {
+            $this->api_db_conn->apiDbStmtClose($upd_qu);
+          }
+        } 
+        
+        //Update from 3.0 to 3.1 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_START', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 3.0 to 3.1 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        } 
+        
+        //Update to newest version
+        $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
+        if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
+          $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
+        }
+        
+    }
     return $this->api_reqser_version;
   }
   
@@ -762,6 +836,12 @@ class ClassReqser extends api_local\ApiBase {
                 if(isset($fields['lang']) && $fields['lang'] != $language_field) {
                   $out_arr = array('error' => 'Language Field '.$language_field.' not allowed use '.$fields['lang'].' instead!');
                 } else {
+                  //JorisK 3-2024, on some Server an issue using ; as delimiter, so we allow some more delimiters plus the refering url encode value depending on server settings can be different
+                  $select_fields = str_replace(',', ';', $select_fields);
+                  $select_fields = str_replace('%2C', ';', $select_fields);
+                  $select_fields = str_replace('|', ';', $select_fields);
+                  $select_fields = str_replace('%7C', ';', $select_fields);
+                  $select_fields = str_replace('%3B', ';', $select_fields);
                   //JorisK Einschränkung auf Spalten bei vordefinierten Tabellen
                   if(isset($fields['fields']) && $this->aara === false) {
                     $select_fields_array = explode(";", $select_fields);
@@ -1161,6 +1241,32 @@ class ClassReqser extends api_local\ApiBase {
 
     return $allowed_tables;
   }
+
+    /**  
+   * private method callFilesSend_file
+   * 
+   * @return array with success or error message
+   */
+  protected function callSettingsChange_reqser_config() {
+    $received_data = file_get_contents('php://input');
+      if ($received_data != '') {
+        $dec_rec_data = json_decode($received_data, true);
+        $dec_rec_data = $this->purifyResp($dec_rec_data);
+        if (isset($dec_rec_data['request_on_start']) && ($dec_rec_data['request_on_start'] === 'true' || $dec_rec_data['request_on_start'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_START'");
+        } elseif (isset($dec_rec_data['request_on_orders_edit']) && ($dec_rec_data['request_on_orders_edit'] === 'true' || $dec_rec_data['request_on_orders_edit'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT'");
+        } else {
+          $out_arr = array('error' => 'Something went wrong, no correct data recieved');
+        }
+      } else {
+        $out_arr = array('error' => 'Something went wrong, no POST Data received');
+      }
+    return $out_arr;
+  }
+
 
   /**  
    * private method nameTablesFields
