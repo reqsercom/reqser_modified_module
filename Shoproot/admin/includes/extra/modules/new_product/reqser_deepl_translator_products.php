@@ -24,7 +24,7 @@
             $reqser_pid = 'new_entry';
           }
           $reqser_check_activ_postfields = array('website' => $_SERVER['HTTP_HOST']);
-          $reqser_post_fields = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'products_description', 'id' => $reqser_pid);
+          $reqser_post_fields = array('website' => $_SERVER['HTTP_HOST'], 'table' => 'products_description', 'id' => $reqser_pid, 'customer_id' => $_SESSION['customer_id']);
           $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
           ?>
           <script>

@@ -135,7 +135,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['reqser_request_text_translation'] = 'true';
       $post_fields['text'] = $_POST['text'];
     }
-    if (isset($post_fields['admin_id'])) $post_fields['admin_id'] = $_POST['admin_id'];
+    if (isset($_SESSION['customer_id'])) $post_fields['customer_id'] = $_SESSION['customer_id'];
     if (isset($_POST['fwl'])) $post_fields['fwl']  = $_POST['fwl'];
     if (isset($_POST['iwl'])) $post_fields['iwl']  = $_POST['iwl'];
     $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', 5);
