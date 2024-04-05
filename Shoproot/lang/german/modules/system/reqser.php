@@ -51,7 +51,7 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Sprachdateien auf dem Serve
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Ohne Sprachdateien funktioniert keine Fremdsprache im Shop und es gibt eine "weisse" Seite!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Sprachdateien automatisch &uuml;bertragen?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Sollen die &uuml;bersetzten Sprachdateien automatisch in Ihren Shop &uuml;bertragen oder jede Sprachdatei manuell in Reqser ausgew&auml;hlt werden ?<br />Ja = Sprachdateien automatisch / Nein = manuell &uuml;bertragen');
-define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', 'API-Zugriffe protokollieren?');
+define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Sicherheit</h2>API-Zugriffe protokollieren?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Sollen API-Zugriffe protokolliert werden?<br />(Logs sind in <i>/api/reqser/logs/</i> zu finden.)');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test im Browser ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Im Browser testen ohne Header zu senden?<br /><span class="alrt">!!! Muß in Live-Betrieb der API deaktiviert sein !!!</span>');
