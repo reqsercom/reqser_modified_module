@@ -97,7 +97,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
                                                                                         'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
                                                                                         'request_on_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT : 'not defined',
-                                                                                        'request_on_category_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
+                                                                                        'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
                                                                                        )
                                                                        )
