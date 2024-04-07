@@ -1263,7 +1263,7 @@ class ClassReqser extends api_local\ApiBase {
   }
 
     /**  
-   * private method callFilesSend_file
+   * private method callSettingsChange_reqser_config
    * 
    * @return array with success or error message
    */
