@@ -75,10 +75,15 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             function(data) {
               if(data != '') {
                 var data_message = JSON.parse(data);
-                if (data_message['add_to_container'] && data_message['add_to_container'] != '' && data_message['container_content'] && data_message['container_content'] != '') {
-                  if($('.' + data_message['add_to_container']).length > 0) {
-                    var newDiv = $('<div>').html(data_message['container_content']);
-                    $('.' + data_message['add_to_container']).prepend(newDiv);
+                if (data_message['reqser_boxes']) {
+                  for (var key in data_message['reqser_boxes']) {
+                    var box = data_message['reqser_boxes'][key];
+                    if (box['add_to_container'] && box['add_to_container'] != '' && box['container_content'] && box['container_content'] != '') {
+                        if($('.' + box['add_to_container']).length > 0) {
+                            var newDiv = $('<div>').html(box['container_content']);
+                            $('.' + box['add_to_container']).prepend(newDiv);
+                        }
+                    }
                   }
                 }
                 if (data_message['alert_message'] && data_message['alert_message'] != ''){
