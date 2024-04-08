@@ -183,12 +183,37 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     } 
 
   }
-  if (basename($PHP_SELF) == 'check_update.php'){
+  if (basename($PHP_SELF) == 'check_update.php') {
     ?>
       <script>
-      if ($('.boxCenterLeft').length > 0){
-        var tableHtml = '<table class="tableBoxCenter collapse"><tbody><tr class="dataTableHeadingRow"><td class="dataTableHeadingContent">Shop</td><td class="dataTableHeadingContent txta-c" style="width:10%;">Installiert</td></tr></tbody></table>';
-        $('.boxCenterLeft').append(tableHtml);
+      if ($('.boxCenterLeft').length > 0) {
+        let version = '<?php echo constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'); ?>';
+        let dir_admin = '<?php echo DIR_WS_ADMIN; ?>';
+        var tableHtml = `<table class="tableBoxCenter collapse"><tbody><tr class="dataTableHeadingRow">
+                          <td class="dataTableHeadingContent">Reqser.com</td>
+                          <td class="dataTableHeadingContent txta-c" style="width:10%;">Installiert</td>
+                          <td class="dataTableHeadingContent txta-c" style="width:10%;">Update Status</td>
+                          <td class="dataTableHeadingContent txta-r" style="width:15%;">Version integriert</td>
+                          <td class="dataTableHeadingContent txta-r" style="width:15%;">Version verfügbar</td>
+                          <td class="dataTableHeadingContent txta-r" style="width:10%;">Aktion</td>
+                        </tr>
+                        <tr class="dataTableRowSelected" onmouseover="this.style.cursor='pointer'" style="cursor: pointer;">
+                        <td class="dataTableContent">Modul Version</td>
+                        <td class="dataTableContent txta-c">
+                          <img src="images/icon_status_green.gif" alt="installiert" title="installiert" width="12" height="12" style="border:0;margin-left: 5px;">                        
+                        </td>
+                        <td class="dataTableContent txta-c">
+                                                
+                        </td>
+                        <td class="dataTableContent txta-r">` + version + `</td>
+                        <td class="dataTableContent txta-r"></td> 
+                        <td class="dataTableContent txta-r"><a class="button" target="_blank" onclick="this.blur();" href="https://www.reqser.com/download_reqser_modified_modul_custom/` + dir_admin + `">Download</a></td>
+                      </tr>
+                      <tr><td colspan="5" style="height:35px;">&nbsp;</td></tr>
+                        
+                        </tbody></table>`;
+                        //<img src="images/icon_status_green.gif" alt="aktuell" title="aktuell" width="12" height="12" style="border:0;margin-left: 5px;"> 
+        $('.boxCenterLeft').prepend(tableHtml);
       }
       </script>
     <?php
