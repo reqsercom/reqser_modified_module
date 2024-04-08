@@ -197,26 +197,49 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                           <td class="dataTableHeadingContent txta-r" style="width:15%;">Version verfügbar</td>
                           <td class="dataTableHeadingContent txta-r" style="width:10%;">Aktion</td>
                         </tr>
-                        <tr class="dataTableRow" onmouseover="this.style.cursor='pointer'" style="cursor: pointer;">
+                        <tr class="dataTableRow">
                         <td class="dataTableContent">Modul Version</td>
                         <td class="dataTableContent txta-c">
                           <img src="images/icon_status_green.gif" alt="installiert" title="installiert" width="12" height="12" style="border:0;margin-left: 5px;">                        
                         </td>
-                        <td class="dataTableContent txta-c">
+                        <td class="dataTableContent txta-c" id="reqser_update_necessary">
                                                 
                         </td>
                         <td class="dataTableContent txta-r">` + version + `</td>
-                        <td class="dataTableContent txta-r"></td> 
+                        <td class="dataTableContent txta-r" id="reqser_aviable_module_version"></td> 
                         <td class="dataTableContent txta-r"><a class="button" target="_blank" onclick="this.blur();" href="https://www.reqser.com/download_reqser_modified_modul_custom/` + dir_admin + `">Download</a></td>
                       </tr>
                       <tr><td colspan="5" style="height:35px;">&nbsp;</td></tr>
-                        
-                        </tbody></table>`;
-                        //<img src="images/icon_status_green.gif" alt="aktuell" title="aktuell" width="12" height="12" style="border:0;margin-left: 5px;"> 
+                    </tbody></table>`;
         $('.boxCenterLeft').prepend(tableHtml);
+        $(function() {
+          let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+
+          msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_upd_qu: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>'};
+          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+          $.post("../ajax.php",
+            msreq_params,
+            function(data) {
+              if(data != '') {
+                var data_message = JSON.parse(data);
+                if (data_message['current_module_version'] && data_message['current_module_version'] != ''){
+                  $('td[id="reqser_aviable_module_version"]').html(data_message['current_module_version']);
+                  if (parseFloat(version) < parseFloat(data_message['current_module_version'])){
+                    $('td[id="reqser_update_necessary"]').html('<img src="images/icon_status_red.gif" alt="update notwendig" title="update" width="12" height="12" style="border:0;margin-left: 5px;">');
+                  } else {
+                    $('td[id="reqser_update_necessary"]').html('<img src="images/icon_status_green.gif" alt="aktuell" title="aktuell" width="12" height="12" style="border:0;margin-left: 5px;">');
+                  }
+                } 
+              }
+            }
+          );
+        });
+
       }
       </script>
     <?php
-    }  
+    }
+    
 }
 
