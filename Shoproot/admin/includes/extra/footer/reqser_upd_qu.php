@@ -197,7 +197,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                           <td class="dataTableHeadingContent txta-r" style="width:15%;">Version verfügbar</td>
                           <td class="dataTableHeadingContent txta-r" style="width:10%;">Aktion</td>
                         </tr>
-                        <tr class="dataTableRowSelected" onmouseover="this.style.cursor='pointer'" style="cursor: pointer;">
+                        <tr class="dataTableRow" onmouseover="this.style.cursor='pointer'" style="cursor: pointer;">
                         <td class="dataTableContent">Modul Version</td>
                         <td class="dataTableContent txta-c">
                           <img src="images/icon_status_green.gif" alt="installiert" title="installiert" width="12" height="12" style="border:0;margin-left: 5px;">                        
