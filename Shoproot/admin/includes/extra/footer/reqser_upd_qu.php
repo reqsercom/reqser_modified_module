@@ -197,7 +197,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                           <td class="dataTableHeadingContent txta-r" style="width:15%;">Version verfügbar</td>
                           <td class="dataTableHeadingContent txta-r" style="width:10%;">Aktion</td>
                         </tr>
-                        <tr class="dataTableRow">
+                        <tr class="dataTableRow" id="reqser_module_row">
                         <td class="dataTableContent">Modul Version</td>
                         <td class="dataTableContent txta-c">
                           <img src="images/icon_status_green.gif" alt="installiert" title="installiert" width="12" height="12" style="border:0;margin-left: 5px;">                        
@@ -209,7 +209,9 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                         <td class="dataTableContent txta-r" id="reqser_aviable_module_version"></td> 
                         <td class="dataTableContent txta-r"><a class="button" target="_blank" onclick="this.blur();" href="https://www.reqser.com/download_reqser_modified_modul_custom/` + dir_admin + `">Download</a></td>
                       </tr>
+                      <tr><td colspan="6" id="reqser_update_instruction_message"></td></tr>
                       <tr><td colspan="5" style="height:35px;">&nbsp;</td></tr>
+                      
                     </tbody></table>`;
         $('.boxCenterLeft').prepend(tableHtml);
         $(function() {
@@ -225,12 +227,20 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 var data_message = JSON.parse(data);
                 if (data_message['current_module_version'] && data_message['current_module_version'] != ''){
                   $('td[id="reqser_aviable_module_version"]').html(data_message['current_module_version']);
-                  if (parseFloat(version) < parseFloat(data_message['current_module_version'])){
+                  if (parseFloat(version) != parseFloat(data_message['current_module_version'])){
                     $('td[id="reqser_update_necessary"]').html('<img src="images/icon_status_red.gif" alt="update notwendig" title="update" width="12" height="12" style="border:0;margin-left: 5px;">');
+                    $('#reqser_module_row').css({'background-color': 'red', 'color': 'white'});
+                    if (data_message['reqser_update_instruction_message'] && data_message['reqser_update_instruction_message'] != ''){
+                      $('td[id="reqser_update_instruction_message"]').html(data_message['reqser_update_instruction_message']);
+                    }
+                    
                   } else {
                     $('td[id="reqser_update_necessary"]').html('<img src="images/icon_status_green.gif" alt="aktuell" title="aktuell" width="12" height="12" style="border:0;margin-left: 5px;">');
                   }
                 } 
+              }
+              if (data_message['alert_message'] && data_message['alert_message'] != ''){
+                  alert(data_message['alert_message']);
               }
             }
           );
