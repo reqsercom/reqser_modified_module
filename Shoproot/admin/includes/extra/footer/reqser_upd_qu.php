@@ -183,5 +183,15 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     } 
 
   }
+  if (basename($PHP_SELF) == 'check_update.php'){
+    ?>
+      <script>
+      if ($('.boxCenterLeft').length > 0){
+        var tableHtml = '<table class="tableBoxCenter collapse"><tbody><tr class="dataTableHeadingRow"><td class="dataTableHeadingContent">Shop</td><td class="dataTableHeadingContent txta-c" style="width:10%;">Installiert</td></tr></tbody></table>';
+        $('.boxCenterLeft').append(tableHtml);
+      }
+      </script>
+    <?php
+    }  
 }
 
