@@ -65,6 +65,17 @@ class reqser {
             }
           }
         }
+        
+        //manually added tables exist ?
+        if($_POST['configuration'][$this->mn_const.'MORE_TABLES_ADD'] != '') {
+          $post_more_tbl_add_arr = explode(',', $_POST['configuration'][$this->mn_const.'MORE_TABLES_ADD']);
+          foreach($post_more_tbl_add_arr as $tbl) {
+            $check_table = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '".$tbl."'");
+            if(xtc_db_num_rows($check_table) == 0) {
+              $messageStack->add_session(sprintf(MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR, $tbl), 'warning');
+            }
+          }
+        }
       }
     }
   }

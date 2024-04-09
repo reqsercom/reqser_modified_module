@@ -65,6 +65,8 @@ define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul keine Sprache in welche &uuml;bersetzt werden soll ausgew&auml;hlt !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"In welche Sprachen &uuml;bersetzen?" darf nicht eine Sprache enthalten die in "Von welcher Sprache &uuml;bersetzen?" ausgew&auml;hlt wurde.');
 
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Die manuell hinzugef&uuml;gte Tabelle <b>"%s"</b> konnte in der Datenbank nicht gefunden werden. Bitte &uuml;berpr&uuml;fen Sie die Einstellungen für "'.MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE.'"!');
+
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Das Reqser.com DeepL Modul wird alle im Modul aktivierten Fremdsprachen automatisch nach dem Speichern für dieses Produkt übersetzen.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator Modul hat kein API Key, bitte ein API Key hinterlegen');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator Modul nicht aktiviert, bitte aktivieren Sie das Modul unter Module->System Module');
