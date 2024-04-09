@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Съхраняваният т�
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'Ключът на API е успешно съхранен');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Не е въведен API ключ! Моля, влезте в <i>reqser.com</i>, вземете API ключа за този уебсайт и го запишете тук в модула.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL Грешка:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Не е избран език, на който да бъде извършен преводът !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Модул не е избран език, на който да бъде преведен !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Превод на кои езици?" не трябва да съдържа език, който е избран в "Превод от кой език?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ръчно добавената таблица <b>"%s"</b> не може да бъде намерена в базата данни. Моля, проверете настройките за "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Модулът Reqser.com DeepL автоматично ще преведе всички чужди езици, активирани в модула за този продукт, след като го запази.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Модулът Deepl Translator на Reqser.com няма API ключ, моля, въведете API ключ');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator модул не е активиран, моля, активирайте модула в Модул->Системен модул');

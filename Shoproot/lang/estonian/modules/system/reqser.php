@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -21,7 +21,7 @@
 ***********************************************************/
 define('MODULE_SYSTEM_REQSER_TITLE', 'Automaatne DeepL t&otilde;lked Reqser <i>.</i>com kaudu, mooduli versioon %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> s&uuml;steemimoodul t&otilde;lgete aktiveerimiseks ja konfigureerimiseks <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> kaudu.');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> s&uuml;steemimoodul t&otilde;lgete aktiveerimiseks ja konfigureerimiseks <i><a href="https://reqser.com/" target="_blank">reqser.com</i> kaudu</a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>P&otilde;hiseaded</h2>Aktiveerige moodul?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser API v&otilde;ti');
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Siin moodulis salvestatud "Req
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API v&otilde;ti edukalt salvestatud');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API v&otilde;tit ei ole sisestatud! Palun logige sisse <i>reqser.com</i> ja hankige selle veebisaidi API v&otilde;ti ning salvestage see siia moodulisse.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ei ole valitud keelde t&otilde;lkimiseks !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Moodul ei ole valitud keelde t&otilde;lkimiseks !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Millistesse keeltesse t&otilde;lkida?" ei tohi sisaldada keelt, mis on valitud jaotises "Millisest keelest t&otilde;lkida?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'K&auml;sitsi lisatud tabelit <b>"%s</b> " ei leitud andmebaasist. Palun kontrollige seadistusi "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL moodul t&otilde;lgib p&auml;rast salvestamist automaatselt k&otilde;ik selle toote jaoks moodulis aktiveeritud v&otilde;&otilde;rkeeled.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator moodulil puudub API v&otilde;ti, palun sisestage API v&otilde;ti.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator moodul ei ole aktiveeritud, palun aktiveerige moodul moodulite all Moodul->S&uuml;steemi moodul');

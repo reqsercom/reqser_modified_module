@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,7 +19,7 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiska DeepL &ouml;vers&auml;ttningar via Reqser <i>.</i>com, modulversion %s<br />- byggd f&ouml;r <i>Reqser</i>.com - &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;"> Reqser.com<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> och &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiska DeepL &ouml;vers&auml;ttningar via Reqser <i>.</i>com, modulversion %s<br />- byggd f&ouml;r <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> och &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Systemmodul f&ouml;r aktivering och konfiguration av &ouml;vers&auml;ttningar via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundl&auml;ggande inst&auml;llningar</h2>Aktivera modul?');
@@ -39,7 +39,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'V&auml;lj ytterligare databasta
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Andra databastabeller (ej tillg&auml;ngliga f&ouml;r urvalet ovan)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Ange ytterligare databastabeller som ska &ouml;vers&auml;ttas h&auml;r, &aring;tskilda med kommatecken.<br />(F&ouml;r till&auml;gg med nya "icke modifierade standard"-tabeller)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Exklusive bord');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Ange h&auml;r de tabeller som inte ska &ouml;vers&auml;ttas, &aring;tskilda av kommatecken.<br />(Endast n&ouml;dv&auml;ndigt om alla standardtabeller har valts ovan och vissa av dem ska exkluderas).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Ange de tabeller som ska undantas fr&aring;n &ouml;vers&auml;ttningar h&auml;r, &aring;tskilda av kommatecken.<br />(Endast n&ouml;dv&auml;ndigt om alla standardtabeller har valts ovan och vissa av dem ska exkluderas).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', '&Ouml;vers&auml;tt fr&aring;n vilket spr&aring;k?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Fr&aring;n vilket spr&aring;k ska &ouml;vers&auml;ttningen g&ouml;ras?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'Vilka spr&aring;k kan jag &ouml;vers&auml;tta till? ' . draw_tooltip('Ytterligare spr&aring;k kan l&auml;ggas till p&aring; <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.'));
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Den "Reqser API-nyckel" som la
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API-nyckel lagrad framg&aring;ngsrikt');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Ingen API-nyckel har angetts! Logga in p&aring; <i>reqser.com</i> och h&auml;mta API-nyckeln f&ouml;r denna webbplats och spara den h&auml;r i modulen.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL-fel:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Inget spr&aring;k att &ouml;vers&auml;tta till valt !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul inget spr&aring;k att &ouml;vers&auml;ttas till valt !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"&Ouml;vers&auml;tt till vilka spr&aring;k?" f&aring;r inte inneh&aring;lla ett spr&aring;k som valts i "&Ouml;vers&auml;tt fr&aring;n vilket spr&aring;k?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Den manuellt tillagda tabellen <b>"%s"</b> kunde inte hittas i databasen. V&auml;nligen kontrollera inst&auml;llningarna f&ouml;r "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL-modulen kommer automatiskt att &ouml;vers&auml;tta alla fr&auml;mmande spr&aring;k som &auml;r aktiverade i modulen f&ouml;r denna produkt efter lagring.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator-modulen har ingen API-nyckel, ange en API-nyckel');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen &auml;r inte aktiverad, v&auml;nligen aktivera modulen under Modul->Systemmodul');

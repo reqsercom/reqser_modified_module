@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '"Kunci API Reqser" yang disimp
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'Kunci API berhasil disimpan');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Tidak ada kunci API yang dimasukkan! Silakan masuk ke <i>reqser.com</i> dan dapatkan kunci API untuk situs web ini dan simpan di sini dalam modul.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'CURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Tidak ada bahasa yang akan diterjemahkan ke dalam bahasa yang dipilih!');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul tidak ada bahasa yang akan diterjemahkan ke dalam bahasa yang dipilih!');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Terjemahkan ke bahasa apa?" tidak boleh berisi bahasa yang telah dipilih di "Terjemahkan dari bahasa apa?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Tabel yang ditambahkan secara manual <b>"%s"</b> tidak dapat ditemukan dalam database. Silakan periksa pengaturan untuk "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL akan secara otomatis menerjemahkan semua bahasa asing yang diaktifkan dalam modul untuk produk ini setelah disimpan.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Penerjemah Reqser.com Deepl tidak memiliki kunci API, harap masukkan kunci API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Penerjemah Reqser.com Deepl tidak diaktifkan, silakan aktifkan modul di bawah Modul- > Modul Sistem');

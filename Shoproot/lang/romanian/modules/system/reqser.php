@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,7 +19,7 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Traduceri automate DeepL prin Reqser <i>.</i>com, versiunea modulului %s<br />- construit pentru <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> și &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a>] (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Traduceri automate DeepL prin Reqser <i>.</i>com, versiunea modulului %s<br />- construit pentru <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> și &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>] Modul de sistem pentru activarea și configurarea traducerilor prin <i><a href="https://reqser.com/" target="_blank">]reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Setări de bază</h2>Activați modulul?');
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '" <i>Reqser</i> API key" stoca
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'Cheia API stocată cu succes');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nu a fost introdusă nicio cheie API! Vă rugăm să vă conectați la <i>reqser.com</i> și să obțineți cheia API pentru acest site web și să o salvați aici &icirc;n modul.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Nu este selectată nicio limbă &icirc;n care să fie tradusă !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Module nu este selectată nicio limbă &icirc;n care să fie tradusă !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Translate to which languages?" nu trebuie să conțină o limbă care a fost selectată &icirc;n "Translate from which language?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Tabelul adăugat manual <b>"%s"</b> nu a putut fi găsit &icirc;n baza de date. Vă rugăm să verificați setările pentru "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modulul Reqser.com DeepL va traduce automat toate limbile străine activate &icirc;n modul pentru acest produs după salvare.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator modulul Deepl nu are nici o cheie API, vă rugăm să introduceți o cheie API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modulul Reqser.com Deepl Translator nu este activat, vă rugăm să activați modulul &icirc;n Module->System Module');

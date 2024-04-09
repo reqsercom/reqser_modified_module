@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,7 +19,7 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiske DeepL overs&aelig;ttelser via Reqser <i>.</i>com, modulversion %s<br />- bygget til <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> og &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiske DeepL overs&aelig;ttelser via Reqser <i>.</i>com, modulversion %s<br />- bygget til <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;"> noRiddle</a> og &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;"> Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Systemmodul til aktivering og konfiguration af overs&aelig;ttelser via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundl&aelig;ggende indstillinger</h2>Aktivere modul?');
@@ -47,7 +47,7 @@ define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', 'Hvilke sprog skal der over
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Engelsk bruges som standard som US English');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Foretr&aelig;kker du den britiske stavem&aring;de?<br />Ja = britisk / Nej = USA');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Yderligere indstillinger</h2>Skal det v&aelig;re tilladt at tilf&oslash;je et nyt sprog til <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>?');
-define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Hvis denne indstilling er sat til "Ja", kan der tilf&oslash;jes nye sprog til <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.<br />Med "Nej" skal sproget allerede eksistere i butikssystemet, og sproget skal v&aelig;re aktiveret i dette modul.<br />Opret sprog i shoppen: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Opret sprog i shoppen ?</a> &nbsp;&nbsp;<span class="alrt">!! Det nye sprog er f&oslash;rst tilg&aelig;ngeligt i shoppen efter 24-48 timer. !!</span><br />Marker derefter her som sprog, der skal overs&aelig;ttes');
+define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Hvis denne indstilling er sat til "Ja", kan der tilf&oslash;jes nye sprog til <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.<br />Med "Nej" skal sproget allerede eksistere i butikssystemet, og sproget skal v&aelig;re aktiveret i dette modul.<br />Opret sprog i shoppen: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Opret sprog i shoppen ?</a> &nbsp;&nbsp;<span class="alrt">!! Det nye sprog er f&oslash;rst tilg&aelig;ngeligt i shoppen efter 24-48 timer. !!</span><br />Mark&eacute;r derefter her som sprog, der skal overs&aelig;ttes');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Overs&aelig;t sprogfiler p&aring; serveren?' . draw_tooltip('Alle filer p&aring; serveren foresp&oslash;rges og overs&aelig;ttes</br>Dette g&aelig;lder ogs&aring; sprogfilerne i modulerne og udvidelserne. Alle sprogfiler regenereres, inklusive eksisterende sprog.<br />Som standard bliver eksisterende fremmedsprogstekster i Reqser overtaget og ikke nyoversat, men det kan &aelig;ndres i Reqser-indstillingerne.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Uden sprogfiler fungerer intet fremmedsprog i butikken, og der er en "hvid" side!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Overf&oslash;re sprogfiler automatisk?');
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Den "Reqser API key", der er g
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API-n&oslash;gle gemt med succes');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Der er ikke indtastet nogen API-n&oslash;gle! Log ind p&aring; <i>reqser.com</i> og hent API-n&oslash;glen til denne hjemmeside, og gem den her i modulet.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Intet sprog at overs&aelig;tte til valgt!');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul intet sprog at overs&aelig;tte til valgt !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Overs&aelig;t til hvilke sprog?" m&aring; ikke indeholde et sprog, der er valgt i "Overs&aelig;t fra hvilket sprog?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Den manuelt tilf&oslash;jede tabel <b>"%s"</b> kunne ikke findes i databasen. Tjek venligst indstillingerne for "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL modulet vil automatisk overs&aelig;tte alle fremmedsprog, der er aktiveret i modulet for dette produkt, n&aring;r det er gemt.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator-modulet har ingen API-n&oslash;gle, indtast venligst en API-n&oslash;gle');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulet er ikke aktiveret, aktiver venligst modulet under Modul->Systemmodul');
