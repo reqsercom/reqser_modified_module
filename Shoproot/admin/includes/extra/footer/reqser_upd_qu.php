@@ -207,7 +207,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                         </td>
                         <td class="dataTableContent txta-r">` + version + `</td>
                         <td class="dataTableContent txta-r" id="reqser_aviable_module_version"></td> 
-                        <td class="dataTableContent txta-r"><a class="button" target="_blank" onclick="this.blur();" href="https://www.reqser.com/download_reqser_modified_modul_custom` + dir_admin + `">Download</a></td>
+                        <td class="dataTableContent txta-r"><a class="button" href="https://www.reqser.com/download_reqser_modified_modul_custom` + dir_admin + `">Download</a></td>
                       </tr>
                       <tr><td colspan="6" id="reqser_update_instruction_message"></td></tr>
                       <tr><td colspan="5" style="height:35px;">&nbsp;</td></tr>
