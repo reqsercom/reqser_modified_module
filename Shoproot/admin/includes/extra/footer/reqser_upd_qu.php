@@ -188,7 +188,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       <script>
       if ($('.boxCenterLeft').length > 0) {
         let version = '<?php echo constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'); ?>';
-        let dir_admin = '<?php echo DIR_WS_ADMIN; ?>';
+        let dir_admin = '<?php echo substr(DIR_WS_ADMIN, 0, -1); ?>';
         var tableHtml = `<table class="tableBoxCenter collapse"><tbody><tr class="dataTableHeadingRow">
                           <td class="dataTableHeadingContent">Reqser.com</td>
                           <td class="dataTableHeadingContent txta-c" style="width:10%;">Installiert</td>
@@ -202,18 +202,24 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                         <td class="dataTableContent txta-c">
                           <img src="images/icon_status_green.gif" alt="installiert" title="installiert" width="12" height="12" style="border:0;margin-left: 5px;">                        
                         </td>
-                        <td class="dataTableContent txta-c" id="reqser_update_necessary">
-                                                
+                        <td class="dataTableContent txta-c" id="reqser_update_necessary">                          
                         </td>
                         <td class="dataTableContent txta-r">` + version + `</td>
                         <td class="dataTableContent txta-r" id="reqser_aviable_module_version"></td> 
-                        <td class="dataTableContent txta-r"><a class="button" href="https://www.reqser.com/download_reqser_modified_modul_custom` + dir_admin + `">Download</a></td>
+                        <td class="dataTableContent txta-r"><a id="downloadButton" class="button" target="_blank" href="https://www.reqser.com/download_reqser_modified_modul_custom` + dir_admin + `">Download</a></td>
                       </tr>
                       <tr><td colspan="6" id="reqser_update_instruction_message"></td></tr>
                       <tr><td colspan="5" style="height:35px;">&nbsp;</td></tr>
                       
                     </tbody></table>`;
         $('.boxCenterLeft').prepend(tableHtml);
+
+        $('.boxCenterLeft').on('click', '#downloadButton', function(event) {
+            event.preventDefault(); 
+            var url = $(this).attr('href');
+            window.open(url, '_blank');
+        });
+
         $(function() {
           let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
