@@ -269,7 +269,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     }    
 
     if (isset($_POST['reqser_modul_update']) && $_POST['reqser_modul_update'] == 'true') {
-      if (extension_loaded('zip')) {
+      if (!extension_loaded('zip')) {
         ?>
         <script>
           alert('ZIP PHP Extension is missing, please download and update manualy!');
