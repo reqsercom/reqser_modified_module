@@ -22,6 +22,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         ?>
         <script>
         $(function() {
+          let version = '<?php echo constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'); ?>';
+          let dir_admin = '<?php echo DIR_WS_ADMIN; ?>';
           let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
 
@@ -33,8 +35,19 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               if(data != '') {
                 var data_message = JSON.parse(data);
                 if (data_message['warning_message'] && data_message['warning_message'] != ''){
-                  $('div[id="module_export_reqser_header"]').html(data_message['warning_message']);
-                  $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
+                  if (parseFloat(version) != parseFloat(data_message['current_module_version'])){                    
+                    var button = `<form action="` + dir_admin + `module_export.php?set=system" method="post">  
+                          <input type="hidden" name="reqser_modul_update" value="true">
+                          <button type="submit" id="reqser_auto_update_button" class="button">Modul Automatisiert Updaten</button>
+                        </form>`;
+                    //Now add the button to $('div[id="module_export_reqser_header"]')
+                    $('div[id="module_export_reqser_header"]').html(data_message['warning_message'] + button);
+                    $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
+                  } else {
+                    $('div[id="module_export_reqser_header"]').html(data_message['warning_message']);
+                    $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
+                  }
+
                 } else if (data_message['success_message'] && data_message['success_message'] != '') {
                   $('div[id="module_export_reqser_header"]').html(data_message['success_message']);
                   $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
@@ -186,10 +199,9 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
   if (basename($PHP_SELF) == 'check_update.php') {
     ?>
       <script>
-        alert('The Reqser Module is up to date.');
       if ($('.boxCenterLeft').length > 0) {
         let version = '<?php echo constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'); ?>';
-        let dir_admin = '<?php echo substr(DIR_WS_ADMIN, 0, -1); ?>';
+        let dir_admin = '<?php echo DIR_WS_ADMIN; ?>';
         var tableHtml = `<table class="tableBoxCenter collapse"><tbody><tr class="dataTableHeadingRow">
                           <td class="dataTableHeadingContent">Reqser.com</td>
                           <td class="dataTableHeadingContent txta-c" style="width:10%;">Installiert</td>
@@ -207,24 +219,21 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                         </td>
                         <td class="dataTableContent txta-r">` + version + `</td>
                         <td class="dataTableContent txta-r" id="reqser_aviable_module_version"></td> 
-                        <td class="dataTableContent txta-r"><a id="downloadButton" class="button" target="_blank" href="https://www.reqser.com/download_reqser_modified_modul_custom` + dir_admin + `">Download</a></td>
+                        <td class="dataTableContent txta-r">
+                        <form action="` + dir_admin + `check_update.php" method="post">  
+                          <input type="hidden" name="reqser_modul_update" value="true">
+                          <button type="submit" id="reqser_auto_update_button" class="button" hidden>Modul Automatisiert Updaten</button>
+                        </form>
+                        </td>
                       </tr>
                       <tr><td colspan="6" id="reqser_update_instruction_message"></td></tr>
                       <tr><td colspan="5" style="height:35px;">&nbsp;</td></tr>
                       
                     </tbody></table>`;
         $('.boxCenterLeft').prepend(tableHtml);
-
-        $('.boxCenterLeft').on('click', '#downloadButton', function(event) {
-            event.preventDefault(); 
-            var url = $(this).attr('href');
-            window.open(url, '_blank');
-        });
-
         $(function() {
           let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
-
           msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_upd_qu: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>'};
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
@@ -235,12 +244,13 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 if (data_message['current_module_version'] && data_message['current_module_version'] != ''){
                   $('td[id="reqser_aviable_module_version"]').html(data_message['current_module_version']);
                   if (parseFloat(version) != parseFloat(data_message['current_module_version'])){
+                    //Show Update Button
+                    $('#reqser_auto_update_button').show();
                     $('td[id="reqser_update_necessary"]').html('<img src="images/icon_status_red.gif" alt="update notwendig" title="update" width="12" height="12" style="border:0;margin-left: 5px;">');
                     $('#reqser_module_row').css({'background-color': 'red', 'color': 'white'});
                     if (data_message['reqser_update_instruction_message'] && data_message['reqser_update_instruction_message'] != ''){
                       $('td[id="reqser_update_instruction_message"]').html(data_message['reqser_update_instruction_message']);
                     }
-                    
                   } else {
                     $('td[id="reqser_update_necessary"]').html('<img src="images/icon_status_green.gif" alt="aktuell" title="aktuell" width="12" height="12" style="border:0;margin-left: 5px;">');
                   }
@@ -257,6 +267,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       </script>
     <?php
     }    
+
     if (isset($_POST['reqser_modul_update']) && $_POST['reqser_modul_update'] == 'true') {
       function rrmdir_reqser($dir) {
         if (is_dir($dir)) {
