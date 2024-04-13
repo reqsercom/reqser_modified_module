@@ -269,75 +269,84 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     }    
 
     if (isset($_POST['reqser_modul_update']) && $_POST['reqser_modul_update'] == 'true') {
-      function rrmdir_reqser($dir) {
-        if (is_dir($dir)) {
-            $objects = scandir($dir);
-            foreach ($objects as $object) {
-                if ($object != "." && $object != "..") {
-                    if (filetype($dir . "/" . $object) == "dir") {
-                      rrmdir_reqser($dir . "/" . $object); // Recursive call
-                    } else {
-                        unlink($dir . "/" . $object); // Delete file
-                    }
-                }
-            }
-            reset($objects);
-            rmdir($dir); // Remove directory
+      if (extension_loaded('zip')) {
+        ?>
+        <script>
+          alert('ZIP PHP Extension is missing, please download and update manualy!');
+        </script>
+        <?php
+      } else {
+        function rrmdir_reqser($dir) {
+          if (is_dir($dir)) {
+              $objects = scandir($dir);
+              foreach ($objects as $object) {
+                  if ($object != "." && $object != "..") {
+                      if (filetype($dir . "/" . $object) == "dir") {
+                        rrmdir_reqser($dir . "/" . $object); // Recursive call
+                      } else {
+                          unlink($dir . "/" . $object); // Delete file
+                      }
+                  }
+              }
+              reset($objects);
+              rmdir($dir); // Remove directory
+          }
         }
-      }
-      // Define the admin directory dynamically or set it directly
-      $dir_admin = substr(DIR_WS_ADMIN, 0, -1); // Update this path as needed
+        // Define the admin directory dynamically or set it directly
+        $dir_admin = substr(DIR_WS_ADMIN, 0, -1); // Update this path as needed
+    
+        // Ensure the tmp directory is empty and re-created
+        rrmdir_reqser('download_reqser/tmp');
+        mkdir(DIR_FS_CATALOG . 'download_reqser/tmp', 0755, true);
+    
+        // Define the URL to download the ZIP file
+        $url = "https://www.reqser.com/download_reqser_modified_modul_custom" . $dir_admin;
+    
+        // Specify path where the file will be saved
+        $zipFile = DIR_FS_CATALOG . "download_reqser/tmp/reqser_modul.zip";
+    
+        // Download the file
+        $fileData = file_get_contents($url);
+        if ($fileData !== false) {
+            // Save the downloaded file
+            if (file_put_contents($zipFile, $fileData)) {
+              // Unzip the file
+              $zip = new ZipArchive;
+              if ($zip->open($zipFile) === TRUE) {
+                  $zip->extractTo(DIR_FS_CATALOG);
+                  $zip->close();
+                  // Clean up the tmp directory
+                  rrmdir_reqser(DIR_FS_CATALOG . 'download_reqser');
+                  unlink(DIR_FS_CATALOG . 'download_reqser');
+                  ?>
+                  <script>
+                    alert('The Reqser Module is updated successfully.');
+                  </script>
+                  <?php
+              } else {
+                  ?>
+                  <script>
+                    alert('Failed to extract the file.');
+                  </script>
+                  <?php
+              }
   
-      // Ensure the tmp directory is empty and re-created
-      rrmdir_reqser('download_reqser/tmp');
-      mkdir(DIR_FS_CATALOG . 'download_reqser/tmp', 0755, true);
-  
-      // Define the URL to download the ZIP file
-      $url = "https://www.reqser.com/download_reqser_modified_modul_custom" . $dir_admin;
-  
-      // Specify path where the file will be saved
-      $zipFile = DIR_FS_CATALOG . "download_reqser/tmp/reqser_modul.zip";
-  
-      // Download the file
-      $fileData = file_get_contents($url);
-      if ($fileData !== false) {
-          // Save the downloaded file
-          if (file_put_contents($zipFile, $fileData)) {
-            // Unzip the file
-            $zip = new ZipArchive;
-            if ($zip->open($zipFile) === TRUE) {
-                $zip->extractTo(DIR_FS_CATALOG);
-                $zip->close();
-                // Clean up the tmp directory
-                rrmdir_reqser(DIR_FS_CATALOG . 'download_reqser');
-                unlink(DIR_FS_CATALOG . 'download_reqser');
-                ?>
-                <script>
-                  alert('The Reqser Module is updated successfully.');
-                </script>
-                <?php
             } else {
                 ?>
                 <script>
-                  alert('Failed to extract the file.');
+                  alert('Failed to download the file.');
                 </script>
                 <?php
             }
-
-          } else {
-              ?>
-              <script>
-                alert('Failed to download the file.');
-              </script>
-              <?php
-          }
-      } else {
-          ?>
-          <script>
-            alert('Failed to download the file.');
-          </script>
-          <?php
+        } else {
+            ?>
+            <script>
+              alert('Failed to download the file.');
+            </script>
+            <?php
+        }
       }
+
     }
 }
 
