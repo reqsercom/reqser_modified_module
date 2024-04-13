@@ -289,14 +289,14 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       $dir_admin = substr(DIR_WS_ADMIN, 0, -1); // Update this path as needed
   
       // Ensure the tmp directory is empty and re-created
-      rrmdir_reqser('download/tmp');
-      mkdir(DIR_FS_CATALOG . 'download/tmp', 0755, true);
+      rrmdir_reqser('download_reqser/tmp');
+      mkdir(DIR_FS_CATALOG . 'download_reqser/tmp', 0755, true);
   
       // Define the URL to download the ZIP file
       $url = "https://www.reqser.com/download_reqser_modified_modul_custom" . $dir_admin;
   
       // Specify path where the file will be saved
-      $zipFile = DIR_FS_CATALOG . "download/tmp/reqser_modul.zip";
+      $zipFile = DIR_FS_CATALOG . "download_reqser/tmp/reqser_modul.zip";
   
       // Download the file
       $fileData = file_get_contents($url);
@@ -309,8 +309,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 $zip->extractTo(DIR_FS_CATALOG);
                 $zip->close();
                 // Clean up the tmp directory
-                rrmdir_reqser(DIR_FS_CATALOG . 'download');
-                unlink(DIR_FS_CATALOG . 'download');
+                rrmdir_reqser(DIR_FS_CATALOG . 'download_reqser');
+                unlink(DIR_FS_CATALOG . 'download_reqser');
                 ?>
                 <script>
                   alert('The Reqser Module is updated successfully.');
