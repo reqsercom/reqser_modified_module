@@ -9,14 +9,14 @@
 
   defined('_VALID_XTC') or die('Direct Access to this location is not allowed.');
   include_once (DIR_FS_CATALOG . 'lang/'.$_SESSION['language'].'/modules/system/reqser.php');
-  if(defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true') {
+  if(defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true' && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT') && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT') == 'true') {
     if (constant('MODULE_SYSTEM_REQSER_REQSER_API_KEY') != ''){
       if (defined('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS') && constant('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS') == ''){
         echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR.'</div>';   
       } else {
       echo '<div id="reqser_check_activ_success" class="success_message" hidden></div>';
       echo '<div id="reqser_check_activ_error" class="error_message" hidden>'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION.'</div>';
-      echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0" hidden></div>';
+      echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0; position: static;" hidden></div>';
       echo '<div id="reqser_check_activ_loading" class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING.'</div>';
         if (isset($_GET['cID']) && $_GET['cID'] > 0) {
           $reqser_cid = (int)$_GET['cID'];

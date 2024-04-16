@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '"Kl&iacute;č API služby Reqs
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', '&Uacute;spě&scaron;ně uložen&yacute; kl&iacute;č API');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nebyl zad&aacute;n ž&aacute;dn&yacute; kl&iacute;č API! Přihlaste se pros&iacute;m na <i>reqser.com</i>, z&iacute;skejte kl&iacute;č API pro tuto webovou str&aacute;nku a uložte jej zde v modulu.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ž&aacute;dn&yacute; jazyk, kter&yacute; by měl b&yacute;t přeložen do vybran&eacute;ho !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul ž&aacute;dn&yacute; jazyk, do kter&eacute;ho m&aacute; b&yacute;t přeložen !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Přeložit do kter&yacute;ch jazyků?" nesm&iacute; obsahovat jazyk, kter&yacute; byl vybr&aacute;n v položce "Přeložit z kter&eacute;ho jazyka?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ručně přidan&aacute; tabulka <b>"%s"</b> nebyla v datab&aacute;zi nalezena. Zkontrolujte pros&iacute;m nastaven&iacute; pro "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL po uložen&iacute; automaticky přelož&iacute; v&scaron;echny ciz&iacute; jazyky aktivovan&eacute; v modulu pro tento produkt.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Reqser.com Deepl Translator nem&aacute; kl&iacute;č API, zadejte pros&iacute;m kl&iacute;č API.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Deepl Translator nen&iacute; aktivov&aacute;n, aktivujte jej pros&iacute;m v č&aacute;sti Module->Syst&eacute;mov&yacute; modul');

@@ -96,6 +96,8 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'reseller_id' => $this->getResellerId(),
                                                                                         'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
                                                                                         'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
+                                                                                        'request_on_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT : 'not defined',
+                                                                                        'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
                                                                                        )
                                                                        )
@@ -260,7 +262,7 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.0 to 3.1 Version
         if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_START', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_START', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -269,7 +271,25 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.0 to 3.1 Version
         if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        } 
+
+        //Update from 3.0 to 3.1 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        } 
+
+        //Update from 3.0 to 3.1 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -1243,7 +1263,7 @@ class ClassReqser extends api_local\ApiBase {
   }
 
     /**  
-   * private method callFilesSend_file
+   * private method callSettingsChange_reqser_config
    * 
    * @return array with success or error message
    */
@@ -1255,12 +1275,19 @@ class ClassReqser extends api_local\ApiBase {
         if (isset($dec_rec_data['request_on_start']) && ($dec_rec_data['request_on_start'] === 'true' || $dec_rec_data['request_on_start'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_START'");
-        } elseif (isset($dec_rec_data['request_on_orders_edit']) && ($dec_rec_data['request_on_orders_edit'] === 'true' || $dec_rec_data['request_on_orders_edit'] === 'false')){
+        } 
+        if (isset($dec_rec_data['request_on_orders_edit']) && ($dec_rec_data['request_on_orders_edit'] === 'true' || $dec_rec_data['request_on_orders_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT'");
-        } else {
-          $out_arr = array('error' => 'Something went wrong, no correct data recieved');
-        }
+        } 
+        if (isset($dec_rec_data['request_on_products_edit']) && ($dec_rec_data['request_on_products_edit'] === 'true' || $dec_rec_data['request_on_products_edit'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT'");
+        } 
+        if (isset($dec_rec_data['request_on_category_edit']) && ($dec_rec_data['request_on_category_edit'] === 'true' || $dec_rec_data['request_on_category_edit'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT'");
+        } 
       } else {
         $out_arr = array('error' => 'Something went wrong, no POST Data received');
       }

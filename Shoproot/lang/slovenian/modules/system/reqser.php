@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Ključ API Reqser, ki je shran
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'Ključ API uspe&scaron;no shranjen');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Ključ API ni bil vnesen! Prijavite se v spletno stran <i>reqser.com</i> in pridobite ključ API za to spletno mesto ter ga shranite tukaj v modulu.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ni izbranega jezika, v katerega je treba prevajati !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul ni izbran noben jezik, v katerega se prevaja !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Prevedi v katere jezike?" ne sme vsebovati jezika, ki je bil izbran v "Prevedi iz katerega jezika?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ročno dodane tabele <b>"%s"</b> ni bilo mogoče najti v zbirki podatkov. Preverite nastavitve za "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL bo po shranjevanju samodejno prevedel vse tuje jezike, aktivirane v modulu za ta izdelek.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator modul nima ključa API, prosimo, vnesite ključ API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Prevajalec modul ni aktiviran, prosimo, aktivirajte modul v Modul->Sistemski modul');

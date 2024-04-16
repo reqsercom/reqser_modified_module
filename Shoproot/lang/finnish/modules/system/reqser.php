@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -39,7 +39,7 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'Valitse muut k&auml;&auml;nnett
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Muut tietokantataulukot (ei valittavissa edell&auml;)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Kirjoita t&auml;h&auml;n pilkulla erotettuna lis&auml;&auml; k&auml;&auml;nnett&auml;vi&auml; tietokantatauluja.<br />(Laajennuksia varten, joissa on uusia "muuttamattomia vakiotauluja").');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'P&ouml;ytien poissulkeminen');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Kirjoita t&auml;h&auml;n taulukot, jotka on j&auml;tett&auml;v&auml; k&auml;&auml;nn&ouml;sten ulkopuolelle, pilkulla erotettuna.<br />(Tarvitaan vain, jos kaikki vakiotaulukot on valittu edell&auml; ja osa niist&auml; halutaan j&auml;tt&auml;&auml; pois).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Kirjoita t&auml;h&auml;n k&auml;&auml;nn&ouml;sten ulkopuolelle j&auml;tett&auml;v&auml;t taulukot pilkulla erotettuna.<br />(Tarvitaan vain, jos kaikki vakiotaulukot on valittu edell&auml; ja osa niist&auml; halutaan j&auml;tt&auml;&auml; pois).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'K&auml;&auml;nt&auml;&auml; mist&auml; kielest&auml;?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Milt&auml; kielelt&auml; k&auml;&auml;nn&ouml;s olisi teht&auml;v&auml;?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'Mille kielille voin k&auml;&auml;nt&auml;&auml;? ' . draw_tooltip('Lis&auml;kieli&auml; voidaan lis&auml;t&auml; osoitteessa <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.'));
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Moduuliin tallennettu "Reqseri
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API-avain tallennettu onnistuneesti');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API-avainta ei ole annettu! Kirjaudu sis&auml;&auml;n osoitteeseen <i>reqser.</i> com ja hanki t&auml;m&auml;n verkkosivuston API-avain ja tallenna se t&auml;nne moduuliin.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Ei kieli k&auml;&auml;nnett&auml;v&auml;ksi valittu !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Module no language to be translated into selected !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"K&auml;&auml;nn&auml; mille kielille?" ei saa sis&auml;lt&auml;&auml; kielt&auml;, joka on valittu kohdassa "K&auml;&auml;nn&auml; milt&auml; kielelt&auml;?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Manuaalisesti lis&auml;tty&auml; taulukkoa <b>"%s</b> " ei l&ouml;ydy tietokannasta. Tarkista asetukset "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL -moduuli k&auml;&auml;nt&auml;&auml; automaattisesti kaikki t&auml;m&auml;n tuotteen moduulissa aktivoidut vieraat kielet tallennuksen j&auml;lkeen.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator -moduulilla ei ole API-avainta, anna API-avain.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator -moduuli ei ole aktivoitu, aktivoi moduuli Moduuli->J&auml;rjestelm&auml;moduuli -kohdassa.');

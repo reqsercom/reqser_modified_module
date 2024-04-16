@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 2.8 on the 15.02.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -47,7 +47,7 @@ define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', 'Į kokias kalbas reikėtų
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Pagal numatytuosius nustatymus naudojama JAV anglų kalba');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Ar pageidaujate briti&scaron;kos ra&scaron;ybos?<br />Taip = britų kalba / Ne = JAV');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Kiti nustatymai</h2>Ar į <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> turėtų būti leista pridėti naują kalbą?');
-define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Nustačius &scaron;į nustatymą "Taip", į <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> galima pridėti naujų kalbų.<br />Pasirinkus "Ne", kalba jau turi egzistuoti parduotuvės sistemoje ir turi būti aktyvuota &scaron;iame modulyje.<br />Sukurti kalbą parduotuvėje: Sukurti kalbą parduotuvėje ?</a>: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Sukurti kalbą parduotuvėje ?</a> &nbsp;&nbsp;<span class="alrt">!! Nauja kalba parduotuvėje bus prieinama tik po 24-48 valandų. !!</span><br />Tada pažymėkite čia kaip kalbą, kurią reikia i&scaron;versti');
+define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Nustačius &scaron;į nustatymą "Taip", į <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> galima pridėti naujų kalbų.<br />Pasirinkus "Ne", kalba jau turi egzistuoti parduotuvės sistemoje ir turi būti aktyvuota &scaron;iame modulyje.<br />Sukurti kalbą parduotuvėje: Sukurti kalbą parduotuvėje ?</a>: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Sukurti kalbą parduotuvėje ?</a> &nbsp;&nbsp;<span class="alrt">!! Nauja kalba parduotuvėje bus prieinama tik po 24-48 valandų. !!</span><br />Tada pažymėkite čia kaip kalbą, kuri bus verčiama');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'I&scaron;versti serverio kalbinius failus?' . draw_tooltip('Užklausiami ir i&scaron;verčiami visi serverio failai</br>Tai taikoma ir modulių bei plėtinių kalbiniams failams. Atkuriami visi kalbų failai, įskaitant esamas kalbas.<br />Pagal numatytuosius nustatymus esami užsienio kalbų tekstai "Reqser" programoje perimami, o ne naujai i&scaron;verčiami, tačiau tai galima pakeisti "Reqser" nustatymuose.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Be kalbos failų parduotuvėje neveikia jokia užsienio kalba ir yra "baltas" puslapis!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Automati&scaron;kai perkelti kalbos failus?');
@@ -60,8 +60,9 @@ define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Modulyje saugomas "Reqser API 
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'Sėkmingai i&scaron;saugotas API raktas');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API raktas neįvestas! Prisijunkite prie <i>reqser.com</i>, gaukite &scaron;ios svetainės API raktą ir i&scaron;saugokite jį modulyje.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL Klaida:<br />%s');
-define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Nėra pasirinktos kalbos, į kurią reikia versti !');
+define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modulis nėra pasirinktos kalbos, į kurią būtų galima versti !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Versti į kokias kalbas?" neturi būti kalbos, kuri buvo pasirinkta "Versti i&scaron; kokios kalbos?".');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Duomenų bazėje nepavyko rasti rankiniu būdu pridėtos lentelės <b>"%s"</b>. Patikrinkite "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '" nustatymus!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'I&scaron;saugojus Reqser.com DeepL modulis automati&scaron;kai i&scaron;verčia visas užsienio kalbas, aktyvuotas &scaron;io gaminio modulyje.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com "Deepl Translator" modulis neturi API rakto, įveskite API raktą');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nėra aktyvuotas, pra&scaron;ome aktyvuoti modulį pagal Modulis->Sistemos modulis');
