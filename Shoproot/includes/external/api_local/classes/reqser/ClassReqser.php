@@ -354,7 +354,7 @@ class ClassReqser extends api_local\ApiBase {
     $qu_str = "SELECT manufacturers_id, manufacturers_name FROM manufacturers";
     $result = $this->api_db_conn->apiDbQuery($qu_str);
     while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
-      $out_arr[$result_arr['manufacturers_id']] = $result_arr['manufacturers_name'];
+      $out_arr[$result_arr['manufacturers_id']] = $this->encode_utf8($this->getShopCharset(), $result_arr['manufacturers_name'], false, true);
     }
     return $out_arr;
   }
