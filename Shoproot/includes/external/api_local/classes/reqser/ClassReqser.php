@@ -1284,7 +1284,7 @@ class ClassReqser extends api_local\ApiBase {
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT'");
         } 
-        if (isset($dec_rec_data['request_on_category_edit']) && ($dec_rec_data['request_on_category_edit'] === 'true' || $dec_rec_data['request_on_category_edit'] === 'false')){
+        if (isset($dec_rec_data['request_on_categories_edit']) && ($dec_rec_data['request_on_categories_edit'] === 'true' || $dec_rec_data['request_on_categories_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT'");
         } 
