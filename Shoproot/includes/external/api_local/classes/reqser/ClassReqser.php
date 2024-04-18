@@ -262,7 +262,7 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.0 to 3.1 Version
         if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_START', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_START', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -271,7 +271,7 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.0 to 3.1 Version
         if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -280,7 +280,7 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.0 to 3.1 Version
         if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -289,7 +289,7 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.0 to 3.1 Version
         if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -1284,7 +1284,7 @@ class ClassReqser extends api_local\ApiBase {
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT'");
         } 
-        if (isset($dec_rec_data['request_on_category_edit']) && ($dec_rec_data['request_on_category_edit'] === 'true' || $dec_rec_data['request_on_category_edit'] === 'false')){
+        if (isset($dec_rec_data['request_on_categories_edit']) && ($dec_rec_data['request_on_categories_edit'] === 'true' || $dec_rec_data['request_on_categories_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT'");
         } 

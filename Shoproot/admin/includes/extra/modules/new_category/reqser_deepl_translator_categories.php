@@ -92,7 +92,7 @@
     } else {
       echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY.'</div>';
     }
-  } elseif (!defined('MODULE_SYSTEM_REQSER_STATUS') || constant('MODULE_SYSTEM_REQSER_STATUS') == 'false') {
+  } elseif (defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'false') {
     echo '<div class="messageStackError">'.MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED.'</div>';
   }  
 ?>
