@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.1';
+    $this->api_reqser_version = '3.2';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -463,7 +463,7 @@ class ClassReqser extends api_local\ApiBase {
 
     $received_data = file_get_contents('php://input');
     if($received_data != '') {
-      if($this->ala !== true) return array('error' => 'Add Language not allowed!', 'add_language_not_allowed' => true);
+      if($this->ala !== true) return array('error' => 'Add Language not allowed!', 'error_code' => '1102');
       $dec_rec_data = json_decode($received_data, true);
       if($this->fwl == (int)$this->shop_languages[strtolower($dec_rec_data['language_code'])]['languages_id'])
         return array('error' => 'adding language '.$dec_rec_data['language_code'].' not allowed, it is "from which language to tanslate"!');
@@ -1044,14 +1044,14 @@ class ClassReqser extends api_local\ApiBase {
                           if(sizeof($insert_array) > 0) {
                             if($insert_qu = $this->api_db_conn->apiDbArrayToTable($table, $insert_array)) {
                               $this->api_db_conn->apiDbStmtClose($insert_qu);
-                              $out_arr[$unique_key]['success_duplicate'] = 'successfully duplicated '.$sql;
+                              $out_arr[$unique_key]['success_duplicate'] = 'successfully duplicated';
                             } else {
-                              $out_arr[$unique_key]['error'] = 'could not execute query: '.$sql;
+                              $out_arr[$unique_key]['error'] = 'could not execute query';
                               continue;
                             }
                           }
                         } else {
-                          $out_arr = array('error' => 'Insert Error, Base Language Entry not found! '.$query);
+                          $out_arr = array('error' => 'Insert Error, Base Language Entry not found!');
                           return $out_arr;
                         }
                       } 
@@ -1063,7 +1063,7 @@ class ClassReqser extends api_local\ApiBase {
                       $update_string = "UPDATE ".$table." SET ".$update_string;
 
                       if($this->write_control_mode === true) {
-                        $out_arr['debug'][$table][$id] = $update_string;
+                        $out_arr['debug'][$table] = $update_string;
                       } else {
                         if($update_qu = $this->api_db_conn->apiDbQuery($update_string, $update_param_arr)) {
                         //we could use apiDbArrayToTable() also, better version ?, noRiddle
@@ -1087,7 +1087,7 @@ class ClassReqser extends api_local\ApiBase {
             $out_arr = array('error' => 'wrong shop configuration for language '.$lang);
           }
         } else {
-          $out_arr = array('error' => 'table '.$tables.' in call not allowed');
+          $out_arr = array('error' => 'table '.$dec_rec_data['table'].' in call not allowed');
         }
       }
     } else {
