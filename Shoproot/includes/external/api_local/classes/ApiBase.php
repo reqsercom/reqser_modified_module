@@ -431,35 +431,37 @@ class ApiBase {
       }
 
       //execute call
-      if(array_key_exists($api_call, $this->allowed_methods) && array_key_exists($action, $this->allowed_methods[$api_call])) {
-        $method = $this->allowed_methods[$api_call][$action]['method'];
-        if(strtolower($_SERVER['REQUEST_METHOD']) !== $method) {
-          $err = array('error' => 'wrong method, method should be '.$method);
-        }
-
-        $method_name = 'call' . ucwords($api_call) . ucwords($action);
-        if(!empty($params)) {
-          $hve_prms = array_key_exists('params', $this->allowed_methods[$api_call][$action]);
-          $sent_params = array_keys($params);
-
-          if($hve_prms === true) {
-            foreach($sent_params as $p) {
-              if(!in_array($p, $this->allowed_methods[$api_call][$action]['params'])) {
-                $temp_err = array('error' => 'params '.$p.' not allowed => allowed params '.json_encode($this->allowed_methods[$api_call][$action]['params']));
-              }
-            }
-          } else {
-            $temp_err = array('error' => 'no GET params allowed');
+      if (empty($err)){
+        if(array_key_exists($api_call, $this->allowed_methods) && array_key_exists($action, $this->allowed_methods[$api_call])) {
+          $method = $this->allowed_methods[$api_call][$action]['method'];
+          if(strtolower($_SERVER['REQUEST_METHOD']) !== $method) {
+            $err = array('error' => 'wrong method, method should be '.$method);
           }
-        }
-
-        if(!isset($temp_err)) {
-          $api_call_response = call_user_func_array(array($this, $method_name), (!empty($params) ? $params : array()));
+  
+          $method_name = 'call' . ucwords($api_call) . ucwords($action);
+          if(!empty($params)) {
+            $hve_prms = array_key_exists('params', $this->allowed_methods[$api_call][$action]);
+            $sent_params = array_keys($params);
+  
+            if($hve_prms === true) {
+              foreach($sent_params as $p) {
+                if(!in_array($p, $this->allowed_methods[$api_call][$action]['params'])) {
+                  $temp_err = array('error' => 'params '.$p.' not allowed => allowed params '.json_encode($this->allowed_methods[$api_call][$action]['params']));
+                }
+              }
+            } else {
+              $temp_err = array('error' => 'no GET params allowed');
+            }
+          }
+  
+          if(!isset($temp_err)) {
+            $api_call_response = call_user_func_array(array($this, $method_name), (!empty($params) ? $params : array()));
+          } else {
+            $err = $temp_err;
+          }
         } else {
-          $err = $temp_err;
+          $err = array('error' => 'unallowed API call test '.$action.' '.$api_call.print_r($this->allowed_methods, true)); 
         }
-      } else {
-        $err = array('error' => 'unallowed API call test '.$action.' '.$api_call.print_r($this->allowed_methods, true)); 
       }
     } else {
       $err = array('error' => 'no proper API call');
