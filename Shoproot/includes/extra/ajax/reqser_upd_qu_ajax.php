@@ -100,6 +100,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
     (isset($_POST['reqser_request_on_start']) && $_POST['reqser_request_on_start'] == 'true') 
       || (isset($_POST['reqser_request_on_orders_edit']) && $_POST['reqser_request_on_orders_edit'] == 'true')
       || (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true')
+      || (isset($_POST['reqser_request_on_seo_products_edit']) && $_POST['reqser_request_on_seo_products_edit'] == 'true')
     )  
     && (isset($_POST['msreq_api_key']) && $_POST['msreq_api_key'] != '')) {
   //JorisK 04-2024
@@ -134,6 +135,15 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
     } elseif (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true'){
       $post_fields['reqser_request_text_translation'] = 'true';
       $post_fields['text'] = $_POST['text'];
+    } elseif (isset($_POST['reqser_request_on_seo_products_edit']) && $_POST['reqser_request_on_seo_products_edit'] == 'true'){
+      $post_fields['reqser_request_on_seo_products_edit'] = 'true';
+      $post_fields['product_descriptions'] = $_POST['productDescriptions'];
+      $post_fields['product_descriptions_exists'] = $_POST['productDescriptionsExists'];
+    } elseif (isset($_POST['reqser_request_seo_edit']) && $_POST['reqser_request_seo_edit'] == 'true'){
+      $post_fields['reqser_request_seo_edit'] = 'true';
+      $post_fields['text'] = $_POST['text'];
+      $post_fields['column'] = $_POST['column'];
+      $post_fields['language_id'] = $_POST['language'];
     }
     if (isset($_SESSION['customer_id'])) $post_fields['customer_id'] = $_SESSION['customer_id'];
     if (isset($_POST['fwl'])) $post_fields['fwl']  = $_POST['fwl'];

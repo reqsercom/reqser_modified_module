@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.2';
+    $this->api_reqser_version = '3.3';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -97,6 +97,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
                                                                                         'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
                                                                                         'request_on_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT : 'not defined',
+                                                                                        'request_on_seo_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT : 'not defined',
                                                                                         'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
                                                                                        )
@@ -134,7 +135,7 @@ class ClassReqser extends api_local\ApiBase {
                                                         ),
                                    'languages' => array('data' => array('method' => 'get',
                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/languages/data',
-                                                                                        'returns' => 'an array with the available languages, its charsets, its ISO-2 Code and if the language is activated in the shop'
+                                                                                        'returns' => 'an array with the available languages, the language id, its charsets, its ISO-2 Code and if the language is activated in the shop'
                                                                                        )
                                                                        ),
                                                         'add_language' => array('method' => 'post',
@@ -295,12 +296,20 @@ class ClassReqser extends api_local\ApiBase {
           }
         } 
         
+        //Update from 3.2 to 3.3 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        
         //Update to newest version
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
         if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
           $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
         }
-        
     }
     return $this->api_reqser_version;
   }
@@ -1283,6 +1292,10 @@ class ClassReqser extends api_local\ApiBase {
         if (isset($dec_rec_data['request_on_products_edit']) && ($dec_rec_data['request_on_products_edit'] === 'true' || $dec_rec_data['request_on_products_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT'");
+        } 
+        if (isset($dec_rec_data['request_on_seo_products_edit']) && ($dec_rec_data['request_on_seo_products_edit'] === 'true' || $dec_rec_data['request_on_seo_products_edit'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT'");
         } 
         if (isset($dec_rec_data['request_on_categories_edit']) && ($dec_rec_data['request_on_categories_edit'] === 'true' || $dec_rec_data['request_on_categories_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');

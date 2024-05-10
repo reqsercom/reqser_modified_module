@@ -257,7 +257,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 } 
               }
               if (data_message['alert_message'] && data_message['alert_message'] != ''){
-                  alert(data_message['alert_message']);
+                alert(data_message['alert_message']);
               }
             }
           );
@@ -348,5 +348,152 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       }
 
     }
+  
+  $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
+
+  if(defined('MODULE_SYSTEM_REQSER_STATUS') 
+    && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true'
+    && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
+    && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true'
+    && basename($PHP_SELF) == 'categories.php' 
+    && $msreq_local_api_key != '') {
+
+    $languages = array();
+    $fwl_language = constant('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG');
+    $languages[] = $fwl_language;
+
+    $iwl_languages = explode(',', constant('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'));
+    array_walk($iwl_languages, function($iwl_languages) use (&$languages) {
+      $languages[] = $iwl_languages;
+    });
+    ?>
+
+    <script>
+      var languages = <?php echo json_encode($languages); ?>;
+
+      $(function() {
+        var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+            msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+
+        // Initialize the productDescriptions array
+        var productDescriptions = [];
+        var productDescriptionsExists = 'false';
+        for (var i = 0; i < languages.length; i++) {
+          // Check if an element with the id cke_products_description_ + language exists
+          var productDescription = $('#cke_products_description_' + languages[i]);
+
+          // Find the body of the editor, if the productDescription element exists
+          if (productDescription) {
+            var productDescriptionBody = productDescription.contents().find('body');
+
+            // Check if the body element exists
+            if (productDescriptionBody) {
+              // Extend the productDescriptions array with a new object
+              productDescriptions.push({
+                language_id: languages[i],
+              });
+              productDescriptionsExists = 'true';
+            }
+          }
+        }
+
+        msreq_params = {
+          ext: 'reqser_upd_qu_ajax',
+          type: 'plain',
+          reqser_request_on_seo_products_edit: 'true', 
+          msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+          productDescriptions: productDescriptions,
+          productDescriptionsExists: productDescriptionsExists,
+        };
+
+        msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+        $.post("../ajax.php",
+          msreq_params,
+          function(data) {
+            if(data != '') {
+              var data_message = JSON.parse(data);
+
+              if (data_message['reqser_buttons'] && Array.isArray(data_message['reqser_buttons']) && data_message['reqser_buttons'].length > 0) {
+                
+                for (var i = 0; i < data_message['reqser_buttons'].length; i++) {
+                  var button = data_message['reqser_buttons'][i];
+                  if (button['add_to_container'] && button['add_to_container'] != '' && button['container_content'] && button['container_content'] != '') {
+                    var container = button['add_to_container'];
+                    if (container.startsWith('#') || container.startsWith('.')) {
+                      // Use the container value directly if it has a # or . prefix
+                      var selector = container;
+                    } else {
+                      // Assume it's an ID if there's no prefix
+                      var selector = '#' + container;
+                    }
+                    if ($(selector).length > 0) {
+                      var content = $(button['container_content']);
+                      $(selector).after(content);
+                    }
+                  }
+                }
+              }
+              if (data_message['alert_message'] && data_message['alert_message'] != ''){
+                alert(data_message['alert_message']);
+              }
+            }
+          }
+        );
+      });
+
+      /*
+      console.log(languages);
+
+      for (var i = 0; i < languages.length; i++) {
+
+        console.log('i: ' + i);
+        console.log('languages[i]: ' + languages[i]);
+
+        $(document).on('click', '#reqser_seo_product_description_edit_button_' + languages[i], function() {
+          $('#reqser_seo_product_description_edit_button_' + languages[i]).hide().prop('disabled', true);
+          $('#reqser_product_seo_product_description_edit_message_' + languages[i]).hide();
+          var productDescriptionBody = $('#cke_products_description_' + languages[i]).contents().find('body');
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+
+              console.log('Search for language: ' + languages[i]);
+          var div_element = document.getElementById('cke_products_description_' + languages[i]);
+          console.log('Found div element: ');
+          console.log(div_element);
+
+
+
+
+          msreq_params = {
+            ext: 'reqser_upd_qu_ajax', 
+            type: 'plain', 
+            reqser_request_seo_edit: 'true',
+            msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+            text: productDescriptionBody.html(),
+            column: 'products_description',
+            language: languages[i],
+          };
+          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+          $.post("../ajax.php",
+            msreq_params,
+            function(data) {
+              if(data != '') {
+                var data_message = JSON.parse(data);
+                if (data_message['translated_text'] && data_message['translated_text'] != ''){
+                  productDescriptionBody.html(data_message['translated_text']);
+                } 
+                if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
+                  productDescriptionBody.html(data_message['seo_edited_text']);
+                } 
+              }
+            }
+          );
+        });
+      }
+      */
+
+    </script>
+  <?php
+  }
 }
 
