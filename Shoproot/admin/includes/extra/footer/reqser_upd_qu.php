@@ -348,12 +348,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       }
 
     }
-  
-  $msreq_local_api_key = defined('MODULE_SYSTEM_REQSER_REQSER_API_KEY') ? MODULE_SYSTEM_REQSER_REQSER_API_KEY : '';
 
-  if(defined('MODULE_SYSTEM_REQSER_STATUS') 
-    && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true'
-    && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
+  if(defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
     && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true'
     && basename($PHP_SELF) == 'categories.php' 
     && $msreq_local_api_key != '') {
