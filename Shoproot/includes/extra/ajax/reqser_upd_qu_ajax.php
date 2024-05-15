@@ -143,9 +143,13 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['reqser_request_on_seo_products_edit'] = 'true';
       $post_fields['product_descriptions'] = $_POST['productDescriptions'];
       $post_fields['product_descriptions_exists'] = $_POST['productDescriptionsExists'];
+      $post_fields['manufacturers_id'] = $_POST['manufacturers_id'];
     } elseif (isset($_POST['reqser_request_seo_edit']) && $_POST['reqser_request_seo_edit'] == 'true'){
       $post_fields['reqser_request_seo_edit'] = 'true';
       $post_fields['text'] = $_POST['text'];
+      $post_fields['products_name'] = $_POST['products_name'];
+      $post_fields['keywords'] = $_POST['keywords'];
+      $post_fields['output_type'] = $_POST['output_type'];
       $post_fields['column'] = $_POST['column'];
       $post_fields['language_id'] = $_POST['language'];
       $timeout = 20;

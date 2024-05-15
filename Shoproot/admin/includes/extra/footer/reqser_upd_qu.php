@@ -402,6 +402,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
           productDescriptions: productDescriptions,
           productDescriptionsExists: productDescriptionsExists,
+          manufacturers_id: $('select[name="manufacturers_id"]').val(),
         };
 
         msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
@@ -441,8 +442,10 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
 
       $(document).ready(function() {
         $(document).on('click', '#reqser_seo_product_description_edit_button_2', function() {
-          $('#reqser_seo_product_description_edit_button_2').hide().prop('disabled', true);
-          $('#reqser_product_seo_product_description_edit_message_2').hide();
+          $('#reqser_seo_product_description_edit_2').hide();
+          $('#reqser_seo_product_description_loader_2').show();
+          //$('#reqser_product_seo_product_description_edit_message_2').hide();
+
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
 
@@ -453,13 +456,15 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           //console.log('Body text: ', body_element.text());
           //console.log('Body content: ', body_element.html()); // Includes HTML tags
           
-
           msreq_params = {
             ext: 'reqser_upd_qu_ajax', 
             type: 'plain', 
             reqser_request_seo_edit: 'true',
             msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
             text: body_element.html(),
+            products_name: $('input[name="products_name[2]"]').val(),
+            keywords: $('textarea[name="product_description_keywords[2]"]').val(),
+            output_type: $('select[name="product_description_output_type[2]"]').val(),
             column: 'products_description',
             language: "2",
           };
@@ -474,6 +479,9 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
                   body_element.html(data_message['seo_edited_text']);
                 }
+
+                $('#reqser_seo_product_description_edit_2').show();
+                $('#reqser_seo_product_description_loader_2').hide();
               }
             }
           );
