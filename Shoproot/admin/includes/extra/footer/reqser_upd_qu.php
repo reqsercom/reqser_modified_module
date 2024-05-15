@@ -352,6 +352,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
   if(defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
     && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true'
     && basename($PHP_SELF) == 'categories.php' 
+    && isset($_GET['action'])
+    && $_GET['action'] == 'new_product'
     && $msreq_local_api_key != '') {
 
     $languages = array();
@@ -437,56 +439,46 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         );
       });
 
-      /*
-      console.log(languages);
-
-      for (var i = 0; i < languages.length; i++) {
-
-        console.log('i: ' + i);
-        console.log('languages[i]: ' + languages[i]);
-
-        $(document).on('click', '#reqser_seo_product_description_edit_button_' + languages[i], function() {
-          $('#reqser_seo_product_description_edit_button_' + languages[i]).hide().prop('disabled', true);
-          $('#reqser_product_seo_product_description_edit_message_' + languages[i]).hide();
-          var productDescriptionBody = $('#cke_products_description_' + languages[i]).contents().find('body');
+      $(document).ready(function() {
+        $(document).on('click', '#reqser_seo_product_description_edit_button_2', function() {
+          $('#reqser_seo_product_description_edit_button_2').hide().prop('disabled', true);
+          $('#reqser_product_seo_product_description_edit_message_2').hide();
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
 
-              console.log('Search for language: ' + languages[i]);
-          var div_element = document.getElementById('cke_products_description_' + languages[i]);
-          console.log('Found div element: ');
-          console.log(div_element);
-
-
-
+          var iframe = $('#cke_products_description_2 iframe');
+          var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+          var body_element = $(iframeDocument).find('body.cke_editable');
+          
+          //console.log('Body text: ', body_element.text());
+          //console.log('Body content: ', body_element.html()); // Includes HTML tags
+          
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax', 
             type: 'plain', 
             reqser_request_seo_edit: 'true',
             msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
-            text: productDescriptionBody.html(),
+            text: body_element.html(),
             column: 'products_description',
-            language: languages[i],
+            language: "2",
           };
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
             msreq_params,
             function(data) {
               if(data != '') {
+                console.log('Data: ' + data);
+                
                 var data_message = JSON.parse(data);
-                if (data_message['translated_text'] && data_message['translated_text'] != ''){
-                  productDescriptionBody.html(data_message['translated_text']);
-                } 
                 if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
-                  productDescriptionBody.html(data_message['seo_edited_text']);
-                } 
+                  body_element.html(data_message['seo_edited_text']);
+                }
               }
             }
           );
         });
-      }
-      */
+      });
 
     </script>
   <?php

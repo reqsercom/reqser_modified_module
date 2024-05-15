@@ -101,6 +101,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       || (isset($_POST['reqser_request_on_orders_edit']) && $_POST['reqser_request_on_orders_edit'] == 'true')
       || (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true')
       || (isset($_POST['reqser_request_on_seo_products_edit']) && $_POST['reqser_request_on_seo_products_edit'] == 'true')
+      || (isset($_POST['reqser_request_seo_edit']) && $_POST['reqser_request_seo_edit'] == 'true')
     )  
     && (isset($_POST['msreq_api_key']) && $_POST['msreq_api_key'] != '')) {
   //JorisK 04-2024
@@ -126,6 +127,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
     if (isset($_POST['reqser_request_on_orders_edit']) && $_POST['reqser_request_on_orders_edit'] == 'true') {
       $post_fields['reqser_request_on_orders_edit'] = 'true';
       $post_fields['comments_exists'] = $_POST['comments_exists'];
+      $timeout = 10;
     } elseif (isset($_POST['reqser_request_on_start']) && $_POST['reqser_request_on_start'] == 'true') {
       $post_fields['reqser_request_on_start'] = 'true';
       $post_fields['admincol_right_exists'] = $_POST['admincol_right_exists'];
