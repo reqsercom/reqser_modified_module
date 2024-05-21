@@ -1405,7 +1405,7 @@ class ClassReqser extends api_local\ApiBase {
         break;
       case 'products_content':
         $fields = array('fields' => array('content_name', 'file_comment'),
-                        'unique_key' => 'content_id',
+                        'unique_key' => 'products_id',
                         'lang' => 'languages_id',
                         'diff_id_for_lng' => 'true');
         break;
