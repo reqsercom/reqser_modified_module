@@ -200,6 +200,13 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'returns' => 'an array with all brand names stored in the manufacturers table'
                                                                                                           )
                                                                                           ),
+                                                      'get_products_manufacturers' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_manufacturers',
+                                                                                                          'desc' => 'get all products manufacturers names',
+                                                                                                          'returns' => 'an array with products ids and manufacturer ids'
+                                                                                                          )
+                                                                                          ),
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
@@ -365,6 +372,40 @@ class ClassReqser extends api_local\ApiBase {
     while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
       $out_arr[$result_arr['manufacturers_id']] = $this->encode_utf8($this->getShopCharset(), $result_arr['manufacturers_name'], false, true);
     }
+    return $out_arr;
+  }
+
+  /**  
+   * private method callTablesGet_products_manufacturers
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_products_manufacturers($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT products_id, manufacturers_id FROM products ORDER BY products_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
+    } else {
+      $qu_str = "SELECT products_id, manufacturers_id FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+    }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        foreach($qu_arr as $key => $value) {
+          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+          $out_arr[$qu_arr['products_id']] = $value;
+        }
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no manufacturers found for products');
+    }
+
     return $out_arr;
   }
   
