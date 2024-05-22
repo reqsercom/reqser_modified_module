@@ -37,8 +37,6 @@ class reqser {
 
     //JorisK 01-2024, Update to new Modul Versions
     if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
-      $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
-      $msreq_api_reqser->getApiReqserVersion(); //JorisK 04-2024 will also update missing configuration values for newer versions
       $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
     }
    
