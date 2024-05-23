@@ -193,11 +193,11 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'returns' => 'an array with the row information, needed to add more than predefined rows for translation, and also if an older Shop version is not having these rows, could lead to sql errors'
                                                                                                          )
                                                                                          ),
-                                                      'get_manufacturers_names' => array('method' => 'get',
+                                                      'get_manufacturers_information' => array('method' => 'get',
                                                                                           'params' => array('table'),
-                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_manufacturers_names',
-                                                                                                          'desc' => 'get all entries from manufacturers table to keep the brand names',
-                                                                                                          'returns' => 'an array with all brand names stored in the manufacturers table'
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_manufacturers_information',
+                                                                                                          'desc' => 'get all entries from manufacturers table to keep the brand names and images',
+                                                                                                          'returns' => 'an array with all brand names and images stored in the manufacturers table'
                                                                                                           )
                                                                                           ),
                                                       'get_products_manufacturers' => array('method' => 'get',
@@ -360,17 +360,20 @@ class ClassReqser extends api_local\ApiBase {
   }
 
   /**  
-   * private method callTablesGet_manufacturers_names
+   * private method callTablesGet_manufacturers_information
    *
    * @return array with all entries
    */
-  protected function callTablesGet_manufacturers_names() {
+  protected function callTablesGet_manufacturers_information() {
     //JorisK necessary to create a glossary to keep the brand names in the foreign language
     $out_arr = array();
-    $qu_str = "SELECT manufacturers_id, manufacturers_name FROM manufacturers";
+    $qu_str = "SELECT manufacturers_id, manufacturers_name, manufacturers_image FROM manufacturers";
     $result = $this->api_db_conn->apiDbQuery($qu_str);
     while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
-      $out_arr[$result_arr['manufacturers_id']] = $this->encode_utf8($this->getShopCharset(), $result_arr['manufacturers_name'], false, true);
+      $out_arr[$result_arr['manufacturers_id']] = array(
+        'name' => $this->encode_utf8($this->getShopCharset(), $result_arr['manufacturers_name'], false, true),
+        'image' => $result_arr['manufacturers_image']
+      );
     }
     return $out_arr;
   }
