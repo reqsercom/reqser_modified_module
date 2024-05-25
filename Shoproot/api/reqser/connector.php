@@ -45,7 +45,14 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
   }
 
   if(isset($_SERVER['REQUEST_URI'])) {
-    $uri_arr = $reqser->receiveRequest($_SERVER['REQUEST_URI']);
+    //JorisK 05-2024: Fix if the Shop is placed in a Subdirectory
+    $api_position = strpos($_SERVER['REQUEST_URI'], '/api/reqser/connector.php');
+    if ($api_position !== false) {
+        $modified_request_uri = substr($_SERVER['REQUEST_URI'], $api_position);
+    } else {
+        $modified_request_uri = $_SERVER['REQUEST_URI']; 
+    }
+    $uri_arr = $reqser->receiveRequest($modified_request_uri);
 
     $rem_add = $reqser->protoc === true ? xtc_get_ip_address() : '';
     $response = $reqser->callRestMethod($uri_arr, $reqser_api_key, $reqser_token, $reqser_token_validity, $rem_add);
