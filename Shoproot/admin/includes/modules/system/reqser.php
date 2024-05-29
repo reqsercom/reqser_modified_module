@@ -152,6 +152,7 @@ class reqser {
   
     //PatrickK From Version 3.3
     xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //PatrickK SEO edits needs edit rights for base language
   }
 
   function remove() {
@@ -172,6 +173,7 @@ class reqser {
                  $this->mn_const.'LANGUAGE_FILES',
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',
+                 $this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',
                 );

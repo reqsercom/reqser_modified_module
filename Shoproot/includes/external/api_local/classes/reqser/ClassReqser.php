@@ -311,6 +311,13 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
         }
+        if (!defined('MODULE_SYSTEM_REQSER_ALLOW_BASE_LANGUAGE_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_ALLOW_BASE_LANGUAGE_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
         
         //Update to newest version
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
@@ -1008,7 +1015,13 @@ class ClassReqser extends api_local\ApiBase {
           
           if(array_key_exists(strtolower($lang), $this->shop_languages)) {
             $lang_id = (int)$this->shop_languages[strtolower($lang)]['languages_id'];
-            if(isset($lang_id) && in_array($lang_id, $iwl_arr)) {
+            //PatrickK 05-2024 Erweiterung der Prüfung mit Check der Grundsprache
+            if(isset($lang_id) 
+              && (in_array($lang_id, $iwl_arr) 
+              || ($lang_id == $this->fwl && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
+              && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true')
+              && $dec_rec_data['transfer_type'] !== 'insert')
+            ) {
               //JorisK Spezialfall da die Tabelle plugin_language_snippets_data nicht die ID sondern den Language Code hat
               if($dec_rec_data['use_language_code'] == 1) {
                 $lang_id = strtolower($lang);
