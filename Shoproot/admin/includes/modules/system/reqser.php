@@ -32,12 +32,15 @@ class reqser {
     $this->enabled = $this->get_const('STATUS') == 'true' ? true : false;
 
     if(version_compare(PHP_VERSION, '7.0', '<')) {
+      
       $this->title .= '<br><span style="color:red;">PHP Version is too low, min. 7.0 required!</span>';
     }
 
     //JorisK 01-2024, Update to new Modul Versions
     if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
-      $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
+      if ($this->admin_update_module_version($this->module_version)){
+        $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
+      }
     }
    
     $this->langs_arr_str = get_langs_from_translate();
@@ -206,6 +209,12 @@ class reqser {
   private function get_const($suffix = '') {
     $full_const = $this->mn_const.$suffix;
     return defined($full_const) ? constant($full_const) : ''; 
+  }
+
+  private function admin_update_module_version($reqser_module_version){
+    require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
+    $api_base = new api_local\ApiBase();
+    return $api_base->update_module_version($reqser_module_version);
   }
   //EOC helper functions
 }
