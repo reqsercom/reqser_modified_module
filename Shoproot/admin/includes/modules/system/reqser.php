@@ -37,7 +37,7 @@ class reqser {
 
     //JorisK 01-2024, Update to new Modul Versions
     if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
-      $this->install();
+      $this->install('update');
       $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
     }
    
@@ -99,7 +99,7 @@ class reqser {
     return $this->_check;
   }
 
-  function install() {
+  function install($mode = 'install') {
     global $messageStack;
     if(version_compare(PHP_VERSION, '7.0', '<')) {
       $messageStack->add_session('PHP version must be minimum 7.0 or higher', 'warning');
@@ -158,6 +158,17 @@ class reqser {
     //PatrickK From Version 3.3
     if (!defined($this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     if (!defined($this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //PatrickK SEO edits needs edit rights for base language
+    if ($mode == 'update'){
+      //JorisK remove error message since it is now updated!
+      echo '<script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function() {
+          var errorMessage = document.querySelector(".error_message");
+          if (errorMessage) {
+              errorMessage.style.display = "none";
+          }
+      });
+      </script>';
+    }
   }
 
   function remove() {
