@@ -150,6 +150,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['reqser_request_seo_edit'] = 'true';
       $post_fields['text'] = $_POST['text'];
       $post_fields['products_name'] = $_POST['products_name'];
+      $post_fields['products_id'] = $_POST['products_id'];
       $post_fields['keywords'] = $_POST['keywords'];
       $post_fields['output_type'] = $_POST['output_type'];
       $post_fields['column'] = $_POST['column'];

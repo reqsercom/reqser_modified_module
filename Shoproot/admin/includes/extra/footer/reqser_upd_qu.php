@@ -457,7 +457,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           //$('#reqser_product_seo_product_description_edit_message_2').hide();
 
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
+              products_id = $('input[name="products_id"]').val();
 
           var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>);
           var productDescriptionBracket = $('#cke_products_description[' + <?php echo $fwl_language ?> + ']');          
@@ -479,6 +480,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             reqser_request_seo_edit: 'true',
             msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
             text: body_element.html(),
+            products_id: products_id,
             products_name: $('input[name="products_name[2]"]').val(),
             keywords: $('textarea[name="product_description_keywords[2]"]').val(),
             output_type: $('select[name="product_description_output_type[2]"]').val(),
@@ -490,7 +492,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             msreq_params,
             function(data) {
               if(data != '') {
-                console.log('Data: ' + data);
+                //console.log('Data: ' + data);
                 
                 var data_message = JSON.parse(data);
                 if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
