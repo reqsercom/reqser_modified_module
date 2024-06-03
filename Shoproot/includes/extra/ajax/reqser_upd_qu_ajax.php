@@ -143,6 +143,8 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['reqser_request_on_seo_products_edit'] = 'true';
       $post_fields['product_descriptions'] = $_POST['productDescriptions'];
       $post_fields['product_descriptions_exists'] = $_POST['productDescriptionsExists'];
+      $post_fields['product_description_id_underscore_exists'] = $_POST['product_description_id_underscore_exists'];
+      $post_fields['product_description_id_bracket_exists'] = $_POST['product_description_id_bracket_exists'];
       $post_fields['manufacturers_id'] = $_POST['manufacturers_id'];
     } elseif (isset($_POST['reqser_request_seo_edit']) && $_POST['reqser_request_seo_edit'] == 'true'){
       $post_fields['reqser_request_seo_edit'] = 'true';

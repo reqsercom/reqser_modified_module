@@ -369,75 +369,85 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     <script>
       var languages = <?php echo json_encode($languages); ?>;
 
-      $(function() {
-        var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-            msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+      $(document).ready(function() {
+        
+        setTimeout(function() {
 
-        // Initialize the productDescriptions array
-        var productDescriptions = [];
-        var productDescriptionsExists = 'false';
-        for (var i = 0; i < languages.length; i++) {
-          // Check if an element with the id cke_products_description_ + language exists
-          var productDescription = $('#cke_products_description_' + languages[i]);
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>'
+              product_description_id_underscore_exists = $('#cke_products_description_'+<?php echo $fwl_language ?>).length > 0 ? 'true' : 'false',
+              product_description_id_bracket_exists = $('#cke_products_description['+<?php echo $fwl_language ?>+']').length > 0 ? 'true' : 'false',
+              productDescriptions = [],
+              productDescriptionsExists = 'false';
 
-          // Find the body of the editor, if the productDescription element exists
-          if (productDescription) {
-            var productDescriptionBody = productDescription.contents().find('body');
+          for (var i = 0; i < languages.length; i++) {
+            // Check if an element with the id cke_products_description_ + language exists          
+            var productDescriptionUnderscore = $('#cke_products_description_' + languages[i]),
+                productDescriptionBracket = $('#cke_products_description[' + languages[i] + ']');
+        
+            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
 
-            // Check if the body element exists
-            if (productDescriptionBody) {
-              // Extend the productDescriptions array with a new object
-              productDescriptions.push({
-                language_id: languages[i],
-              });
-              productDescriptionsExists = 'true';
+            // Find the body of the editor, if the productDescription element exists
+            if (productDescription) {
+              var productDescriptionBody = productDescription.contents().find('body');
+
+              // Check if the body element exists
+              if (productDescriptionBody) {
+                // Extend the productDescriptions array with a new object
+                productDescriptions.push({
+                  language_id: languages[i],
+                });
+                productDescriptionsExists = 'true';
+              }
             }
           }
-        }
 
-        msreq_params = {
-          ext: 'reqser_upd_qu_ajax',
-          type: 'plain',
-          reqser_request_on_seo_products_edit: 'true', 
-          msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
-          productDescriptions: productDescriptions,
-          productDescriptionsExists: productDescriptionsExists,
-          manufacturers_id: $('select[name="manufacturers_id"]').val(),
-        };
+          msreq_params = {
+            ext: 'reqser_upd_qu_ajax',
+            type: 'plain',
+            reqser_request_on_seo_products_edit: 'true', 
+            msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+            productDescriptions: productDescriptions,
+            productDescriptionsExists: productDescriptionsExists,
+            product_description_id_underscore_exists: product_description_id_underscore_exists,
+            product_description_id_bracket_exists: product_description_id_bracket_exists,
+            manufacturers_id: $('select[name="manufacturers_id"]').val(),
+          };
 
-        msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
-        $.post("../ajax.php",
-          msreq_params,
-          function(data) {
-            if(data != '') {
-              var data_message = JSON.parse(data);
+          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+          $.post("../ajax.php",
+            msreq_params,
+            function(data) {
+              if(data != '') {
+                var data_message = JSON.parse(data);
 
-              if (data_message['reqser_buttons'] && Array.isArray(data_message['reqser_buttons']) && data_message['reqser_buttons'].length > 0) {
-                
-                for (var i = 0; i < data_message['reqser_buttons'].length; i++) {
-                  var button = data_message['reqser_buttons'][i];
-                  if (button['add_to_container'] && button['add_to_container'] != '' && button['container_content'] && button['container_content'] != '') {
-                    var container = button['add_to_container'];
-                    if (container.startsWith('#') || container.startsWith('.')) {
-                      // Use the container value directly if it has a # or . prefix
-                      var selector = container;
-                    } else {
-                      // Assume it's an ID if there's no prefix
-                      var selector = '#' + container;
-                    }
-                    if ($(selector).length > 0) {
-                      var content = $(button['container_content']);
-                      $(selector).after(content);
+                if (data_message['reqser_buttons'] && Array.isArray(data_message['reqser_buttons']) && data_message['reqser_buttons'].length > 0) {
+                  
+                  for (var i = 0; i < data_message['reqser_buttons'].length; i++) {
+                    var button = data_message['reqser_buttons'][i];
+                    if (button['add_to_container'] && button['add_to_container'] != '' && button['container_content'] && button['container_content'] != '') {
+                      var container = button['add_to_container'];
+                      if (container.startsWith('#') || container.startsWith('.')) {
+                        // Use the container value directly if it has a # or . prefix
+                        var selector = container;
+                      } else {
+                        // Assume it's an ID if there's no prefix
+                        var selector = '#' + container;
+                      }
+                      if ($(selector).length > 0) {
+                        var content = $(button['container_content']);
+                        $(selector).after(content);
+                      }
                     }
                   }
                 }
-              }
-              if (data_message['alert_message'] && data_message['alert_message'] != ''){
-                alert(data_message['alert_message']);
+                if (data_message['alert_message'] && data_message['alert_message'] != ''){
+                  alert(data_message['alert_message']);
+                }
               }
             }
-          }
-        );
+          );
+        }, 4000);
       });
 
       $(document).ready(function() {
@@ -449,7 +459,14 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
 
-          var iframe = $('#cke_products_description_2 iframe');
+          var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>);
+          var productDescriptionBracket = $('#cke_products_description[' + <?php echo $fwl_language ?> + ']');          
+          var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
+          
+          if (productDescription) {
+            var iframe = productDescription.find('iframe');
+          }
+          
           var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
           var body_element = $(iframeDocument).find('body.cke_editable');
           
