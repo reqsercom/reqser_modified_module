@@ -387,6 +387,11 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         
             var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
 
+          // TEMP Monitoring
+            console.log('productDescriptionUnderscore: ', productDescriptionUnderscore);
+            console.log('productDescriptionBracket: ', productDescriptionBracket);
+            console.log('productDescription: ', productDescription);
+
             // Find the body of the editor, if the productDescription element exists
             if (productDescription) {
               var productDescriptionBody = productDescription.contents().find('body');
@@ -401,6 +406,13 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               }
             }
           }
+
+          // TEMP Monitoring
+          console.log('fwl_language: '+<?php echo $fwl_language ?>);
+          console.log('productDescriptions: ', productDescriptions);
+          console.log('productDescriptionsExists: ', productDescriptionsExists);
+          console.log('product_description_id_underscore_exists: ', product_description_id_underscore_exists);
+          console.log('product_description_id_bracket_exists: ', product_description_id_bracket_exists);
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax',
