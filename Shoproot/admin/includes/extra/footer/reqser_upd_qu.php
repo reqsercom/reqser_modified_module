@@ -376,24 +376,16 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>'
               product_description_id_underscore_exists = $('#cke_products_description_'+<?php echo $fwl_language ?>).length > 0 ? 'true' : 'false',
-              product_description_id_bracket_exists = $('#cke_products_description['+<?php echo $fwl_language ?>+']').length > 0 ? 'true' : 'false',
-              product_description_id_bracket_2_exists = $('#cke_products_description\\['+<?php echo $fwl_language ?>+'\\]').length > 0 ? 'true' : 'false',
+              product_description_id_bracket_exists = $('#cke_products_description\\['+<?php echo $fwl_language ?>+'\\]').length > 0 ? 'true' : 'false',
               productDescriptions = [],
               productDescriptionsExists = 'false';
 
           for (var i = 0; i < languages.length; i++) {
             // Check if an element with the id cke_products_description_ + language exists          
             var productDescriptionUnderscore = $('#cke_products_description_' + languages[i]),
-                productDescriptionBracket = $('#cke_products_description[' + languages[i] + ']')
-                productDescriptionBracket2 = $('#cke_products_description\\[' + languages[i] + '\\]');
+                productDescriptionBracket = $('#cke_products_description\\[' + languages[i] + '\\]');
         
-            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : productDescriptionBracket2.length > 0 ? productDescriptionBracket2 : null;
-
-            // TEMP Monitoring
-            console.log('productDescriptionUnderscore: ', productDescriptionUnderscore);
-            console.log('productDescriptionBracket: ', productDescriptionBracket);
-            console.log('productDescriptionBracket2: ', productDescriptionBracket2);
-            console.log('productDescription: ', productDescription);
+            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
 
             // Find the body of the editor, if the productDescription element exists
             if (productDescription) {
@@ -409,14 +401,6 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               }
             }
           }
-
-          // TEMP Monitoring
-          console.log('fwl_language: '+<?php echo $fwl_language ?>);
-          console.log('productDescriptions: ', productDescriptions);
-          console.log('productDescriptionsExists: ', productDescriptionsExists);
-          console.log('product_description_id_underscore_exists: ', product_description_id_underscore_exists);
-          console.log('product_description_id_bracket_exists: ', product_description_id_bracket_exists);
-          console.log('product_description_id_bracket_2_exists: ', product_description_id_bracket_2_exists);
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax',
@@ -445,10 +429,10 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                       var container = button['add_to_container'];
                       if (container.startsWith('#') || container.startsWith('.')) {
                         // Use the container value directly if it has a # or . prefix
-                        var selector = container;
+                        var selector = container.replace(/([\[\]])/g, "\\$1"); // escape special characters
                       } else {
                         // Assume it's an ID if there's no prefix
-                        var selector = '#' + container;
+                        var selector = '#' + container.replace(/([\[\]])/g, "\\$1"); // escape special characters
                       }
                       if ($(selector).length > 0) {
                         var content = $(button['container_content']);
@@ -477,7 +461,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               products_id = $('input[name="products_id"]').val();
 
           var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>);
-          var productDescriptionBracket = $('#cke_products_description[' + <?php echo $fwl_language ?> + ']');          
+          var productDescriptionBracket = $('#cke_products_description\\[' + <?php echo $fwl_language ?> + '\\]');          
           var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
           
           if (productDescription) {
