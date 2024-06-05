@@ -377,19 +377,22 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>'
               product_description_id_underscore_exists = $('#cke_products_description_'+<?php echo $fwl_language ?>).length > 0 ? 'true' : 'false',
               product_description_id_bracket_exists = $('#cke_products_description['+<?php echo $fwl_language ?>+']').length > 0 ? 'true' : 'false',
+              product_description_id_bracket_2_exists = $('#cke_products_description\\['+<?php echo $fwl_language ?>+'\\]').length > 0 ? 'true' : 'false',
               productDescriptions = [],
               productDescriptionsExists = 'false';
 
           for (var i = 0; i < languages.length; i++) {
             // Check if an element with the id cke_products_description_ + language exists          
             var productDescriptionUnderscore = $('#cke_products_description_' + languages[i]),
-                productDescriptionBracket = $('#cke_products_description[' + languages[i] + ']');
+                productDescriptionBracket = $('#cke_products_description[' + languages[i] + ']')
+                productDescriptionBracket2 = $('#cke_products_description\\[' + languages[i] + '\\]');
         
-            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
+            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : productDescriptionBracket2.length > 0 ? productDescriptionBracket2 : null;
 
-          // TEMP Monitoring
+            // TEMP Monitoring
             console.log('productDescriptionUnderscore: ', productDescriptionUnderscore);
             console.log('productDescriptionBracket: ', productDescriptionBracket);
+            console.log('productDescriptionBracket2: ', productDescriptionBracket2);
             console.log('productDescription: ', productDescription);
 
             // Find the body of the editor, if the productDescription element exists
@@ -413,6 +416,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           console.log('productDescriptionsExists: ', productDescriptionsExists);
           console.log('product_description_id_underscore_exists: ', product_description_id_underscore_exists);
           console.log('product_description_id_bracket_exists: ', product_description_id_bracket_exists);
+          console.log('product_description_id_bracket_2_exists: ', product_description_id_bracket_2_exists);
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax',
