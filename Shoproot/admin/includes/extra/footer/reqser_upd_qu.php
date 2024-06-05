@@ -459,6 +459,9 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
               products_id = $('input[name="products_id"]').val();
+              
+          // If the products_id is 0, it's a new product
+          products_id = (products_id == 0) ? "new_product" : products_id;
 
           var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>);
           var productDescriptionBracket = $('#cke_products_description\\[' + <?php echo $fwl_language ?> + '\\]');          
