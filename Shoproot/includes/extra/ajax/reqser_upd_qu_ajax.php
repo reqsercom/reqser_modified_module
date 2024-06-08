@@ -151,10 +151,13 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['text'] = $_POST['text'];
       $post_fields['products_name'] = $_POST['products_name'];
       $post_fields['products_id'] = $_POST['products_id'];
-      $post_fields['keywords'] = $_POST['keywords'];
-      $post_fields['output_type'] = $_POST['output_type'];
       $post_fields['column'] = $_POST['column'];
       $post_fields['language_id'] = $_POST['language'];
+      if (isset($_POST['seo_inputs']) && is_array($_POST['seo_inputs'])) {
+        foreach ($_POST['seo_inputs'] as $key => $value) {
+          $post_fields[$key] = $value;
+        }
+      }
       $timeout = 20;
     }
     if (isset($_SESSION['customer_id'])) $post_fields['customer_id'] = $_SESSION['customer_id'];

@@ -368,13 +368,26 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
 
     <script>
       var languages = <?php echo json_encode($languages); ?>;
+      var form_inputs = [];
 
       $(document).ready(function() {
+
+        // Add a placeholder for the Reqser SEO settings
+        var product_description_id_underscore = $('#products_description_'+<?php echo $fwl_language ?>),
+            product_description_id_bracket = $('#products_description\\['+<?php echo $fwl_language ?>+'\\]');
+        var product_description_selector = product_description_id_underscore.length > 0 ? product_description_id_underscore : product_description_id_bracket.length > 0 ? product_description_id_bracket : null;
         
+        var loadingMessage = "<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING ?>";
+        var content = '<div id="reqser_seo_product_description_placeholder_2" style="text-align: center; animation: pulse 2s infinite; margin: 40px 0 0;">' + loadingMessage + '</div><style> @keyframes pulse { 0% { opacity: 1;} 50% { opacity: 0.5; } 100% { opacity: 1; } } </style>';
+    
+        if ($(product_description_selector).length > 0) {
+          $(product_description_selector).after(content);
+        }
+
         setTimeout(function() {
 
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>'
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
               product_description_id_underscore_exists = $('#cke_products_description_'+<?php echo $fwl_language ?>).length > 0 ? 'true' : 'false',
               product_description_id_bracket_exists = $('#cke_products_description\\['+<?php echo $fwl_language ?>+'\\]').length > 0 ? 'true' : 'false',
               productDescriptions = [],
@@ -401,6 +414,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               }
             }
           }
+
+          //console.log('productDescriptions: ', productDescriptions);
 
           msreq_params = {
             ext: 'reqser_upd_qu_ajax',
@@ -434,12 +449,18 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                         // Assume it's an ID if there's no prefix
                         var selector = '#' + container.replace(/([\[\]])/g, "\\$1"); // escape special characters
                       }
+                      $('#reqser_seo_product_description_placeholder_2').hide();
                       if ($(selector).length > 0) {
                         var content = $(button['container_content']);
                         $(selector).after(content);
+                      } else {
+                        // TODO: Handle the case where the container doesn't exist
                       }
                     }
                   }
+                }
+                if (data_message['form_inputs'] && Array.isArray(data_message['form_inputs']) && data_message['form_inputs'].length > 0) {
+                  form_inputs = data_message['form_inputs'];
                 }
                 if (data_message['alert_message'] && data_message['alert_message'] != ''){
                   alert(data_message['alert_message']);
@@ -454,59 +475,83 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         $(document).on('click', '#reqser_seo_product_description_edit_button_2', function() {
           $('#reqser_seo_product_description_edit_2').hide();
           $('#reqser_seo_product_description_loader_2').show();
-          //$('#reqser_product_seo_product_description_edit_message_2').hide();
 
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
-              products_id = $('input[name="products_id"]').val();
-              
-          // If the products_id is 0, it's a new product
-          products_id = (products_id == 0) ? "new_product" : products_id;
+              msreq_params = {},
+              products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(); // Set the products_id to "new_product" if it's 0, otherwise use the value
+                    
+          // Loop through the form inputs and add them to the msreq_params object
+          var seo_inputs = {};
+          if (form_inputs.length > 0) {
+              for (var i = 0; i < form_inputs.length; i++) {
+                  var form_input = form_inputs[i];
+                  var input;
+                  if (form_input['type'] === 'radio') {
+                      input = $('input[name="'+form_input['name']+'"]:checked');
+                  } else {
+                      input = $(form_input['type']+'[name="'+form_input['name']+'"]');
+                  }
+                  if (input.length > 0) {
+                      var value = input.val();
+                      var nameWithoutBrackets = form_input['name'].replace(/\[.*\]/g, '');
+                      seo_inputs[nameWithoutBrackets] = value;
+                  }
+              }
+          }
 
           var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>);
           var productDescriptionBracket = $('#cke_products_description\\[' + <?php echo $fwl_language ?> + '\\]');          
-          var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
-          
+          var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;          
+
           if (productDescription) {
             var iframe = productDescription.find('iframe');
-          }
-          
-          var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
-          var body_element = $(iframeDocument).find('body.cke_editable');
-          
-          //console.log('Body text: ', body_element.text());
-          //console.log('Body content: ', body_element.html()); // Includes HTML tags
-          
-          msreq_params = {
-            ext: 'reqser_upd_qu_ajax', 
-            type: 'plain', 
-            reqser_request_seo_edit: 'true',
-            msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
-            text: body_element.html(),
-            products_id: products_id,
-            products_name: $('input[name="products_name[2]"]').val(),
-            keywords: $('textarea[name="product_description_keywords[2]"]').val(),
-            output_type: $('select[name="product_description_output_type[2]"]').val(),
-            column: 'products_description',
-            language: "2",
-          };
-          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
-          $.post("../ajax.php",
-            msreq_params,
-            function(data) {
-              if(data != '') {
-                //console.log('Data: ' + data);
-                
-                var data_message = JSON.parse(data);
-                if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
-                  body_element.html(data_message['seo_edited_text']);
-                }
+            if (iframe.length > 0) {
+                var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+                if (iframeDocument) {
+                    var body_element = $(iframeDocument).find('body.cke_editable');
 
-                $('#reqser_seo_product_description_edit_2').show();
-                $('#reqser_seo_product_description_loader_2').hide();
-              }
+                    msreq_params = {
+                      ext: 'reqser_upd_qu_ajax', 
+                      type: 'plain', 
+                      reqser_request_seo_edit: 'true',
+                      msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+                      text: body_element.html(),
+                      products_id: products_id,
+                      products_name: $('input[name="products_name[2]"]').val(),
+                      column: 'products_description',
+                      seo_inputs: seo_inputs,
+                      language: "2",
+                    };
+                    msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+                    $.post("../ajax.php",
+                      msreq_params,
+                      function(data) {
+                        if(data != '') {                          
+                          var data_message = JSON.parse(data);
+                          if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
+                            body_element.html(data_message['seo_edited_text']);
+                          }
+          
+                          $('#reqser_seo_product_description_edit_2').show();
+                          $('#reqser_seo_product_description_loader_2').hide();
+          
+                          if (data_message['alert_message'] && data_message['alert_message'] != ''){
+                            alert(data_message['alert_message']);
+                          }
+                        }
+                      }
+                    );
+
+                } else {
+                  console.error('Reqser.com: Iframe document not found');
+                }
+            } else {
+              console.error('Reqser.com: Iframe not found');
             }
-          );
+          } else {
+            console.error('Reqser.com: Product description not found');
+          }
         });
       });
 
