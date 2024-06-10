@@ -527,7 +527,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                     $.post("../ajax.php",
                       msreq_params,
                       function(data) {
-                        if(data != '') {                          
+                        if(data != '') {
                           var data_message = JSON.parse(data);
                           if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != ''){
                             body_element.html(data_message['seo_edited_text']);
@@ -539,6 +539,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                           if (data_message['alert_message'] && data_message['alert_message'] != ''){
                             alert(data_message['alert_message']);
                           }
+                        } else {
+                          console.error('Reqser.com: No data returned');
                         }
                       }
                     );
