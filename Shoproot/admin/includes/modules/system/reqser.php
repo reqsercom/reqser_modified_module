@@ -61,6 +61,16 @@ class reqser {
           foreach($post_iwl as $lang_id) {
             if($lang_id == $post_fwl) {
               $messageStack->add_session(MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR, 'warning');
+
+              //PatrickK 06-2024 Remove the language from the list of languages to translate into when it is the same as the language to translate from
+              $iwl_languages_query = xtc_db_query("SELECT configuration_value name FROM ".TABLE_CONFIGURATION." WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'");
+              if (xtc_db_num_rows($iwl_languages_query) > 0) {                
+                $iwl_languages = xtc_db_fetch_array($iwl_languages_query);                
+                $iwl_language_ids = explode(',', $iwl_languages['name']);                
+                unset($iwl_language_ids[array_search($post_fwl, $iwl_language_ids)]);
+                $iwl_language_ids = implode(',', $iwl_language_ids);
+                xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$iwl_language_ids."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'");
+              }
             }
           }
         }
