@@ -379,7 +379,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         
         var loadingMessage = "<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING ?>";
         var content = '<div id="reqser_seo_product_description_placeholder_2" style="text-align: center; animation: pulse 2s infinite; margin: 40px 0 0;">' + loadingMessage + '</div><style> @keyframes pulse { 0% { opacity: 1;} 50% { opacity: 0.5; } 100% { opacity: 1; } } </style>';
-    
+        var original_text = '';
+
         if ($(product_description_selector).length > 0) {
           $(product_description_selector).after(content);
         }
@@ -510,6 +511,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
                 if (iframeDocument) {
                     var body_element = $(iframeDocument).find('body.cke_editable');
+                    original_text = body_element.html();
 
                     msreq_params = {
                       ext: 'reqser_upd_qu_ajax', 
@@ -535,6 +537,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           
                           $('#reqser_seo_product_description_edit_2').show();
                           $('#reqser_seo_product_description_loader_2').hide();
+                          $('#reqser_seo_product_description_reset_button_2').show();
           
                           if (data_message['alert_message'] && data_message['alert_message'] != ''){
                             alert(data_message['alert_message']);
@@ -545,6 +548,32 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                       }
                     );
 
+                } else {
+                  console.error('Reqser.com: Iframe document not found');
+                }
+            } else {
+              console.error('Reqser.com: Iframe not found');
+            }
+          } else {
+            console.error('Reqser.com: Product description not found');
+          }
+        });
+      });
+
+      $(document).ready(function() {
+        $(document).on('click', '#reqser_seo_product_description_reset_button_2', function() {
+
+          var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>),
+              productDescriptionBracket = $('#cke_products_description\\[' + <?php echo $fwl_language ?> + '\\]'),
+              productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
+
+          if (productDescription) {
+            var iframe = productDescription.find('iframe');
+            if (iframe.length > 0) {
+                var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+                if (iframeDocument) {
+                    var body_element = $(iframeDocument).find('body.cke_editable');
+                    body_element.html(original_text);
                 } else {
                   console.error('Reqser.com: Iframe document not found');
                 }
