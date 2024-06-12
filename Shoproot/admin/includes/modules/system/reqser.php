@@ -202,6 +202,7 @@ class reqser {
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',
                  $this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT',
+                 $this->mn_const.'SANATIZE_STRINGS',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',
                 );
