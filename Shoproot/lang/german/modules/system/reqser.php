@@ -55,8 +55,8 @@ define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Sicherheit</h2>API-
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Sollen API-Zugriffe protokolliert werden?<br />(Logs sind in <i>/api/reqser/logs/</i> zu finden.)');
 define('MODULE_SYSTEM_REQSER_ALLOW_BASE_LANGUAGE_EDIT_TITLE', 'Bearbeiten der Grundsprache erlauben?');
 define('MODULE_SYSTEM_REQSER_ALLOW_BASE_LANGUAGE_EDIT_DESC', 'Damit die Suchmaschinenoptimierung der Texte in der Grundsprache erfolgen kann, sollte das Bearbeiten der Grundsprache erlaubt sein.<br />Ja = Bearbeiten erlauben / Nein = Bearbeiten nicht erlauben');
-define('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS_TITLE', 'M&ouml;chten Sie <scripte> und <iframe> entfernen?');
-define('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS_DESC', 'Ja entfernt <scripte> und <iframe> aus den &uuml;bersetzten Texten, Nein l&auml;sst sie drin. Falls in Texten z.B. YouTube Videos eingebunden sind oder Animationen vorhanden, sollten Sie "Nein" w&auml;hlen ansonsten wird das in der Fremdsprache entfernt.');
+define('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS_TITLE', 'M&ouml;chten Sie "scripte" und "iframe" aus der API entfernen?');
+define('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS_DESC', 'Falls Sie in Texten z.B. YouTube Videos eingebunden haben oder Animationen vorhanden sind, muss es drin bleiben damit es funktioniert.<br />Ja = Entfernen / Nein = Nicht entfernen');
 
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test im Browser ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Im Browser testen ohne Header zu senden?<br /><span class="alrt">!!! Muß in Live-Betrieb der API deaktiviert sein !!!</span>');
