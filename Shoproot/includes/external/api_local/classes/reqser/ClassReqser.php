@@ -989,7 +989,7 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       $out_arr = array('error' => 'no table and/or no language provided for call');
     }
-
+    $out_arr = $this->purifyResp($out_arr);
     return $out_arr;
   }
 
@@ -1018,7 +1018,8 @@ class ClassReqser extends api_local\ApiBase {
             //PatrickK 05-2024 Erweiterung der Prüfung mit Check der Grundsprache
             if(isset($lang_id) 
               && (in_array($lang_id, $iwl_arr) 
-              || ($lang_id == $this->fwl && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
+              || ($lang_id == $this->fwl 
+              && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
               && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true')
               && $dec_rec_data['transfer_type'] !== 'insert')
             ) {

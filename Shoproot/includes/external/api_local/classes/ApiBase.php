@@ -267,15 +267,18 @@ class ApiBase {
    * @return sanitized strings
    */
   protected function purifyResp($response) {
-    if(is_array($response)) {
-      foreach ($response as $key => $value) {
-        $response[$key] = $this->purifyResp($value);
-      }
-    } else {
-      $response = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $response);
-      $response = preg_replace('/<iframe(.*?)>(.*?)<\/iframe>/is', '', $response);
+    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+    if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+          if(is_array($response)) {
+            foreach ($response as $key => $value) {
+              $response[$key] = $this->purifyResp($value);
+            }
+          } else {
+            $response = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $response);
+            $response = preg_replace('/<iframe(.*?)>(.*?)<\/iframe>/is', '', $response);
+          }
     }
-
     return $response;
   }
 
