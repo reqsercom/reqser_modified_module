@@ -363,7 +363,7 @@ class ApiBase {
       return $hve_err;
     }
 
-    return $this->purifyResp($ret_result);
+    return $ret_result;
   }
   
   /**  
