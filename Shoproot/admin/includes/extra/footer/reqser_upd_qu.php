@@ -510,6 +510,17 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             }
           }
 
+          function sanitizeAndEncodeHTML(html) {
+            var tempDiv = document.createElement('div');
+            tempDiv.innerText = html;
+            var encodedHTML = tempDiv.innerHTML;
+            return encodeURIComponent(encodedHTML);
+          }
+          
+          function revertSanitizeAndEncodeHTML(encodedHTML) {
+            return decodeURIComponent(encodedHTML);
+          }
+
           $('#reqser_seo_product_description_edit_2').hide();
           $('#reqser_seo_product_description_loader_2').show();
 
@@ -519,82 +530,95 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
 
           if (productDescription) {
             var iframe = productDescription.find('iframe');
+            var textarea = productDescription.find('textarea');
             if (iframe.length > 0) {
               var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
               if (iframeDocument) {
-
-                function sanitizeAndEncodeHTML(html) {
-                  var tempDiv = document.createElement('div');
-                  tempDiv.innerText = html;
-                  var encodedHTML = tempDiv.innerHTML;
-                  return encodeURIComponent(encodedHTML);
-                }
-                
-                function revertSanitizeAndEncodeHTML(encodedHTML) {
-                  var tempDiv = document.createElement('div');
-                  tempDiv.innerHTML = decodeURIComponent(encodedHTML);
-                  var decodedHTML = tempDiv.innerText;
-                  return decodedHTML;
-                }
-
                 var body_element = $(iframeDocument).find('body.cke_editable');
                 var bodyContent = body_element.html();
-                var sanitizedContent = sanitizeAndEncodeHTML(bodyContent);
                 original_text = bodyContent;
-
-                msreq_params = {
-                  ext: 'reqser_upd_qu_ajax', 
-                  type: 'plain', 
-                  reqser_request_seo_edit: 'true',
-                  msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
-                  text: sanitizedContent,
-                  products_id: products_id,
-                  products_name: $('input[name="products_name[2]"]').val(),
-                  column: 'products_description',
-                  seo_inputs: seo_inputs,
-                  language: "2",
-                };
-                msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
-                $.post("../ajax.php",
-                  msreq_params,
-                  function(data) {
-                    if(data != '') {
-                      console.log('data: ', data);
-                      var data_message = JSON.parse(data);
-                      if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != '') {
-                        console.log('Body element html before: ', body_element.html());
-                        console.log('Body element length before: ', body_element.html().length);
-
-                        var temp = revertSanitizeAndEncodeHTML(data_message['seo_edited_text']);
-                        console.log('Temp: ', temp);
-                        body_element.html(data_message['seo_edited_text']);
-                        console.log('Body element html after: ', body_element.html());
-                        console.log('Body element length after: ', body_element.html().length);
-                        alert('Bitte bestätigen');
-                        body_element.html(temp);
-                      }
-                      if (data_message['alert_message'] && data_message['alert_message'] != '') {
-                        alert(data_message['alert_message']);
-                      }
-                    } else {
-                      alert('Reqser.com: Something went wrong. Please try again later.');
-                      console.error('Reqser.com: No data returned');
-                    }
-
-                    $('#reqser_seo_product_description_edit_2').show();
-                    $('#reqser_seo_product_description_loader_2').hide();
-                    $('#reqser_seo_product_description_reset_button_2').show();
-                  }
-                );
+                var sanitizedContent = sanitizeAndEncodeHTML(bodyContent);
               } else {
                 console.error('Reqser.com: Iframe document not found');
+                return;
               }
+            } else if (textarea.length > 0) {
+              var body_element = textarea;
+              var bodyContent = body_element.val();
+              console.log('Body content: ', bodyContent);
+              original_text = bodyContent;
+              var sanitizedContent = sanitizeAndEncodeHTML(bodyContent);
+              console.log('Sanitized content: ', sanitizedContent);
+
             } else {
-              console.error('Reqser.com: Iframe not found');
+              console.error('Reqser.com: Neither iframe nor textarea found');
+              return;
             }
           } else {
             console.error('Reqser.com: Product description not found');
+            return;
           }
+
+          msreq_params = {
+            ext: 'reqser_upd_qu_ajax', 
+            type: 'plain', 
+            reqser_request_seo_edit: 'true',
+            msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+            text: sanitizedContent,
+            products_id: products_id,
+            products_name: $('input[name="products_name[2]"]').val(),
+            column: 'products_description',
+            seo_inputs: seo_inputs,
+            language: "2",
+          };
+          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+          $.post("../ajax.php",
+            msreq_params,
+            function(data) {
+              if(data != '') {
+                console.log('data: ', data);
+                var data_message = JSON.parse(data);
+                if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != '') {
+
+                  var iframe = productDescription.find('iframe');
+                  var textarea = productDescription.find('textarea');
+                  if (iframe.length > 0) {
+                    var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+                    if (iframeDocument) {
+                      var body_element = $(iframeDocument).find('body.cke_editable');
+                      body_element.html(data_message['seo_edited_text']);
+                    } else {
+                      console.error('Reqser.com: Iframe document not found');
+                    }
+                  } else if (textarea.length > 0) {
+                    textarea.val(data_message['seo_edited_text']);
+                  }
+                  /*
+                  console.log('Body element html before: ', body_element.html());
+                  console.log('Body element length before: ', body_element.html().length);
+
+                  var temp = revertSanitizeAndEncodeHTML(data_message['seo_edited_text']);
+                  console.log('Temp: ', temp);
+                  body_element.html(data_message['seo_edited_text']);
+                  console.log('Body element html after: ', body_element.html());
+                  console.log('Body element length after: ', body_element.html().length);
+                  //alert('Bitte bestätigen');
+                  //body_element.html(temp);
+                  */
+                }
+                if (data_message['alert_message'] && data_message['alert_message'] != '') {
+                  alert(data_message['alert_message']);
+                }
+              } else {
+                alert('Reqser.com: Something went wrong. Please try again later.');
+                console.error('Reqser.com: No data returned');
+              }
+
+              $('#reqser_seo_product_description_edit_2').show();
+              $('#reqser_seo_product_description_loader_2').hide();
+              $('#reqser_seo_product_description_reset_button_2').show();
+            }
+          );
         });
       });
 
