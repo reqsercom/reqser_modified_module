@@ -267,17 +267,13 @@ class ApiBase {
    * @return sanitized strings
    */
   protected function purifyResp($response) {
-    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
-    if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
-        || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
-          if(is_array($response)) {
-            foreach ($response as $key => $value) {
-              $response[$key] = $this->purifyResp($value);
-            }
-          } else {
-            $response = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $response);
-            $response = preg_replace('/<iframe(.*?)>(.*?)<\/iframe>/is', '', $response);
-          }
+    if(is_array($response)) {
+      foreach ($response as $key => $value) {
+        $response[$key] = $this->purifyResp($value);
+      }
+    } else {
+      $response = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $response);
+      $response = preg_replace('/<iframe(.*?)>(.*?)<\/iframe>/is', '', $response);
     }
     return $response;
   }
@@ -365,8 +361,12 @@ class ApiBase {
     if($hve_err != '') {
       return $hve_err;
     }
-
-    return $this->purifyResp($ret_result);
+    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+    if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+      $ret_result = $this->purifyResp($ret_result);
+    } 
+    return $ret_result;
   }
   
   /**  

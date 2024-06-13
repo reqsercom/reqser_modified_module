@@ -990,7 +990,11 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       $out_arr = array('error' => 'no table and/or no language provided for call');
     }
-    $out_arr = $this->purifyResp($out_arr);
+    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+    if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+      $out_arr = $this->purifyResp($out_arr);
+    } 
     return $out_arr;
   }
 
@@ -1009,7 +1013,11 @@ class ClassReqser extends api_local\ApiBase {
       $received_data = file_get_contents('php://input');
       if($received_data != '') {
         $dec_rec_data = json_decode($received_data, true);
-        $dec_rec_data = $this->purifyResp($dec_rec_data); //sanitize, noRiddle, 08-2023
+        //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+        if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
+            || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+            $dec_rec_data = $this->purifyResp($dec_rec_data); //sanitize, noRiddle, 08-2023
+        } 
         if(in_array($dec_rec_data['table'], $allowed_tables)) {
           $table = $dec_rec_data['table'];
           $lang = $dec_rec_data['lang'];
