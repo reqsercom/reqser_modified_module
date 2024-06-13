@@ -492,14 +492,14 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               if (form_input['type'] === 'radio') {
                 input = $('input[name="'+form_input['name']+'"]');
                 var checked = $('input[name="'+form_input['name']+'"]:checked');
-                if (input.prop('required') && checked.length === 0) {
+                if (input.data('required') == true && checked.length === 0) {
                   alert("<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING ?>" + " " + nameWithoutBrackets);
                   return; // Stop the function if a required field is empty
                 }
                 value = checked.val();
               } else {
                 input = $(form_input['type']+'[name="'+form_input['name']+'"]');
-                if (input.prop('required') && input.val().trim() === '') {
+                if (input.data('required') == true && input.val().trim() === '') {
                   alert("<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING ?>" + " " + nameWithoutBrackets);
                   return; // Stop the function if a required field is empty
                 }
