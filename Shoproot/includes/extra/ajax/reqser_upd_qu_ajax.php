@@ -158,7 +158,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
           $post_fields[$key] = $value;
         }
       }
-      $timeout = 20;
+      $timeout = 60;
     }
     if (isset($_SESSION['customer_id'])) $post_fields['customer_id'] = $_SESSION['customer_id'];
     if (isset($_POST['fwl'])) $post_fields['fwl']  = $_POST['fwl'];
