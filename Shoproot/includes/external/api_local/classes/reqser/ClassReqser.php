@@ -85,7 +85,7 @@ class ClassReqser extends api_local\ApiBase {
     }
 
     //JorisK Files Sturkturen die kein eigenen Ordner pro Sprache haben sondern anhand vom Dateiname erkannt werden
-    $this->path_file_name = array('template', 'payone', 'paypal', 'config_shopvoting');
+    $this->path_file_name = array('template', 'payone', 'paypal', 'mailbeez_languages');
 
     $this->allowed_methods = array('api_calls' => array('info' => array('method' => 'get',
                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/api_calls/info',
