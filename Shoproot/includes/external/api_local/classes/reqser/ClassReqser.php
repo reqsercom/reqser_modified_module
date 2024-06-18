@@ -78,11 +78,14 @@ class ClassReqser extends api_local\ApiBase {
     } 
     //JorisK 06-2024 falls Mailbeez installiert ist
     if(file_exists(DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/')) {
-      $this->path['mailbeez'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/';
+      $this->path['mailbeez_lang'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/';
+      if(file_exists(DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/languages/')) {
+        $this->path['mailbeez_languages'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/languages/';
+      }
     }
 
     //JorisK Files Sturkturen die kein eigenen Ordner pro Sprache haben sondern anhand vom Dateiname erkannt werden
-    $this->path_file_name = array('template', 'payone', 'paypal');
+    $this->path_file_name = array('template', 'payone', 'paypal', 'config_shopvoting');
 
     $this->allowed_methods = array('api_calls' => array('info' => array('method' => 'get',
                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/api_calls/info',
