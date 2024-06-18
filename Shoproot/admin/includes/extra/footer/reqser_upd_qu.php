@@ -460,23 +460,6 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                     }
                   }
                 }
-                if (data_message['add_to_container'] && data_message['add_to_container'] != '' && data_message['container_content'] && data_message['container_content'] != '') {
-                  var container = data_message['add_to_container'];
-                  if (container.startsWith('#') || container.startsWith('.')) {
-                    // Use the container value directly if it has a # or . prefix
-                    var selector = container.replace(/([\[\]])/g, "\\$1"); // escape special characters
-                  } else {
-                    // Assume it's an ID if there's no prefix
-                    var selector = '#' + container.replace(/([\[\]])/g, "\\$1"); // escape special characters
-                  }
-                  $('#reqser_seo_product_description_placeholder_2').hide();
-                  if ($(selector).length > 0) {
-                    var content = $(data_message['container_content']);
-                    $(selector).after(content);
-                  } else {
-                    // TODO: Handle the case where the container doesn't exist
-                  }
-                }
                 if (data_message['form_inputs'] && Array.isArray(data_message['form_inputs']) && data_message['form_inputs'].length > 0) {
                   form_inputs = data_message['form_inputs'];
                 }
