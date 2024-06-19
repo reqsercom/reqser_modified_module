@@ -583,7 +583,6 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             msreq_params,
             function(data) {
               if(data != '') {
-                console.log('data: ', data);
                 var data_message = JSON.parse(data);
                 if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != '') {
 
