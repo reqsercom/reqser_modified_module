@@ -574,6 +574,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             products_id: products_id,
             products_name: $('input[name="products_name[2]"]').val(),
             column: 'products_description',
+            table_name: 'products_description',
             seo_inputs: seo_inputs,
             language: "2",
           };

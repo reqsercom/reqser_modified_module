@@ -152,6 +152,7 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
       $post_fields['products_name'] = $_POST['products_name'];
       $post_fields['products_id'] = $_POST['products_id'];
       $post_fields['column'] = $_POST['column'];
+      $post_fields['table_name'] = $_POST['table_name'];
       $post_fields['language_id'] = $_POST['language'];
       if (isset($_POST['seo_inputs']) && is_array($_POST['seo_inputs'])) {
         foreach ($_POST['seo_inputs'] as $key => $value) {
