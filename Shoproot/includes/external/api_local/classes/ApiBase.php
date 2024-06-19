@@ -362,8 +362,8 @@ class ApiBase {
       return $hve_err;
     }
     //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
-    if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
-        || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+    if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
       $ret_result = $this->purifyResp($ret_result);
     } 
     return $ret_result;
