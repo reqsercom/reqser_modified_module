@@ -319,9 +319,9 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
         }
-        if (!defined('MODULE_SYSTEM_REQSER_ALLOW_BASE_LANGUAGE_EDIT')){
+        if (!defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_ALLOW_BASE_LANGUAGE_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
