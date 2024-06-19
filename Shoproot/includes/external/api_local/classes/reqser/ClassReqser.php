@@ -107,7 +107,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_seo_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT : 'not defined',
                                                                                         'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
-                                                                                        'sanatize_string' => defined('MODULE_SYSTEM_REQSER_SANATIZE_STRING') ? MODULE_SYSTEM_REQSER_SANATIZE_STRING : 'not defined',
+                                                                                        'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRING') ? MODULE_SYSTEM_REQSER_SANITIZE_STRING : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -998,8 +998,8 @@ class ClassReqser extends api_local\ApiBase {
       $out_arr = array('error' => 'no table and/or no language provided for call');
     }
     //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
-    if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
-        || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+    if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
       $out_arr = $this->purifyResp($out_arr);
     } 
     return $out_arr;
@@ -1021,8 +1021,8 @@ class ClassReqser extends api_local\ApiBase {
       if($received_data != '') {
         $dec_rec_data = json_decode($received_data, true);
         //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
-        if (!defined('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS')
-            || constant('MODULE_SYSTEM_REQSER_SANATIZE_STRINGS') == 'true'){
+        if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
+            || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
             $dec_rec_data = $this->purifyResp($dec_rec_data); //sanitize, noRiddle, 08-2023
         } 
         if(in_array($dec_rec_data['table'], $allowed_tables)) {

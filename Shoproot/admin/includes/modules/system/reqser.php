@@ -168,7 +168,7 @@ class reqser {
     //PatrickK From Version 3.3
     if (!defined($this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     if (!defined($this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //PatrickK SEO edits needs edit rights for base language
-    if (!defined($this->mn_const.'SANATIZE_STRINGS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'SANATIZE_STRINGS'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //JorisK 06-2024, issue if strings are sanitized and f.e. youtube videos or animations are in the text
+    if (!defined($this->mn_const.'SANITIZE_STRINGS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'SANITIZE_STRINGS'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //JorisK 06-2024, issue if strings are sanitized and f.e. youtube videos or animations are in the text
     
     if ($mode == 'update'){
       //JorisK remove error message since it is now updated!
@@ -202,7 +202,7 @@ class reqser {
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',
                  $this->mn_const.'ALLOW_BASE_LANGUAGE_EDIT',
-                 $this->mn_const.'SANATIZE_STRINGS',
+                 $this->mn_const.'SANITIZE_STRINGS',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',
                 );
