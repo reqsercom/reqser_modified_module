@@ -76,7 +76,7 @@ class ClassReqser extends api_local\ApiBase {
     if(file_exists(DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/')) {
       $this->path['template_buttons'] = DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/';
     } 
-    //JorisK 06-2024 falls Mailbeez installiert ist
+    //JorisK 06-2024 falls Milhive Shopvoting installiert ist
     if(file_exists(DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/')) {
       $this->path['mailbeez_lang'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/';
       if(file_exists(DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/languages/')) {
