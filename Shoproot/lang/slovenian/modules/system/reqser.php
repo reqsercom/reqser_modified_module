@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Samodejno prena&sca
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Ali naj se prevedene jezikovne datoteke samodejno prenesejo v va&scaron;o trgovino ali je treba vsako jezikovno datoteko v programu Reqser izbrati ročno?<br />Da = jezikovne datoteke se prenesejo samodejno / Ne = prenesejo se ročno');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Varnost</h2>Beležiti dostope API?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Ali je treba dostope do API beležiti?<br />(Dnevniki so na voljo v <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Preprečiti urejanje osnovnega jezika?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Dovoljeno mora biti urejanje osnovnega jezika, da se lahko besedila optimizirajo za iskalnike v osnovnem jeziku.<br />Da = preprečiti urejanje / Ne = dovoliti urejanje');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Ali je treba iz besedil odstraniti besedi "scripte" in "iframe"?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Če so v besedila na primer vključeni videoposnetki YouTube ali animacije, teh oznak ne smete odstraniti. V nasprotnem primeru lahko besedila, ki jih urejamo, izgubijo funkcionalnost.<br />Da = odstranite / Ne = ne odstranite');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Preizkus v brskalniku ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testiranje v brskalniku brez po&scaron;iljanja glave?<br /><span class="alrt">!!! Pri delovanju API v živo mora biti deaktivirano !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Ključ API Reqser, ki je shranjen tukaj v modulu, se ne ujema s ključem, shranjenim na <i>spletnem</i> mestu <i>reqser.com</i>.<br />Prijavite se v spletno stran <i>reqser</i>.com in preverite ključ API ali ga po potrebi ponovno pridobite in shranite tukaj.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Prevajalec modul ni aktiviran, prosimo, aktivirajte modul v Modul->Sistemski modul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator modul nima povezave!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Preverja se povezava s spletno stranjo Reqser.com, počakajte.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'Nastavitve SEO se nalagajo, počakajte.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Va&scaron;i vnosi niso popolni, preverite jih:');

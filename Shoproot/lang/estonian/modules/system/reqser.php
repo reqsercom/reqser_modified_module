@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Keelefailide automa
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Kas t&otilde;lgitud keelefailid tuleks automaatselt teie kauplusesse &uuml;le kanda v&otilde;i tuleks iga keelefail Reqseris k&auml;sitsi valida?<br />Jah = keelefailide automaatne &uuml;lekandmine / Ei = k&auml;sitsi &uuml;lekandmine');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Turvalisus</h2>Logi API ligip&auml;&auml;sud?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Kas API ligip&auml;&auml;sud tuleks logida?<br />(Logid leiate aadressilt <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Takistada p&otilde;hikeele redigeerimist?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'P&otilde;hikeele redigeerimine peaks olema lubatud, et tekstide otsingumootori optimeerimine saaks toimuda p&otilde;hikeeles.<br />Jah = Keelata redigeerimine / Ei = Lubada redigeerimine');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Kas "scripte" ja "iframe" tuleks tekstidest eemaldada?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Kui tekstides on n&auml;iteks YouTube\'i videod v&otilde;i animatsioonid, ei tohiks neid silte eemaldada. Vastasel juhul v&otilde;ivad tekstid, mida me toimetame, kaotada funktsionaalsuse.<br />Jah = Eemaldada / Ei = Mitte eemaldada');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Testi brauseris ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testida brauseris ilma p&auml;iseid saatmata?<br /><span class="alrt">!!! Peab olema deaktiveeritud API reaalajas !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Siin moodulis salvestatud "Reqser API v&otilde;ti" ei vasta <i>reqser.com-i</i> salvestatud v&otilde;tmele.<br />Palun logige sisse <i>reqser</i>.com-i ja kontrollige API-v&otilde;tit v&otilde;i vajadusel otsige see uuesti v&auml;lja ja salvestage see siia.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator moodul ei ole aktiveeritud, palun aktiveerige moodul moodulite all Moodul->S&uuml;steemi moodul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator moodulil puudub &uuml;hendus!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com &uuml;hendust kontrollitakse, palun oodake.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO-seadistused laaditakse, palun oodake.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Teie kanded ei ole t&auml;ielikud, palun kontrollige:');

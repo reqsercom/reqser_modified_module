@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', '&Ouml;verf&ouml;ra 
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Ska de &ouml;versatta spr&aring;kfilerna &ouml;verf&ouml;ras automatiskt till din butik eller ska varje spr&aring;kfil v&auml;ljas manuellt i Reqser?<br />Ja = &ouml;verf&ouml;r spr&aring;kfiler automatiskt / Nej = &ouml;verf&ouml;r manuellt');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>S&auml;kerhet</h2>Logga &aring;tkomst till API?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'B&ouml;r API-&aring;tkomster loggas?<br />(Loggar finns i <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'F&ouml;rhindra redigering av grundspr&aring;ket?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Redigering av grundspr&aring;ket b&ouml;r till&aring;tas s&aring; att s&ouml;kmotoroptimering av texterna kan ske p&aring; grundspr&aring;ket.<br />Ja = F&ouml;rhindra redigering / Nej = Till&aring;t redigering');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'B&ouml;r "scripte" och "iframe" strykas fr&aring;n texterna?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Om texterna inneh&aring;ller t.ex. YouTube-videor eller animationer ska dessa taggar inte tas bort. Annars kan de texter vi redigerar f&ouml;rlora sin funktionalitet.<br />Ja = Ta bort / Nej = Ta inte bort');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test i webbl&auml;saren?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testa i webbl&auml;saren utan att skicka headers?<br /><span class="alrt">!!! M&aring;ste avaktiveras i live drift av API!!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Den "Reqser API-nyckel" som lagras h&auml;r i modulen st&auml;mmer inte &ouml;verens med den som lagras p&aring; <i>reqser.com</i>.<br />Logga in p&aring; <i>reqser</i>.com och kontrollera API-nyckeln eller, om det beh&ouml;vs, h&auml;mta den igen och spara den h&auml;r.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen &auml;r inte aktiverad, v&auml;nligen aktivera modulen under Modul->Systemmodul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator-modulen har ingen anslutning!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Anslutningen till Reqser.com kontrolleras, v&auml;nligen v&auml;nta.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO-inst&auml;llningar laddas, v&auml;nligen v&auml;nta.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Dina uppgifter &auml;r inte fullst&auml;ndiga, v&auml;nligen kontrollera:');

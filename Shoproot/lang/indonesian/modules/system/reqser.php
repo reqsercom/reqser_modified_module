@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Mentransfer file ba
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Haruskah file bahasa yang telah diterjemahkan ditransfer secara otomatis ke toko Anda atau haruskah setiap file bahasa dipilih secara manual di Reqser?<br />Ya = transfer file bahasa secara otomatis / Tidak = transfer secara manual');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Keamanan</h2>Akses API log?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Haruskah akses API dicatat?<br />(Catatan dapat ditemukan di <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Mencegah pengeditan bahasa dasar?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Pengeditan bahasa dasar harus diizinkan agar pengoptimalan mesin telusur terhadap teks dapat dilakukan dalam bahasa dasar.<br />Ya = Cegah pengeditan / Tidak = Izinkan pengeditan');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Haruskah "scripte" dan "iframe" dihapus dari teks?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Jika, misalnya, video atau animasi YouTube disertakan dalam teks, tag ini tidak boleh dihapus. Jika tidak, teks yang kita edit dapat kehilangan fungsinya.<br />Ya = Hapus / Tidak = Jangan hapus');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Menguji di browser?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Menguji di browser tanpa mengirim header?<br /><span class="alrt">!!! Harus dinonaktifkan dalam operasi langsung API !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '"Kunci API Reqser" yang disimpan di sini dalam modul tidak sama dengan yang disimpan di <i>reqser.com</i>.<br />Silakan masuk ke <i>reqser</i>.com dan periksa kunci API atau, jika perlu, ambil lagi dan simpan di sini.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Penerjemah Reqser.co
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Penerjemah Reqser.com Deepl tidak diaktifkan, silakan aktifkan modul di bawah Modul- > Modul Sistem');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Penerjemah Reqser.com Deepl tidak memiliki koneksi!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Koneksi Reqser.com sedang diperiksa, harap tunggu.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'Pengaturan SEO sedang dimuat, harap tunggu.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Entri Anda belum lengkap, silakan periksa:');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -55,6 +55,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', '언어 파일을 �
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', '번역된 언어 파일을 자동으로 상점으로 전송해야 하나요, 아니면 Reqser에서 각 언어 파일을 수동으로 선택해야 하나요?<br />예 = 언어 파일 자동 전송 / 아니요 = 수동 전송');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>보안</h2>API 액세스를 기록하시겠습니까?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'API 액세스를 기록해야 하나요?<br />(로그는 <i>/api/reqser/logs/에서</i> 찾을 수 있습니다).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', '기본 언어의 편집을 방지하고 싶으신가요?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', '텍스트의 검색 엔진 최적화가 기본 언어로 이루어질 수 있도록 기본 언어의 편집을 허용해야 합니다.<br />예 = 편집 금지 / 아니요 = 편집 허용');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', '텍스트에서 \'스크립트\'와 \'iframe\'을 제거해야 하나요?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', '예를 들어 텍스트에 YouTube 동영상이나 애니메이션이 포함되어 있는 경우 이러한 태그를 제거해서는 안 됩니다. 그렇지 않으면 편집한 텍스트의 기능이 손실될 수 있습니다.<br />예 = 제거 / 아니요 = 제거하지 않음');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', '브라우저에서 테스트 ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', '헤더를 보내지 않고 브라우저에서 테스트하시겠습니까?<br /><span class="alrt">!!! API의 라이브 작동에서 비활성화해야 합니다 !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '여기 모듈에 저장된 "Reqser API 키"가 <i>reqser.com에</i> 저장된 키와 일치하지 않습니다.<br /><i>reqser</i>.com에 로그인하여 API 키를 확인하거나 필요한 경우 다시 검색하여 여기에 저장하세요.');
@@ -69,3 +73,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com 심층 번역�
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com 심층 번역기 모듈이 활성화되지 않은 경우 모듈->시스템 모듈에서 모듈을 활성화하세요.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com 심층 번역기 모듈이 연결되지 않았습니다!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com 연결을 확인하는 중입니다. 잠시만 기다려주세요.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO 설정이 로드 중입니다. 잠시만 기다려주세요.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', '입력이 완료되지 않았으니 확인해 주세요:');
