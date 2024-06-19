@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Vai valodas failus 
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Vai tulkotie valodu faili ir automātiski jāpārsūta uz jūsu veikalu, vai arī katrs valodas fails ir jāizvēlas manuāli Reqser programmā?<br />Jā = automātiski pārsūtīt valodas failus / Nē = pārsūtīt manuāli');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Dro&scaron;ība</h2>Reģistrēt API piekļuves?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Vai API piekļuves ir jāreģistrē?<br />(Žurnālus var atrast <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Novērst pamatvalodas rediģē&scaron;anu?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Būtu jāatļauj pamatvalodas rediģē&scaron;ana, lai tekstus varētu optimizēt meklētājprogrammām pamatvalodā.<br />Jā = Aizliegt rediģē&scaron;anu / Nē = Atļaut rediģē&scaron;anu');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Vai no tekstiem būtu jāsvītro "scripte" un "iframe"?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Ja tekstos ir iekļauti, piemēram, YouTube videoklipi vai animācijas, &scaron;īs birkas nav jādzē&scaron;. Pretējā gadījumā rediģētie teksti var zaudēt funkcionalitāti.<br />Jā = jādzēst / Nē = nedzēst');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Testē&scaron;ana pārlūkprogrammā ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testē&scaron;ana pārlūkprogrammā, nenosūtot galvenes?<br /><span class="alrt">!!! Jādeaktivizē API tie&scaron;ajā darbībā !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Modulī saglabātā "Reqser API atslēga" nesakrīt ar atslēgu, kas saglabāta vietnē <i>reqser.com</i>.<br />Lūdzu, piesakieties vietnē <i>reqser</i>.com un pārbaudiet API atslēgu vai, ja nepiecie&scaron;ams, iegūstiet to vēlreiz un saglabājiet &scaron;eit.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nav aktivizēts, lūdzu, aktivizējiet moduli sadaļā Module->Sistēmas modulis');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator modulim nav savienojuma!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com savienojums tiek pārbaudīts, lūdzu, uzgaidiet.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO iestatījumi tiek ielādēti, lūdzu, uzgaidiet.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Jūsu ieraksti nav pabeigti, lūdzu, pārbaudiet:');

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Automatick&yacute; 
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Mali by sa preložen&eacute; jazykov&eacute; s&uacute;bory automaticky preniesť do v&aacute;&scaron;ho obchodu alebo by sa mal každ&yacute; jazykov&yacute; s&uacute;bor vybrať ručne v programe Reqser?<br />&Aacute;no = prenos jazykov&yacute;ch s&uacute;borov automaticky / Nie = prenos manu&aacute;lne');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Zabezpečenie</h2>Zaznamen&aacute;vať pr&iacute;stupy API?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Mali by sa pr&iacute;stupy k API zaznamen&aacute;vať?<br />(Logy n&aacute;jdete v <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Zabr&aacute;niť &uacute;prave z&aacute;kladn&eacute;ho jazyka?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', '&Uacute;prava z&aacute;kladn&eacute;ho jazyka by mala byť povolen&aacute;, aby bolo možn&eacute; optimalizovať texty pre vyhľad&aacute;vače v z&aacute;kladnom jazyku.<br />&Aacute;no = Zabr&aacute;niť &uacute;prav&aacute;m / Nie = Povoliť &uacute;pravy');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Mali by sa z textov odstr&aacute;niť slov&aacute; "scripte" a "iframe"?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Ak s&uacute; s&uacute;časťou textov napr&iacute;klad vide&aacute; z YouTube alebo anim&aacute;cie, tieto značky by sa nemali odstraňovať. V opačnom pr&iacute;pade by upravovan&eacute; texty mohli stratiť funkčnosť.<br />&Aacute;no = Odstr&aacute;niť / Nie = Neodstraňovať');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test v prehliadači ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testovanie v prehliadači bez odosielania hlavičiek?<br /><span class="alrt">!!! Mus&iacute; byť deaktivovan&eacute; v živej prev&aacute;dzke API !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Kľ&uacute;č API Reqser uložen&yacute; v module sa nezhoduje s kľ&uacute;čom uložen&yacute;m na str&aacute;nke <i>reqser.com</i>.<br />Prihl&aacute;ste sa na str&aacute;nku <i>reqser</i>.com a skontrolujte kľ&uacute;č API, pr&iacute;padne ho znovu nač&iacute;tajte a uložte sem.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Deepl Translator od 
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nie je aktivovan&yacute;, aktivujte modul v časti Module->Syst&eacute;mov&yacute; modul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Reqser.com Deepl Translator nem&aacute; žiadne pripojenie!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Prebieha kontrola pripojenia Reqser.com, počkajte, pros&iacute;m.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'Nač&iacute;tavaj&uacute; sa nastavenia SEO, počkajte, pros&iacute;m.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Va&scaron;e &uacute;daje nie s&uacute; &uacute;pln&eacute;, skontrolujte ich:');

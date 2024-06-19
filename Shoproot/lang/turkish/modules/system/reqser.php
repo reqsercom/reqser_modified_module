@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Dil dosyalarını o
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', '&Ccedil;evrilen dil dosyaları otomatik olarak mağazanıza aktarılmalı mı yoksa her dil dosyası Reqser\'da manuel olarak mı se&ccedil;ilmeli?<br />Evet = dil dosyalarını otomatik olarak aktar / Hayır = manuel olarak aktar');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>G&uuml;venlik</h2>API erişimlerini g&uuml;nl&uuml;ğe kaydedin?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'API erişimleri g&uuml;nl&uuml;ğe kaydedilmeli mi?<br />(G&uuml;nl&uuml;kler <i>/api/reqser/logs/</i> i&ccedil;inde bulunabilir).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Temel dilin d&uuml;zenlenmesini engellemek mi?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Metinlerin arama motoru optimizasyonunun temel dilde yapılabilmesi i&ccedil;in temel dilin d&uuml;zenlenmesine izin verilmelidir.<br />Evet = D&uuml;zenlemeyi engelle / Hayır = D&uuml;zenlemeye izin ver');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', '"Scripte" ve "iframe" metinlerden &ccedil;ıkarılmalı mı?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', '&Ouml;rneğin, metinlerde YouTube videoları veya animasyonlar yer alıyorsa, bu etiketler kaldırılmamalıdır. Aksi takdirde, d&uuml;zenlediğimiz metinler işlevselliğini kaybedebilir.<br />Evet = Kaldır / Hayır = Kaldırmayın');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Tarayıcıda test edelim mi?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Başlık g&ouml;ndermeden tarayıcıda test edin?<br /><span class="alrt">!!! API\'nin canlı &ccedil;alışmasında devre dışı bırakılmalıdır !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Burada mod&uuml;lde saklanan "Reqser API anahtarı" <i>reqser.com</i> \'da saklananla eşleşmiyor.<br />L&uuml;tfen <i>reqser</i>.com\'da oturum a&ccedil;ın ve API anahtarını kontrol edin veya gerekirse tekrar alın ve buraya kaydedin.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator mod&uuml;l&uuml; etkinleştirilmemiş, l&uuml;tfen Mod&uuml;l->Sistem Mod&uuml;l&uuml; altındaki mod&uuml;l&uuml; etkinleştirin');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator mod&uuml;l&uuml;n&uuml;n bağlantısı yok!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com bağlantısı kontrol ediliyor, l&uuml;tfen bekleyin.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO ayarları y&uuml;kleniyor, l&uuml;tfen bekleyin.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Girişleriniz tam değil, l&uuml;tfen kontrol edin:');

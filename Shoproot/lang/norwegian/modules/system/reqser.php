@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Overf&oslash;re spr
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Skal de oversatte spr&aring;kfilene overf&oslash;res automatisk til butikken din, eller skal hver enkelt spr&aring;kfil velges manuelt i Reqser?<br />Ja = overf&oslash;r spr&aring;kfiler automatisk / Nei = overf&oslash;r manuelt');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Sikkerhet</h2>Logge API-tilganger?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'B&oslash;r API-tilganger logges?<br />(Du finner loggene i <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Hindre redigering av grunnspr&aring;ket?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Redigering av grunnspr&aring;ket b&oslash;r v&aelig;re tillatt, slik at s&oslash;kemotoroptimalisering av tekstene kan skje p&aring; grunnspr&aring;ket.<br />Ja = Forhindrer redigering / Nei = Tillater redigering');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'B&oslash;r "scripte" og "iframe" fjernes fra tekstene?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Hvis det for eksempel er inkludert YouTube-videoer eller animasjoner i tekstene, b&oslash;r disse taggene ikke fjernes. I motsatt fall kan tekstene vi redigerer, miste funksjonalitet.<br />Ja = Fjern / Nei = Ikke fjern');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test i nettleseren?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Teste i nettleseren uten &aring; sende headers?<br /><span class="alrt">!!! M&aring; v&aelig;re deaktivert i direkte drift av API-et!!!</span>.');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '"Reqser API-n&oslash;kkelen" som er lagret her i modulen, stemmer ikke overens med den som er lagret p&aring; <i>reqser.com</i>.<br />Vennligst logg inn p&aring; <i>reqser</i>.com og sjekk API-n&oslash;kkelen eller, om n&oslash;dvendig, hent den p&aring; nytt og lagre den her.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator-modulen ikke aktivert, vennligst aktiver modulen under Modul->Systemmodul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator-modulen har ingen forbindelse!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com-tilkoblingen kontrolleres, vennligst vent.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO-innstillinger lastes inn, vennligst vent.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Oppf&oslash;ringene dine er ikke fullstendige, vennligst sjekk:');

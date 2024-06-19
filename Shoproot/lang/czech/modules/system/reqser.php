@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Automatick&yacute; 
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Měly by se přeložen&eacute; jazykov&eacute; soubory automaticky přen&aacute;&scaron;et do va&scaron;eho obchodu, nebo by se měly jednotliv&eacute; jazykov&eacute; soubory vyb&iacute;rat ručně v aplikaci Reqser?<br />Ano = jazykov&eacute; soubory se přenesou automaticky / Ne = přenesou se ručně');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Zabezpečen&iacute;</h2>Zaznamen&aacute;vat př&iacute;stupy k rozhran&iacute; API?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Měly by se př&iacute;stupy k rozhran&iacute; API zaznamen&aacute;vat?<br />(Protokoly lze nal&eacute;zt v <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Zabr&aacute;nit &uacute;prav&aacute;m z&aacute;kladn&iacute;ho jazyka?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', '&Uacute;prava z&aacute;kladn&iacute;ho jazyka by měla b&yacute;t povolena, aby bylo možn&eacute; optimalizovat texty pro vyhled&aacute;vače v z&aacute;kladn&iacute;m jazyce.<br />Ano = zabr&aacute;nit &uacute;prav&aacute;m / Ne = povolit &uacute;pravy');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Měly by se z textů odstranit slova "scripte" a "iframe"?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Pokud jsou souč&aacute;st&iacute; textů např&iacute;klad videa z YouTube nebo animace, neměly by b&yacute;t tyto značky odstraněny. V opačn&eacute;m př&iacute;padě by upravovan&eacute; texty mohly ztratit funkčnost.<br />Ano = Odstranit / Ne = Neodstraňovat');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test v prohl&iacute;žeči ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testov&aacute;n&iacute; v prohl&iacute;žeči bez odes&iacute;l&aacute;n&iacute; hlaviček?<br /><span class="alrt">!!! Mus&iacute; b&yacute;t deaktivov&aacute;no v ostr&eacute;m provozu API !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '"Kl&iacute;č API služby Reqser" uložen&yacute; zde v modulu se neshoduje s kl&iacute;čem uložen&yacute;m na adrese <i>reqser.com</i>.<br />Přihlaste se pros&iacute;m k webu <i>reqser</i>.com a zkontrolujte kl&iacute;č API, př&iacute;padně jej znovu načtěte a uložte zde.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Modul Reqser.com Deepl Tra
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modul Deepl Translator nen&iacute; aktivov&aacute;n, aktivujte jej pros&iacute;m v č&aacute;sti Module->Syst&eacute;mov&yacute; modul');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modul Reqser.com Deepl Translator nem&aacute; ž&aacute;dn&eacute; připojen&iacute;!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Připojen&iacute; k serveru Reqser.com se kontroluje, vyčkejte pros&iacute;m.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'Nastaven&iacute; SEO se nač&iacute;t&aacute;, vyčkejte pros&iacute;m.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Va&scaron;e &uacute;daje nejsou &uacute;pln&eacute;, zkontrolujte je:');

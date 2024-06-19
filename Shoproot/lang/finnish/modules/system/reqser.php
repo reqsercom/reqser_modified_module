@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Siirt&auml;&auml; k
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Pit&auml;isik&ouml; k&auml;&auml;nnetyt kielitiedostot siirt&auml;&auml; automaattisesti myym&auml;l&auml;&auml;si vai pit&auml;isik&ouml; kukin kielitiedosto valita manuaalisesti Reqseriss&auml;?<br />Kyll&auml; = siirt&auml;&auml; kielitiedostot automaattisesti / Ei = siirt&auml;&auml; manuaalisesti.');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Turvallisuus</h2>Loki API-k&auml;yt&ouml;t?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Pit&auml;isik&ouml; API-k&auml;ynnit kirjata?<br />(Lokit l&ouml;ytyv&auml;t osoitteesta <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Est&auml;&auml; peruskielen muokkaaminen?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Peruskielen muokkaaminen olisi sallittava, jotta tekstien hakukoneoptimointi voidaan tehd&auml; peruskielell&auml;.<br />Kyll&auml; = Est&auml; muokkaus / Ei = Salli muokkaus.');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Pit&auml;isik&ouml; "scripte" ja "iframe" poistaa teksteist&auml;?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Jos teksteihin sis&auml;ltyy esimerkiksi YouTube-videoita tai animaatioita, n&auml;it&auml; tunnisteita ei pid&auml; poistaa. Muuten muokkaamamme tekstit voivat menett&auml;&auml; toimivuutensa.<br />Kyll&auml; = Poista / Ei = &Auml;l&auml; poista');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Testaa selaimessa ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testaa selaimessa l&auml;hett&auml;m&auml;tt&auml; otsikoita?<br /><span class="alrt">!!! On poistettava k&auml;yt&ouml;st&auml; API:n reaaliaikaisessa toiminnassa !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Moduuliin tallennettu "Reqserin API-avain" ei vastaa <i>reqser.com-sivustolle</i> tallennettua avainta.<br />Kirjaudu sis&auml;&auml;n <i>reqser</i>.com-sivustolle ja tarkista API-avain tai tarvittaessa hae se uudelleen ja tallenna se t&auml;nne.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator -moduuli ei ole aktivoitu, aktivoi moduuli Moduuli->J&auml;rjestelm&auml;moduuli -kohdassa.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator module ei ole yhteydess&auml;!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com-yhteytt&auml; tarkistetaan, odota.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO-asetukset latautuvat, odota.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Merkint&auml;nne eiv&auml;t ole t&auml;ydellisi&auml;, tarkistakaa:');

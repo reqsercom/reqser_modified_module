@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Nyelvi f&aacute;jlo
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'A leford&iacute;tott nyelvi f&aacute;jlokat automatikusan kell &aacute;tvinni az &Ouml;n &uuml;zlet&eacute;be, vagy minden egyes nyelvi f&aacute;jlt manu&aacute;lisan kell kiv&aacute;lasztani a Reqserben?<br />Igen = a nyelvi f&aacute;jlok automatikus &aacute;tvitele / Nem = k&eacute;zi &aacute;tvitel');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Biztons&aacute;g</h2>Napl&oacute;zza az API-hozz&aacute;f&eacute;r&eacute;seket?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Napl&oacute;zni kell-e az API-hozz&aacute;f&eacute;r&eacute;seket?<br />(A napl&oacute;k a <i>/api/reqser/logs/</i> k&ouml;nyvt&aacute;rban tal&aacute;lhat&oacute;k).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Az alapnyelv szerkeszt&eacute;s&eacute;nek megakad&aacute;lyoz&aacute;sa?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Az alapnyelv szerkeszt&eacute;s&eacute;t enged&eacute;lyezni kell, hogy a sz&ouml;vegek keresőoptimaliz&aacute;l&aacute;sa az alapnyelven t&ouml;rt&eacute;nhessen.<br />Igen = Szerkeszt&eacute;s megakad&aacute;lyoz&aacute;sa / Nem = Szerkeszt&eacute;s enged&eacute;lyez&eacute;se');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'A "scripte" &eacute;s az "iframe" kifejez&eacute;seket el kell hagyni a sz&ouml;vegekből?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Ha p&eacute;ld&aacute;ul YouTube-vide&oacute;k vagy anim&aacute;ci&oacute;k szerepelnek a sz&ouml;vegekben, ezeket a c&iacute;mk&eacute;ket nem szabad elt&aacute;vol&iacute;tani. Ellenkező esetben az &aacute;ltalunk szerkesztett sz&ouml;vegek elvesz&iacute;thetik funkcionalit&aacute;sukat.<br />Igen = Elt&aacute;vol&iacute;t&aacute;s / Nem = Ne t&aacute;vol&iacute;tsa el');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Teszt a b&ouml;ng&eacute;szőben ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Tesztel&eacute;s a b&ouml;ng&eacute;szőben fejl&eacute;cek k&uuml;ld&eacute;se n&eacute;lk&uuml;l?<br /><span class="alrt">!!! Az API &eacute;les &uuml;zem&eacute;ben ki kell kapcsolni !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'A modulban t&aacute;rolt "Reqser API kulcs" nem egyezik a <i>reqser.com</i> oldalon t&aacute;roltal.<br />K&eacute;rj&uuml;k, jelentkezzen be a <i>reqser</i>.com oldalra, &eacute;s ellenőrizze az API-kulcsot, vagy ha sz&uuml;ks&eacute;ges, k&eacute;rje le &uacute;jra, &eacute;s mentse el itt.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'A Reqser.com Deepl Transla
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nem aktiv&aacute;lva, k&eacute;rj&uuml;k, aktiv&aacute;lja a modult a Modul->Rendszermodul alatt.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'A Reqser.com Deepl Translator modulnak nincs kapcsolata!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'A Reqser.com kapcsolat ellenőrz&eacute;se folyamatban van, k&eacute;rj&uuml;k v&aacute;rjon.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'A SEO be&aacute;ll&iacute;t&aacute;sok bet&ouml;ltődnek, k&eacute;rj&uuml;k v&aacute;rjon.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'A bejegyz&eacute;sei nem teljesek, k&eacute;rj&uuml;k, ellenőrizze:');

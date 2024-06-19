@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Transferir ficheiro
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Os ficheiros de l&iacute;nguas traduzidos devem ser transferidos automaticamente para a sua loja ou cada ficheiro de l&iacute;ngua deve ser selecionado manualmente no reqser?<br />Sim = transferir ficheiros de l&iacute;nguas automaticamente / N&atilde;o = transferir manualmente');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Seguran&ccedil;a</h2>Registar os acessos &agrave; API?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Os acessos &agrave; API devem ser registados?<br />(Os registos podem ser encontrados em <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Impedir a edi&ccedil;&atilde;o da l&iacute;ngua de base?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'A edi&ccedil;&atilde;o da l&iacute;ngua de base deve ser permitida para que a otimiza&ccedil;&atilde;o dos textos para os motores de busca possa ser feita na l&iacute;ngua de base.<br />Sim = Impedir a edi&ccedil;&atilde;o / N&atilde;o = Permitir a edi&ccedil;&atilde;o');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Dever&atilde;o os termos "scripte" e "iframe" ser retirados dos textos?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Se, por exemplo, forem inclu&iacute;dos nos textos v&iacute;deos do YouTube ou anima&ccedil;&otilde;es, estas etiquetas n&atilde;o devem ser removidas. Caso contr&aacute;rio, os textos que editamos podem perder a sua funcionalidade.<br />Sim = Remover / N&atilde;o = N&atilde;o remover');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Testar no browser ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testar no browser sem enviar cabe&ccedil;alhos?<br /><span class="alrt">!!! Deve ser desativado no funcionamento em direto da API !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'A "Chave da API do reqser" guardada aqui no m&oacute;dulo n&atilde;o corresponde &agrave; guardada em <i>reqser.com</i>.<br />Inicie sess&atilde;o em <i>reqser</i>.com e verifique a chave da API ou, se necess&aacute;rio, recupere-a novamente e guarde-a aqui.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'O m&oacute;dulo Reqser.com
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'O m&oacute;dulo Reqser.com Deepl Translator n&atilde;o est&aacute; ativado, por favor active o m&oacute;dulo em M&oacute;dulo->M&oacute;dulo de Sistema');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'O m&oacute;dulo Reqser.com Deepl Translator n&atilde;o tem qualquer liga&ccedil;&atilde;o!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'A liga&ccedil;&atilde;o reqser.com est&aacute; a ser verificada, por favor aguarde.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'As defini&ccedil;&otilde;es de SEO est&atilde;o a ser carregadas, aguarde.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'As suas entradas n&atilde;o est&atilde;o completas, por favor verifique:');
