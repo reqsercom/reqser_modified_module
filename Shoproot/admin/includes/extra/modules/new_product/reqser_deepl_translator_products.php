@@ -16,7 +16,7 @@
       } else {
         echo '<div id="reqser_check_activ_success" class="success_message" hidden></div>';
         echo '<div id="reqser_check_activ_error" class="error_message" hidden>'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION.'</div>';
-        echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0; position: static;" hidden></div>';
+        echo '<div id="reqser_check_activ_info" class="info_message" style="background-color: #f0f6fe; color: #2a4dd0; border-color: #b2c7e3; position: static;" hidden></div>';
         echo '<div id="reqser_check_activ_loading" class="success_message">'.MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING.'</div>';
           if (isset($_GET['pID']) && $_GET['pID'] > 0) {
             $reqser_pid = (int)$_GET['pID'];

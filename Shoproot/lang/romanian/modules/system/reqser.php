@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Transferul automat 
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Ar trebui ca fișierele de limbă traduse să fie transferate automat &icirc;n magazinul dumneavoastră sau ar trebui ca fiecare fișier de limbă să fie selectat manual &icirc;n Reqser?<br />Da = transferați automat fișierele lingvistice / Nu = transferați manual');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Securitate</h2>&Icirc;nregistrare accesări API?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Ar trebui ca accesările API să fie &icirc;nregistrate?<br />(Jurnalele pot fi găsite &icirc;n <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', '&Icirc;mpiedicați editarea limbii de bază?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Editarea limbii de bază ar trebui să fie permisă, astfel &icirc;nc&acirc;t optimizarea textelor pentru motoarele de căutare să poată avea loc &icirc;n limba de bază.<br />Da = Impiedicați editarea / Nu = Permiteți editarea');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Ar trebui să se elimine "scripte" și "iframe" din texte?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', '&Icirc;n cazul &icirc;n care, de exemplu, &icirc;n texte sunt incluse videoclipuri YouTube sau animații, aceste etichete nu trebuie eliminate. &Icirc;n caz contrar, textele pe care le edităm și-ar putea pierde funcționalitatea.<br />Da = Eliminați / Nu = Nu eliminați');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Test &icirc;n browser ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Testați &icirc;n browser fără a trimite anteturi?<br /><span class="alrt">!!! Trebuie să fie dezactivat &icirc;n funcționarea live a API-ului !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '" <i>Reqser</i> API key" stocată aici &icirc;n modul nu se potrivește cu cea stocată la <i>reqser.com</i>.<br />Vă rugăm să vă conectați la <i>reqser</i>.com și să verificați cheia API sau, dacă este necesar, să o preluați din nou și să o salvați aici.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Modulul Reqser.com Deepl Translator nu este activat, vă rugăm să activați modulul &icirc;n Module->System Module');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Modulul Reqser.com Deepl Translator nu are nici o conexiune!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Conexiunea Reqser.com este &icirc;n curs de verificare, vă rugăm să așteptați.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'Setările SEO se &icirc;ncarcă, vă rugăm să așteptați.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Intrările dvs. nu sunt complete, vă rugăm să verificați:');

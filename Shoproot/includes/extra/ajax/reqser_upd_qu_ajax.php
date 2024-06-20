@@ -100,6 +100,8 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
     (isset($_POST['reqser_request_on_start']) && $_POST['reqser_request_on_start'] == 'true') 
       || (isset($_POST['reqser_request_on_orders_edit']) && $_POST['reqser_request_on_orders_edit'] == 'true')
       || (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true')
+      || (isset($_POST['reqser_request_on_seo_products_edit']) && $_POST['reqser_request_on_seo_products_edit'] == 'true')
+      || (isset($_POST['reqser_request_seo_edit']) && $_POST['reqser_request_seo_edit'] == 'true')
     )  
     && (isset($_POST['msreq_api_key']) && $_POST['msreq_api_key'] != '')) {
   //JorisK 04-2024
@@ -121,9 +123,11 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   if(isset($msreq_token_verify['access_token']) && !isset($msreq_token_verify['warning_message'])) {
     $msreq_url_requ = 'https://reqser.com/api/module_request';
     $post_fields = array('website' => $_SERVER['HTTP_HOST'], 'cms' => 'Modified','cms_version' => PROJECT_MAJOR_VERSION.'.'.PROJECT_MINOR_VERSION, 'module_version' => $msreq_api_reqser->getApiReqserVersion());
+    $timeout = 5;
     if (isset($_POST['reqser_request_on_orders_edit']) && $_POST['reqser_request_on_orders_edit'] == 'true') {
       $post_fields['reqser_request_on_orders_edit'] = 'true';
       $post_fields['comments_exists'] = $_POST['comments_exists'];
+      $timeout = 10;
     } elseif (isset($_POST['reqser_request_on_start']) && $_POST['reqser_request_on_start'] == 'true') {
       $post_fields['reqser_request_on_start'] = 'true';
       $post_fields['admincol_right_exists'] = $_POST['admincol_right_exists'];
@@ -134,11 +138,33 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
     } elseif (isset($_POST['reqser_request_text_translation']) && $_POST['reqser_request_text_translation'] == 'true'){
       $post_fields['reqser_request_text_translation'] = 'true';
       $post_fields['text'] = $_POST['text'];
+      $timeout = 20;
+    } elseif (isset($_POST['reqser_request_on_seo_products_edit']) && $_POST['reqser_request_on_seo_products_edit'] == 'true'){
+      $post_fields['reqser_request_on_seo_products_edit'] = 'true';
+      $post_fields['product_descriptions'] = $_POST['productDescriptions'];
+      $post_fields['product_descriptions_exists'] = $_POST['productDescriptionsExists'];
+      $post_fields['product_description_id_underscore_exists'] = $_POST['product_description_id_underscore_exists'];
+      $post_fields['product_description_id_bracket_exists'] = $_POST['product_description_id_bracket_exists'];
+      $post_fields['manufacturers_id'] = $_POST['manufacturers_id'];
+    } elseif (isset($_POST['reqser_request_seo_edit']) && $_POST['reqser_request_seo_edit'] == 'true'){
+      $post_fields['reqser_request_seo_edit'] = 'true';
+      $post_fields['text'] = $_POST['text'];
+      $post_fields['products_name'] = $_POST['products_name'];
+      $post_fields['products_id'] = $_POST['products_id'];
+      $post_fields['column'] = $_POST['column'];
+      $post_fields['table_name'] = $_POST['table_name'];
+      $post_fields['language_id'] = $_POST['language'];
+      if (isset($_POST['seo_inputs']) && is_array($_POST['seo_inputs'])) {
+        foreach ($_POST['seo_inputs'] as $key => $value) {
+          $post_fields[$key] = $value;
+        }
+      }
+      $timeout = 60;
     }
     if (isset($_SESSION['customer_id'])) $post_fields['customer_id'] = $_SESSION['customer_id'];
     if (isset($_POST['fwl'])) $post_fields['fwl']  = $_POST['fwl'];
     if (isset($_POST['iwl'])) $post_fields['iwl']  = $_POST['iwl'];
-    $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', 5);
+    $msreq_result_request = $msreq_api_reqser->doRequest($msreq_url_requ, 'post', 'json', 'json', $post_fields, array('token' => $msreq_token_verify['access_token']), NULL, 'y', $timeout);
     if(isset($msreq_result_request)) {
       echo json_encode($msreq_result_request); exit;
     } else {

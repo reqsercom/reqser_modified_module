@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.2';
+    $this->api_reqser_version = '3.3';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -76,9 +76,16 @@ class ClassReqser extends api_local\ApiBase {
     if(file_exists(DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/')) {
       $this->path['template_buttons'] = DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/buttons/';
     } 
+    //JorisK 06-2024 falls Milhive Shopvoting installiert ist
+    if(file_exists(DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/')) {
+      $this->path['mailbeez_lang'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/lang/';
+      if(file_exists(DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/languages/')) {
+        $this->path['mailbeez_languages'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/languages/';
+      }
+    }
 
     //JorisK Files Sturkturen die kein eigenen Ordner pro Sprache haben sondern anhand vom Dateiname erkannt werden
-    $this->path_file_name = array('template', 'payone', 'paypal');
+    $this->path_file_name = array('template', 'payone', 'paypal', 'mailbeez_languages');
 
     $this->allowed_methods = array('api_calls' => array('info' => array('method' => 'get',
                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/api_calls/info',
@@ -97,8 +104,11 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_start' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_START')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_START : 'not defined',
                                                                                         'request_on_orders_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_ORDERS_EDIT : 'not defined',
                                                                                         'request_on_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT : 'not defined',
+                                                                                        'request_on_seo_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT : 'not defined',
                                                                                         'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
+                                                                                        'disable_base_language_edit' => (defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')) ? MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT : 'not defined',
+                                                                                        'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRING') ? MODULE_SYSTEM_REQSER_SANITIZE_STRING : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -134,7 +144,7 @@ class ClassReqser extends api_local\ApiBase {
                                                         ),
                                    'languages' => array('data' => array('method' => 'get',
                                                                         'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/languages/data',
-                                                                                        'returns' => 'an array with the available languages, its charsets, its ISO-2 Code and if the language is activated in the shop'
+                                                                                        'returns' => 'an array with the available languages, the language id, its charsets, its ISO-2 Code and if the language is activated in the shop'
                                                                                        )
                                                                        ),
                                                         'add_language' => array('method' => 'post',
@@ -192,11 +202,18 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'returns' => 'an array with the row information, needed to add more than predefined rows for translation, and also if an older Shop version is not having these rows, could lead to sql errors'
                                                                                                          )
                                                                                          ),
-                                                      'get_manufacturers_names' => array('method' => 'get',
+                                                      'get_manufacturers_information' => array('method' => 'get',
                                                                                           'params' => array('table'),
-                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_manufacturers_names',
-                                                                                                          'desc' => 'get all entries from manufacturers table to keep the brand names',
-                                                                                                          'returns' => 'an array with all brand names stored in the manufacturers table'
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_manufacturers_information',
+                                                                                                          'desc' => 'get all entries from manufacturers table to keep the brand names and images',
+                                                                                                          'returns' => 'an array with all brand names and images stored in the manufacturers table'
+                                                                                                          )
+                                                                                          ),
+                                                      'get_products_manufacturers' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_manufacturers',
+                                                                                                          'desc' => 'get all products manufacturers names',
+                                                                                                          'returns' => 'an array with products ids and manufacturer ids'
                                                                                                           )
                                                                                           ),
                                                   ),
@@ -295,12 +312,27 @@ class ClassReqser extends api_local\ApiBase {
           }
         } 
         
+        //Update from 3.2 to 3.3 Version
+        if (!defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        if (!defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        
         //Update to newest version
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
         if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
           $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
         }
-        
     }
     return $this->api_reqser_version;
   }
@@ -344,18 +376,55 @@ class ClassReqser extends api_local\ApiBase {
   }
 
   /**  
-   * private method callTablesGet_manufacturers_names
+   * private method callTablesGet_manufacturers_information
    *
    * @return array with all entries
    */
-  protected function callTablesGet_manufacturers_names() {
+  protected function callTablesGet_manufacturers_information() {
     //JorisK necessary to create a glossary to keep the brand names in the foreign language
     $out_arr = array();
-    $qu_str = "SELECT manufacturers_id, manufacturers_name FROM manufacturers";
+    $qu_str = "SELECT manufacturers_id, manufacturers_name, manufacturers_image FROM manufacturers";
     $result = $this->api_db_conn->apiDbQuery($qu_str);
     while($result_arr = $this->api_db_conn->apiDbFetchArray($result)) {
-      $out_arr[$result_arr['manufacturers_id']] = $this->encode_utf8($this->getShopCharset(), $result_arr['manufacturers_name'], false, true);
+      $out_arr[$result_arr['manufacturers_id']] = array(
+        'name' => $this->encode_utf8($this->getShopCharset(), $result_arr['manufacturers_name'], false, true),
+        'image' => $result_arr['manufacturers_image']
+      );
     }
+    return $out_arr;
+  }
+
+  /**  
+   * private method callTablesGet_products_manufacturers
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_products_manufacturers($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT products_id, manufacturers_id FROM products ORDER BY products_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
+    } else {
+      $qu_str = "SELECT products_id, manufacturers_id FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+    }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        foreach($qu_arr as $key => $value) {
+          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+          $out_arr[$qu_arr['products_id']] = $value;
+        }
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no manufacturers found for products');
+    }
+
     return $out_arr;
   }
   
@@ -929,7 +998,11 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       $out_arr = array('error' => 'no table and/or no language provided for call');
     }
-
+    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+    if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
+      $out_arr = $this->purifyResp($out_arr);
+    } 
     return $out_arr;
   }
 
@@ -948,14 +1021,25 @@ class ClassReqser extends api_local\ApiBase {
       $received_data = file_get_contents('php://input');
       if($received_data != '') {
         $dec_rec_data = json_decode($received_data, true);
-        $dec_rec_data = $this->purifyResp($dec_rec_data); //sanitize, noRiddle, 08-2023
+        //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+        if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
+            || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
+            $dec_rec_data = $this->purifyResp($dec_rec_data); //sanitize, noRiddle, 08-2023
+        } 
         if(in_array($dec_rec_data['table'], $allowed_tables)) {
           $table = $dec_rec_data['table'];
           $lang = $dec_rec_data['lang'];
           
           if(array_key_exists(strtolower($lang), $this->shop_languages)) {
             $lang_id = (int)$this->shop_languages[strtolower($lang)]['languages_id'];
-            if(isset($lang_id) && in_array($lang_id, $iwl_arr)) {
+            //PatrickK 05-2024 Erweiterung der Prüfung mit Check der Grundsprache
+            if(isset($lang_id) 
+              && (in_array($lang_id, $iwl_arr) 
+              || ($lang_id == $this->fwl 
+              && defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
+              && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true')
+              && $dec_rec_data['transfer_type'] !== 'insert')
+            ) {
               //JorisK Spezialfall da die Tabelle plugin_language_snippets_data nicht die ID sondern den Language Code hat
               if($dec_rec_data['use_language_code'] == 1) {
                 $lang_id = strtolower($lang);
@@ -1284,6 +1368,10 @@ class ClassReqser extends api_local\ApiBase {
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_PRODUCTS_EDIT'");
         } 
+        if (isset($dec_rec_data['request_on_seo_products_edit']) && ($dec_rec_data['request_on_seo_products_edit'] === 'true' || $dec_rec_data['request_on_seo_products_edit'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT'");
+        } 
         if (isset($dec_rec_data['request_on_categories_edit']) && ($dec_rec_data['request_on_categories_edit'] === 'true' || $dec_rec_data['request_on_categories_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT'");
@@ -1351,7 +1439,7 @@ class ClassReqser extends api_local\ApiBase {
         break;
       case 'products_content':
         $fields = array('fields' => array('content_name', 'file_comment'),
-                        'unique_key' => 'content_id',
+                        'unique_key' => 'products_id',
                         'lang' => 'languages_id',
                         'diff_id_for_lng' => 'true');
         break;

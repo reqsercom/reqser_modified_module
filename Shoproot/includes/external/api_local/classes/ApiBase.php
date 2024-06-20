@@ -122,6 +122,47 @@ class ApiBase {
     
     return $hash;
   }
+
+  /**
+   * protected function custom_getallheaders
+   * getallheaders not available in FPM in PHP lower than 7.3, noRiddle, 05-2024
+   * (function thanks to https://github.com/ralouphie/getallheaders/blob/develop/src/getallheaders.php)
+   *
+   * @return the HTTP an array with header key/value pairs
+   */
+  protected function custom_getallheaders() {
+    $headers = array();
+
+    $copy_server = array('CONTENT_TYPE'   => 'Content-Type',
+                         'CONTENT_LENGTH' => 'Content-Length',
+                         'CONTENT_MD5'    => 'Content-Md5',
+                        );
+
+    foreach($_SERVER as $key => $value) {
+      if(substr($key, 0, 5) === 'HTTP_') {
+        $key = substr($key, 5);
+        if(!isset($copy_server[$key]) || !isset($_SERVER[$key])) {
+          $key = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', $key))));
+          $headers[$key] = $value;
+        }
+      } elseif(isset($copy_server[$key])) {
+        $headers[$copy_server[$key]] = $value;
+      }
+    }
+
+    if(!isset($headers['Authorization'])) {
+      if(isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])) {
+        $headers['Authorization'] = $_SERVER['REDIRECT_HTTP_AUTHORIZATION'];
+      } elseif(isset($_SERVER['PHP_AUTH_USER'])) {
+        $basic_pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
+        $headers['Authorization'] = 'Basic ' . base64_encode($_SERVER['PHP_AUTH_USER'] . ':' . $basic_pass);
+      } elseif(isset($_SERVER['PHP_AUTH_DIGEST'])) {
+        $headers['Authorization'] = $_SERVER['PHP_AUTH_DIGEST'];
+      }
+    }
+
+    return $headers;
+  }
   
   /**  
    * protected method getHeaders
@@ -130,7 +171,7 @@ class ApiBase {
    */
   protected function getHeaders() {
     //JorisK update for HTTP/2 where the authorization comes in lower case //meaning in HHTP/1.1 the header Authorization, noRiddle, 10-2023
-    $headers = getallheaders();
+    $headers = function_exists('getallheaders') ? getallheaders() : $this->custom_getallheaders(); //getallheaders not available in FPM in PHP lower than 7.3, noRiddle, 05-2024
     return array_combine(
       array_map(function($key) {
         return ucfirst(strtolower($key));
@@ -234,7 +275,6 @@ class ApiBase {
       $response = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $response);
       $response = preg_replace('/<iframe(.*?)>(.*?)<\/iframe>/is', '', $response);
     }
-
     return $response;
   }
 
@@ -321,8 +361,12 @@ class ApiBase {
     if($hve_err != '') {
       return $hve_err;
     }
-
-    return $this->purifyResp($ret_result);
+    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
+    if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
+        || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
+      $ret_result = $this->purifyResp($ret_result);
+    } 
+    return $ret_result;
   }
   
   /**  

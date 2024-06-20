@@ -23,7 +23,7 @@ class reqser {
 
   function __construct() {
     global $messageStack;
-    $this->module_version = '3.2';
+    $this->module_version = '3.3';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version).'<div id="module_export_reqser_header"></div>';
@@ -37,6 +37,7 @@ class reqser {
 
     //JorisK 01-2024, Update to new Modul Versions
     if (defined($this->mn_const.'INSTALLED_MODULE_VERSION') && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != '' && constant($this->mn_const.'INSTALLED_MODULE_VERSION') != $this->module_version){
+      $this->install('update');
       $this->title .= '<br><span style="color:green;">Version update from '.constant($this->mn_const.'INSTALLED_MODULE_VERSION').' to '.$this->module_version.' success</span>';
     }
    
@@ -60,6 +61,16 @@ class reqser {
           foreach($post_iwl as $lang_id) {
             if($lang_id == $post_fwl) {
               $messageStack->add_session(MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR, 'warning');
+
+              //PatrickK 06-2024 Remove the language from the list of languages to translate into when it is the same as the language to translate from
+              $iwl_languages_query = xtc_db_query("SELECT configuration_value name FROM ".TABLE_CONFIGURATION." WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'");
+              if (xtc_db_num_rows($iwl_languages_query) > 0) {                
+                $iwl_languages = xtc_db_fetch_array($iwl_languages_query);                
+                $iwl_language_ids = explode(',', $iwl_languages['name']);                
+                unset($iwl_language_ids[array_search($post_fwl, $iwl_language_ids)]);
+                $iwl_language_ids = implode(',', $iwl_language_ids);
+                xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$iwl_language_ids."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'");
+              }
             }
           }
         }
@@ -98,20 +109,24 @@ class reqser {
     return $this->_check;
   }
 
-  function install() {
+  function install($mode = 'install') {
     global $messageStack;
     if(version_compare(PHP_VERSION, '7.0', '<')) {
       $messageStack->add_session('PHP version must be minimum 7.0 or higher', 'warning');
       return;
     }
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'STATUS'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."REQSER_API_KEY', '', '6', '2', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TEMP_SHOP_TOKEN', '', '6', '4', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TST_VALID_UNTIL', '', '6', '5', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."INSTALLED_MODULE_VERSION', '".$this->module_version."', '6', '5', now())");
+    if (!defined($this->mn_const.'STATUS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'STATUS'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'REQSER_API_KEY')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."REQSER_API_KEY', '', '6', '2', now())");
+    if (!defined($this->mn_const.'TEMP_SHOP_TOKEN')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TEMP_SHOP_TOKEN', '', '6', '4', now())");
+    if (!defined($this->mn_const.'TST_VALID_UNTIL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."TST_VALID_UNTIL', '', '6', '5', now())");
+    if (!defined($this->mn_const.'INSTALLED_MODULE_VERSION')){
+      xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."INSTALLED_MODULE_VERSION', '".$this->module_version."', '6', '5', now())");
+    } elseif (floatval(constant($this->mn_const.'INSTALLED_MODULE_VERSION')) != floatval($this->module_version)){
+      xtc_db_query("UPDATE ".TABLE_CONFIGURATION." SET configuration_value = '".$this->module_version."' WHERE configuration_key = '".$this->mn_const."INSTALLED_MODULE_VERSION'");
+    }
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_ALL_ROW_ACCESS'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'ALLOW_ALL_ROW_ACCESS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_ALL_ROW_ACCESS'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     $default_tables = 'banners,categories_description,content_manager,content_manager_content,coupons_description,customers_status,email_content,manufacturers_info,orders_status,products_content,products_description,products_options,products_options_values,products_tags_options,products_tags_values,products_vpe,products_xsell_grp_name,shipping_status';
     $default_more_tables = 'products_images_description,reviews_description';
     //Prüfen ob plugin_sq_ajax_add_to_cart_data und/oder plugin_language_snippets_data wenn ja in default nehmen, wegen Spezialfall für Language
@@ -124,31 +139,48 @@ class reqser {
       $default_tables .= ',plugin_language_snippets_data';
     }
  
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."TABLES_TO_TRANSL', '".$default_tables."',  '6', '6', '', 'nr_cfg_multi_checkbox(\'get_default_tables_to_translate\', \'chr(44)\',', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."MORE_TABLES', '".$default_more_tables."',  '6', '7', '', 'nr_cfg_multi_checkbox(\'get_more_tables_to_translate\', \'chr(44)\',', now())");
+    if (!defined($this->mn_const.'TABLES_TO_TRANSL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."TABLES_TO_TRANSL', '".$default_tables."',  '6', '6', '', 'nr_cfg_multi_checkbox(\'get_default_tables_to_translate\', \'chr(44)\',', now())");
+    if (!defined($this->mn_const.'MORE_TABLES')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."MORE_TABLES', '".$default_more_tables."',  '6', '7', '', 'nr_cfg_multi_checkbox(\'get_more_tables_to_translate\', \'chr(44)\',', now())");
     
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."MORE_TABLES_ADD', '', '6', '8', now())");
+    if (!defined($this->mn_const.'MORE_TABLES_ADD')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."MORE_TABLES_ADD', '', '6', '8', now())");
     //xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."LESS_TABLES', '', '6', '9', now())");
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."FROM_WHICH_LANG', '2',  '6', '10', '', 'nr_cfg_select_option_langs(array(),', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."INTO_WHICH_LANGS', '',  '6', '11', '', 'nr_cfg_multi_checkbox(\'get_langs_to_translate\', \'chr(44)\',', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'INTO_ENGLISH_BRITISH'."', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ADD_LANGUAGE_ALLOWED'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'FROM_WHICH_LANG')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."FROM_WHICH_LANG', '2',  '6', '10', '', 'nr_cfg_select_option_langs(array(),', now())");
+    if (!defined($this->mn_const.'INTO_WHICH_LANGS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." ( configuration_key, configuration_value, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('".$this->mn_const."INTO_WHICH_LANGS', '',  '6', '11', '', 'nr_cfg_multi_checkbox(\'get_langs_to_translate\', \'chr(44)\',', now())");
+    if (!defined($this->mn_const.'INTO_ENGLISH_BRITISH')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'INTO_ENGLISH_BRITISH'."', 'false', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'ADD_LANGUAGE_ALLOWED')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ADD_LANGUAGE_ALLOWED'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES_SETTING'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'LANGUAGE_FILES')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'LANGUAGE_FILES_SETTING')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'LANGUAGE_FILES_SETTING'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'PROTOCOL_ACC'."', 'false', '6', '12', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'PROTOCOL_ACC')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'PROTOCOL_ACC'."', 'false', '6', '12', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 
     //JorisK From Version 2.7 on
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
+    if (!defined($this->mn_const.'SEND_TOKEN')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN', '', '6', '4', now())");
+    if (!defined($this->mn_const.'SEND_TOKEN_VALID_UNTILL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTILL', '', '6', '5', now())");
 
     //JorisK From Version 3.1
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_START'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_ORDERS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_PRODUCTS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_CATEGORIES_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'REQUEST_ON_START')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_START'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'REQUEST_ON_ORDERS_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_ORDERS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'REQUEST_ON_PRODUCTS_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_PRODUCTS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'REQUEST_ON_CATEGORIES_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_CATEGORIES_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+  
+    //PatrickK From Version 3.3
+    if (!defined($this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'REQUEST_ON_SEO_PRODUCTS_EDIT'."', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    if (!defined($this->mn_const.'DISABLE_BASE_LANGUAGE_EDIT')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'DISABLE_BASE_LANGUAGE_EDIT'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //PatrickK 06-2024 SEO edits needs edit rights for base language
+    if (!defined($this->mn_const.'SANITIZE_STRINGS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'SANITIZE_STRINGS'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())"); //JorisK 06-2024, issue if strings are sanitized and f.e. youtube videos or animations are in the text
+    
+    if ($mode == 'update'){
+      //JorisK remove error message since it is now updated!
+      echo '<script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function() {
+          var errorMessage = document.querySelector(".error_message");
+          if (errorMessage) {
+              errorMessage.style.display = "none";
+          }
+      });
+      </script>';
+    }
   }
 
   function remove() {
@@ -169,6 +201,8 @@ class reqser {
                  $this->mn_const.'LANGUAGE_FILES',
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',
+                 $this->mn_const.'DISABLE_BASE_LANGUAGE_EDIT',
+                 $this->mn_const.'SANITIZE_STRINGS',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',
                 );

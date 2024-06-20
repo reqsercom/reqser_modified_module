@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -55,6 +55,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', '言語ファイル�
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', '翻訳された言語ファイルは自動的にショップに転送されますか、それともreqserで各言語ファイルを手動で選択する必要がありますか？<br />はい = 言語ファイルを自動的に転送する / いいえ = 手動で転送する');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>セキュリティ</h2>APIアクセスのログを取るか？');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'APIアクセスはログに記録されるべきですか？<br />(ログは<i>/api/reqser/logs/</i>にあります）。');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', '基本言語の編集を防ぐ？');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', '基本言語で検索エンジン最適化ができるように、基本言語の編集を許可すべきである。<br />はい = 編集を禁止する / いいえ = 編集を許可する');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'テキストから「scripte」と「iframe」を削除すべきか？');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', '例えば、YouTubeのビデオやアニメーションがテキストに含まれている場合、これらのタグは削除しないでください。そうしないと、編集したテキストの機能が失われる可能性があります。<br />はい = 削除する / いいえ = 削除しない');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'ブラウザでテスト？');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'ヘッダーを送信せずにブラウザでテスト？<br /><span class="alrt">!!!APIのライブ操作では非アクティブにする必要がある !!!</span>.');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'モジュールに保存されている "reqser APIキー "が、<i>reqser.comに</i>保存されているものと一致しません。<br /><i>reqser</i>.comにログインしてAPIキーを確認するか、必要であれば再度取得してここに保存してください。');
@@ -69,3 +73,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'reqser.comのDeepl Transla
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'reqser.com Deepl Translator モジュールが有効になっていません。モジュール->システムモジュールの下でモジュールを有効にしてください。');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'reqser.com Deepl Translator モジュールには接続されていません！');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'reqser.comの接続をチェック中です。');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO設定の読み込み中です。');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', '入力が完了していません：');

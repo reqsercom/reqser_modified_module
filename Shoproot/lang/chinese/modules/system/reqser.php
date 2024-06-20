@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -55,6 +55,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', '自动传输语言�
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', '翻译好的语言文件应该自动传输到您的商店，还是应该在 reqser 中手动选择每个语言文件？<br />是 = 自动传输语言文件 / 否 = 手动传输');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>安全性</h2>记录 API 访问？');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', '是否应记录 API 访问？<br />(日志可在<i>/api/reqser/logs/</i>）。');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', '防止编辑基本语言？');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', '应允许编辑基本语言，以便用基本语言对文本进行搜索引擎优化。<br />是 = 阻止编辑 / 否 = 允许编辑');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', '是否应从文本中删除 "scripte "和 "iframe"？');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', '例如，如果文本中包含 YouTube 视频或动画，则不应删除这些标签。否则，我们编辑的文本可能会失去功能。<br />是 = 删除 / 否 = 不删除');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', '在浏览器中测试？');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', '在不发送头信息的情况下在浏览器中进行测试？<br /><span class="alrt">!!!必须在实时运行 API 时停用！！！</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', '模块中存储的 "Reqser API 密钥 "与<i>reqser.com</i>中存储的密钥不一致。<br />请登录<i>reqser</i>.com 并检查 API 密钥，如有必要，请重新获取并保存在这里。');
@@ -69,3 +73,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translato
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator 模块未激活，请在模块->系统模块下激活该模块');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator 模块没有连接！');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', '正在检查 Reqser.com 连接，请稍候。');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', '搜索引擎优化设置正在加载中，请稍候。');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', '您的条目不完整，请检查：');

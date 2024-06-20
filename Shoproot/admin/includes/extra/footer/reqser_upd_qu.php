@@ -257,7 +257,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                 } 
               }
               if (data_message['alert_message'] && data_message['alert_message'] != ''){
-                  alert(data_message['alert_message']);
+                alert(data_message['alert_message']);
               }
             }
           );
@@ -348,5 +348,311 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       }
 
     }
+
+  if(defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')
+    && constant('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT') == 'true'
+    && basename($PHP_SELF) == 'categories.php' 
+    && isset($_GET['action'])
+    && $_GET['action'] == 'new_product'
+    && $msreq_local_api_key != '') {
+
+    $languages = array();
+    $fwl_language = constant('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG');
+    $languages[] = $fwl_language;
+
+    $iwl_languages = explode(',', constant('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS'));
+    array_walk($iwl_languages, function($iwl_languages) use (&$languages) {
+      $languages[] = $iwl_languages;
+    });
+    ?>
+
+    <script>
+      var languages = <?php echo json_encode($languages); ?>;
+      var form_inputs = [];
+
+      $(document).ready(function() {
+
+        // Add a placeholder for the Reqser SEO settings
+        var product_description_id_underscore = $('#products_description_'+<?php echo $fwl_language ?>),
+            product_description_id_bracket = $('#products_description\\['+<?php echo $fwl_language ?>+'\\]');
+        var product_description_selector = product_description_id_underscore.length > 0 ? product_description_id_underscore : product_description_id_bracket.length > 0 ? product_description_id_bracket : null;
+        
+        var loadingMessage = "<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING ?>";
+        var content = '<div id="reqser_seo_product_description_placeholder_2" style="text-align: center; animation: pulse 2s infinite; margin: 40px 0 0;">' + loadingMessage + '</div><style> @keyframes pulse { 0% { opacity: 1;} 50% { opacity: 0.5; } 100% { opacity: 1; } } </style>';
+        var original_text = '';
+
+        if ($(product_description_selector).length > 0) {
+          $(product_description_selector).after(content);
+        }
+
+        setTimeout(function() {
+
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
+              product_description_id_underscore_exists = $('#cke_products_description_'+<?php echo $fwl_language ?>).length > 0 ? 'true' : 'false',
+              product_description_id_bracket_exists = $('#cke_products_description\\['+<?php echo $fwl_language ?>+'\\]').length > 0 ? 'true' : 'false',
+              productDescriptions = [],
+              productDescriptionsExists = 'false';
+
+          for (var i = 0; i < languages.length; i++) {
+            // Check if an element with the id cke_products_description_ + language exists          
+            var productDescriptionUnderscore = $('#cke_products_description_' + languages[i]),
+                productDescriptionBracket = $('#cke_products_description\\[' + languages[i] + '\\]');
+        
+            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
+
+            // Find the body of the editor, if the productDescription element exists
+            if (productDescription) {
+              var productDescriptionBody = productDescription.contents().find('body');
+
+              // Check if the body element exists
+              if (productDescriptionBody) {
+                // Extend the productDescriptions array with a new object
+                productDescriptions.push({
+                  language_id: languages[i],
+                });
+                productDescriptionsExists = 'true';
+              }
+            }
+          }
+
+          //console.log('productDescriptions: ', productDescriptions);
+
+          msreq_params = {
+            ext: 'reqser_upd_qu_ajax',
+            type: 'plain',
+            reqser_request_on_seo_products_edit: 'true', 
+            msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+            productDescriptions: productDescriptions,
+            productDescriptionsExists: productDescriptionsExists,
+            product_description_id_underscore_exists: product_description_id_underscore_exists,
+            product_description_id_bracket_exists: product_description_id_bracket_exists,
+            manufacturers_id: $('select[name="manufacturers_id"]').val(),
+          };
+
+          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+          $.post("../ajax.php",
+            msreq_params,
+            function(data) {
+              if(data != '') {
+                var data_message = JSON.parse(data);
+
+                if (data_message['reqser_buttons'] && Array.isArray(data_message['reqser_buttons']) && data_message['reqser_buttons'].length > 0) {
+                  
+                  for (var i = 0; i < data_message['reqser_buttons'].length; i++) {
+                    var button = data_message['reqser_buttons'][i];
+                    if (button['add_to_container'] && button['add_to_container'] != '' && button['container_content'] && button['container_content'] != '') {
+                      var container = button['add_to_container'];
+                      if (container.startsWith('#') || container.startsWith('.')) {
+                        // Use the container value directly if it has a # or . prefix
+                        var selector = container.replace(/([\[\]])/g, "\\$1"); // escape special characters
+                      } else {
+                        // Assume it's an ID if there's no prefix
+                        var selector = '#' + container.replace(/([\[\]])/g, "\\$1"); // escape special characters
+                      }
+                      $('#reqser_seo_product_description_placeholder_2').hide();
+                      if ($(selector).length > 0) {
+                        var content = $(button['container_content']);
+                        $(selector).after(content);
+                      } else {
+                        // TODO: Handle the case where the container doesn't exist
+                      }
+                    }
+                  }
+                }
+                if (data_message['form_inputs'] && Array.isArray(data_message['form_inputs']) && data_message['form_inputs'].length > 0) {
+                  form_inputs = data_message['form_inputs'];
+                }
+                if (data_message['alert_message'] && data_message['alert_message'] != ''){
+                  alert(data_message['alert_message']);
+                }
+              }
+            }
+          );
+        }, 4000);
+      });
+
+      $(document).ready(function() {
+        $(document).on('click', '#reqser_seo_product_description_edit_button_2', function() {
+
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
+              msreq_params = {},
+              products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(); // Set the products_id to "new_product" if it's 0, otherwise use the value
+                    
+          // Loop through the form inputs and add them to the msreq_params object
+          var seo_inputs = {};
+          if (form_inputs.length > 0) {
+            for (var i = 0; i < form_inputs.length; i++) {
+              var form_input = form_inputs[i];
+              var input;
+              var value;
+              var nameWithoutBrackets = form_input['name'].replace(/\[.*\]/g, '');
+
+              if (form_input['type'] === 'radio') {
+                input = $('input[name="'+form_input['name']+'"]');
+                var checked = $('input[name="'+form_input['name']+'"]:checked');
+                if (input.data('required') == true && checked.length === 0) {
+                  alert("<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING ?>" + " " + nameWithoutBrackets);
+                  return; // Stop the function if a required field is empty
+                }
+                value = checked.val();
+              } else {
+                input = $(form_input['type']+'[name="'+form_input['name']+'"]');
+                if (input.data('required') == true && input.val().trim() === '') {
+                  alert("<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING ?>" + " " + nameWithoutBrackets);
+                  return; // Stop the function if a required field is empty
+                }
+                value = input.val();
+              }
+
+              seo_inputs[nameWithoutBrackets] = value;
+            }
+          }
+
+          function sanitizeAndEncodeHTML(html) {
+            var tempDiv = document.createElement('div');
+            tempDiv.innerText = html;
+            var encodedHTML = tempDiv.innerHTML;
+            return encodeURIComponent(encodedHTML);
+          }
+          
+          function revertSanitizeAndEncodeHTML(encodedHTML) {
+            return decodeURIComponent(encodedHTML);
+          }
+
+          $('#reqser_seo_product_description_edit_2').hide();
+          $('#reqser_seo_product_description_loader_2').show();
+
+          var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>);
+          var productDescriptionBracket = $('#cke_products_description\\[' + <?php echo $fwl_language ?> + '\\]');          
+          var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;          
+
+          if (productDescription) {
+            var iframe = productDescription.find('iframe');
+            var textarea = productDescription.find('textarea');
+            if (iframe.length > 0) {
+              var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+              if (iframeDocument) {
+                var body_element = $(iframeDocument).find('body.cke_editable');
+                var bodyContent = body_element.html();
+                original_text = bodyContent;
+                var sanitizedContent = sanitizeAndEncodeHTML(bodyContent);
+              } else {
+                $('#reqser_seo_product_description_edit_2').show();
+                $('#reqser_seo_product_description_loader_2').hide();
+                $('#reqser_seo_product_description_reset_button_2').show();
+                console.error('Reqser.com: Iframe document not found');
+                return;
+              }
+            } else if (textarea.length > 0) {
+              var body_element = textarea;
+              var bodyContent = body_element.val();
+              original_text = bodyContent;
+              var sanitizedContent = sanitizeAndEncodeHTML(bodyContent);
+            } else {
+              $('#reqser_seo_product_description_edit_2').show();
+              $('#reqser_seo_product_description_loader_2').hide();
+              $('#reqser_seo_product_description_reset_button_2').show();
+              console.error('Reqser.com: Neither iframe nor textarea found');
+              return;
+            }
+          } else {
+            $('#reqser_seo_product_description_edit_2').show();
+            $('#reqser_seo_product_description_loader_2').hide();
+            $('#reqser_seo_product_description_reset_button_2').show();
+            console.error('Reqser.com: Product description not found');
+            return;
+          }
+
+          msreq_params = {
+            ext: 'reqser_upd_qu_ajax', 
+            type: 'plain', 
+            reqser_request_seo_edit: 'true',
+            msreq_api_key: '<?php echo $msreq_local_api_key; ?>',
+            text: sanitizedContent,
+            products_id: products_id,
+            products_name: $('input[name="products_name[2]"]').val(),
+            column: 'products_description',
+            table_name: 'products_description',
+            seo_inputs: seo_inputs,
+            language: "2",
+          };
+          msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
+          $.post("../ajax.php",
+            msreq_params,
+            function(data) {
+              if(data != '') {
+                var data_message = JSON.parse(data);
+                if (data_message['seo_edited_text'] && data_message['seo_edited_text'] != '') {
+
+                  var iframe = productDescription.find('iframe');
+                  var textarea = productDescription.find('textarea');
+                  if (iframe.length > 0) {
+                    var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+                    if (iframeDocument) {
+                      var body_element = $(iframeDocument).find('body.cke_editable');
+                      body_element.html(data_message['seo_edited_text']);
+                    } else {
+                      console.error('Reqser.com: Iframe document not found');
+                    }
+                  } else if (textarea.length > 0) {
+                    textarea.val(data_message['seo_edited_text']);
+                  } else {
+                    alert('Reqser.com: Something went wrong. Please try again later.');
+                    console.error('Reqser.com: Neither iframe nor textarea found');
+                  }
+                }
+                if (data_message['alert_message'] && data_message['alert_message'] != '') {
+                  alert(data_message['alert_message']);
+                }
+              } else {
+                alert('Reqser.com: Something went wrong. Please try again later.');
+                console.error('Reqser.com: No data returned');
+              }
+
+              $('#reqser_seo_product_description_edit_2').show();
+              $('#reqser_seo_product_description_loader_2').hide();
+              $('#reqser_seo_product_description_reset_button_2').show();
+            }
+          );
+        });
+      });
+
+      $(document).ready(function() {
+        $(document).on('click', '#reqser_seo_product_description_reset_button_2', function() {
+
+          var productDescriptionUnderscore = $('#cke_products_description_' + <?php echo $fwl_language ?>),
+              productDescriptionBracket = $('#cke_products_description\\[' + <?php echo $fwl_language ?> + '\\]'),
+              productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
+
+          if (productDescription) {
+            var iframe = productDescription.find('iframe');
+            var textarea = productDescription.find('textarea');
+            if (iframe.length > 0) {
+                var iframeDocument = iframe[0].contentDocument || iframe[0].contentWindow.document;
+                if (iframeDocument) {
+                    var body_element = $(iframeDocument).find('body.cke_editable');
+                    body_element.html(original_text);
+                } else {
+                  console.error('Reqser.com: Iframe document not found');
+                  return;
+                }
+            } else if (textarea.length > 0) {
+              textarea.val(data_message['seo_edited_text']);
+            } else {
+              console.error('Reqser.com: Neither iframe nor textarea found');
+              return;
+            }
+          } else {
+            console.error('Reqser.com: Product description not found');
+            return;
+          }
+        });
+      });
+
+    </script>
+  <?php
+  }
 }
 

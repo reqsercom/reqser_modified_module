@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.1 on the 09.04.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -54,6 +54,10 @@ define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Automati&scaron;kai
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Ar i&scaron;versti kalbų failai turėtų būti automati&scaron;kai perkeliami į jūsų parduotuvę, ar kiekvieną kalbos failą reikia pasirinkti rankiniu būdu "Reqser" programoje?<br />Taip = kalbos failai perkeliami automati&scaron;kai / Ne = perkeliami rankiniu būdu');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_TITLE', '<hr /><h2>Saugumas</h2>Registruoti API prieigas?');
 define('MODULE_SYSTEM_REQSER_PROTOCOL_ACC_DESC', 'Ar API prieigos turėtų būti registruojamos?<br />(Žurnalus galima rasti <i>/api/reqser/logs/</i> ).');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_TITLE', 'Užkirsti kelią pagrindinės kalbos redagavimui?');
+define('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT_DESC', 'Turėtų būti leidžiama redaguoti pagrindinę kalbą, kad tekstus būtų galima optimizuoti paie&scaron;kos sistemoms pagrindine kalba.<br />Taip = neleisti redaguoti / Ne = leisti redaguoti');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', 'Ar i&scaron; tekstų reikėtų i&scaron;braukti žodžius "scripte" ir "iframe"?');
+define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', 'Jei tekstuose yra, pavyzdžiui, "YouTube" vaizdo įra&scaron;ų arba animacijos, &scaron;ių žymų nereikėtų &scaron;alinti. Prie&scaron;ingu atveju redaguojami tekstai gali prarasti funkcionalumą.<br />Taip = Pa&scaron;alinti / Ne = Ne&scaron;alinti');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Bandymas nar&scaron;yklėje ?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Bandymas nar&scaron;yklėje nesiunčiant antra&scaron;čių?<br /><span class="alrt">!!! Turi būti i&scaron;jungtas, kai API veikia gyvai !!!</span>');
 define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Modulyje saugomas "Reqser API raktas" nesutampa su <i>reqser.com</i> saugomu raktu.<br />Prisijunkite prie <i>reqser</i>.com ir patikrinkite API raktą arba, jei reikia, dar kartą jį gaukite ir i&scaron;saugokite čia.');
@@ -68,3 +72,5 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com "Deepl Translat
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nėra aktyvuotas, pra&scaron;ome aktyvuoti modulį pagal Modulis->Sistemos modulis');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator modulis neturi ry&scaron;io!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Tikrinamas Reqser.com ry&scaron;ys, palaukite.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO nustatymai kraunami, palaukite.');
+define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Jūsų įra&scaron;ai nėra i&scaron;samūs, patikrinkite:');
