@@ -107,6 +107,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_seo_products_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_SEO_PRODUCTS_EDIT : 'not defined',
                                                                                         'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
+                                                                                        'disable_base_language_edit' => (defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')) ? MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT : 'not defined',
                                                                                         'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRING') ? MODULE_SYSTEM_REQSER_SANITIZE_STRING : 'not defined',
                                                                                        )
                                                                        )
