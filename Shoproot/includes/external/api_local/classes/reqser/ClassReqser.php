@@ -108,7 +108,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'request_on_categories_edit' => (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) ? MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT : 'not defined',
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
                                                                                         'disable_base_language_edit' => (defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')) ? MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT : 'not defined',
-                                                                                        'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRING') ? MODULE_SYSTEM_REQSER_SANITIZE_STRING : 'not defined',
+                                                                                        'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') ? MODULE_SYSTEM_REQSER_SANITIZE_STRINGS : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -327,9 +327,9 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
         }
-        if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRING')){
+        if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SANITIZE_STRING', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
