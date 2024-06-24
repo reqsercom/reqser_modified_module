@@ -1005,11 +1005,6 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       $out_arr = array('error' => 'no table and/or no language provided for call');
     }
-    //JorisK 06-2024, gibt Probleme falls im Text z.B. ein Youtube Video eingebettet ist oder sonstige Animationen per Script eingebunden sind
-    if (!defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS')
-        || constant('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') == 'true'){
-      $out_arr = $this->purifyResp($out_arr);
-    } 
     return $out_arr;
   }
 
