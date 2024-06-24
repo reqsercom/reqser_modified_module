@@ -1005,6 +1005,7 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       $out_arr = array('error' => 'no table and/or no language provided for call');
     }
+ 
     return $out_arr;
   }
 
