@@ -1500,6 +1500,10 @@ class ClassReqser extends api_local\ApiBase {
                         'unique_key' => 'shipping_status_id',
                         'lang' => 'language_id');
         break;
+      //JorisK 06-2024, added Default $field to prevent warning on new not known or defined tables
+      default:
+        $fields = array();
+      break;
     }
 
     return $fields;
