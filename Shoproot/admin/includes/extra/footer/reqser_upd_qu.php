@@ -376,6 +376,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         var product_description_id_underscore = $('#products_description_'+<?php echo $fwl_language ?>),
             product_description_id_bracket = $('#products_description\\['+<?php echo $fwl_language ?>+'\\]');
         var product_description_selector = product_description_id_underscore.length > 0 ? product_description_id_underscore : product_description_id_bracket.length > 0 ? product_description_id_bracket : null;
+        var products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(); // Set the products_id to "new_product" if it's 0, otherwise use the value
         
         var loadingMessage = "<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING ?>";
         var content = '<div id="reqser_seo_product_description_placeholder_2" style="text-align: center; animation: pulse 2s infinite; margin: 40px 0 0;">' + loadingMessage + '</div><style> @keyframes pulse { 0% { opacity: 1;} 50% { opacity: 0.5; } 100% { opacity: 1; } } </style>';
@@ -428,6 +429,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             product_description_id_underscore_exists: product_description_id_underscore_exists,
             product_description_id_bracket_exists: product_description_id_bracket_exists,
             manufacturers_id: $('select[name="manufacturers_id"]').val(),
+            products_id: products_id,
           };
 
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
