@@ -258,15 +258,6 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
         }
-
-        //Update from 2.6 to 2.7 Version
-        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL')){
-          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL', '', '6', '5');
-          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
-            $this->api_db_conn->apiDbStmtClose($ins_qu);
-          }
-        }
         
         //Update from 2.7 to 2.8 Version
         if (defined('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION')){
@@ -332,6 +323,21 @@ class ClassReqser extends api_local\ApiBase {
           $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 3.3 to 3.4 Version
+        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL', '', '6', '5');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        if (defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL')){
+          $upd_conf_qu_str = "DELETE FROM configuration WHERE configuration_key = ?";
+          if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'))){
+            $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
           }
         }
         
@@ -1262,9 +1268,9 @@ class ClassReqser extends api_local\ApiBase {
    * @return array of token and expiry
    */
   public function getsendToken() {   
-      if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL) > time()) {
+      if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL) > time()) {
         $ret_arr = array('access_token' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN'),
-                          'expiry' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'));
+                          'expiry' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL'));
       } else {
         $msreq_url_credential = 'https://reqser.com/api/token';
         //authenticate ?
@@ -1279,7 +1285,7 @@ class ClassReqser extends api_local\ApiBase {
           $decoded_payload = base64_decode(str_replace(['-', '_'], ['+', '/'], $payload) . str_repeat('=', 3 - (3 + strlen($payload)) % 4));
           $payload_array = json_decode($decoded_payload, true);
           $expire_token = date("Y-m-d H:i:s", $payload_array['exp']);
-          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$expire_token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'");
+          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$expire_token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL'");
         }
       }
     return $ret_arr;
