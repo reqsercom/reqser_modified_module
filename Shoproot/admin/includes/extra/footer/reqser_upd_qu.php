@@ -375,8 +375,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         // Add a placeholder for the Reqser SEO settings
         var product_description_id_underscore = $('#products_description_'+<?php echo $fwl_language ?>),
             product_description_id_bracket = $('#products_description\\['+<?php echo $fwl_language ?>+'\\]');
-        var product_description_selector = product_description_id_underscore.length > 0 ? product_description_id_underscore : product_description_id_bracket.length > 0 ? product_description_id_bracket : null;
-        var products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(); // Set the products_id to "new_product" if it's 0, otherwise use the value
+            product_description_selector = product_description_id_underscore.length > 0 ? product_description_id_underscore : product_description_id_bracket.length > 0 ? product_description_id_bracket : null,
+            products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(); // Set the products_id to "new_product" if it's 0, otherwise use the value
         
         var loadingMessage = "<?php echo MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING ?>";
         var content = '<div id="reqser_seo_product_description_placeholder_2" style="text-align: center; animation: pulse 2s infinite; margin: 40px 0 0;">' + loadingMessage + '</div><style> @keyframes pulse { 0% { opacity: 1;} 50% { opacity: 0.5; } 100% { opacity: 1; } } </style>';
@@ -386,39 +386,17 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           $(product_description_selector).after(content);
         }
 
-        setTimeout(function() {
+        var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
+            msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
+            fwl_language = '<?php echo $fwl_language; ?>',
+            max_attempts = 5,
+            attempt = 0,
+            productDescriptions = [],
+            productDescriptionsExists = 'false',
+            product_description_id_underscore_exists,
+            product_description_id_bracket_exists;
 
-          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
-              product_description_id_underscore_exists = $('#cke_products_description_'+<?php echo $fwl_language ?>).length > 0 ? 'true' : 'false',
-              product_description_id_bracket_exists = $('#cke_products_description\\['+<?php echo $fwl_language ?>+'\\]').length > 0 ? 'true' : 'false',
-              productDescriptions = [],
-              productDescriptionsExists = 'false';
-
-          for (var i = 0; i < languages.length; i++) {
-            // Check if an element with the id cke_products_description_ + language exists          
-            var productDescriptionUnderscore = $('#cke_products_description_' + languages[i]),
-                productDescriptionBracket = $('#cke_products_description\\[' + languages[i] + '\\]');
-        
-            var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
-
-            // Find the body of the editor, if the productDescription element exists
-            if (productDescription) {
-              var productDescriptionBody = productDescription.contents().find('body');
-
-              // Check if the body element exists
-              if (productDescriptionBody) {
-                // Extend the productDescriptions array with a new object
-                productDescriptions.push({
-                  language_id: languages[i],
-                });
-                productDescriptionsExists = 'true';
-              }
-            }
-          }
-
-          //console.log('productDescriptions: ', productDescriptions);
-
+        function sendAjaxRequest() {
           msreq_params = {
             ext: 'reqser_upd_qu_ajax',
             type: 'plain',
@@ -471,7 +449,48 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               }
             }
           );
-        }, 4000);
+        }
+
+        function checkProductsDescriptionEditorLoaded() {
+          product_description_id_underscore_exists = $('#cke_products_description_'+fwl_language).length > 0 ? 'true' : 'false';
+          product_description_id_bracket_exists = $('#cke_products_description\\['+fwl_language+'\\]').length > 0 ? 'true' : 'false';
+
+          if ((product_description_id_underscore_exists == 'true' || product_description_id_bracket_exists == 'true')) {
+            
+            for (var i = 0; i < languages.length; i++) {
+              // Check if an element with the id cke_products_description_ + language exists
+              var productDescriptionUnderscore = $('#cke_products_description_' + languages[i]),
+                  productDescriptionBracket = $('#cke_products_description\\[' + languages[i] + '\\]');
+
+              var productDescription = productDescriptionUnderscore.length > 0 ? productDescriptionUnderscore : productDescriptionBracket.length > 0 ? productDescriptionBracket : null;
+              
+              // Find the body of the editor, if the productDescription element exists
+              if (productDescription) {
+                var productDescriptionBody = productDescription.contents().find('body');
+
+                // Check if the body element exists
+                if (productDescriptionBody) {
+                  // Extend the productDescriptions array with a new object
+                  productDescriptions.push({
+                    language_id: languages[i],
+                  });
+                  productDescriptionsExists = 'true';
+                }
+              }
+            }
+
+            sendAjaxRequest();
+          } else if (attempt < max_attempts) {
+            attempt++;
+            // Retry after a short delay if the iframe is not yet loaded
+            setTimeout(checkProductsDescriptionEditorLoaded, 2000);
+          } else {
+            console.error('Reqser.com: Products description editor not found after maximum attempts. SEO settings may not work correctly.');
+            sendAjaxRequest();
+          }
+        }
+
+        checkProductsDescriptionEditorLoaded();
       });
 
       $(document).ready(function() {
