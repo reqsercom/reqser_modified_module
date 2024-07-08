@@ -1220,13 +1220,9 @@ class ClassReqser extends api_local\ApiBase {
    */
   protected function encode_utf8($charset, $string, $encoding = '', $force_utf8 = false) {
     if(strtolower($charset) == 'utf-8' || $force_utf8 === true) {
-      // PatrickK 07-2024, wir erwarten in der Regel UTF-8, daher erst prüfen ob es UTF-8 ist, wenn nicht dann konvertieren
-      if ($encoding === false && mb_check_encoding($string, 'UTF-8')) {
-        return $string;
-      }
       $supported_charsets = explode(',', strtoupper(ENCODE_DEFINED_CHARSETS));  
       $cur_encoding = (!empty($encoding) && $encoding !== false) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
-      if($cur_encoding == 'UTF-8' && mb_check_encoding($string, 'UTF-8')) {
+      if(($cur_encoding == 'UTF-8' || $cur_encoding == 'SJIS') && mb_check_encoding($string, 'UTF-8')) {
         return $string;
       } elseif ($cur_encoding !== false) {
         return mb_convert_encoding($string, 'UTF-8', $cur_encoding);
