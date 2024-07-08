@@ -1222,6 +1222,7 @@ class ClassReqser extends api_local\ApiBase {
     if(strtolower($charset) == 'utf-8' || $force_utf8 === true) {
       $supported_charsets = explode(',', strtoupper(ENCODE_DEFINED_CHARSETS));  
       $cur_encoding = (!empty($encoding) && $encoding !== false) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
+      // PatrickK 07-2024 In Einzelfällen kann es vorkommen, dass die Funktion mb_detect_encoding() nicht das richtige Encoding erkennt und z.B. SJIS zurückgibt, obwohl es UTF-8 ist. In diesem Fall wird trotzdem geprüft, ob es UTF-8 ist und dann zurückgegeben.
       if(($cur_encoding == 'UTF-8' || $cur_encoding == 'SJIS') && mb_check_encoding($string, 'UTF-8')) {
         return $string;
       } elseif ($cur_encoding !== false) {
