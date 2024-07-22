@@ -499,8 +499,9 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
               msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
               msreq_params = {},
-              products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(); // Set the products_id to "new_product" if it's 0, otherwise use the value
-                    
+              products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(), // Set the products_id to "new_product" if it's 0, otherwise use the value
+              keywords_as_manufacturers_default = $('#reqser_seo_product_description_keywords_default_' + <?php echo $fwl_language ?>).is(':checked');
+          
           // Loop through the form inputs and add them to the msreq_params object
           var seo_inputs = {};
           if (form_inputs.length > 0) {
@@ -598,6 +599,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
             table_name: 'products_description',
             seo_inputs: seo_inputs,
             language: "2",
+            manufacturers_id: $('select[name="manufacturers_id"]').val(),
+            keywords_as_manufacturers_default: keywords_as_manufacturers_default,
           };
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
