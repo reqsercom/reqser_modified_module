@@ -15,10 +15,10 @@
 
 ***********************************************************/
 
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatische DeepL &Uuml;bersetzungen via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'AI-Tools f&uuml;r Modified via <i>Reqser.com</i>, Modul-Version %s<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> und &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - '.date('m-Y').')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
-System-Modul f&uuml;r die Aktivierung und Konfiguration von &Uuml;bersetzungen via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
+Erhalte Zugang zu praktischen AI-Tools f&uuml;r deinen Modified-Shop via <i><a href="https://reqser.com/" target="_blank">reqser.com</a></i>');
 
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Grundeinstellungen</h2>Modul aktivieren?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
@@ -76,7 +76,7 @@ define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Das Reqser.com DeepL Modul wird al
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator Modul hat kein API Key, bitte ein API Key hinterlegen');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator Modul nicht aktiviert, bitte aktivieren Sie das Modul unter Module->System Module');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_MISSING_CONNECTION', 'Reqser.com Deepl Translator Modul hat keine Verbindung!');
-define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com Verbindung wird geprüft, bitte warten.');
+define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE_CONNECTION_LOADING', 'Reqser.com Verbindung wird gepr&uuml;ft, bitte warten.');
 
 define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO Einstellungen werden geladen, bitte warten.');
 define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Ihre Eingaben sind nicht vollst&auml;ndig, bitte &uuml;berpr&uuml;fen:');
