@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,9 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatikus DeepL ford&iacute;t&aacute;sok a Reqser <i>.</i>com-on kereszt&uuml;l, a modul verzi&oacute;ja %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> &eacute;s &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'AI eszk&ouml;z&ouml;k ford&iacute;t&aacute;sokhoz &eacute;s SEO-hoz a Reqser <i>.</i>com-on kereszt&uuml;l, modul verzi&oacute; %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> &eacute;s &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Rendszermodul a ford&iacute;t&aacute;sok aktiv&aacute;l&aacute;s&aacute;hoz &eacute;s konfigur&aacute;l&aacute;s&aacute;hoz <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Rendszermodul a DeepL, OpenAI &eacute;s Neuroflash kapcsolathoz a <i><a href="https://reqser.com/" target="_blank">reqser.com-on</i> kereszt&uuml;l <i></a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Alapbe&aacute;ll&iacute;t&aacute;sok</h2>Modul aktiv&aacute;l&aacute;sa?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser API kulcs');
@@ -48,7 +48,7 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Az angol alap&eacute;
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'A brit helyes&iacute;r&aacute;st r&eacute;szes&iacute;ten&eacute; előnyben?<br />Igen = brit / Nem = USA');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Tov&aacute;bbi be&aacute;ll&iacute;t&aacute;sok</h2>Enged&eacute;lyezni kell egy &uacute;j nyelv hozz&aacute;ad&aacute;s&aacute;t a <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>-hoz ?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Ha ez a be&aacute;ll&iacute;t&aacute;s "Igen", akkor &uacute;j nyelveket lehet hozz&aacute;adni a <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> oldalhoz.<br />A "Nem" be&aacute;ll&iacute;t&aacute;ssal a nyelvnek m&aacute;r l&eacute;teznie kell a boltrendszerben, &eacute;s a nyelvet aktiv&aacute;lni kell ebben a modulban.<br />Nyelv l&eacute;trehoz&aacute;sa a boltban: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Nyelv l&eacute;trehoz&aacute;sa a boltban ?</a> &nbsp;&nbsp;<span class="alrt">!! Az &uacute;j nyelv csak 24-48 &oacute;ra eltelt&eacute;vel lesz el&eacute;rhető a boltban. !!</span><br />Ezut&aacute;n jel&ouml;lje meg itt a leford&iacute;tand&oacute; nyelvet');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'A szerveren l&eacute;vő nyelvi f&aacute;jlok leford&iacute;t&aacute;sa?' . draw_tooltip('A szerveren l&eacute;vő &ouml;sszes f&aacute;jl lek&eacute;rdez&eacute;sre &eacute;s leford&iacute;t&aacute;sra ker&uuml;l</br>Ez a modulok &eacute;s kiterjeszt&eacute;sek nyelvi f&aacute;jljaira is vonatkozik. Minden nyelvi f&aacute;jl &uacute;jragener&aacute;l&aacute;sra ker&uuml;l, bele&eacute;rtve a megl&eacute;vő nyelveket is.<br />Alap&eacute;rtelmez&eacute;s szerint a Reqserben megl&eacute;vő idegen nyelvű sz&ouml;vegek &aacute;tv&eacute;telre ker&uuml;lnek, &eacute;s nem &uacute;j ford&iacute;t&aacute;sra, de ez megv&aacute;ltoztathat&oacute; a Reqser be&aacute;ll&iacute;t&aacute;saiban.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('A szerveren l&eacute;vő nyelvi f&aacute;jlok leford&iacute;t&aacute;sa? A szerveren l&eacute;vő &ouml;sszes f&aacute;jl lek&eacute;rdez&eacute;sre &eacute;s leford&iacute;t&aacute;sra ker&uuml;l</br>Ez a modulok &eacute;s kiterjeszt&eacute;sek nyelvi f&aacute;jljaira is vonatkozik. Minden nyelvi f&aacute;jl &uacute;jragener&aacute;l&aacute;sra ker&uuml;l, bele&eacute;rtve a megl&eacute;vő nyelveket is.<br />Alap&eacute;rtelmez&eacute;s szerint a Reqserben megl&eacute;vő idegen nyelvű sz&ouml;vegek &aacute;tv&eacute;telre ker&uuml;lnek, &eacute;s nem ker&uuml;lnek &uacute;j ford&iacute;t&aacute;sra, de ez megv&aacute;ltoztathat&oacute; a Reqser be&aacute;ll&iacute;t&aacute;saiban.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Nyelvi f&aacute;jlok n&eacute;lk&uuml;l nem műk&ouml;dik idegen nyelv a boltban, &eacute;s van egy "feh&eacute;r" oldal!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Nyelvi f&aacute;jlok automatikus &aacute;tvitele?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'A leford&iacute;tott nyelvi f&aacute;jlokat automatikusan kell &aacute;tvinni az &Ouml;n &uuml;zlet&eacute;be, vagy minden egyes nyelvi f&aacute;jlt manu&aacute;lisan kell kiv&aacute;lasztani a Reqserben?<br />Igen = a nyelvi f&aacute;jlok automatikus &aacute;tvitele / Nem = k&eacute;zi &aacute;tvitel');
@@ -66,7 +66,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nincs API-kulcs megadva! K&eac
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul nincs kiv&aacute;lasztott nyelvre ford&iacute;tand&oacute; nyelv !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', 'A "Ford&iacute;t&aacute;s mely nyelvekre?" nem tartalmazhat olyan nyelvet, amely a "Ford&iacute;t&aacute;s mely nyelvekről?" mezőben lett kiv&aacute;lasztva.');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'A k&eacute;zzel hozz&aacute;adott <b>"%s</b> " t&aacute;bla nem tal&aacute;lhat&oacute; az adatb&aacute;zisban. K&eacute;rj&uuml;k, ellenőrizze a "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '" be&aacute;ll&iacute;t&aacute;sait!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'A k&eacute;zzel hozz&aacute;adott <b>"%s</b> " t&aacute;bla nem tal&aacute;lhat&oacute; az adatb&aacute;zisban.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' K&eacute;rj&uuml;k, ellenőrizze a " " be&aacute;ll&iacute;t&aacute;sait!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'A Reqser.com DeepL modul a ment&eacute;s ut&aacute;n automatikusan leford&iacute;tja a modulban aktiv&aacute;lt &ouml;sszes idegen nyelvet.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'A Reqser.com Deepl Translator modulnak nincs API kulcsa, k&eacute;rj&uuml;k, adjon meg egy API kulcsot.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modul nem aktiv&aacute;lva, k&eacute;rj&uuml;k, aktiv&aacute;lja a modult a Modul->Rendszermodul alatt.');
