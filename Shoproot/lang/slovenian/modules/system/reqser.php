@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,9 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Samodejni prevodi DeepL prek Reqser <i>.</i>com, različica modula %s<br />- zgraditi za <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> in &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Orodja AI za prevode in SEO prek Reqser <i>.</i>com, različica modula %s<br />- zgraditi za <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> in &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sistemski modul za aktivacijo in konfiguracijo prevodov prek <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sistemski modul za povezavo z DeepL, OpenAI in Neuroflash prek <i><a href="https://reqser.com/" target="_blank">reqser.com</a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Osnovne nastavitve</h2>Aktivacija modula?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Zahtevani ključ API');
@@ -48,7 +48,7 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Angle&scaron;čina se
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Bi raje uporabljali britanski pravopis?<br />Da = britanski / Ne = ZDA');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Dodatne nastavitve</h2>Ali naj se dovoli dodajanje novega jezika na <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> ?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Če je ta nastavitev nastavljena na "Da", lahko v <i> spletno stran <a href="https://reqser.com/" target="_blank">reqser.com</i></a> dodajate nove jezike.<br />Z nastavitvijo "Ne" mora jezik že obstajati v sistemu trgovine, jezik pa mora biti aktiviran v tem modulu.<br />Ustvarite jezik v trgovini: Ustvari jezik v trgovini ?</a>: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo &nbsp;&nbsp;<span class="alrt">!! Novi jezik je v trgovini na voljo &scaron;ele po 24-48 urah. !!</span><br />Nato označite tukaj kot jezik, ki ga je treba prevesti');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Prevedite jezikovne datoteke v strežniku?' . draw_tooltip('Vse datoteke v strežniku so poizvedovane in prevedene</br>To velja tudi za jezikovne datoteke modulov in raz&scaron;iritev. Vse jezikovne datoteke se obnovijo, vključno z obstoječimi jeziki.<br />Privzeto se prevzamejo obstoječa besedila v tujih jezikih v programu Reqser in se ne prevajajo na novo, vendar lahko to spremenite v nastavitvah programa Reqser.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('Prevajanje jezikovnih datotek v strežniku? Vse datoteke v strežniku so poizvedovane in prevedene</br>To velja tudi za jezikovne datoteke modulov in raz&scaron;iritev. Preoblikujejo se vse jezikovne datoteke, vključno z obstoječimi jeziki.<br />Privzeto se prevzamejo obstoječa besedila v tujih jezikih v programu Reqser in se ne prevajajo na novo, vendar lahko to spremenite v nastavitvah programa Reqser.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Brez jezikovnih datotek v trgovini ne deluje noben tuji jezik in je na voljo "bela" stran!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Samodejno prena&scaron;anje jezikovnih datotek?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Ali naj se prevedene jezikovne datoteke samodejno prenesejo v va&scaron;o trgovino ali je treba vsako jezikovno datoteko v programu Reqser izbrati ročno?<br />Da = jezikovne datoteke se prenesejo samodejno / Ne = prenesejo se ročno');
@@ -66,7 +66,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Ključ API ni bil vnesen! Prij
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modul ni izbran noben jezik, v katerega se prevaja !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Prevedi v katere jezike?" ne sme vsebovati jezika, ki je bil izbran v "Prevedi iz katerega jezika?".');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ročno dodane tabele <b>"%s"</b> ni bilo mogoče najti v zbirki podatkov. Preverite nastavitve za "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ročno dodane tabele <b>"%s"</b> ni bilo mogoče najti v zbirki podatkov.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' Preverite nastavitve za " "!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Modul Reqser.com DeepL bo po shranjevanju samodejno prevedel vse tuje jezike, aktivirane v modulu za ta izdelek.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator modul nima ključa API, prosimo, vnesite ključ API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Prevajalec modul ni aktiviran, prosimo, aktivirajte modul v Modul->Sistemski modul');

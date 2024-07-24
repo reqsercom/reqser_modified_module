@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,10 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automaatne DeepL t&otilde;lked Reqser <i>.</i>com kaudu, mooduli versioon %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'AI t&ouml;&ouml;riistad t&otilde;lkimiseks ja SEO jaoks Reqser <i>.</i>com kaudu, mooduli versioon %s<br />- build for <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ja &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> s&uuml;steemimoodul t&otilde;lgete aktiveerimiseks ja konfigureerimiseks <i><a href="https://reqser.com/" target="_blank">reqser.com</i> kaudu</a>');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
+ <i><a href="https://reqser.com/" target="_blank">S&uuml;steemi moodul &uuml;hendamiseks DeepL, OpenAI ja Neuroflashiga</i> <i>reqser.com</i> kaudu. <i></a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>P&otilde;hiseaded</h2>Aktiveerige moodul?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser API v&otilde;ti');
@@ -48,7 +49,7 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Inglise keelt kasutat
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Kas te eelistaksite briti kirjaviisi?<br />Jah = Briti / Ei = USA');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>T&auml;iendavad seaded</h2>Kas <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> peaks olema lubatud lisada uus keel ?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Kui see seade on seatud "Jah", saab <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> lisada uusi keeli.<br />Kui seadistus on "Ei", peab keel olema poes&uuml;steemis juba olemas ja keel peab olema selles moodulis aktiveeritud.<br />Looge keel poes: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Create language in shop ?</a> &nbsp;&nbsp;<span class="alrt">!! Uus keel on poes saadaval alles 24-48 tunni p&auml;rast. !!</span><br />Seej&auml;rel m&auml;rkige siin t&otilde;lgitavaks keeleks');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Translate language files on the server?' . draw_tooltip('K&otilde;ik serveris olevad failid k&uuml;sitakse ja t&otilde;lgitakse</br>See kehtib ka moodulite ja laienduste keelefailide kohta. K&otilde;ik keelefailid taastatakse, sealhulgas olemasolevad keeled.<br />Vaikimisi v&otilde;etakse Reqseris olemasolevad v&otilde;&otilde;rkeelsed tekstid &uuml;le ja neid ei t&otilde;lgita uuesti, kuid seda saab muuta Reqseri seadetes.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('T&otilde;lkida serveris olevad keelefailid? K&otilde;ik serveris olevad failid k&uuml;sitakse ja t&otilde;lgitakse</br>See kehtib ka moodulite ja laienduste keelefailide kohta. K&otilde;ik keelefailid taastatakse, sealhulgas olemasolevad keeled.<br />Vaikimisi v&otilde;etakse Reqseris olemasolevad v&otilde;&otilde;rkeelsed tekstid &uuml;le ja neid ei t&otilde;lgita uuesti, kuid seda saab muuta Reqseri seadetes.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Ilma keelefailideta ei t&ouml;&ouml;ta poes &uuml;kski v&otilde;&otilde;rkeel ja seal on "valge" leht!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Keelefailide automaatne &uuml;lekandmine?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Kas t&otilde;lgitud keelefailid tuleks automaatselt teie kauplusesse &uuml;le kanda v&otilde;i tuleks iga keelefail Reqseris k&auml;sitsi valida?<br />Jah = keelefailide automaatne &uuml;lekandmine / Ei = k&auml;sitsi &uuml;lekandmine');
@@ -66,7 +67,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API v&otilde;tit ei ole sisest
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Moodul ei ole valitud keelde t&otilde;lkimiseks !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Millistesse keeltesse t&otilde;lkida?" ei tohi sisaldada keelt, mis on valitud jaotises "Millisest keelest t&otilde;lkida?".');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'K&auml;sitsi lisatud tabelit <b>"%s</b> " ei leitud andmebaasist. Palun kontrollige seadistusi "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'K&auml;sitsi lisatud tabelit <b>"%s</b> " ei leitud andmebaasist.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' Palun kontrollige seadeid " "!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL moodul t&otilde;lgib p&auml;rast salvestamist automaatselt k&otilde;ik selle toote jaoks moodulis aktiveeritud v&otilde;&otilde;rkeeled.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator moodulil puudub API v&otilde;ti, palun sisestage API v&otilde;ti.');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator moodul ei ole aktiveeritud, palun aktiveerige moodul moodulite all Moodul->S&uuml;steemi moodul');

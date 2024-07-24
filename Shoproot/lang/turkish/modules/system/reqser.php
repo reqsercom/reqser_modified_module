@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,9 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Reqser <i>.</i>com aracılığıyla otomatik DeepL &ccedil;evirileri, mod&uuml;l s&uuml;r&uuml;m&uuml; %s<br />- <i>Reqser</i>.com i&ccedil;in inşa edildi -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ve &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Reqser <i>.</i>com aracılığıyla &ccedil;eviriler ve SEO i&ccedil;in yapay zeka ara&ccedil;ları, mod&uuml;l s&uuml;r&uuml;m&uuml; %s<br />- <i>Reqser</i>.com i&ccedil;in inşa edildi -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ve &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> &uuml;zerinden &ccedil;evirilerin etkinleştirilmesi ve yapılandırılması i&ccedil;in sistem mod&uuml;l&uuml;');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> DeepL, OpenAI ve Neuroflash ile <i><a href="https://reqser.com/" target="_blank">reqser.com</a></i> &uuml;zerinden bağlantı i&ccedil;in sistem mod&uuml;l&uuml;');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Temel ayarlar</h2>Mod&uuml;l etkinleştirilsin mi?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser API anahtarı');
@@ -48,7 +48,7 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'İngilizce varsayıla
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'İngiliz yazımını mı tercih edersiniz?<br />Evet = İngiliz / Hayır = ABD');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Diğer ayarlar</h2>Yeni bir dilin <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>\'a eklenmesine izin verilmeli mi?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Bu ayar "Evet" olarak ayarlandığında, <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>\'a yeni diller eklenebilir.<br />"Hayır" ile, dil mağaza sisteminde zaten mevcut olmalı ve dil bu mod&uuml;lde etkinleştirilmelidir.<br />Mağazada dil oluşturun: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Mağazada dil oluştur ?</a> &nbsp;&nbsp;<span class="alrt">!! Yeni dil yalnızca 24-48 saat sonra mağazada kullanılabilir. !!</span><br />Ardından burayı &ccedil;evrilecek dil olarak işaretleyin');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Sunucudaki dil dosyalarını &ccedil;evir?' . draw_tooltip('Sunucudaki t&uuml;m dosyalar sorgulanır ve &ccedil;evrilir</br>Bu aynı zamanda mod&uuml;llerin ve uzantıların dil dosyaları i&ccedil;in de ge&ccedil;erlidir. Mevcut diller de dahil olmak &uuml;zere t&uuml;m dil dosyaları yeniden oluşturulur.<br />Varsayılan olarak, Reqser\'deki mevcut yabancı dil metinleri benimsenir ve yeni &ccedil;evrilmez, ancak bu Reqser ayarlarından değiştirilebilir.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('Sunucudaki dil dosyalarını &ccedil;evir? Sunucudaki t&uuml;m dosyalar sorgulanır ve &ccedil;evrilir</br>Bu aynı zamanda mod&uuml;llerin ve uzantıların dil dosyaları i&ccedil;in de ge&ccedil;erlidir. Mevcut diller de dahil olmak &uuml;zere t&uuml;m dil dosyaları yeniden oluşturulur.<br />Varsayılan olarak, Reqser\'deki mevcut yabancı dil metinleri benimsenir ve yeni &ccedil;evrilmez, ancak bu Reqser ayarlarından değiştirilebilir.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Dil dosyaları olmadan, mağazada hi&ccedil;bir yabancı dil &ccedil;alışmıyor ve "beyaz" bir sayfa var!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Dil dosyalarını otomatik olarak aktarın?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', '&Ccedil;evrilen dil dosyaları otomatik olarak mağazanıza aktarılmalı mı yoksa her dil dosyası Reqser\'da manuel olarak mı se&ccedil;ilmeli?<br />Evet = dil dosyalarını otomatik olarak aktar / Hayır = manuel olarak aktar');
@@ -60,13 +60,13 @@ define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_TITLE', '"Scripte" ve "iframe" met
 define('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS_DESC', '&Ouml;rneğin, metinlerde YouTube videoları veya animasyonlar yer alıyorsa, bu etiketler kaldırılmamalıdır. Aksi takdirde, d&uuml;zenlediğimiz metinler işlevselliğini kaybedebilir.<br />Evet = Kaldır / Hayır = Kaldırmayın');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_TITLE', 'Tarayıcıda test edelim mi?');
 define('MODULE_SYSTEM_REQSER_BROWSER_TEST_DESC', 'Başlık g&ouml;ndermeden tarayıcıda test edin?<br /><span class="alrt">!!! API\'nin canlı &ccedil;alışmasında devre dışı bırakılmalıdır !!!</span>');
-define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Burada mod&uuml;lde saklanan "Reqser API anahtarı" <i>reqser.com</i> \'da saklananla eşleşmiyor.<br />L&uuml;tfen <i>reqser</i>.com\'da oturum a&ccedil;ın ve API anahtarını kontrol edin veya gerekirse tekrar alın ve buraya kaydedin.');
+define('MODULE_SYSTEM_REQSER_API_KEY_WRONG_ERR', 'Burada mod&uuml;lde depolanan "Reqser API anahtarı" <i>reqser.com</i> \'da depolananla eşleşmiyor.<br />L&uuml;tfen <i>reqser</i>.com\'da oturum a&ccedil;ın ve API anahtarını kontrol edin veya gerekirse tekrar alın ve buraya kaydedin.');
 define('MODULE_SYSTEM_REQSER_API_KEY_SUCCESS', 'API anahtarı başarıyla kaydedildi');
 define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API anahtarı girilmedi! L&uuml;tfen <i>reqser.com</i> \'da oturum a&ccedil;ın ve bu web sitesi i&ccedil;in API anahtarını alın ve buraya mod&uuml;lde kaydedin.');
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL HATASI:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Mod&uuml;lde &ccedil;evrilecek dil se&ccedil;ili değil!');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Hangi dillere &ccedil;evir?", "Hangi dilden &ccedil;evir?" b&ouml;l&uuml;m&uuml;nde se&ccedil;ilen bir dili i&ccedil;ermemelidir.');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Manuel olarak eklenen <b>"%s"</b> tablosu veritabanında bulunamadı. L&uuml;tfen "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '" ayarlarını kontrol edin!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Manuel olarak eklenen <b>"%s"</b> tablosu veritabanında bulunamadı.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' L&uuml;tfen " " i&ccedil;in ayarları kontrol edin!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL mod&uuml;l&uuml;, kaydedildikten sonra bu &uuml;r&uuml;n i&ccedil;in mod&uuml;lde etkinleştirilen t&uuml;m yabancı dilleri otomatik olarak &ccedil;evirecektir.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator mod&uuml;l&uuml;n&uuml;n API anahtarı yok, l&uuml;tfen bir API anahtarı girin');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator mod&uuml;l&uuml; etkinleştirilmemiş, l&uuml;tfen Mod&uuml;l->Sistem Mod&uuml;l&uuml; altındaki mod&uuml;l&uuml; etkinleştirin');

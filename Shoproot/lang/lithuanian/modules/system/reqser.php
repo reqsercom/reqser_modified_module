@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,9 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatiniai DeepL vertimai per Reqser <i>.</i>com, modulio versija %s<br />- sukurti <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ir &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'AI įrankiai vertimams ir SEO per Reqser <i>.</i>com, modulio versija %s<br />- sukurti <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> ir &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sisteminis modulis, skirtas vertimams aktyvuoti ir konfigūruoti per <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sistemos modulis, skirtas prisijungti prie DeepL, "OpenAI" ir "Neuroflash" per <i><a href="https://reqser.com/" target="_blank">reqser.com</a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Pagrindiniai nustatymai</h2>Įjungti modulį?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Užklausos API raktas');
@@ -48,7 +48,7 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Pagal numatytuosius n
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Ar pageidaujate briti&scaron;kos ra&scaron;ybos?<br />Taip = britų kalba / Ne = JAV');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Kiti nustatymai</h2>Ar į <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> turėtų būti leista pridėti naują kalbą?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Nustačius &scaron;į nustatymą "Taip", į <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> galima pridėti naujų kalbų.<br />Pasirinkus "Ne", kalba jau turi egzistuoti parduotuvės sistemoje ir turi būti aktyvuota &scaron;iame modulyje.<br />Sukurti kalbą parduotuvėje: Sukurti kalbą parduotuvėje ?</a>: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Sukurti kalbą parduotuvėje ?</a> &nbsp;&nbsp;<span class="alrt">!! Nauja kalba parduotuvėje bus prieinama tik po 24-48 valandų. !!</span><br />Tada pažymėkite čia kaip kalbą, kuri bus verčiama');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'I&scaron;versti serverio kalbinius failus?' . draw_tooltip('Užklausiami ir i&scaron;verčiami visi serverio failai</br>Tai taikoma ir modulių bei plėtinių kalbiniams failams. Atkuriami visi kalbų failai, įskaitant esamas kalbas.<br />Pagal numatytuosius nustatymus esami užsienio kalbų tekstai "Reqser" programoje perimami, o ne naujai i&scaron;verčiami, tačiau tai galima pakeisti "Reqser" nustatymuose.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('I&scaron;versti kalbinius serverio failus? Užklausiami ir i&scaron;verčiami visi serverio failai</br>Tai taikoma ir modulių bei plėtinių kalbiniams failams. Atkuriami visi kalbų failai, įskaitant esamas kalbas.<br />Pagal numatytuosius nustatymus esami užsienio kalbų tekstai "Reqser" yra perimami, o ne naujai i&scaron;verčiami, tačiau tai galima pakeisti "Reqser" nustatymuose.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Be kalbos failų parduotuvėje neveikia jokia užsienio kalba ir yra "baltas" puslapis!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Automati&scaron;kai perkelti kalbos failus?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Ar i&scaron;versti kalbų failai turėtų būti automati&scaron;kai perkeliami į jūsų parduotuvę, ar kiekvieną kalbos failą reikia pasirinkti rankiniu būdu "Reqser" programoje?<br />Taip = kalbos failai perkeliami automati&scaron;kai / Ne = perkeliami rankiniu būdu');
@@ -66,7 +66,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API raktas neįvestas! Prisiju
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL Klaida:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modulis nėra pasirinktos kalbos, į kurią būtų galima versti !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Versti į kokias kalbas?" neturi būti kalbos, kuri buvo pasirinkta "Versti i&scaron; kokios kalbos?".');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Duomenų bazėje nepavyko rasti rankiniu būdu pridėtos lentelės <b>"%s"</b>. Patikrinkite "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '" nustatymus!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Duomenų bazėje nepavyko rasti rankiniu būdu pridėtos lentelės <b>"%s"</b>.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' Patikrinkite " "!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'I&scaron;saugojus Reqser.com DeepL modulis automati&scaron;kai i&scaron;verčia visas užsienio kalbas, aktyvuotas &scaron;io gaminio modulyje.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com "Deepl Translator" modulis neturi API rakto, įveskite API raktą');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nėra aktyvuotas, pra&scaron;ome aktyvuoti modulį pagal Modulis->Sistemos modulis');

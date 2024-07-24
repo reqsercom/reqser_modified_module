@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,10 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automātiskie tulkojumi DeepL, izmantojot Reqser <i>.</i>com, moduļa versija %s<br />- <i>Reqser</i>.com izveide -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> un &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'AI rīki tulkojumiem un SEO, izmantojot Reqser <i>.</i>com, moduļa versija %s<br />- <i>Reqser</i>.com -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> un &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Sistēmas modulis tulkojumu aktivizē&scaron;anai un konfigurē&scaron;anai, izmantojot <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
+ <i><a href="https://reqser.com/" target="_blank">Sistēmas modulis savienojumam ar DeepL, OpenAI un Neuroflash, izmantojot</i> <i>reqser.com</a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Pamata iestatījumi</h2>Aktivizēt moduli?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Pieprasītāja API atslēga');
@@ -48,7 +49,7 @@ define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Pēc noklusējuma ang
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Vai vēlaties lietot britu rakstību?<br />Jā = britu valodā / Nē = ASV');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Papildu iestatījumi</h2>Vai <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> ir atļauts pievienot jaunu valodu?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Ja &scaron;im iestatījumam ir iestatīta vērtība "Jā", vietnē <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> var pievienot jaunas valodas.<br />Ja iestatījums ir "Nē", valodai jau ir jābūt veikala sistēmā, un valodai ir jābūt aktivizētai &scaron;ajā modulī.<br />Izveidot valodu veikalā: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '"> &amp;raquo Izveidot valodu veikalā ?</a> &nbsp;&nbsp;<span class="alrt">!! Jaunā valoda veikalā būs pieejama tikai pēc 24-48 stundām. !!</span><br />Tad atzīmējiet &scaron;eit kā tulkojamo valodu');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Tulkot serverī eso&scaron;os valodas failus?' . draw_tooltip('Visi serverī eso&scaron;ie faili tiek pieprasīti un tulkoti</br>Tas attiecas arī uz moduļu un papla&scaron;inājumu valodas failiem. Tiek atjaunoti visi valodu faili, ieskaitot eso&scaron;ās valodas.<br />Pēc noklusējuma Reqser tiek pārņemti eso&scaron;ie sve&scaron;valodu teksti, nevis tulkoti no jauna, taču to var mainīt Reqser iestatījumos.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('Tulkot serverī eso&scaron;os valodas failus? Visi serverī eso&scaron;ie faili tiek pieprasīti un tulkoti</br>Tas attiecas arī uz moduļu un papla&scaron;inājumu valodas failiem. Tiek atjaunoti visi valodu faili, ieskaitot eso&scaron;ās valodas.<br />Pēc noklusējuma Reqser tiek pārņemti eso&scaron;ie sve&scaron;valodu teksti, nevis tulkoti no jauna, taču to var mainīt Reqser iestatījumos.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Bez valodas failiem veikalā nedarbojas neviena sve&scaron;valoda un ir "balta" lapa!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Vai valodas failus pārsūtīt automātiski?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Vai tulkotie valodu faili ir automātiski jāpārsūta uz jūsu veikalu, vai arī katrs valodas fails ir jāizvēlas manuāli Reqser programmā?<br />Jā = automātiski pārsūtīt valodas failus / Nē = pārsūtīt manuāli');
@@ -66,7 +67,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'API atslēga nav ievadīta! L�
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL kļūda:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Modulis nav izvēlēta tulkojamā valoda !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"Tulkot uz kādām valodām?" nedrīkst ietvert valodu, kas tika izvēlēta sadaļā "Tulkot no kādas valodas?".');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Datubāzē nevarēja atrast manuāli pievienoto tabulu <b>"%s"</b>. Lūdzu, pārbaudiet "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '" iestatījumus!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Datubāzē nevarēja atrast manuāli pievienoto tabulu <b>"%s"</b>.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' Lūdzu, pārbaudiet iestatījumus " "!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL modulis pēc saglabā&scaron;anas automātiski iztulkos visas sve&scaron;valodas, kas modulī aktivizētas &scaron;im produktam.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator modulim nav API atslēgas, lūdzu, ievadiet API atslēgu');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator modulis nav aktivizēts, lūdzu, aktivizējiet moduli sadaļā Module->Sistēmas modulis');
