@@ -478,7 +478,7 @@ class ClassReqser extends api_local\ApiBase {
       }
       $this->api_db_conn->apiDbStmtClose($qu);
     } else {
-      $out_arr = array('error' => 'no manufacturers found for products');
+      $out_arr = array('error' => 'no products found');
     }
 
     return $out_arr;
