@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,9 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Automatyczne tłumaczenia DeepL przez Reqser <i>.</i>com, wersja modułu %s<br />- build dla <i>Reqser</i>.com - %s<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> and &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Narzędzia AI do tłumaczeń i SEO przez Reqser <i>.</i>com, wersja modułu %s<br />- build dla <i>Reqser</i>.com - %s<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> i &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> ' . date('m-Y') . '(07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Moduł systemowy do aktywacji i konfiguracji tłumaczeń za pośrednictwem <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Moduł systemowy do połączenia z DeepL, OpenAI i Neuroflash poprzez <i><a href="https://reqser.com/" target="_blank">reqser.com</a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Ustawienia podstawowe</h2>Aktywować moduł?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Klucz API reqser');
@@ -39,16 +39,16 @@ define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', 'Wybierz tutaj kolejne tabele ba
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', 'Inne tabele bazy danych (niedostępne do wyboru powyżej)');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', 'Wprowadź kolejne tabele bazy danych do przetłumaczenia, oddzielając je przecinkami.<br />(Dla rozszerzeń z nowymi "niezmodyfikowanymi standardowymi" tabelami)');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', 'Wyklucz tabele');
-define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'Tutaj wprowadź tabele, kt&oacute;re mają zostać wyłączone z tłumaczeń, oddzielając je przecinkami.<br />(Konieczne tylko wtedy, gdy powyżej wybrano wszystkie standardowe tabele, a niekt&oacute;re z nich mają zostać wykluczone).');
+define('MODULE_SYSTEM_REQSER_LESS_TABLES_DESC', 'W tym miejscu wprowadź tabele, kt&oacute;re mają zostać wykluczone z tłumaczeń, oddzielając je przecinkami.<br />(Konieczne tylko wtedy, gdy powyżej wybrano wszystkie standardowe tabele, a niekt&oacute;re z nich mają zostać wykluczone).');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_TITLE', 'Przetłumaczyć z jakiego języka?');
 define('MODULE_SYSTEM_REQSER_FROM_WHICH_LANG_DESC', 'Z jakiego języka powinno zostać wykonane tłumaczenie?');
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_TITLE', 'Na jakie języki mogę tłumaczyć? ' . draw_tooltip('Dodatkowe języki można dodać na stronie <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.'));
 define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', 'Na jakie języki należy przetłumaczyć?');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', 'Domyślnie używany jest język angielski amerykański');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', 'Czy wolisz pisownię brytyjską?<br />Tak = brytyjska / Nie = amerykańska');
-define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Dalsze ustawienia</h2>Czy należy dodać nowy język do <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>?');
+define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>Dalsze ustawienia</h2><i><a href="https://reqser.com/" target="_blank"></i></a> Czy należy dodać nowy język do <i>reqser.com</i>?');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', 'Przy tym ustawieniu na "Tak", nowe języki mogą być dodawane do <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.<br />W przypadku ustawienia "Nie" język musi już istnieć w systemie sklepu i musi być aktywowany w tym module.<br />Utw&oacute;rz język w sklepie: <a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">&amp;raquo Utw&oacute;rz język w sklepie ?</a> &nbsp;&nbsp;<span class="alrt">!! Nowy język będzie dostępny w sklepie dopiero po 24-48 godzinach. !!</span><br />Następnie zaznacz tutaj jako język do przetłumaczenia');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', 'Przetłumacz pliki językowe na serwerze?' . draw_tooltip('Wszystkie pliki na serwerze są sprawdzane i tłumaczone</br>Dotyczy to r&oacute;wnież plik&oacute;w językowych moduł&oacute;w i rozszerzeń. Wszystkie pliki językowe są regenerowane, w tym istniejące języki.<br />Domyślnie istniejące teksty obcojęzyczne w Reqser są przyjmowane, a nie na nowo tłumaczone, ale można to zmienić w ustawieniach Reqser.'));
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('Przetłumaczyć pliki językowe na serwerze? Wszystkie pliki na serwerze są sprawdzane i tłumaczone</br>Dotyczy to r&oacute;wnież plik&oacute;w językowych moduł&oacute;w i rozszerzeń. Wszystkie pliki językowe są regenerowane, w tym istniejące języki.<br />Domyślnie istniejące teksty obcojęzyczne w Reqser są przyjmowane, a nie na nowo tłumaczone, ale można to zmienić w ustawieniach Reqser.'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', 'Bez plik&oacute;w językowych żaden język obcy nie działa w sklepie i jest "biała" strona!');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', 'Automatyczne przesyłanie plik&oacute;w językowych?');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', 'Czy przetłumaczone pliki językowe powinny być automatycznie przesyłane do sklepu, czy też każdy plik językowy należy wybrać ręcznie w programie Reqser?<br />Tak = przesyłaj pliki językowe automatycznie / Nie = przesyłaj ręcznie');
@@ -66,7 +66,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', 'Nie wprowadzono klucza API! Za
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR:<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'Reqser.com DeepL Moduł brak wybranego języka do tłumaczenia !');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', 'Opcja "Przetłumacz na jakie języki?" nie może zawierać języka wybranego w opcji "Przetłumacz z jakiego języka?".');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ręcznie dodana tabela <b>"%s"</b> nie została znaleziona w bazie danych. Sprawdź ustawienia dla "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '"!');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', 'Ręcznie dodana tabela <b>"%s"</b> nie została znaleziona w bazie danych.' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . ' Sprawdź ustawienia dla " "!');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Moduł Reqser.com DeepL po zapisaniu automatycznie przetłumaczy wszystkie języki obce aktywowane w module dla tego produktu.');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Moduł Reqser.com Deepl Translator nie ma klucza API, wprowadź klucz API');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Moduł Reqser.com Deepl Translator nie został aktywowany, należy aktywować moduł w Module->System Module.');

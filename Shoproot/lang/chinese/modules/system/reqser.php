@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,14 +19,14 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', '通过 Reqser<i>.</i>com 自动 DeepL 翻译，模块版本%s<br />- 为 Reqser<i>.com</i>构建 -<br />&copy;<a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> and &copy;<a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 -' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', '通过 Reqser<i>.</i>com 进行翻译和搜索引擎优化的人工智能工具，模块版本%s<br />- 为 Reqser<i>.com</i>构建 -<br /><a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;"></a> <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;"></a> ' . date('m-Y') . '&copy; noRiddle 和 &copy; Reqser.com (07-2023 - )');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
 <a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br>
-通过<i><a href="https://reqser.com/" target="_blank">reqser.com</i>激活和配置翻译的系统模块</a>');
+<i><a href="https://reqser.com/" target="_blank">通过</i> <i>reqser.com</i>与 DeepL、OpenAI 和 Neuroflash 连接的系统模块<i></a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>基本设置</h2>激活模块？');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'reqser API 密钥');
-define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_DESC', '您可以在此处输入来自<i>Reqser.com</i>的 API 密钥。在 Reqser 上连接 Modified 时显示。<a href="https://www.reqser.com/translation/new-website/Modified" target="_blank" title="Direkt Link">&amp;raquo 直接链接</a> ');
+define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_DESC', '您可以在此处输入来自<i>Reqser.com</i>的 API 密钥。在 Reqser 上连接 Modified 时显示。<a href="https://www.reqser.com/translation/new-website/Modified" target="_blank" title="Direkt Link">&amp;raquo 这里的直接链接</a>');
 define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_TITLE', '临时安全令牌');
 define('MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN_DESC', '用于外部查询商店的临时安全令牌。<br /><span  class="alrt">自动分配 !</span>');
 define('MODULE_SYSTEM_REQSER_TST_VALID_UNTIL_TITLE', '临时安全令牌的有效性');
@@ -36,7 +36,7 @@ define('MODULE_SYSTEM_REQSER_ALLOW_ALL_ROW_ACCESS_DESC', '是 "允许 reqser 访
 define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_TITLE', '数据库表格');
 define('MODULE_SYSTEM_REQSER_TABLES_TO_TRANSL_DESC', '要翻译的标准数据库表。');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE', '更多数据库表格');
-define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', '在此选择更多需要翻译的数据库表');
+define('MODULE_SYSTEM_REQSER_MORE_TABLES_DESC', '在此处选择更多需要翻译的数据库表');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_TITLE', '其他数据库表（不供上述选择）');
 define('MODULE_SYSTEM_REQSER_MORE_TABLES_ADD_DESC', '在此输入要翻译的其他数据库表，以逗号分隔。<br />(适用于带有新的 "非修改标准 "表的扩展程序）');
 define('MODULE_SYSTEM_REQSER_LESS_TABLES_TITLE', '不包括表格');
@@ -48,8 +48,8 @@ define('MODULE_SYSTEM_REQSER_INTO_WHICH_LANGS_DESC', '应翻译成哪些语言�
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_TITLE', '默认使用美国英语');
 define('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH_DESC', '您喜欢英式拼写吗？<br />是 = 英国 / 否 = 美国');
 define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_TITLE', '<hr /><h2>进一步设置</h2>是否允许在<i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> 中添加新语言？');
-define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', '设置为 "是 "时，可在<i><a href="https://reqser.com/" target="_blank">reqser.com</i></a> 中添加新语言。<br />如果设置为 "否"，商店系统中必须已经存在该语言，并且该语言必须在该模块中激活。<br />在商店中创建语言：<a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">在商店中创建语言？</a> &nbsp;&nbsp;<span class="alrt">!!新语言只有在 24-48 小时后才能在商店中使用。!!</span><br />然后将此处标记为要翻译的语言');
-define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '翻译服务器上的语言文件？' . draw_tooltip('查询并翻译服务器上的所有文件</br>这也适用于模块和扩展程序的语言文件。所有语言文件都会重新生成，包括现有语言。<br />默认情况下，Reqser 中现有的外语文本会被采用，而不会被新翻译，但可以在 Reqser 设置中进行更改。'));
+define('MODULE_SYSTEM_REQSER_ADD_LANGUAGE_ALLOWED_DESC', '<a href="https://reqser.com/" target="_blank"></a> 设置为 "是 "时，可在<i>reqser.com</i>中添加新语言。<br />如果设置为 "否"，商店系统中必须已经存在该语言，并且该语言必须在该模块中激活。<br />在商店中创建语言：<a href="' . DIR_WS_ADMIN . FILENAME_LANGUAGES . '">在商店中创建语言？</a> &nbsp;&nbsp;<span class="alrt">!!新语言只有在 24-48 小时后才能在商店中使用。!!</span><br />然后将此处标记为要翻译的语言');
+define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_TITLE', '' . draw_tooltip('翻译服务器上的语言文件？ 查询并翻译服务器上的所有文件</br>这也适用于模块和扩展程序的语言文件。所有语言文件都会重新生成，包括现有语言。<br />默认情况下，Reqser 中现有的外语文本会被采用，而不会被新翻译，但可以在 Reqser 设置中进行更改。'));
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_DESC', '如果没有语言文件，商店里就无法使用任何外语，页面也是 "白色 "的！');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_TITLE', '自动传输语言文件？');
 define('MODULE_SYSTEM_REQSER_LANGUAGE_FILES_SETTING_DESC', '翻译好的语言文件应该自动传输到您的商店，还是应该在 reqser 中手动选择每个语言文件？<br />是 = 自动传输语言文件 / 否 = 手动传输');
@@ -67,7 +67,7 @@ define('MODULE_SYSTEM_REQSER_API_KEY_EMPTY_ERR', '未输入 API 密钥！请登�
 define('MODULE_SYSTEM_REQSER_CURL_ERR', 'cURL ERROR：<br />%s');
 define('MODULE_SYSTEM_REQSER_INTO_LANGS_EMPTY_ERR', 'reqser.com DeepL 模块没有选择要翻译的语言！');
 define('MODULE_SYSTEM_REQSER_IWL_IN_FWL_ERR', '"翻译成哪种语言？"不得包含在 "从哪种语言翻译？"中选择的语言。');
-define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', '数据库中找不到手动添加的表<b>"%s"</b>。请检查 "' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '" 的设置！');
+define('MODULE_SYSTEM_REQSER_TABLE_NOT_EXIST_ERR', '数据库中找不到手动添加的表<b>"%s"</b>。' . MODULE_SYSTEM_REQSER_MORE_TABLES_TITLE . '请检查""的设置！');
 define('MODULE_SYSTEM_REQSER_ADMIN_MESSAGE', 'Reqser.com DeepL 模块将在保存后自动翻译该产品在模块中激活的所有外语。');
 define('MODULE_SYSTEM_REQSER_ADMIN_MISSING_API_KEY', 'Reqser.com Deepl Translator 模块没有 API 密钥，请输入 API 密钥');
 define('MODULE_SYSTEM_REQSER_ADMIN_INSTALLED_NOT_ACTIVATED', 'Reqser.com Deepl Translator 模块未激活，请在模块->系统模块下激活该模块');

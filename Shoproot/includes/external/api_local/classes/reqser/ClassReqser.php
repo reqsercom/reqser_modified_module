@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.3';
+    $this->api_reqser_version = '3.4';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -212,8 +212,15 @@ class ClassReqser extends api_local\ApiBase {
                                                       'get_products_manufacturers' => array('method' => 'get',
                                                                                           'params' => array('from', 'chunks'),
                                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_manufacturers',
-                                                                                                          'desc' => 'get all products manufacturers names',
+                                                                                                          'desc' => 'get all products manufacturers ids',
                                                                                                           'returns' => 'an array with products ids and manufacturer ids'
+                                                                                                          )
+                                                                                          ),
+                                                      'get_products_information' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_information',
+                                                                                                          'desc' => 'get the information about image_name, status and manufacturer_id of products',
+                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the products'
                                                                                                           )
                                                                                           ),
                                                   ),
@@ -254,15 +261,6 @@ class ClassReqser extends api_local\ApiBase {
         if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, ?)";
           $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN', '', '6', '4', 'now()');
-          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
-            $this->api_db_conn->apiDbStmtClose($ins_qu);
-          }
-        }
-
-        //Update from 2.6 to 2.7 Version
-        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL')){
-          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL', '', '6', '5');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -332,6 +330,21 @@ class ClassReqser extends api_local\ApiBase {
           $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 3.3 to 3.4 Version
+        if (!defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES (?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL', '', '6', '5');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+        if (defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL')){
+          $upd_conf_qu_str = "DELETE FROM configuration WHERE configuration_key = ?";
+          if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'))){
+            $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
           }
         }
         
@@ -423,6 +436,7 @@ class ClassReqser extends api_local\ApiBase {
       $chrst = $this->getShopCharset();
       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
         foreach($qu_arr as $key => $value) {
+          if ($key == 'products_id') continue;
           $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
           $out_arr[$qu_arr['products_id']] = $value;
         }
@@ -430,6 +444,41 @@ class ClassReqser extends api_local\ApiBase {
       $this->api_db_conn->apiDbStmtClose($qu);
     } else {
       $out_arr = array('error' => 'no manufacturers found for products');
+    }
+
+    return $out_arr;
+  }
+
+  /**  
+   * private method callTablesGet_products_information
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_products_information($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT products_id, manufacturers_id, products_status, products_image FROM products ORDER BY products_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
+    } else {
+      $qu_str = "SELECT products_id, manufacturers_id, products_status, products_image FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+    }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        foreach($qu_arr as $key => $value) {
+          if ($key == 'products_id') continue;
+          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+          $out_arr[$qu_arr['products_id']][$key] = $value;
+        }
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no products found');
     }
 
     return $out_arr;
@@ -1216,7 +1265,8 @@ class ClassReqser extends api_local\ApiBase {
     if(strtolower($charset) == 'utf-8' || $force_utf8 === true) {
       $supported_charsets = explode(',', strtoupper(ENCODE_DEFINED_CHARSETS));  
       $cur_encoding = (!empty($encoding) && $encoding !== false) && in_array(strtoupper($encoding), $supported_charsets) ? strtoupper($encoding) : mb_detect_encoding($string, ENCODE_DEFINED_CHARSETS, true);
-      if($cur_encoding == 'UTF-8' && mb_check_encoding($string, 'UTF-8')) {
+      // PatrickK 07-2024 In Einzelfällen kann es vorkommen, dass die Funktion mb_detect_encoding() nicht das richtige Encoding erkennt und z.B. SJIS zurückgibt, obwohl es UTF-8 ist. In diesem Fall wird trotzdem geprüft, ob es UTF-8 ist und dann zurückgegeben.
+      if(($cur_encoding == 'UTF-8' || $cur_encoding == 'SJIS') && mb_check_encoding($string, 'UTF-8')) {
         return $string;
       } elseif ($cur_encoding !== false) {
         return mb_convert_encoding($string, 'UTF-8', $cur_encoding);
@@ -1262,9 +1312,9 @@ class ClassReqser extends api_local\ApiBase {
    * @return array of token and expiry
    */
   public function getsendToken() {   
-      if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL) > time()) {
+      if(defined('MODULE_SYSTEM_REQSER_SEND_TOKEN') && MODULE_SYSTEM_REQSER_SEND_TOKEN !== '' && defined('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL') && strtotime((string)MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL) > time()) {
         $ret_arr = array('access_token' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN'),
-                          'expiry' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'));
+                          'expiry' => constant('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL'));
       } else {
         $msreq_url_credential = 'https://reqser.com/api/token';
         //authenticate ?
@@ -1279,7 +1329,7 @@ class ClassReqser extends api_local\ApiBase {
           $decoded_payload = base64_decode(str_replace(['-', '_'], ['+', '/'], $payload) . str_repeat('=', 3 - (3 + strlen($payload)) % 4));
           $payload_array = json_decode($decoded_payload, true);
           $expire_token = date("Y-m-d H:i:s", $payload_array['exp']);
-          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$expire_token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'");
+          $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$expire_token."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTIL'");
         }
       }
     return $ret_arr;
@@ -1496,6 +1546,10 @@ class ClassReqser extends api_local\ApiBase {
                         'unique_key' => 'shipping_status_id',
                         'lang' => 'language_id');
         break;
+      //JorisK 06-2024, added Default $field to prevent warning on new not known or defined tables
+      default:
+        $fields = array();
+      break;
     }
 
     return $fields;

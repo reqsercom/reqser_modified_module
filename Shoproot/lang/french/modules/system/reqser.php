@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   Automated Translated by Reqser.com using Modified Modul Version 3.3 on the 19.06.2024
+   Automated Translated by Reqser.com using Modified Modul Version 3.4 on the 24.07.2024
    ---------------------------------------------------------------------------------------*/
 
 
@@ -19,9 +19,9 @@
 * © copyright JorisK Reqser.com 08-2023
 
 ***********************************************************/
-define('MODULE_SYSTEM_REQSER_TITLE', 'Traductions automatiques DeepL via <i>Reqser.com</i>, version du module %s.<br />- build for <i>Reqser.com</i> -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> et &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
+define('MODULE_SYSTEM_REQSER_TITLE', 'Outils AI pour la traduction et le r&eacute;f&eacute;rencement via <i>Reqser.com</i>, version du module %s.<br />- build for <i>Reqser.com</i> - -<br />&copy; <a href="http://www.revilonetz.de/kontakt" target="_blank" title="Kontaktiere noRiddle" style="color:#02afc3;">noRiddle</a> et &copy; <a href="https://www.reqser.com" target="_blank" title="Kontaktiere Reqser" style="color:#02afc3;">Reqser.com</a> (07-2023 - ' . date('m-Y') . ')');
 define('MODULE_SYSTEM_REQSER_DESCRIPTION', '
-<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Module syst&egrave;me pour activer et configurer les traductions via <i><a href="https://reqser.com/" target="_blank">reqser.com</i></a>.');
+<a href="https://www.reqser.com" target="_blank"><img src="images/reqser_modul/modul_logo.png" border=0 width="400px"></a></br> Module syst&egrave;me pour la connexion avec DeepL, OpenAI et Neuroflash via <i><a href="https://reqser.com/" target="_blank">reqser.com</a></i>');
 define('MODULE_SYSTEM_REQSER_STATUS_TITLE', '<h2>Param&egrave;tres de base</h2>Activer le module ?');
 define('MODULE_SYSTEM_REQSER_STATUS_DESC', '');
 define('MODULE_SYSTEM_REQSER_REQSER_API_KEY_TITLE', 'Reqser Cl&eacute; API');
