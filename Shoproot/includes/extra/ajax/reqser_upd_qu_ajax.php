@@ -20,11 +20,11 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   $reqser_error_message = '';
   $msreq_local_api_key = $_POST['msreq_api_key'];
   if(!class_exists('DbFuncs') && (!isset($api_db_conn) || !is_object($api_db_conn))) {
-    require_once(DIR_FS_EXTERNAL.'api_local/classes/db/DbFuncs.php');
-    $api_db_conn = new api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
+    require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/db/DbFuncs.php');
+    $api_db_conn = new reqser_api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
   }
-  require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
-  $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
+  require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/reqser/ClassReqser.php');
+  $msreq_api_reqser = new reqser_api_local\reqser\ClassReqser('reqser');
   $msreq_token_verify = $msreq_api_reqser->getsendToken();
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];
@@ -45,11 +45,11 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   $reqser_error_message = '';
   $msreq_local_api_key = $_POST['msreq_api_key'];
   if(!class_exists('DbFuncs') && (!isset($api_db_conn) || !is_object($api_db_conn))) {
-    require_once(DIR_FS_EXTERNAL.'api_local/classes/db/DbFuncs.php');
-    $api_db_conn = new api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
+    require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/db/DbFuncs.php');
+    $api_db_conn = new reqser_api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
   }
-  require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
-  $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
+  require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/reqser/ClassReqser.php');
+  $msreq_api_reqser = new reqser_api_local\reqser\ClassReqser('reqser');
   $msreq_token_verify = $msreq_api_reqser->getsendToken();
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];
@@ -72,12 +72,12 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   $reqser_error_message = '';
   $msreq_local_api_key = $_POST['msreq_api_key'];
   if(!class_exists('DbFuncs') && (!isset($api_db_conn) || !is_object($api_db_conn))) {
-    require_once(DIR_FS_EXTERNAL.'api_local/classes/db/DbFuncs.php');
-    $api_db_conn = new api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
+    require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/db/DbFuncs.php');
+    $api_db_conn = new reqser_api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
   }
   
-  require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
-  $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
+  require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/reqser/ClassReqser.php');
+  $msreq_api_reqser = new reqser_api_local\reqser\ClassReqser('reqser');
   $msreq_token_verify = $msreq_api_reqser->getsendToken();
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];
@@ -108,12 +108,12 @@ if(isset($_POST['reqser_upd_qu']) && $_POST['reqser_upd_qu'] == 'true' && (isset
   $reqser_error_message = '';
   $msreq_local_api_key = $_POST['msreq_api_key'];
   if(!class_exists('DbFuncs') && (!isset($api_db_conn) || !is_object($api_db_conn))) {
-    require_once(DIR_FS_EXTERNAL.'api_local/classes/db/DbFuncs.php');
-    $api_db_conn = new api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
+    require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/db/DbFuncs.php');
+    $api_db_conn = new reqser_api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
   }
   
-  require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
-  $msreq_api_reqser = new api_local\reqser\ClassReqser('reqser');
+  require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/reqser/ClassReqser.php');
+  $msreq_api_reqser = new reqser_api_local\reqser\ClassReqser('reqser');
   $msreq_token_verify = $msreq_api_reqser->getsendToken();
   if ($msreq_token_verify['access_token'] == '' && $msreq_token_verify['message'] != ''){
     $msreq_result_request['info_message'] = $msreq_token_verify['message'];

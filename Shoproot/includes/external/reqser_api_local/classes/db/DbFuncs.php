@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 * file: DbFuncs.php
-* path: /includes/external/api_local/classes/
+* path: /includes/external/reqser_api_local/classes/
 * use: Db methods for local api
 *
 * contributions: with ideas from https://codeshack.io/super-fast-php-mysql-database-class/
@@ -17,7 +17,7 @@
 
 ***********************************************************/
 
-namespace api_local;
+namespace reqser_api_local;
 
 class DbFuncs {
   private $db_conn;

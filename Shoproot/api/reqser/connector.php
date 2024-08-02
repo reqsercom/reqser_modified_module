@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 * file: ClassReqser.php
-* path: /includes/external/api_local/classes/reqser/
+* path: /includes/external/reqser_api_local/classes/reqser/
 * use: methods for reqser requests
 *
 * © copyright 07-2023, noRiddle
@@ -18,11 +18,11 @@
 $act_dir = dirname(__FILE__, 3);
 chdir($act_dir);
 
-include_once('includes/application_top_api.php');
+include_once('includes/application_top_reqser_api.php');
 
 if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'true') {
-  require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
-  $reqser = new api_local\reqser\ClassReqser('reqser');
+  require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/reqser/ClassReqser.php');
+  $reqser = new reqser_api_local\reqser\ClassReqser('reqser');
 
   if(!in_array('curl', get_loaded_extensions()) && !function_exists('curl_init')) {
     $reqser_connector_error = array('error' => 'no cURL available on this machine');
