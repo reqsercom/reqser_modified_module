@@ -35,11 +35,17 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
               if(data != '') {
                 var data_message = JSON.parse(data);
                 if (data_message['warning_message'] && data_message['warning_message'] != ''){
-                  if (parseFloat(version) != parseFloat(data_message['current_module_version'])){                    
+                  if (parseFloat(version) != parseFloat(data_message['current_module_version'])){   
                     var button = `<form action="` + dir_admin + `module_export.php?set=system" method="post">  
-                          <input type="hidden" name="reqser_modul_update" value="true">
-                          <button type="submit" id="reqser_auto_update_button" class="button">Modul Automatisiert Updaten</button>
-                        </form>`;
+                                      <input type="hidden" name="reqser_modul_update" value="true">`;
+
+                        // Adding CSRF hidden field if CSRF_TOKEN_SYSTEM is true
+                        if ('<?php echo CSRF_TOKEN_SYSTEM; ?>' == 'true') {
+                            button += `<input type="hidden" name="` + msreq_tok_key + `" value="` + msreq_tok_val + `">`;
+                        }
+
+                        button += `<button type="submit" id="reqser_auto_update_button" class="button">Modul Automatisiert Updaten</button>
+                                   </form>`;
                     //Now add the button to $('div[id="module_export_reqser_header"]')
                     $('div[id="module_export_reqser_header"]').html(data_message['warning_message'] + button);
                     $('div[id="module_export_reqser_header"]').css('color', data_message['text_color']);
