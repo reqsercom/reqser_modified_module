@@ -109,6 +109,7 @@ class ClassReqser extends reqser_api_local\ApiBase {
                                                                                         'dir_admin' => defined('DIR_ADMIN') ? DIR_ADMIN : 'not defined', //Wichtig für das Update des Moduls das der Admin Ordner bereits korrekt umbenannt ist
                                                                                         'disable_base_language_edit' => (defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')) ? MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT : 'not defined',
                                                                                         'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') ? MODULE_SYSTEM_REQSER_SANITIZE_STRINGS : 'not defined',
+                                                                                        'british_english' => defined('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH') ? MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
