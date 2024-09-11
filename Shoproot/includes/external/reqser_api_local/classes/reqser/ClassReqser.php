@@ -119,17 +119,8 @@ class ClassReqser extends reqser_api_local\ApiBase {
                                                                        'desc' => 'Change some Reqser Config values as to control if the shop should make request on certain pages or not',
                                                                        'returns' => 'array with success or error message'
                                                                       )
-                                                      ),
-                                    'renew' => array('method' => 'get',
-                                                      'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/renew',
-                                                                      'desc' => 'renew token (e.g. because expired) for shop API calls (valid 1 month)',
-                                                                      'returns' => 'an array with the token and its expiry'
-                                                                    )
-                                                    )
+                                                      )
                                     ),
-
-
-                            
                                    'temp_token' => array('fetch' => array('method' => 'get',
                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/temp_token/fetch',
                                                                                           'desc' => 'get token for shop API calls (valid 1 month)',
