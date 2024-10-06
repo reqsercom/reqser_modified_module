@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 * file: ApiBase.php
-* path: /includes/external/reqser_api_local/classes/
+* path: /includes/external/api_local/classes/
 * use: basic methods for local api
 *
 * © copyright 07-2023, noRiddle
@@ -15,7 +15,7 @@
 
 ***********************************************************/
 
-namespace reqser_api_local;
+namespace api_local;
 
 if(!function_exists('xtc_create_password') || !function_exists('xtc_RandomString'))
   require_once(DIR_FS_INC.'xtc_create_password.inc.php');
