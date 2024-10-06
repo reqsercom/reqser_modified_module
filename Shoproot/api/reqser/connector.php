@@ -18,7 +18,7 @@
 $act_dir = dirname(__FILE__, 3);
 chdir($act_dir);
 
-include_once('includes/application_top_reqser_api.php');
+include_once('includes/application_top_api.php');
 
 if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'true') {
   require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
