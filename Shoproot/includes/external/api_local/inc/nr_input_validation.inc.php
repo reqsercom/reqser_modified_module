@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 * file: nr_input_validation.inc.php
-* path: /includes/external/reqser_api_local/inc/
+* path: /includes/external/api_local/inc/
 * use: input validation for local API
 *
 * © copyright 08-2023, noRiddle

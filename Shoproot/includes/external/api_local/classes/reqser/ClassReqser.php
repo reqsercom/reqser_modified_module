@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 * file: ClassReqser.php
-* path: /includes/external/reqser_api_local/classes/reqser/
+* path: /includes/external/api_local/classes/reqser/
 * use: methods for reqser requests
 *
 * © copyright 07-2023, noRiddle
@@ -15,14 +15,14 @@
 
 ***********************************************************/
 
-namespace reqser_api_local\reqser;
+namespace api_local\reqser;
 
-require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/ApiBase.php');
-use reqser_api_local;
+require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
+use api_local;
 
 defined('ENCODE_DEFINED_CHARSETS') || define('ENCODE_DEFINED_CHARSETS','ASCII,UTF-8,ISO-8859-1,ISO-8859-15,cp866,cp1251,cp1252,KOI8-R,GB18030,SJIS,EUC-JP');
 
-class ClassReqser extends reqser_api_local\ApiBase {
+class ClassReqser extends api_local\ApiBase {
   public $browser_mode, $protoc;
   protected $api_reqser_version, $dev_mode, $allowed_methods, $log_path, $shop_languages, $path, $path_file_name, $fwl_and_iwl_arr;
   private $write_control_mode, $at, $mt, $mtad, $lt, $aara, $fwl, $iwl, $lf, $ala;
