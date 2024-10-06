@@ -11,8 +11,6 @@
 |/  | |   | |   \  | |   | |   | | |___|
 |   n |___o |    R i |___d |__ d l |__e
 
-* © 08-2024 by JorisK Reqser.com
-
 ***********************************************************/
 
 // start the timer for the page parse time log
