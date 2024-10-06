@@ -215,6 +215,13 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'returns' => 'an multi dimensional array with the needed information to handle the products'
                                                                                                           )
                                                                                           ),
+                                                      'get_categories_information' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_categories_information',
+                                                                                                          'desc' => 'get the information about the category tree to know which product is listed where',
+                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the cetgories'
+                                                                                                          )
+                                                                                          ),
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
