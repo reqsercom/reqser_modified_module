@@ -482,6 +482,41 @@ class ClassReqser extends api_local\ApiBase {
 
     return $out_arr;
   }
+
+    /**  
+   * private method callTablesGet_categories_information
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_categories_information($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT categories_id, categories_image, parent_id, categories_status, sort_order FROM categories ORDER BY categories_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
+    } else {
+      $qu_str = "SELECT categories_id, categories_image, parent_id, categories_status, sort_order FROM categories WHERE categories_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+    }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        foreach($qu_arr as $key => $value) {
+          if ($key == 'products_id') continue;
+          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+          $out_arr[$qu_arr['products_id']][$key] = $value;
+        }
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no products found');
+    }
+
+    return $out_arr;
+  }
   
    /**  
    * private method callFilesGet_all_language_files
