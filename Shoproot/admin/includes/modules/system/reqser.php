@@ -222,8 +222,8 @@ class reqser {
     $headers = array();
     $headers[] = 'Accept: application/json';
 
-    require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/ApiBase.php');
-    $api_base = new reqser_api_local\ApiBase();
+    require_once(DIR_FS_EXTERNAL.'api_local/classes/ApiBase.php');
+    $api_base = new api_local\ApiBase();
     $token_verify = $api_base->doRequest($url, 'post', 'normal', 'json', $vals, array('token' => $local_api_key), NULL, 'y', 5);
 
     if(is_array($token_verify) && isset($token_verify['access_token'])) {

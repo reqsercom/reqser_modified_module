@@ -47,7 +47,7 @@ if(!function_exists('xtc_get_ip_address')) {
   require_once(DIR_FS_INC.'xtc_get_ip_address.inc.php');
 }
 if(!function_exists('xtc_input_validation')) {
-  require_once(DIR_FS_EXTERNAL.'reqser_api_local/inc/nr_input_validation.inc.php');
+  require_once(DIR_FS_EXTERNAL.'api_local/inc/nr_input_validation.inc.php');
 }
 // security inputfilter for GET/POST/COOKIE
 require_once (DIR_FS_INC.'html_encoding.php');
@@ -97,8 +97,8 @@ require_once (DIR_FS_INC.'db_functions.inc.php');
 // make a connection to the database... now
 xtc_db_connect() or die('Unable to connect to database server!');
 */
-require_once(DIR_FS_EXTERNAL.'reqser_api_local/classes/db/DbFuncs.php');
-$api_db_conn = new reqser_api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
+require_once(DIR_FS_EXTERNAL.'api_local/classes/db/DbFuncs.php');
+$api_db_conn = new api_local\DbFuncs(DB_SERVER, DB_SERVER_USERNAME, DB_SERVER_PASSWORD, DB_DATABASE, DB_SERVER_CHARSET);
 
 // set the application parameters
 //$configuration_query = xtc_db_query('select configuration_key as cfgKey, configuration_value as cfgValue from ' . TABLE_CONFIGURATION);
