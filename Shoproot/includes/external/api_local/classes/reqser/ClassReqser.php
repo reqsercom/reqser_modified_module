@@ -219,9 +219,16 @@ class ClassReqser extends api_local\ApiBase {
                                                                                           'params' => array('from', 'chunks'),
                                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_categories_information',
                                                                                                           'desc' => 'get the information about the category tree to know which product is listed where',
-                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the cetgories'
+                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the categories'
                                                                                                           )
                                                                                           ),
+                                                      'get_products_to_categories_information' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_to_categories_information',
+                                                                                                          'desc' => 'get the information about the category tree to know which product is listed where',
+                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the products to categories'
+                                                                                                          )
+                                                                                          ),                                                                                        
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
@@ -505,14 +512,47 @@ class ClassReqser extends api_local\ApiBase {
       $chrst = $this->getShopCharset();
       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
         foreach($qu_arr as $key => $value) {
-          if ($key == 'products_id') continue;
+          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+          $out_arr[$qu_arr['categories_id']][$key] = $value;
+        }
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no categories found');
+    }
+
+    return $out_arr;
+  }
+
+      /**  
+   * private method callTablesGet_products_to_categories_information
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_products_to_categories_information($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT * FROM products_to_categories ORDER BY categories_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
+    } else {
+      $qu_str = "SELECT * FROM products_to_categories WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+    }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        foreach($qu_arr as $key => $value) {
           $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
           $out_arr[$qu_arr['products_id']][$key] = $value;
         }
       }
       $this->api_db_conn->apiDbStmtClose($qu);
     } else {
-      $out_arr = array('error' => 'no products found');
+      $out_arr = array('error' => 'no products to categories found');
     }
 
     return $out_arr;
