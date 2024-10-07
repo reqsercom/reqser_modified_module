@@ -545,10 +545,12 @@ class ClassReqser extends api_local\ApiBase {
     if($this->api_db_conn->apiDbNumRows($qu) > 0) {
       $chrst = $this->getShopCharset();
       while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        $array = [];
         foreach($qu_arr as $key => $value) {
           $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
-          $out_arr[$qu_arr['products_id']][$key] = $value;
+          $array[$key] = $value;
         }
+        $out_arr[] = $array;
       }
       $this->api_db_conn->apiDbStmtClose($qu);
     } else {
