@@ -1,8 +1,8 @@
 <?php
 /***********************************************************
-* file: ClassReqser.php
-* path: /includes/external/api_local/classes/reqser/
-* use: methods for reqser requests
+* file: connector.php
+* path: /api/reqser/connector.php
+* use: connector for reqser API
 *
 * © copyright 07-2023, noRiddle
              ____
