@@ -83,6 +83,13 @@ class ClassReqser extends api_local\ApiBase {
         $this->path['mailbeez_languages'] = DIR_FS_CATALOG . 'includes/external/mailhive/configbeez/config_shopvoting/languages/';
       }
     }
+    // JorisK 01-2025 Bootstrap Template Button
+    if (
+      file_exists(DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/source/inc/css_button.inc.php') &&
+      preg_match('/^bootstrap\d$/', CURRENT_TEMPLATE)
+    ) {
+        $this->path['bootstrap'] = DIR_FS_CATALOG . 'templates/' . CURRENT_TEMPLATE . '/source/inc/';
+    }
 
     //JorisK Files Sturkturen die kein eigenen Ordner pro Sprache haben sondern anhand vom Dateiname erkannt werden
     $this->path_file_name = array('template', 'payone', 'paypal', 'mailbeez_languages');
