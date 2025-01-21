@@ -1574,7 +1574,7 @@ class ClassReqser extends api_local\ApiBase {
                         'diff_id_for_lng' => 'true');
         break;
       case 'products_description':
-        $fields = array('fields' => array('products_name', 'products_heading_title', 'products_description', 'products_short_description', 'products_meta_title', 'products_meta_description', 'products_order_description', 'last_update'),
+        $fields = array('fields' => array('products_name', 'products_heading_title', 'products_description', 'products_short_description', 'products_keywords', 'products_meta_title', 'products_meta_description', 'products_meta_keywords', 'products_order_description', 'last_update'),
                         'unique_key' => 'products_id',
                         'lang' => 'language_id');
         break;
