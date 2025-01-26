@@ -24,8 +24,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         $(function() {
           let version = '<?php echo constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'); ?>';
           let dir_admin = '<?php echo DIR_WS_ADMIN; ?>';
-          let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+          let msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
 
           msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_upd_qu: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>'};
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
@@ -69,8 +69,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         ?>
         <script>
         $(function() {
-          let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+          let msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
           let admincolRightExists = $('.admincol_right').length > 0 ? 'true' : 'false';
           let admincolLeftExists = $('.admincol_left').length > 0 ? 'true' : 'false';
           let admincolExists = $('.admincol').length > 0 ? 'true' : 'false';
@@ -126,8 +126,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
 
         <script>
         $(function() {
-          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
           let commentsExists = $('#comments').length > 0 ? 'true' : 'false';
 
           msreq_params = {
@@ -172,8 +172,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           $('#reqser_product_edit_message').hide();
           var textareaContent = $('#comments').val();
           textareaContent = textareaContent.replace(/\n/g, '&#10;');
-          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
           msreq_params = {
             ext: 'reqser_upd_qu_ajax', 
             type: 'plain', 
@@ -238,8 +238,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                     </tbody></table>`;
         $('.boxCenterLeft').prepend(tableHtml);
         $(function() {
-          let msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+          let msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
           msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_upd_qu: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>'};
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
@@ -392,8 +392,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
           $(product_description_selector).after(content);
         }
 
-        var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-            msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
+        var msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+            msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>',
             fwl_language = '<?php echo $fwl_language; ?>',
             max_attempts = 5,
             attempt = 0,
@@ -502,8 +502,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       $(document).ready(function() {
         $(document).on('click', '#reqser_seo_product_description_edit_button_2', function() {
 
-          var msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>',
+          var msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>',
               msreq_params = {},
               products_id = $('input[name="products_id"]').val() == 0 ? "new_product" : $('input[name="products_id"]').val(), // Set the products_id to "new_product" if it's 0, otherwise use the value
               keywords_as_manufacturers_default = $('#reqser_seo_product_description_keywords_default_' + <?php echo $fwl_language ?>).is(':checked');

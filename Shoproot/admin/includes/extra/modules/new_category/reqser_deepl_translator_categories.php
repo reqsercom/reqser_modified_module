@@ -42,8 +42,8 @@
               }
           }, 500);
           function executeajaxrequest() {
-            const msreq_tok_key = '<?php echo $_SESSION['CSRFName']; ?>',
-                  msreq_tok_val = '<?php echo $_SESSION['CSRFToken']; ?>';
+            const msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+                  msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
             const msreq_check_activ_params = {
               ext: 'reqser_upd_qu_ajax', 
               type: 'plain', 
