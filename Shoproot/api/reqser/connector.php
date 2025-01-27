@@ -24,6 +24,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
   require_once(DIR_FS_EXTERNAL.'api_local/classes/reqser/ClassReqser.php');
   $reqser = new api_local\reqser\ClassReqser('reqser');
 
+
+
   if(!in_array('curl', get_loaded_extensions()) && !function_exists('curl_init')) {
     $reqser_connector_error = array('error' => 'no cURL available on this machine');
   }
@@ -31,7 +33,7 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
   $reqser_api_key = MODULE_SYSTEM_REQSER_REQSER_API_KEY;
   $reqser_token = '';
   $reqser_token_validity = '';
-  if(strpos($_SERVER['REQUEST_URI'], '/temp_token/') === false) {
+  if(strpos($_SERVER['REQUEST_URI'], '/temp_token/') === false || !isset($_GET['temp_token'])) {
     $reqser_token = MODULE_SYSTEM_REQSER_TEMP_SHOP_TOKEN;
     $reqser_token_validity = MODULE_SYSTEM_REQSER_TST_VALID_UNTIL;
 
@@ -44,6 +46,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     }
   }
 
+
+
   if(isset($_SERVER['REQUEST_URI'])) {
     //JorisK 05-2024: Fix if the Shop is placed in a Subdirectory
     $api_position = strpos($_SERVER['REQUEST_URI'], '/api/reqser/connector.php');
@@ -52,6 +56,16 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
     } else {
         $modified_request_uri = $_SERVER['REQUEST_URI']; 
     }
+
+    //JorisK 01-2025; issue with htaccess rewrite for seo module used on some modified shops the call syntax can be adapted to proper get call using parameters
+    if (isset($_GET['temp_token'])) {
+      $modified_request_uri = substr($modified_request_uri, 0, strpos($modified_request_uri, '?'));
+      $modified_request_uri .= '/temp_token/'.$_GET['temp_token'];
+    } elseif (isset($_GET['api_calls'])) {
+      $modified_request_uri = substr($modified_request_uri, 0, strpos($modified_request_uri, '?'));
+      $modified_request_uri .= '/api_calls/'.$_GET['api_calls'];
+    }
+
     $uri_arr = $reqser->receiveRequest($modified_request_uri);
 
     $rem_add = $reqser->protoc === true ? xtc_get_ip_address() : '';
