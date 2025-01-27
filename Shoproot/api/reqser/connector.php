@@ -57,14 +57,9 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
         $modified_request_uri = $_SERVER['REQUEST_URI']; 
     }
 
-    //JorisK 01-2025; issue with htaccess rewrite for seo module used on some modified shops the call syntax can be adapted to proper get call using parameters
-    if (isset($_GET['temp_token'])) {
-      $modified_request_uri = substr($modified_request_uri, 0, strpos($modified_request_uri, '?'));
-      $modified_request_uri .= '/temp_token/'.$_GET['temp_token'];
-    } elseif (isset($_GET['api_calls'])) {
-      $modified_request_uri = substr($modified_request_uri, 0, strpos($modified_request_uri, '?'));
-      $modified_request_uri .= '/api_calls/'.$_GET['api_calls'];
-    }
+    //JorisK 01-2025: Since the syntax of using .php/ is conflicting with SEO Modul we need to change and allow the syntax for proper Get Calling.
+    $modified_request_uri = str_replace('.php?', '.php/', $modified_request_uri);
+    $modified_request_uri = str_replace('=', '/', $modified_request_uri);
 
     $uri_arr = $reqser->receiveRequest($modified_request_uri);
 
