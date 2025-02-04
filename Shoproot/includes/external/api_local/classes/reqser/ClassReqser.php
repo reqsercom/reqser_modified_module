@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.5';
+    $this->api_reqser_version = '3.6';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -110,6 +110,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'disable_base_language_edit' => (defined('MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT')) ? MODULE_SYSTEM_REQSER_DISABLE_BASE_LANGUAGE_EDIT : 'not defined',
                                                                                         'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') ? MODULE_SYSTEM_REQSER_SANITIZE_STRINGS : 'not defined',
                                                                                         'british_english' => defined('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH') ? MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH : 'not defined',
+                                                                                        'template' => defined('CURRENT_TEMPLATE') ? CURRENT_TEMPLATE : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -1573,7 +1574,7 @@ class ClassReqser extends api_local\ApiBase {
                         'diff_id_for_lng' => 'true');
         break;
       case 'products_description':
-        $fields = array('fields' => array('products_name', 'products_heading_title', 'products_description', 'products_short_description', 'products_meta_title', 'products_meta_description', 'products_order_description', 'last_update'),
+        $fields = array('fields' => array('products_name', 'products_heading_title', 'products_description', 'products_short_description', 'products_keywords', 'products_meta_title', 'products_meta_description', 'products_meta_keywords', 'products_order_description', 'last_update'),
                         'unique_key' => 'products_id',
                         'lang' => 'language_id');
         break;
