@@ -208,6 +208,8 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
       if ($('.boxCenterLeft').length > 0) {
         let version = '<?php echo constant('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'); ?>';
         let dir_admin = '<?php echo DIR_WS_ADMIN; ?>';
+        let msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
+            msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
         var tableHtml = `<table class="tableBoxCenter collapse"><tbody><tr class="dataTableHeadingRow">
                           <td class="dataTableHeadingContent">Reqser.com</td>
                           <td class="dataTableHeadingContent txta-c" style="width:10%;">Installiert</td>
@@ -243,8 +245,6 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                     </tbody></table>`;
         $('.boxCenterLeft').prepend(tableHtml);
         $(function() {
-          let msreq_tok_key = '<?php echo $_SESSION['CSRFName'] ?? null; ?>',
-              msreq_tok_val = '<?php echo $_SESSION['CSRFToken'] ?? null; ?>';
           msreq_params = {ext: 'reqser_upd_qu_ajax', type: 'plain', reqser_upd_qu: 'true', msreq_api_key: '<?php echo $msreq_local_api_key; ?>'};
           msreq_params[msreq_tok_key] = ""+msreq_tok_val+"";
           $.post("../ajax.php",
