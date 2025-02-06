@@ -75,6 +75,7 @@
               }
             });
             $('#new_product').submit(function(e) {
+              e.preventDefault();
               const msreq_params = {
                 ext: 'reqser_upd_qu_ajax', 
                 type: 'plain', 
@@ -84,6 +85,8 @@
               };
               msreq_params[msreq_tok_key] = msreq_tok_val;
               $.post("../ajax.php", msreq_params);
+              $('#new_product').off('submit');
+              $('#new_product').submit();
           });
           };
   
