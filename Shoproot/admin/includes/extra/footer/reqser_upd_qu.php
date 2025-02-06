@@ -228,7 +228,12 @@ if(defined('MODULE_SYSTEM_REQSER_STATUS') && MODULE_SYSTEM_REQSER_STATUS == 'tru
                         <td class="dataTableContent txta-r">
                         <form action="` + dir_admin + `check_update.php" method="post">  
                           <input type="hidden" name="reqser_modul_update" value="true">
-                          <button type="submit" id="reqser_auto_update_button" class="button" hidden>Modul Automatisiert Updaten</button>
+                        `;
+        // Adding CSRF hidden field if CSRF_TOKEN_SYSTEM is true
+        if ('<?php echo CSRF_TOKEN_SYSTEM; ?>' == 'true') {
+          tableHtml += `<input type="hidden" name="` + msreq_tok_key + `" value="` + msreq_tok_val + `">`;
+        }
+        tableHtml +=  `<button type="submit" id="reqser_auto_update_button" class="button" hidden>Modul Automatisiert Updaten</button>
                         </form>
                         </td>
                       </tr>
