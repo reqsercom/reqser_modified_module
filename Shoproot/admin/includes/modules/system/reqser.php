@@ -210,6 +210,7 @@ class reqser {
                  $this->mn_const.'PROTOCOL_ACC',
                  $this->mn_const.'DISABLE_BASE_LANGUAGE_EDIT',
                  $this->mn_const.'SANITIZE_STRINGS',
+                 $this->mn_const.'IMAGE_TAGS_ACTIVE',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',
                 );
