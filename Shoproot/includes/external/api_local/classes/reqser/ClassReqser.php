@@ -229,6 +229,13 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'desc' => 'get the information about the category tree to know which product is listed where',
                                                                                                           'returns' => 'an multi dimensional array with the needed information to handle the products to categories'
                                                                                                           )
+                                                                                          ),  
+                                                      'get_products_image_information' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_image_information',
+                                                                                                          'desc' => 'get the information about the products images',
+                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the products images'
+                                                                                                          )
                                                                                           ),                                                                                        
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
@@ -525,21 +532,21 @@ class ClassReqser extends api_local\ApiBase {
     return $out_arr;
   }
 
-      /**  
-   * private method callTablesGet_products_to_categories_information
+  /**  
+   * private method callTablesGet_products_image_information
    *
    * @param $from = id of
    * @param int $chunks
    * @return array with all entries
    */
-  protected function callTablesGet_products_to_categories_information($from = 0, $chunks = 0) {
+  protected function callTablesGet_products_image_information($from = 0, $chunks = 0) {
     $out_arr = array();
     if ($from != 'single_entry'){
       $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
-      $qu_str = "SELECT * FROM products_to_categories ORDER BY categories_id ASC".$limit;
+      $qu_str = "SELECT * FROM products_images ORDER BY categories_id ASC".$limit;
       $qu = $this->api_db_conn->apiDbQuery($qu_str);
     } else {
-      $qu_str = "SELECT * FROM products_to_categories WHERE products_id = ?";
+      $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
       $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
     }
 
@@ -555,11 +562,12 @@ class ClassReqser extends api_local\ApiBase {
       }
       $this->api_db_conn->apiDbStmtClose($qu);
     } else {
-      $out_arr = array('error' => 'no products to categories found');
+      $out_arr = array('error' => 'no products images found');
     }
 
     return $out_arr;
   }
+
   
    /**  
    * private method callFilesGet_all_language_files
