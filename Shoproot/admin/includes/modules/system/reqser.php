@@ -205,12 +205,12 @@ class reqser {
                  $this->mn_const.'MORE_TABLES',
                  $this->mn_const.'MORE_TABLES_ADD',
                  $this->mn_const.'ADD_LANGUAGE_ALLOWED', 
+                 $this->mn_const.'IMAGE_TAGS_ACTIVE',
                  $this->mn_const.'LANGUAGE_FILES',
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',
                  $this->mn_const.'DISABLE_BASE_LANGUAGE_EDIT',
                  $this->mn_const.'SANITIZE_STRINGS',
-                 $this->mn_const.'IMAGE_TAGS_ACTIVE',
                  $this->mn_const.'TEMP_SHOP_TOKEN',
                  $this->mn_const.'TST_VALID_UNTIL',
                 );
