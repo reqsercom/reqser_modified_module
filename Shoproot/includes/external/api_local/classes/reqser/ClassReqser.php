@@ -239,7 +239,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           )
                                                                                           ),  
                                                       'add_main_image_entry_to_product_images' => array('method' => 'get',
-                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'params' => array('product_id'),
                                                                                           'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/add_main_image_entry_to_product_images',
                                                                                                           'desc' => 'add the main image entry to products_image table',
                                                                                                           'returns' => 'array with success or error'
