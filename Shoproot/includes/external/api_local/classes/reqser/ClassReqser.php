@@ -532,8 +532,7 @@ class ClassReqser extends api_local\ApiBase {
     return $out_arr;
   }
 
-
-        /**  
+   /**  
    * private method callTablesGet_products_to_categories_information
    *
    * @param $from = id of
