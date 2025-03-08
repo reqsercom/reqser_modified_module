@@ -532,6 +532,43 @@ class ClassReqser extends api_local\ApiBase {
     return $out_arr;
   }
 
+
+        /**  
+   * private method callTablesGet_products_to_categories_information
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_products_to_categories_information($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT * FROM products_to_categories ORDER BY categories_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
+    } else {
+      $qu_str = "SELECT * FROM products_to_categories WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+    }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+        $array = [];
+        foreach($qu_arr as $key => $value) {
+          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+          $array[$key] = $value;
+        }
+        $out_arr[] = $array;
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no products to categories found');
+    }
+
+    return $out_arr;
+  }
+
   /**  
    * private method callTablesGet_products_image_information
    *
