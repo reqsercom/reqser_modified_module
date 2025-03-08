@@ -618,8 +618,13 @@ class ClassReqser extends api_local\ApiBase {
             } 
             $array = [];
             //now hash the image and add it as parameter
-            $image_content = file_get_contents($image);
-            $array['hashed_image'] = md5($image_content);
+            try {
+              $image_content = file_get_contents($image);
+              $array['hashed_image'] = md5($image_content);
+            } catch (\Exception $e) {
+              continue;
+            }
+            
             foreach($qu_arr as $key => $value) {
               $value = $this->encode_utf8($chrst, $value, false, true);
               $array[$key] = $value;
