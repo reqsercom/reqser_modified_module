@@ -237,7 +237,14 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'desc' => 'get the information about the products images',
                                                                                                           'returns' => 'an multi dimensional array with the needed information to handle the products images'
                                                                                                           )
-                                                                                          ),                                                                                        
+                                                                                          ),  
+                                                      'add_main_image_entry_to_product_images' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/add_main_image_entry_to_product_images',
+                                                                                                          'desc' => 'add the main image entry to products_image table',
+                                                                                                          'returns' => 'array with success or error'
+                                                                                                          )
+                                                                                          ),                                                                                       
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
@@ -620,7 +627,7 @@ class ClassReqser extends api_local\ApiBase {
 
 
   /**  
-   * private method callTablesGet_products_image_information
+   * private method callTablesAdd_main_image_entry_to_product_images
    *
    * @param $product_id
    * @return bool
