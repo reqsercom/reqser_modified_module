@@ -634,15 +634,23 @@ class ClassReqser extends api_local\ApiBase {
    */
   protected function callTablesAdd_main_image_entry_to_product_images($product_id) {
     if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
-      //Step one we check if there is already an entry for this product and image_nr on 0
+      //Check if the product_id exists
+      $qu_str = "SELECT products_image FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        return array('error' => 'No product found with the id '.$product_id);
+      }
+      $data = $this->api_db_conn->apiDbFetchArray($qu, true);
+
+      //We check if there is already an entry for this product and image_nr on 0
       $qu_str = "SELECT * FROM products_images WHERE products_id = ? AND image_nr = 0";
       $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
       if($this->api_db_conn->apiDbNumRows($qu) > 0) {
         return array('success' => 'Entry already exists for product_id '.$product_id.' and image_nr 0');
       }
-      //We do not add a image_name since this is stored in products_table and we do not want to have it at two places so we leave it empty on purpose
-      $ins_qu_str = "INSERT INTO products_images (products_id, image_nr) VALUES(?, ?)";
-      $ins_vals_arr = array((int)$product_id, 0);
+      
+      $ins_qu_str = "INSERT INTO products_images (products_id, image_nr, image_name) VALUES(?, ?, ?)";
+      $ins_vals_arr = array((int)$product_id, 0, $data['products_image']);
       if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
         $new_id = $this->api_db_conn->apiDbLastInsertId();
         $this->api_db_conn->apiDbStmtClose($ins_qu);
