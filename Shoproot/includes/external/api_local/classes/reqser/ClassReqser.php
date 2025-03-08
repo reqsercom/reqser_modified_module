@@ -587,31 +587,65 @@ class ClassReqser extends api_local\ApiBase {
    */
   protected function callTablesGet_products_image_information($from = 0, $chunks = 0) {
     $out_arr = array();
-    if ($from != 'single_entry'){
-      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
-      $qu_str = "SELECT * FROM products_images ORDER BY categories_id ASC".$limit;
-      $qu = $this->api_db_conn->apiDbQuery($qu_str);
-    } else {
-      $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
-      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
-    }
-
-    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-      $chrst = $this->getShopCharset();
-      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
-        $array = [];
-        foreach($qu_arr as $key => $value) {
-          $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
-          $array[$key] = $value;
-        }
-        $out_arr[] = $array;
+    if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
+      if ($from != 'single_entry'){
+        $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+        $qu_str = "SELECT * FROM products_images ORDER BY products_id ASC".$limit;
+        $qu = $this->api_db_conn->apiDbQuery($qu_str);
+      } else {
+        $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
+        $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
       }
-      $this->api_db_conn->apiDbStmtClose($qu);
+  
+      if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+        $chrst = $this->getShopCharset();
+        while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+          $array = [];
+          foreach($qu_arr as $key => $value) {
+            $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
+            $array[$key] = $value;
+          }
+          $out_arr[] = $array;
+        }
+        $this->api_db_conn->apiDbStmtClose($qu);
+      } else {
+        $out_arr = array('error' => 'no products images found');
+      }
+  
+      return $out_arr;
     } else {
-      $out_arr = array('error' => 'no products images found');
+      return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
     }
+  }
 
-    return $out_arr;
+
+  /**  
+   * private method callTablesGet_products_image_information
+   *
+   * @param $product_id
+   * @return bool
+   */
+  protected function callTablesAdd_main_image_entry_to_product_images($product_id) {
+    if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
+      //Step one we check if there is already an entry for this product and image_nr on 0
+      $qu_str = "SELECT * FROM products_images WHERE products_id = ? AND image_nr = 0";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+        return array('success' => 'Entry already exists for product_id '.$product_id.' and image_nr 0');
+      }
+      //We do not add a image_name since this is stored in products_table and we do not want to have it at two places so we leave it empty on purpose
+      $ins_qu_str = "INSERT INTO products_images (products_id, image_nr) VALUES(?, ?)";
+      $ins_vals_arr = array((int)$product_id, 0);
+      if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
+        $new_id = $this->api_db_conn->apiDbLastInsertId();
+        $this->api_db_conn->apiDbStmtClose($ins_qu);
+        return array('success' => 'New Entry added and has now the id '.$new_id);
+      } else {
+        return array('error' => 'Something went wrong with the execution of the insert!');
+      }
+    } else {
+      return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
+    }
   }
 
   
