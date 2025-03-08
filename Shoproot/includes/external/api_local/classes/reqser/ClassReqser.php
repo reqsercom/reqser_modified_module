@@ -111,6 +111,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') ? MODULE_SYSTEM_REQSER_SANITIZE_STRINGS : 'not defined',
                                                                                         'british_english' => defined('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH') ? MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH : 'not defined',
                                                                                         'template' => defined('CURRENT_TEMPLATE') ? CURRENT_TEMPLATE : 'not defined',
+                                                                                        'image_tags_active' => defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') ? MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -361,10 +362,19 @@ class ClassReqser extends api_local\ApiBase {
             $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
           }
         }
+
+        //Update from 3.6 to 3.7
+        if (!defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
         
         //Update to newest version
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
-        if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
+        if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE'))){
           $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
         }
     }
