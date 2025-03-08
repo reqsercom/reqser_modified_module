@@ -607,12 +607,24 @@ class ClassReqser extends api_local\ApiBase {
       if($this->api_db_conn->apiDbNumRows($qu) > 0) {
         $chrst = $this->getShopCharset();
         while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
-          $array = [];
-          foreach($qu_arr as $key => $value) {
-            $value = $this->encode_utf8($chrst, $value, false, true); //JorisK must be set to utf-8 11-2023
-            $array[$key] = $value;
-          }
-          $out_arr[] = $array;
+            if (!isset($qu_arr['image_name']) || $qu_arr['image_name'] == '' || substr_count($qu_arr['image_name'], '.') != 1){
+              continue;
+            }
+            //Now we need to check if the image is still available on the server
+            $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
+            $image = $path.$qu_arr['image_name'];
+            if (!file_exists($image)){
+              continue;
+            } 
+            $array = [];
+            //now hash the image and add it as parameter
+            $image_content = file_get_contents($image);
+            $array['hashed_image'] = md5($image_content);
+            foreach($qu_arr as $key => $value) {
+              $value = $this->encode_utf8($chrst, $value, false, true);
+              $array[$key] = $value;
+            }
+            $out_arr[] = $array;
         }
         $this->api_db_conn->apiDbStmtClose($qu);
       } else {
