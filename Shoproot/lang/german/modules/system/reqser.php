@@ -82,4 +82,4 @@ define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_SETTINGS_LOADING', 'SEO Einste
 define('MODULE_SYSTEM_REQSER_ADMIN_CATEGORIES_SEO_FORM_PARAMS_MISSING', 'Ihre Eingaben sind nicht vollst&auml;ndig, bitte &uuml;berpr&uuml;fen:');
 
 define('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE_TITLE', 'Bildbeschreibung für das Main Produkt Bild aktivieren?');
-define('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE_DESC', '"Ja" erlaubt Reqser für das Main Produkt Bild einen Alt und Title Tag zu erstellen.<br />"Nein" deaktiviert die Funktion.');
+define('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE_DESC', '"Ja" erlaubt Reqser für das jeweils erste Produkt Bild einen Alt und Title Tag zu erstellen.<br />"Nein" deaktiviert die Funktion.');
