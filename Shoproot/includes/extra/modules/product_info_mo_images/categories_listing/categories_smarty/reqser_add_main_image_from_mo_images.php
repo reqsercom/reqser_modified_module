@@ -11,7 +11,7 @@ Beispiel für Main Image Standard Nova Template templates\tpl_modified_nova\modu
 Original suche nach 2x:
 <img class="lazyload" data-src="{$module_data.PRODUCTS_IMAGE}" alt="{$module_data.PRODUCTS_NAME|onlytext}" title="{$module_data.PRODUCTS_NAME|onlytext}">
 
-Neu einsetzen damit Tags angezeigt werden:
+2x Neu einsetzen damit Tags angezeigt werden:
 <img class="lazyload" data-src="{$module_data.PRODUCTS_IMAGE}" alt="{if isset($module_data.reqser_main_image_tag.image_alt) && $module_data.reqser_main_image_tag.image_alt != ''}{$module_data.reqser_main_image_tag.image_alt|onlytext}{else}{$module_data.PRODUCTS_NAME|onlytext}{/if}" title="{if isset($module_data.reqser_main_image_tag.image_title) && $module_data.reqser_main_image_tag.image_title != ''}{$module_data.reqser_main_image_tag.image_title|onlytext}{else}{$module_data.PRODUCTS_NAME|onlytext}{/if}">
 
 ********************************************************************/
