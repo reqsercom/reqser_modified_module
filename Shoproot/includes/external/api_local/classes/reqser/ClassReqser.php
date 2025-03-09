@@ -244,7 +244,14 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'desc' => 'add the main image entry to products_image table',
                                                                                                           'returns' => 'array with success or error'
                                                                                                           )
-                                                                                          ),                                                                                       
+                                                                                          ),  
+                                                       'get_products_main_image_information' => array('method' => 'get',
+                                                                                          'params' => array('product_id'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_main_image_information',
+                                                                                                          'desc' => 'return information about the main image',
+                                                                                                          'returns' => 'array with success or error'
+                                                                                                          )
+                                                                                          ),                                                                                    
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
@@ -611,6 +618,7 @@ class ClassReqser extends api_local\ApiBase {
               continue;
             }
             //Now we need to check if the image is still available on the server
+            $url = DIR_WS_POPUP_IMAGES.$qu_arr['image_name'];
             $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
             $image = $path.$qu_arr['image_name'];
             if (!file_exists($image)){
@@ -621,8 +629,16 @@ class ClassReqser extends api_local\ApiBase {
             try {
               $image_content = file_get_contents($image);
               $array['hashed_image'] = md5($image_content);
+              $array['url'] = $url;
             } catch (\Exception $e) {
               continue;
+            }
+            try {
+              $array['filemtime'] = filemtime($image);
+              $array['filectime'] = filectime($image);
+              $array['file_size'] = filesize($image);
+            } catch (\Exception $e) {
+              //do nothing since it is not forcefull necessary data to have
             }
             
             foreach($qu_arr as $key => $value) {
@@ -657,6 +673,7 @@ class ClassReqser extends api_local\ApiBase {
       if($this->api_db_conn->apiDbNumRows($qu) == 0) {
         return array('error' => 'No product found with the id '.$product_id);
       }
+      $data = $this->api_db_conn->apiDbFetchArray($qu, true);
 
       //We check if there is already an entry for this product and image_nr on 0
       $qu_str = "SELECT * FROM products_images WHERE products_id = ? AND image_nr = 0";
@@ -665,9 +682,8 @@ class ClassReqser extends api_local\ApiBase {
         return array('success' => 'Entry already exists for product_id '.$product_id.' and image_nr 0');
       }
       
-      //We do not add the image name itself on purpose to prevent having double entries on sitemap or any other place it might could be used
       $ins_qu_str = "INSERT INTO products_images (products_id, image_nr, image_name) VALUES(?, ?, ?)";
-      $ins_vals_arr = array((int)$product_id, 0, '');
+      $ins_vals_arr = array((int)$product_id, 0, $data['products_image']);
       if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
         $new_id = $this->api_db_conn->apiDbLastInsertId();
         $this->api_db_conn->apiDbStmtClose($ins_qu);
@@ -678,6 +694,49 @@ class ClassReqser extends api_local\ApiBase {
     } else {
       return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
     }
+  }
+
+    /**  
+   * private method callTablesAdd_main_image_entry_to_product_images
+   *
+   * @param $product_id
+   * @return bool
+   */
+  protected function callTablesGet_products_main_image_information($product_id) {
+      //Check if the product_id exists
+      $qu_str = "SELECT products_image FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        return array('error' => 'No product found with the id '.$product_id);
+      }
+      $data = $this->api_db_conn->apiDbFetchArray($qu, true);
+
+      //Now we check if the file exists and if so we get the necessary information
+      $url = DIR_WS_POPUP_IMAGES.$data['products_image'];
+      $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
+      $image = $path.$data['products_image'];
+      if (!file_exists($image)){
+        return (array('error' => 'No Image found on the server'));
+      } 
+      $array = [];
+      //now hash the image and add it as parameter
+      try {
+        $image_content = file_get_contents($image);
+        $array['hashed_image'] = md5($image_content);
+        $array['url'] = $url;
+      } catch (\Exception $e) {
+      return (array('error' => 'Image not able to hash'));
+      }
+      try {
+        $array['filemtime'] = filemtime($image);
+        $array['filectime'] = filectime($image);
+        $array['file_size'] = filesize($image);
+      } catch (\Exception $e) {
+        //do nothing since it is not forcefull necessary data to have
+      }
+      $array['image_name'] = $data['products_image'];
+
+      return $array;
   }
 
   
