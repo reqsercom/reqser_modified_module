@@ -667,11 +667,12 @@ class ClassReqser extends api_local\ApiBase {
    */
   protected function callTablesAdd_main_image_entry_to_product_images($product_id) {
     if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
+      $array = [];
       //Check if the product_id exists
       $qu_str = "SELECT products_image FROM products WHERE products_id = ?";
       $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
       if($this->api_db_conn->apiDbNumRows($qu) == 0) {
-        return array('error' => 'No product found with the id '.$product_id);
+        $array = array('error' => 'No product found with the id '.$product_id);
       }
       $data = $this->api_db_conn->apiDbFetchArray($qu, true);
 
@@ -679,21 +680,42 @@ class ClassReqser extends api_local\ApiBase {
       $qu_str = "SELECT * FROM products_images WHERE products_id = ? AND image_nr = 0";
       $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
       if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-        return array('success' => 'Entry already exists for product_id '.$product_id.' and image_nr 0');
+        $data = $this->api_db_conn->apiDbFetchArray($qu, true);
+        $new_id = $data['image_id'];
+        $array = array('success' => 'Entry already exists for product_id '.$product_id.' and image_nr 0', 'image_id' => $data['image_id']);
+      } else {
+        $ins_qu_str = "INSERT INTO products_images (products_id, image_nr, image_name) VALUES(?, ?, ?)";
+        $ins_vals_arr = array((int)$product_id, 0, $data['products_image']);
+        if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
+          $new_id = $this->api_db_conn->apiDbLastInsertId();
+          $this->api_db_conn->apiDbStmtClose($ins_qu);
+          $array = array('success' => 'New Entry added', 'image_id' => $new_id);
+        } else {
+          return array('error' => 'Something went wrong with the execution of the insert!');
+        }
       }
       
-      $ins_qu_str = "INSERT INTO products_images (products_id, image_nr, image_name) VALUES(?, ?, ?)";
-      $ins_vals_arr = array((int)$product_id, 0, $data['products_image']);
-      if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
-        $new_id = $this->api_db_conn->apiDbLastInsertId();
-        $this->api_db_conn->apiDbStmtClose($ins_qu);
-        return array('success' => 'New Entry added and has now the id '.$new_id);
+      //Now we also need to check if the base entry exist so we can fill it with an update
+      $qu_str = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, [(int)$product_id, $this->fwl, $new_id]);
+      if ($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        $ins_qu_str = "INSERT INTO products_images_description (image_id, products_id, image_title, image_alt, language_id) VALUES(?, ?, ?, ?, ?)";
+        $ins_vals_arr = array((int)$new_id, (int)$product_id, '', '', $this->fwl);
+        if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
+          $this->api_db_conn->apiDbStmtClose($ins_qu);
+          $array['description_entry'] = 'created with for fwl langauge';
+        } else {
+          return array('error' => 'Something went wrong with the execution of the insert on description table!');
+        }
       } else {
-        return array('error' => 'Something went wrong with the execution of the insert!');
+        $array['description_entry'] = 'already exists for fwl language';
       }
+
+      return $array;
     } else {
       return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
     }
+    
   }
 
     /**  
