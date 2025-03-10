@@ -696,7 +696,7 @@ class ClassReqser extends api_local\ApiBase {
       $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
       $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
       if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-        while($data = $this->api_db_conn->apiDbFetchArray($qu, true)){
+        while($data = $this->api_db_conn->apiDbFetchArray($qu)){
           $qu_str = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
           $qu = $this->api_db_conn->apiDbQuery($qu_str, [(int)$product_id, $this->fwl, (int)$data['image_id']]);
           if ($this->api_db_conn->apiDbNumRows($qu) == 0) {
