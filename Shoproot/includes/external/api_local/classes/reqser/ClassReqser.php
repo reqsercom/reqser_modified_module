@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.7';
+    $this->api_reqser_version = '3.8';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -601,62 +601,60 @@ class ClassReqser extends api_local\ApiBase {
    */
   protected function callTablesGet_products_image_information($from = 0, $chunks = 0) {
     $out_arr = array();
-    if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
-      if ($from != 'single_entry'){
-        $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
-        $qu_str = "SELECT * FROM products_images ORDER BY products_id ASC".$limit;
-        $qu = $this->api_db_conn->apiDbQuery($qu_str);
-      } else {
-        $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
-        $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
-      }
-  
-      if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-        $chrst = $this->getShopCharset();
-        while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
-            if (!isset($qu_arr['image_name']) || $qu_arr['image_name'] == '' || substr_count($qu_arr['image_name'], '.') != 1){
-              continue;
-            }
-            //Now we need to check if the image is still available on the server
-            $url = DIR_WS_POPUP_IMAGES.$qu_arr['image_name'];
-            $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
-            $image = $path.$qu_arr['image_name'];
-            if (!file_exists($image)){
-              continue;
-            } 
-            $array = [];
-            //now hash the image and add it as parameter
-            try {
-              $image_content = file_get_contents($image);
-              $array['hashed_image'] = md5($image_content);
-              $array['url'] = $url;
-            } catch (\Exception $e) {
-              continue;
-            }
-            try {
-              $array['filemtime'] = filemtime($image);
-              $array['filectime'] = filectime($image);
-              $array['file_size'] = filesize($image);
-            } catch (\Exception $e) {
-              //do nothing since it is not forcefull necessary data to have
-            }
-            
-            foreach($qu_arr as $key => $value) {
-              $value = $this->encode_utf8($chrst, $value, false, true);
-              $array[$key] = $value;
-            }
-            $out_arr[] = $array;
-        }
-        $this->api_db_conn->apiDbStmtClose($qu);
-      } else {
-        $out_arr = array('error' => 'no products images found');
-      }
-  
-      return $out_arr;
+    if ($from != 'single_entry'){
+      $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+      $qu_str = "SELECT * FROM products_images ORDER BY products_id ASC".$limit;
+      $qu = $this->api_db_conn->apiDbQuery($qu_str);
     } else {
-      return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
+      $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
     }
+
+    if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+      $chrst = $this->getShopCharset();
+      while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+          if (!isset($qu_arr['image_name']) || $qu_arr['image_name'] == '' || substr_count($qu_arr['image_name'], '.') != 1){
+            continue;
+          }
+          //Now we need to check if the image is still available on the server
+          $url = DIR_WS_POPUP_IMAGES.$qu_arr['image_name'];
+          $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
+          $image = $path.$qu_arr['image_name'];
+          if (!file_exists($image)){
+            continue;
+          } 
+          $array = [];
+          //now hash the image and add it as parameter
+          try {
+            $image_content = file_get_contents($image);
+            $array['hashed_image'] = md5($image_content);
+            $array['url'] = $url;
+          } catch (\Exception $e) {
+            continue;
+          }
+          try {
+            $array['filemtime'] = filemtime($image);
+            $array['filectime'] = filectime($image);
+            $array['file_size'] = filesize($image);
+          } catch (\Exception $e) {
+            //do nothing since it is not forcefull necessary data to have
+          }
+          
+          foreach($qu_arr as $key => $value) {
+            $value = $this->encode_utf8($chrst, $value, false, true);
+            $array[$key] = $value;
+          }
+          $out_arr[] = $array;
+      }
+      $this->api_db_conn->apiDbStmtClose($qu);
+    } else {
+      $out_arr = array('error' => 'no products images found');
+    }
+
+    return $out_arr;
   }
+
+
 
 
   /**  
@@ -694,28 +692,30 @@ class ClassReqser extends api_local\ApiBase {
           return array('error' => 'Something went wrong with the execution of the insert!');
         }
       }
-      
-      //Now we also need to check if the base entry exist so we can fill it with an update
-      $qu_str = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
-      $qu = $this->api_db_conn->apiDbQuery($qu_str, [(int)$product_id, $this->fwl, $new_id]);
-      if ($this->api_db_conn->apiDbNumRows($qu) == 0) {
-        $ins_qu_str = "INSERT INTO products_images_description (image_id, products_id, image_title, image_alt, language_id) VALUES(?, ?, ?, ?, ?)";
-        $ins_vals_arr = array((int)$new_id, (int)$product_id, '', '', $this->fwl);
-        if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
-          $this->api_db_conn->apiDbStmtClose($ins_qu);
-          $array['description_entry'] = 'created with for fwl langauge';
-        } else {
-          return array('error' => 'Something went wrong with the execution of the insert on description table!');
+
+      $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+        while($data = $this->api_db_conn->apiDbFetchArray($qu, true)){
+          $qu_str = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
+          $qu = $this->api_db_conn->apiDbQuery($qu_str, [(int)$product_id, $this->fwl, (int)$data['image_id']]);
+          if ($this->api_db_conn->apiDbNumRows($qu) == 0) {
+            $ins_qu_str = "INSERT INTO products_images_description (image_id, products_id, image_title, image_alt, language_id) VALUES(?, ?, ?, ?, ?)";
+            $ins_vals_arr = array((int)$data['image_id'], (int)$product_id, '', '', $this->fwl);
+            if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
+              $this->api_db_conn->apiDbStmtClose($ins_qu);
+              $array['description_entry'][$data['image_id']] = 'created with for fwl language';
+            } else {
+              return array('error' => 'Something went wrong with the execution of the insert on description table!');
+            }
+          }
         }
-      } else {
-        $array['description_entry'] = 'already exists for fwl language';
       }
 
       return $array;
     } else {
       return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
     }
-    
   }
 
     /**  
