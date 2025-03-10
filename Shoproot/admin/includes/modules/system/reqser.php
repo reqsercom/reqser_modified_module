@@ -23,7 +23,7 @@ class reqser {
 
   function __construct() {
     global $messageStack;
-    $this->module_version = '3.6';
+    $this->module_version = '3.7';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version).'<div id="module_export_reqser_header"></div>';
@@ -173,6 +173,9 @@ class reqser {
     //JorisK From Version 3.4
     if (!defined($this->mn_const.'SEND_TOKEN_VALID_UNTIL')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('".$this->mn_const."SEND_TOKEN_VALID_UNTIL', '', '6', '5', now())");
     if (defined($this->mn_const.'SEND_TOKEN_VALID_UNTILL')) xtc_db_query("DELETE FROM ".TABLE_CONFIGURATION." WHERE configuration_key = '".$this->mn_const."SEND_TOKEN_VALID_UNTILL'");
+
+    //JorisK FroM Version 3.7
+    if (!defined($this->mn_const.'IMAGE_TAGS_ACTIVE')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'IMAGE_TAGS_ACTIVE'."', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     
     if ($mode == 'update'){
       //JorisK remove error message since it is now updated!
@@ -202,6 +205,7 @@ class reqser {
                  $this->mn_const.'MORE_TABLES',
                  $this->mn_const.'MORE_TABLES_ADD',
                  $this->mn_const.'ADD_LANGUAGE_ALLOWED', 
+                 $this->mn_const.'IMAGE_TAGS_ACTIVE',
                  $this->mn_const.'LANGUAGE_FILES',
                  $this->mn_const.'LANGUAGE_FILES_SETTING',
                  $this->mn_const.'PROTOCOL_ACC',

@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.6';
+    $this->api_reqser_version = '3.7';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -111,6 +111,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'sanitize_string' => defined('MODULE_SYSTEM_REQSER_SANITIZE_STRINGS') ? MODULE_SYSTEM_REQSER_SANITIZE_STRINGS : 'not defined',
                                                                                         'british_english' => defined('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH') ? MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH : 'not defined',
                                                                                         'template' => defined('CURRENT_TEMPLATE') ? CURRENT_TEMPLATE : 'not defined',
+                                                                                        'image_tags_active' => defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') ? MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -229,7 +230,28 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'desc' => 'get the information about the category tree to know which product is listed where',
                                                                                                           'returns' => 'an multi dimensional array with the needed information to handle the products to categories'
                                                                                                           )
-                                                                                          ),                                                                                        
+                                                                                          ),  
+                                                      'get_products_image_information' => array('method' => 'get',
+                                                                                          'params' => array('from', 'chunks'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_image_information',
+                                                                                                          'desc' => 'get the information about the products images',
+                                                                                                          'returns' => 'an multi dimensional array with the needed information to handle the products images'
+                                                                                                          )
+                                                                                          ),  
+                                                      'add_main_image_entry_to_product_images' => array('method' => 'get',
+                                                                                          'params' => array('product_id'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/add_main_image_entry_to_product_images',
+                                                                                                          'desc' => 'add the main image entry to products_image table',
+                                                                                                          'returns' => 'array with success or error'
+                                                                                                          )
+                                                                                          ),  
+                                                       'get_products_main_image_information' => array('method' => 'get',
+                                                                                          'params' => array('product_id'),
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/get_products_main_image_information',
+                                                                                                          'desc' => 'return information about the main image',
+                                                                                                          'returns' => 'array with success or error'
+                                                                                                          )
+                                                                                          ),                                                                                    
                                                   ),
                                    'files' => array('get_all_language_files' => array('method' => 'get',
                                                                                       'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/files/get_all_language_files',
@@ -352,6 +374,15 @@ class ClassReqser extends api_local\ApiBase {
           $upd_conf_qu_str = "DELETE FROM configuration WHERE configuration_key = ?";
           if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_SEND_TOKEN_VALID_UNTILL'))){
             $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
+          }
+        }
+
+        //Update from 3.6 to 3.7
+        if (!defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
         }
         
@@ -525,7 +556,7 @@ class ClassReqser extends api_local\ApiBase {
     return $out_arr;
   }
 
-      /**  
+   /**  
    * private method callTablesGet_products_to_categories_information
    *
    * @param $from = id of
@@ -560,6 +591,176 @@ class ClassReqser extends api_local\ApiBase {
 
     return $out_arr;
   }
+
+  /**  
+   * private method callTablesGet_products_image_information
+   *
+   * @param $from = id of
+   * @param int $chunks
+   * @return array with all entries
+   */
+  protected function callTablesGet_products_image_information($from = 0, $chunks = 0) {
+    $out_arr = array();
+    if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
+      if ($from != 'single_entry'){
+        $limit = ($chunks > 0) ? " LIMIT ".(int)$from.','.(int)$chunks : '';
+        $qu_str = "SELECT * FROM products_images ORDER BY products_id ASC".$limit;
+        $qu = $this->api_db_conn->apiDbQuery($qu_str);
+      } else {
+        $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
+        $qu = $this->api_db_conn->apiDbQuery($qu_str, $chunks); 
+      }
+  
+      if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+        $chrst = $this->getShopCharset();
+        while($qu_arr = $this->api_db_conn->apiDbFetchArray($qu)) {
+            if (!isset($qu_arr['image_name']) || $qu_arr['image_name'] == '' || substr_count($qu_arr['image_name'], '.') != 1){
+              continue;
+            }
+            //Now we need to check if the image is still available on the server
+            $url = DIR_WS_POPUP_IMAGES.$qu_arr['image_name'];
+            $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
+            $image = $path.$qu_arr['image_name'];
+            if (!file_exists($image)){
+              continue;
+            } 
+            $array = [];
+            //now hash the image and add it as parameter
+            try {
+              $image_content = file_get_contents($image);
+              $array['hashed_image'] = md5($image_content);
+              $array['url'] = $url;
+            } catch (\Exception $e) {
+              continue;
+            }
+            try {
+              $array['filemtime'] = filemtime($image);
+              $array['filectime'] = filectime($image);
+              $array['file_size'] = filesize($image);
+            } catch (\Exception $e) {
+              //do nothing since it is not forcefull necessary data to have
+            }
+            
+            foreach($qu_arr as $key => $value) {
+              $value = $this->encode_utf8($chrst, $value, false, true);
+              $array[$key] = $value;
+            }
+            $out_arr[] = $array;
+        }
+        $this->api_db_conn->apiDbStmtClose($qu);
+      } else {
+        $out_arr = array('error' => 'no products images found');
+      }
+  
+      return $out_arr;
+    } else {
+      return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
+    }
+  }
+
+
+  /**  
+   * private method callTablesAdd_main_image_entry_to_product_images
+   *
+   * @param $product_id
+   * @return bool
+   */
+  protected function callTablesAdd_main_image_entry_to_product_images($product_id) {
+    if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
+      $array = [];
+      //Check if the product_id exists
+      $qu_str = "SELECT products_image FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        $array = array('error' => 'No product found with the id '.$product_id);
+      }
+      $data = $this->api_db_conn->apiDbFetchArray($qu, true);
+
+      //We check if there is already an entry for this product and image_nr on 0
+      $qu_str = "SELECT * FROM products_images WHERE products_id = ? AND image_nr = 0";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) > 0) {
+        $data = $this->api_db_conn->apiDbFetchArray($qu, true);
+        $new_id = $data['image_id'];
+        $array = array('success' => 'Entry already exists for product_id '.$product_id.' and image_nr 0', 'image_id' => $data['image_id']);
+      } else {
+        $ins_qu_str = "INSERT INTO products_images (products_id, image_nr, image_name) VALUES(?, ?, ?)";
+        $ins_vals_arr = array((int)$product_id, 0, $data['products_image']);
+        if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
+          $new_id = $this->api_db_conn->apiDbLastInsertId();
+          $this->api_db_conn->apiDbStmtClose($ins_qu);
+          $array = array('success' => 'New Entry added', 'image_id' => $new_id);
+        } else {
+          return array('error' => 'Something went wrong with the execution of the insert!');
+        }
+      }
+      
+      //Now we also need to check if the base entry exist so we can fill it with an update
+      $qu_str = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, [(int)$product_id, $this->fwl, $new_id]);
+      if ($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        $ins_qu_str = "INSERT INTO products_images_description (image_id, products_id, image_title, image_alt, language_id) VALUES(?, ?, ?, ?, ?)";
+        $ins_vals_arr = array((int)$new_id, (int)$product_id, '', '', $this->fwl);
+        if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
+          $this->api_db_conn->apiDbStmtClose($ins_qu);
+          $array['description_entry'] = 'created with for fwl langauge';
+        } else {
+          return array('error' => 'Something went wrong with the execution of the insert on description table!');
+        }
+      } else {
+        $array['description_entry'] = 'already exists for fwl language';
+      }
+
+      return $array;
+    } else {
+      return array('error' => 'callTablesGet_products_image_information not allowed due to setting MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE on false!');
+    }
+    
+  }
+
+    /**  
+   * private method callTablesAdd_main_image_entry_to_product_images
+   *
+   * @param $product_id
+   * @return bool
+   */
+  protected function callTablesGet_products_main_image_information($product_id) {
+      //Check if the product_id exists
+      $qu_str = "SELECT products_image FROM products WHERE products_id = ?";
+      $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
+      if($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        return array('error' => 'No product found with the id '.$product_id);
+      }
+      $data = $this->api_db_conn->apiDbFetchArray($qu, true);
+
+      //Now we check if the file exists and if so we get the necessary information
+      $url = DIR_WS_POPUP_IMAGES.$data['products_image'];
+      $path = DIR_FS_CATALOG.DIR_WS_POPUP_IMAGES;
+      $image = $path.$data['products_image'];
+      if (!file_exists($image)){
+        return (array('error' => 'No Image found on the server'));
+      } 
+      $array = [];
+      //now hash the image and add it as parameter
+      try {
+        $image_content = file_get_contents($image);
+        $array['hashed_image'] = md5($image_content);
+        $array['url'] = $url;
+      } catch (\Exception $e) {
+      return (array('error' => 'Image not able to hash'));
+      }
+      try {
+        $array['filemtime'] = filemtime($image);
+        $array['filectime'] = filectime($image);
+        $array['file_size'] = filesize($image);
+      } catch (\Exception $e) {
+        //do nothing since it is not forcefull necessary data to have
+      }
+      $array['image_name'] = $data['products_image'];
+
+      return $array;
+  }
+
   
    /**  
    * private method callFilesGet_all_language_files
