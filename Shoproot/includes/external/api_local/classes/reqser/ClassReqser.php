@@ -388,7 +388,7 @@ class ClassReqser extends api_local\ApiBase {
         
         //Update to newest version
         $upd_conf_qu_str = "UPDATE configuration SET configuration_value = '".$this->api_reqser_version."' WHERE configuration_key = ?";
-        if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE'))){
+        if ($upd_conf_qu = $this->api_db_conn->apiDbQuery($upd_conf_qu_str, array('MODULE_SYSTEM_REQSER_INSTALLED_MODULE_VERSION'))){
           $this->api_db_conn->apiDbStmtClose($upd_conf_qu);
         }
     }
