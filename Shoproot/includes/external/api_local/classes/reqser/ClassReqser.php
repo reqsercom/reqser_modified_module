@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '3.8';
+    $this->api_reqser_version = '4.0';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -238,9 +238,9 @@ class ClassReqser extends api_local\ApiBase {
                                                                                                           'returns' => 'an multi dimensional array with the needed information to handle the products images'
                                                                                                           )
                                                                                           ),  
-                                                      'add_main_image_entry_to_product_images' => array('method' => 'get',
+                                                      'prepare_image_description_for_product_id' => array('method' => 'get',
                                                                                           'params' => array('product_id'),
-                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/add_main_image_entry_to_product_images',
+                                                                                          'expl' => array('call' => HTTPS_SERVER.'/api/reqser/connector.php/tables/prepare_image_description_for_product_id',
                                                                                                           'desc' => 'add the main image entry to products_image table',
                                                                                                           'returns' => 'array with success or error'
                                                                                                           )
@@ -658,12 +658,12 @@ class ClassReqser extends api_local\ApiBase {
 
 
   /**  
-   * private method callTablesAdd_main_image_entry_to_product_images
+   * private method callTablesPrepare_image_description_for_product_id
    *
    * @param $product_id
    * @return bool
    */
-  protected function callTablesAdd_main_image_entry_to_product_images($product_id) {
+  protected function callTablesPrepare_image_description_for_product_id($product_id) {
     if (defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'){
       $array = [];
       //Check if the product_id exists
@@ -696,21 +696,25 @@ class ClassReqser extends api_local\ApiBase {
       $qu_str = "SELECT * FROM products_images WHERE products_id = ?";
       $qu = $this->api_db_conn->apiDbQuery($qu_str, (int)$product_id); 
       if($this->api_db_conn->apiDbNumRows($qu) > 0) {
-        while($data = $this->api_db_conn->apiDbFetchArray($qu, true)){
-          $qu_str = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
-          $qu = $this->api_db_conn->apiDbQuery($qu_str, [(int)$product_id, $this->fwl, (int)$data['image_id']]);
-          if ($this->api_db_conn->apiDbNumRows($qu) == 0) {
+        while($data = $this->api_db_conn->apiDbFetchArray($qu)){
+          $qu_str_desc = "SELECT * FROM products_images_description WHERE products_id = ? AND language_id = ? AND image_id = ?";
+          $qu_desc = $this->api_db_conn->apiDbQuery($qu_str_desc, [(int)$product_id, $this->fwl, (int)$data['image_id']]);
+          if ($this->api_db_conn->apiDbNumRows($qu_desc) == 0) {
             $ins_qu_str = "INSERT INTO products_images_description (image_id, products_id, image_title, image_alt, language_id) VALUES(?, ?, ?, ?, ?)";
             $ins_vals_arr = array((int)$data['image_id'], (int)$product_id, '', '', $this->fwl);
             if($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)) {
               $this->api_db_conn->apiDbStmtClose($ins_qu);
               $array['description_entry'][$data['image_id']] = 'created with for fwl language';
             } else {
-              return array('error' => 'Something went wrong with the execution of the insert on description table!');
+              $array['description_entry'][$data['image_id']] = 'Something went wrong with the execution of the insert on description table';
+              //return array('error' => 'Something went wrong with the execution of the insert on description table!');
             }
+          } else {
+            $array['description_entry'][$data['image_id']] = 'already exists for fwl language';
           }
         }
       }
+      $this->api_db_conn->apiDbStmtClose($qu);
 
       return $array;
     } else {
@@ -719,7 +723,7 @@ class ClassReqser extends api_local\ApiBase {
   }
 
     /**  
-   * private method callTablesAdd_main_image_entry_to_product_images
+   * private method callTablesPrepare_image_description_for_product_id
    *
    * @param $product_id
    * @return bool
