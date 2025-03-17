@@ -36,7 +36,7 @@ class ClassReqser extends api_local\ApiBase {
   public function __construct($subp = '') {
     parent::__construct($subp);
 
-    $this->api_reqser_version = '4.0';
+    $this->api_reqser_version = '4.1';
 
     $this->browser_mode = false;
     $this->dev_mode = true;
@@ -112,6 +112,7 @@ class ClassReqser extends api_local\ApiBase {
                                                                                         'british_english' => defined('MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH') ? MODULE_SYSTEM_REQSER_INTO_ENGLISH_BRITISH : 'not defined',
                                                                                         'template' => defined('CURRENT_TEMPLATE') ? CURRENT_TEMPLATE : 'not defined',
                                                                                         'image_tags_active' => defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') ? MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE : 'not defined',
+                                                                                        'image_tags_load_frontent_main_image' => defined('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE') ? MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE : 'not defined',
                                                                                        )
                                                                        )
                                                        ),
@@ -380,7 +381,16 @@ class ClassReqser extends api_local\ApiBase {
         //Update from 3.6 to 3.7
         if (!defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE')){
           $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
-          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE', 'true', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
+          if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
+            $this->api_db_conn->apiDbStmtClose($ins_qu);
+          }
+        }
+
+        //Update from 4.0 to 4.1
+        if (!defined('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE')){
+          $ins_qu_str = "INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES (?, ?, ?, ?, ?, now())";
+          $ins_vals_arr = array('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE', 'false', '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ');
           if ($ins_qu = $this->api_db_conn->apiDbQuery($ins_qu_str, $ins_vals_arr)){
             $this->api_db_conn->apiDbStmtClose($ins_qu);
           }
@@ -1710,6 +1720,10 @@ class ClassReqser extends api_local\ApiBase {
         if (isset($dec_rec_data['request_on_categories_edit']) && ($dec_rec_data['request_on_categories_edit'] === 'true' || $dec_rec_data['request_on_categories_edit'] === 'false')){
           $out_arr = array('succes' => 'Settings updated');
           if (defined('MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['request_on_start']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_REQUEST_ON_CATEGORIES_EDIT'");
+        } 
+        if (isset($dec_rec_data['image_tags_load_frontent_main_image']) && ($dec_rec_data['image_tags_load_frontent_main_image'] === 'true' || $dec_rec_data['image_tags_load_frontent_main_image'] === 'false')){
+          $out_arr = array('succes' => 'Settings updated');
+          if (defined('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE')) $this->api_db_conn->apiDbQuery("UPDATE configuration SET configuration_value = '".$dec_rec_data['image_tags_load_frontent_main_image']."' WHERE configuration_key = 'MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE'");
         } 
       } else {
         $out_arr = array('error' => 'Something went wrong, no POST Data received');
