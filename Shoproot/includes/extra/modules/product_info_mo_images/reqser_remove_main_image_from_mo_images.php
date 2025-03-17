@@ -20,9 +20,14 @@ Neu einsetzen damit Tags angezeigt werden:
 
 ********************************************************************/
 
-if (defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true' && defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true') {
-    if (isset($more_images_data[-1])){
+if (defined('MODULE_SYSTEM_REQSER_STATUS') 
+    && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true' 
+    && defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') 
+    && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'
+    && defined('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE')
+    && constant('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE') == 'true') {
+    if (isset($more_images_data[0])){
         $info_smarty->assign('reqser_main_image_tag', $more_images_data[0]);
-        unset($more_images_data[-1]);
+        unset($more_images_data[0]);
     } 
 }

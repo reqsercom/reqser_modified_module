@@ -16,7 +16,12 @@ Original suche nach 2x:
 
 ********************************************************************/
 
-if (defined('MODULE_SYSTEM_REQSER_STATUS') && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true' && defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true') {
+if (defined('MODULE_SYSTEM_REQSER_STATUS') 
+    && constant('MODULE_SYSTEM_REQSER_STATUS') == 'true' 
+    && defined('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') 
+    && constant('MODULE_SYSTEM_REQSER_IMAGE_TAGS_ACTIVE') == 'true'
+    && defined('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE')
+    && constant('MODULE_SYSTEM_REQSER_LOAD_FRONTENT_MAIN_IMAGE') == 'true') {
     if (isset($module_content) && count($module_content) > 0) {
         $all_product_ids = array_keys($module_content);
         if ($language_id == '') $language_id = $_SESSION['languages_id'];
