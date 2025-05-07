@@ -23,7 +23,7 @@ class reqser {
 
   function __construct() {
     global $messageStack;
-    $this->module_version = '4.1';
+    $this->module_version = '4.2';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version).'<div id="module_export_reqser_header"></div>';
