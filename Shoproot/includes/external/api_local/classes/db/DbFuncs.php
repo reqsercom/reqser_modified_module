@@ -146,7 +146,12 @@ class DbFuncs {
             $err = 'Unable to execute query: '.$last_err['message'].' in '.$last_err['file'];
         }
 
-        $exct = $stmt->execute();
+        try {
+          $exct = $stmt->execute();
+        } catch(Exception $e) {
+          $err = 'Unable to execute query: '.$e->getMessage().' in '.$e->getFile();
+        }
+        
         if($exct === false) {
           $last_err = error_get_last();
           if($last_err !== null)
