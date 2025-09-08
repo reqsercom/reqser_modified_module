@@ -23,7 +23,7 @@ class reqser {
 
   function __construct() {
     global $messageStack;
-    $this->module_version = '4.2';
+    $this->module_version = '4.3';
     $this->code = 'reqser';
     $this->mn_const = 'MODULE_SYSTEM_'.strtoupper($this->code).'_'; //module name, first constant part
     $this->title = sprintf($this->get_const('TITLE'), $this->module_version).'<div id="module_export_reqser_header"></div>';
@@ -127,7 +127,7 @@ class reqser {
     }
 
     if (!defined($this->mn_const.'ALLOW_ALL_ROW_ACCESS')) xtc_db_query("INSERT INTO ".TABLE_CONFIGURATION." (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('".$this->mn_const.'ALLOW_ALL_ROW_ACCESS'."', 'true', '6', '3', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
-    $default_tables = 'banners,categories_description,content_manager,content_manager_content,coupons_description,customers_status,email_content,manufacturers_info,orders_status,products_content,products_description,products_options,products_options_values,products_tags_options,products_tags_values,products_vpe,products_xsell_grp_name,shipping_status';
+    $default_tables = 'banners,categories_description,content_manager,content_manager_content,coupons_description,cookie_consent_cookies,customers_status,email_content,manufacturers_info,orders_status,products_content,products_description,products_options,products_options_values,products_tags_options,products_tags_values,products_vpe,products_xsell_grp_name,shipping_status';
     $default_more_tables = 'products_images_description,reviews_description';
     //Prüfen ob plugin_sq_ajax_add_to_cart_data und/oder plugin_language_snippets_data wenn ja in default nehmen, wegen Spezialfall für Language
     $check_plugin_sq_ajax_add_to_cart_data = xtc_db_query("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'plugin_sq_ajax_add_to_cart_data'");

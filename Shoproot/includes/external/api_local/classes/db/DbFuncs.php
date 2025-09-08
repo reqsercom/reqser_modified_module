@@ -73,13 +73,13 @@ class DbFuncs {
     $p = $this->use_pconnect === 'true';
     try {
       $db_conn = new \mysqli((($p === true ? 'p:' : '').$port_socket[0]), $usr, $pss, $db, (isset($port_socket[1]) ? $port_socket[1] : null), (isset($port_socket[2]) ? $port_socket[2] : null));
-    } catch(Exception $e) {
+    } catch(\Exception $e) {
       $err = 'Connection failed: '.$db_conn->connect_error;
     }
 
     try {
       $db_conn->set_charset($chrst);
-    } catch(Exception $e) {
+    } catch(\Exception $e) {
       $err = 'Couln\'t set charset for db connection: '.$db_conn->connect_error;
     }
 
@@ -133,7 +133,7 @@ class DbFuncs {
 
       try {
         $stmt = $this->db_conn->prepare($query);
-      } catch(Exception $e) {
+      } catch(\Exception $e) {
         $err = '('.$this->db_conn->errno.') Unable to prepare statement (check your syntax): '.$this->db_conn->error;
         $stmt = false;
       }
@@ -146,7 +146,12 @@ class DbFuncs {
             $err = 'Unable to execute query: '.$last_err['message'].' in '.$last_err['file'];
         }
 
-        $exct = $stmt->execute();
+        try {
+          $exct = $stmt->execute();
+        } catch(\Exception $e) {
+          $err = 'Unable to execute query: '.$e->getMessage().' in '.$e->getFile();
+        }
+        
         if($exct === false) {
           $last_err = error_get_last();
           if($last_err !== null)
@@ -161,7 +166,7 @@ class DbFuncs {
     } else {
       try {
         $res = $this->db_conn->query($query);
-      } catch(Exception $e) {
+      } catch(\Exception $e) {
         $err = '('.$this->db_conn->errno.') Query error: '.$this->db_conn->error;
         $res = false;
       }
