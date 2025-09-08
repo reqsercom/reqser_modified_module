@@ -1766,6 +1766,11 @@ class ClassReqser extends api_local\ApiBase {
                         'unique_key' => 'coupon_id',
                         'lang' => 'language_id');
         break;
+      case 'cookie_consent_cookies':
+        $fields = array('fields' => array('cookies_name', 'cookies_description'),
+                        'unique_key' => 'cookies_id',
+                        'lang' => 'languages_id');
+        break;
       case 'customers_status':
         $fields = array('fields' => array('customers_status_name'),
                         'unique_key' => 'customers_status_id',
